@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Flames
+  m_Shader: {fileID: 4800000, guid: 9cc25789aeec011478d4f481ace9e7dd, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: 13e7c41a3cc3bc5468376aaf5f173040, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _node_7140:
+        m_Texture: {fileID: 2800000, guid: 13e7c41a3cc3bc5468376aaf5f173040, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AppendToSinGraphic: 0
+    - _AppendtoSingraphic: 1
+    - _Cutoff: 0.5
+    - _OpacityValue: 0
+    - _PanneTimeSpeed: 0.363
+    - _PannerTimeSpeed: 0.25
+    - _TimeSpeed: 0.5
+    - _Valuetoappend: 2
+    - _node_4242: 1
+    - _node_5480: 0
+    m_Colors:
+    - _FlamesColor: {r: 1, g: 0.8435739, b: 0, a: 1}
+    - _node_6357: {r: 1, g: 0.76596725, b: 0, a: 1}
