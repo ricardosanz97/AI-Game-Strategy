@@ -200,6 +200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4670096992017030}
+  - component: {fileID: 65997064132582162}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -23876,3 +23877,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1109343157011458}
   m_Mesh: {fileID: 4300000, guid: b554c5a6542b2234586e1581edbc66b2, type: 3}
+--- !u!65 &65997064132582162
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1026771214822714}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 13, y: 1, z: 10}
+  m_Center: {x: -5.5, y: 0, z: 3}

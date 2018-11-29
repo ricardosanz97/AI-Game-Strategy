@@ -52,6 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc95dc4bc7bbdbb478c6770dd54d1df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PathfindingManagerPrefab: {fileID: 114238072562047484, guid: 33a1bee944c12c94383e29d37e7989a3,
+    type: 2}
 --- !u!114 &114770247962680934
 MonoBehaviour:
   m_ObjectHideFlags: 1
