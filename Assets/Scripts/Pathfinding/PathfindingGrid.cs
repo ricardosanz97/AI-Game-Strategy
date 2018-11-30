@@ -20,6 +20,7 @@ namespace CustomPathfinding
 		public Node[,] Grid { get; private set; }
 		public int GridSizeX { get; private set; }
 		public int GridSizeZ { get; private set; }
+		private GameObject nodeContainer;
 		
 		public int NodeCount => GridSizeX * GridSizeZ;
 
@@ -33,23 +34,19 @@ namespace CustomPathfinding
 			_nodeDiameter = nodePrefab.NodeRadius * 2;
 			GridSizeX = Mathf.RoundToInt(GridWorldSize.x / _nodeDiameter);
 			GridSizeZ = Mathf.RoundToInt(GridWorldSize.y / _nodeDiameter);
-
+			
 			CreateGrid();
 		}
 
 		public void CreateGrid()
 		{
-			if (Grid != null)
+			if (nodeContainer != null)
 			{
-				for (int i = 0; i < GridSizeX; i++)
-				{
-					for (int j = 0; j < GridSizeZ; j++)
-					{
-						Destroy(Grid[i,j]);
-					}
-				}
+				Destroy(nodeContainer);
 			}
 			
+			nodeContainer = new GameObject("Node Container");
+			nodeContainer.transform.SetParent(this.transform);
 			Grid = new Node[GridSizeX, GridSizeZ];
 			Vector3 gridOrigin;
 			//Collider[] results = new Collider[16];
@@ -60,7 +57,6 @@ namespace CustomPathfinding
 				gridOrigin = transform.position - Vector3.right * GridWorldSize.x/2 - Vector3.forward * GridWorldSize.y/2 ;
 			
 			Debug.DrawRay(Vector3.zero, gridOrigin);
-
 			for (int i = 0; i < GridSizeX; i++)
 			{
 				for (int j = 0; j < GridSizeZ; j++)
@@ -83,16 +79,16 @@ namespace CustomPathfinding
 
 		private void InitializeNode(int i, int j, Vector3 nodeWorldPosition, Node.ENodeType nodeType)
 		{
-			Grid[i,j] = Instantiate(nodePrefab, nodeWorldPosition, Quaternion.identity, transform);
+			Grid[i,j] = Instantiate(nodePrefab, nodeWorldPosition, Quaternion.identity, nodeContainer.transform);
 			Grid[i, j].NodeType = nodeType;
 
 			if (nodeType == Node.ENodeType.NonWalkable)
 			{
-				Grid[i,j].GetComponent<MeshRenderer>().material.color = Color.red;
+				Grid[i,j].GetComponent<MeshRenderer>().material.color = new Color(1,0,0,0.1f);
 			}
 			else
 			{
-				Grid[i,j].GetComponent<MeshRenderer>().material.color = Color.green;
+				Grid[i,j].GetComponent<MeshRenderer>().material.color = new Color(0,1,0.1f);
 			}
 			
 			Grid[i, j].GridX = i;
