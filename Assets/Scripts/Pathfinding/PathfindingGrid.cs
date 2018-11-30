@@ -10,18 +10,18 @@ namespace CustomPathfinding
 	{
 		[Header("Grid Properties")] 
 		public Vector2 GridWorldSize;
+		[SerializeField] private LayerMask _unwalkableMask;
+		public bool UseTransformAsGridOrigin;
 		
 		[Header("Node Properties")]
 		public float NodeRadius;
 		public float NextToWallsNodeCost = 30;
 
-		[SerializeField] private LayerMask _unwalkableMask;
 		private float _nodeDiameter;
 		public Node[,] Grid { get; private set; }
 		public int GridSizeX { get; private set; }
 		public int GridSizeZ { get; private set; }
 		
-
 		public int NodeCount => GridSizeX * GridSizeZ;
 
 		void Start ()
@@ -38,51 +38,35 @@ namespace CustomPathfinding
 			CreateGrid();
 		}
 
-		private void CreateGrid()
+		public void CreateGrid()
 		{
 			Grid = new Node[GridSizeX, GridSizeZ];
-                                                   
-			Vector3 bottomLeft =  transform.position - Vector3.right * GridWorldSize.x/2 - Vector3.forward * GridWorldSize.y/2 ;
+			Vector3 gridOrigin;
+			//Collider[] results = new Collider[16];
+			
+			if(UseTransformAsGridOrigin)
+				gridOrigin = transform.position;
+			else
+				gridOrigin = transform.position + Vector3.right * GridWorldSize.x/2 - Vector3.forward * GridWorldSize.y/2 ;
+			
+			Debug.DrawRay(Vector3.zero, gridOrigin);
 
 			for (int i = 0; i < GridSizeX; i++)
 			{
 				for (int j = 0; j < GridSizeZ; j++)
 				{
 					Node.ENodeType nodeType = Node.ENodeType.Walkable;
-					Vector3 nodeWorldPosition = bottomLeft + Vector3.right * (i * _nodeDiameter + NodeRadius) +
+					Vector3 nodeWorldPosition = gridOrigin + Vector3.right * (i * _nodeDiameter + NodeRadius) +
 					                            Vector3.forward * (j * _nodeDiameter + NodeRadius);
-					
-					Collider[] results = Physics.OverlapBox(nodeWorldPosition, new Vector3(NodeRadius, NodeRadius, NodeRadius),Quaternion.identity);
 
-					if (results.Length == 0)
-					{
-						nodeType = Node.ENodeType.Invisible;
-					}
-					else if (Physics.CheckBox(nodeWorldPosition, new Vector3(NodeRadius, NodeRadius, NodeRadius),
-						Quaternion.identity, _unwalkableMask))
-					{
+					/*results = new Collider[16];
+					Physics.OverlapBoxNonAlloc(nodeWorldPosition,
+						new Vector3(NodeRadius, NodeRadius, NodeRadius), results,Quaternion.identity);*/
+
+					if (Physics.CheckBox(nodeWorldPosition, new Vector3(NodeRadius, NodeRadius, NodeRadius),Quaternion.identity, _unwalkableMask))
 						nodeType = Node.ENodeType.NonWalkable;
-					}
 					
 					InitializeNode(i, j, nodeWorldPosition, nodeType);
-				}
-			}
-
-			for (int i = 0; i < GridSizeX; i++)
-			{
-				for (int j = 0; j < GridSizeZ; j++)
-				{
-					foreach (var neighbor in GetNeighborsWithObstacles(Grid[i, j]))
-					{
-						if (neighbor.NodeType == Node.ENodeType.NonWalkable)
-						{
-							if (Grid[i, j].NodeType == Node.ENodeType.Walkable)
-							{
-								Grid[i, j].NodeType = Node.ENodeType.NextToWall;
-								break;								
-							}
-						}
-					}
 				}
 			}
 		}
@@ -108,8 +92,6 @@ namespace CustomPathfinding
 			return Grid[x,y];
 		}
 		
-
-
 		public IEnumerable<Node> GetNeighbors(Node currentNode)
 		{	
 			for (int i = -1; i <= 1; i++)

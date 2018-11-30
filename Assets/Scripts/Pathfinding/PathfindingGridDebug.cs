@@ -16,6 +16,16 @@ public class PathfindingGridDebug : MonoBehaviour
         _grid = GetComponent<PathfindingGrid>();
     }
 
+    private void OnGUI()
+    {
+        #if UNITY_EDITOR
+        if (GUILayout.Button("Generate Grid"))
+        {
+            _grid.CreateGrid();
+        }
+        #endif
+    }
+
     private void OnDrawGizmos()
     {
         if (_grid != null)
@@ -29,12 +39,8 @@ public class PathfindingGridDebug : MonoBehaviour
 						
                     if(n.NodeType == Node.ENodeType.NonWalkable)
                         Gizmos.color = Color.red;
-                    else if(n.NodeType == Node.ENodeType.NextToWall)
-                        Gizmos.color = Color.yellow;
                     else if(n.NodeType == Node.ENodeType.Walkable)
                         Gizmos.color = Color.green;
-                    else if(n.NodeType == Node.ENodeType.Invisible)
-                        continue;
 						
                     Gizmos.DrawCube(n.WorldPosition,Vector3.one * cubeSeparation);
                 }
