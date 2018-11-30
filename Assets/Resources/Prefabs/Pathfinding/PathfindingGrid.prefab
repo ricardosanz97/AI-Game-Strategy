@@ -9,46 +9,64 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1983968981577116}
+  m_RootGameObject: {fileID: 1753253163013532}
   m_IsPrefabAsset: 1
---- !u!1 &1983968981577116
+--- !u!1 &1753253163013532
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4174209563485588}
-  - component: {fileID: 114347095190066154}
+  - component: {fileID: 4565784593016118}
+  - component: {fileID: 114484714985080646}
+  - component: {fileID: 114962751060168446}
   m_Layer: 0
-  m_Name: TroopController
+  m_Name: PathfindingGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4174209563485588
+--- !u!4 &4565784593016118
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1983968981577116}
+  m_GameObject: {fileID: 1753253163013532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.7289915, y: 0.23473454, z: 3.8238266}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114347095190066154
+--- !u!114 &114484714985080646
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1983968981577116}
+  m_GameObject: {fileID: 1753253163013532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 338bf46b452a37b44991e52bcf1f370d, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e8f0945ab095454589bf97719521d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTroopSelected: 0
+  GridWorldSize: {x: 12, y: 8}
+  _unwalkableMask:
+    serializedVersion: 2
+    m_Bits: 512
+  UseTransformAsGridOrigin: 1
+  nodePrefab: {fileID: 0}
+--- !u!114 &114962751060168446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1753253163013532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60173983492346d49b113f83e518cf35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cubeSeparation: 0.9

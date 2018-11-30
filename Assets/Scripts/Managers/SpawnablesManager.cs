@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public enum TROOP {
     None,
@@ -10,7 +11,7 @@ public enum TROOP {
     Wall,
     Construction
 }
-public class TroopController : MonoBehaviour {
+public class SpawnablesManager : MonoBehaviour {
 
 	[SerializeField]private TROOP currentTroopSelected;
 
@@ -26,7 +27,7 @@ public class TroopController : MonoBehaviour {
 
     public void SpawnTroop(GameObject cell)
     {
-        switch (GameObject.FindObjectOfType<TroopController>().GetComponent<TroopController>().GetCurrentTroop())
+        switch (currentTroopSelected)
         {
             case TROOP.Minion:
                 Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Minion.ToString()), new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), Quaternion.identity);

@@ -1,19 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class TroopButtonController : MonoBehaviour {
 
     public TROOP troopType;
-
-    private void OnEnable()
-    {
-        
-    }
+    
+    [Inject]
+    private SpawnablesManager _spawnablesManager;
 
     public void SelectTroop()
     {
-        GameObject.FindObjectOfType<TroopController>().GetComponent<TroopController>().SetCurrentTroop(troopType);
+        _spawnablesManager.SetCurrentTroop(troopType);
     }
     
 

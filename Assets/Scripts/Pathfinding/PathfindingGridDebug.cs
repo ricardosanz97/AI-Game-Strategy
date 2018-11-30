@@ -5,10 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(PathfindingGrid))]
 public class PathfindingGridDebug : MonoBehaviour
-{
-    [Range(0.3f,0.9f)]
-    public float cubeSeparation = 0.4f;
-    
+{   
     private PathfindingGrid _grid;
 
     private void Start()

@@ -1188,17 +1188,16 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="BackToMenuButton.cs" t="Include" />
           <e p="Cells" t="Include">
             <e p="CellBehaviour.cs" t="Include" />
           </e>
           <e p="DependenciesInstallers" t="Include">
             <e p="ProjectInstaller.cs" t="Include" />
           </e>
-          <e p="Manager" t="Include">
+          <e p="Managers" t="Include">
             <e p="GameManager.cs" t="Include" />
+            <e p="SpawnablesManager.cs" t="Include" />
           </e>
-          <e p="NewGameButtonController.cs" t="Include" />
           <e p="Pathfinding" t="Include">
             <e p="AStar.cs" t="Include" />
             <e p="IWeightedGraph.cs" t="Include" />
@@ -1207,12 +1206,10 @@
             <e p="PathfindingGridDebug.cs" t="Include" />
             <e p="PathfindingManager.cs" t="Include" />
           </e>
-          <e p="Test.cs" t="Include" />
-          <e p="Troops" t="Include">
-            <e p="TroopController.cs" t="Include" />
-          </e>
           <e p="UI" t="Include">
             <e p="AttackButtonController.cs" t="Include" />
+            <e p="BackToMenuButton.cs" t="Include" />
+            <e p="NewGameButtonController.cs" t="Include" />
             <e p="TroopButtonController.cs" t="Include" />
           </e>
         </e>

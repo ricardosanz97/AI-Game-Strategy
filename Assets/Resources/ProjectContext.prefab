@@ -54,6 +54,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PathfindingManagerPrefab: {fileID: 114238072562047484, guid: 33a1bee944c12c94383e29d37e7989a3,
     type: 2}
+  SpawnablesManager: {fileID: 114347095190066154, guid: 4d355638e97d39b43bb6c732fe3405b1,
+    type: 2}
 --- !u!114 &114770247962680934
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Zenject;
 
-public class CellBehaviour : MonoBehaviour {
-    
-    
+public class CellBehaviour : MonoBehaviour
+{
+    [Inject]
+    private SpawnablesManager _spawnablesManager;
 
     private void OnMouseOver()
     {
@@ -19,7 +21,7 @@ public class CellBehaviour : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        GameObject.FindObjectOfType<TroopController>().GetComponent<TroopController>().SpawnTroop(this.gameObject);
+        _spawnablesManager.SpawnTroop(this.gameObject);
     }
 
 }
