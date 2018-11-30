@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace CustomPathfinding
 {
-    public struct Node : IEquatable<Node>
+    [RequireComponent(typeof(Collider),typeof(MeshRenderer))]
+    public class Node : MonoBehaviour, IEquatable<Node>
     {
         public enum ENodeType
         {
@@ -14,15 +15,7 @@ namespace CustomPathfinding
         public int GridX { get; set; }
         public int GridZ { get; set; }
         public ENodeType NodeType { get; set; }
-
-        public Node(int cost, Vector3 worldPosition, int gridX, int gridZ, ENodeType eNodeType) : this()
-        {
-            _cost = cost;
-            WorldPosition = worldPosition;
-            GridX = gridX;
-            GridZ = gridZ;
-            NodeType = eNodeType;
-        }
+        public float NodeRadius;
 
         public int Cost
         {

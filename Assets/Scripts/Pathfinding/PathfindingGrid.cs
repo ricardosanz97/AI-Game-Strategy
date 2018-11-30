@@ -11,12 +11,11 @@ namespace CustomPathfinding
 		[Header("Grid Properties")] 
 		public Vector2 GridWorldSize;
 		[SerializeField] private LayerMask _unwalkableMask;
+		[Tooltip("if this is false, the bottom right will be usd instead.")]
 		public bool UseTransformAsGridOrigin;
+		[Header("Node Prefab")]
+		public Node nodePrefab;
 		
-		[Header("Node Properties")]
-		public float NodeRadius;
-		public float NextToWallsNodeCost = 30;
-
 		private float _nodeDiameter;
 		public Node[,] Grid { get; private set; }
 		public int GridSizeX { get; private set; }
@@ -31,7 +30,7 @@ namespace CustomPathfinding
 
 		public void InitializePathfindingGrid()
 		{
-			_nodeDiameter = NodeRadius * 2;
+			_nodeDiameter = nodePrefab.NodeRadius * 2;
 			GridSizeX = Mathf.RoundToInt(GridWorldSize.x / _nodeDiameter);
 			GridSizeZ = Mathf.RoundToInt(GridWorldSize.y / _nodeDiameter);
 
@@ -40,6 +39,17 @@ namespace CustomPathfinding
 
 		public void CreateGrid()
 		{
+			if (Grid != null)
+			{
+				for (int i = 0; i < GridSizeX; i++)
+				{
+					for (int j = 0; j < GridSizeZ; j++)
+					{
+						Destroy(Grid[i,j]);
+					}
+				}
+			}
+			
 			Grid = new Node[GridSizeX, GridSizeZ];
 			Vector3 gridOrigin;
 			//Collider[] results = new Collider[16];
@@ -47,7 +57,7 @@ namespace CustomPathfinding
 			if(UseTransformAsGridOrigin)
 				gridOrigin = transform.position;
 			else
-				gridOrigin = transform.position + Vector3.right * GridWorldSize.x/2 - Vector3.forward * GridWorldSize.y/2 ;
+				gridOrigin = transform.position - Vector3.right * GridWorldSize.x/2 - Vector3.forward * GridWorldSize.y/2 ;
 			
 			Debug.DrawRay(Vector3.zero, gridOrigin);
 
@@ -56,25 +66,35 @@ namespace CustomPathfinding
 				for (int j = 0; j < GridSizeZ; j++)
 				{
 					Node.ENodeType nodeType = Node.ENodeType.Walkable;
-					Vector3 nodeWorldPosition = gridOrigin + Vector3.right * (i * _nodeDiameter + NodeRadius) +
-					                            Vector3.forward * (j * _nodeDiameter + NodeRadius);
+					Vector3 nodeWorldPosition = gridOrigin + Vector3.right * (i * _nodeDiameter + nodePrefab.NodeRadius) +
+					                            Vector3.forward * (j * _nodeDiameter + nodePrefab.NodeRadius);
 
 					/*results = new Collider[16];
 					Physics.OverlapBoxNonAlloc(nodeWorldPosition,
 						new Vector3(NodeRadius, NodeRadius, NodeRadius), results,Quaternion.identity);*/
 
-					if (Physics.CheckBox(nodeWorldPosition, new Vector3(NodeRadius, NodeRadius, NodeRadius),Quaternion.identity, _unwalkableMask))
+					if (Physics.CheckBox(nodeWorldPosition, new Vector3(nodePrefab.NodeRadius,nodePrefab.NodeRadius,nodePrefab.NodeRadius),Quaternion.identity, _unwalkableMask))
 						nodeType = Node.ENodeType.NonWalkable;
-					
-					InitializeNode(i, j, nodeWorldPosition, nodeType);
+
+					InitializeNode(i,j,nodeWorldPosition,nodeType);
 				}
 			}
 		}
 
 		private void InitializeNode(int i, int j, Vector3 nodeWorldPosition, Node.ENodeType nodeType)
 		{
-			Grid[i, j].WorldPosition = nodeWorldPosition;
+			Grid[i,j] = Instantiate(nodePrefab, nodeWorldPosition, Quaternion.identity, transform);
 			Grid[i, j].NodeType = nodeType;
+
+			if (nodeType == Node.ENodeType.NonWalkable)
+			{
+				Grid[i,j].GetComponent<MeshRenderer>().material.color = Color.red;
+			}
+			else
+			{
+				Grid[i,j].GetComponent<MeshRenderer>().material.color = Color.green;
+			}
+			
 			Grid[i, j].GridX = i;
 			Grid[i, j].GridZ = j;
 		}
@@ -140,8 +160,6 @@ namespace CustomPathfinding
 			    neighbor.NodeType == Node.ENodeType.Walkable)
 				return 1.4f;
 			
-			if (neighbor.NodeType == Node.ENodeType.NextToWall)
-				return NextToWallsNodeCost;
 
 			return int.MaxValue;
 
@@ -177,7 +195,7 @@ namespace CustomPathfinding
 		{
 			Vector3 dir = n2.WorldPosition - n1.WorldPosition;
 
-			for (float i = 0; i < 1; i += NodeRadius/5.0f)
+			for (float i = 0; i < 1; i += nodePrefab.NodeRadius/5.0f)
 			{
 				Vector3 samplePoint = n1.WorldPosition + i * dir;
 
