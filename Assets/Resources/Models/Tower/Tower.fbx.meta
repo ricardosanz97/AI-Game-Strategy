@@ -1,28 +1,35 @@
 fileFormatVersion: 2
-guid: aff7e4e15981e394bb578880b52e56a5
+guid: a05fd55a172e8a34e98fa6a0b37ee03b
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Flames.001
-    100002: //RootNode
-    100004: Lava
-    100006: RockBasic1LP
-    400000: Flames.001
-    400002: //RootNode
-    400004: Lava
-    400006: RockBasic1LP
-    2100000: Flames
-    2100002: Lava1
-    2100004: Floor1
-    2300000: Flames.001
-    2300002: Lava
-    2300004: RockBasic1LP
-    3300000: Flames.001
-    3300002: Lava
-    3300004: RockBasic1LP
-    4300000: Flames.001
-    4300002: Lava
-    4300004: RockBasic1LP
+    100000: Cube
+    100002: Cube.001
+    100004: Cube.002
+    100006: Cylinder
+    100008: //RootNode
+    400000: Cube
+    400002: Cube.001
+    400004: Cube.002
+    400006: Cylinder
+    400008: //RootNode
+    2100000: Cascada
+    2100002: Corona
+    2100004: Tower
+    2100006: LavaTower
+    2100008: TowerDoor
+    2300000: Cube
+    2300002: Cube.001
+    2300004: Cube.002
+    2300006: Cylinder
+    3300000: Cube
+    3300002: Cube.001
+    3300004: Cube.002
+    3300006: Cylinder
+    4300000: Cube.001
+    4300002: Cylinder
+    4300004: Cube
+    4300006: Cube.002
   externalObjects: {}
   materials:
     importMaterials: 1

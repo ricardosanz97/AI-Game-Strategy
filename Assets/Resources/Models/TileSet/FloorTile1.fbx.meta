@@ -23,22 +23,7 @@ ModelImporter:
     4300000: Flames
     4300002: Lava
     4300004: Rock
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Flames
-    second: {fileID: 2100000, guid: a371697b05808c44cb133a45acc27e1c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Floor1
-    second: {fileID: 2100000, guid: 57807b44b39b5694db7e91e28ad7e859, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Lava1
-    second: {fileID: 2100000, guid: 004935a9247f771488cf29582c417f1b, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -110,6 +95,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
