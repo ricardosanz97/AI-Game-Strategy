@@ -5,8 +5,6 @@
 
 	public class EditorLabel : MonoBehaviour {
 
-
-
 		public string text;
 
 		private static GUIStyle style;

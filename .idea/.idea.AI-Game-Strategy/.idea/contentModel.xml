@@ -1194,6 +1194,34 @@
           <e p="DependenciesInstallers" t="Include">
             <e p="ProjectInstaller.cs" t="Include" />
           </e>
+          <e p="FSM" t="Include">
+            <e p="AbstracNPCBrain.cs" t="Include" />
+            <e p="ChangeConditions" t="Include">
+              <e p="Condition.cs" t="Include" />
+            </e>
+            <e p="ConfigurationSO.cs" t="Include" />
+            <e p="FSMSystem.cs" t="Include" />
+            <e p="NextStateInfo" t="Include">
+              <e p="NextStateInfo.cs" t="Include" />
+            </e>
+            <e p="States" t="Include">
+              <e p="State.cs" t="Include" />
+            </e>
+            <e p="SteeringBehaviours" t="Include">
+              <e p="Action.cs" t="Include" />
+            </e>
+            <e p="Transitions" t="Include">
+              <e p="Transition.cs" t="Include" />
+            </e>
+          </e>
+          <e p="FSMScriptableObjects" t="Include">
+            <e p="Action.cs" t="Include" />
+            <e p="BrainConfiguration.cs" t="Include" />
+            <e p="BrainController.cs" t="Include" />
+            <e p="Decision.cs" t="Include" />
+            <e p="State.cs" t="Include" />
+            <e p="Transition.cs" t="Include" />
+          </e>
           <e p="Managers" t="Include">
             <e p="GameManager.cs" t="Include" />
             <e p="SpawnablesManager.cs" t="Include" />

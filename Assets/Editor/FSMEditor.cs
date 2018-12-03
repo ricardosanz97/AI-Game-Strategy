@@ -1,13 +1,18 @@
-using Boo.Lang;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Editor;
+using FSMSO;
 using UnityEditor;
 using UnityEngine;
+using Zenject;
+using Array = System.Array;
 
 public class FSMEditor : EditorWindow
 {
+    #region NodeVariables
     private List<Node> _nodes;
     private List<Connection> _connections;
-    
     private GUIStyle _nodeStyle;
     private GUIStyle _selectedNodeStyle;
     private GUIStyle _inPointStyle;
@@ -16,6 +21,11 @@ public class FSMEditor : EditorWindow
     private ConnectionPoint _selectedOutPoint;
     private Vector2 _drag;
     private Vector2 _offset;
+    #endregion
+
+    private Dictionary<string,string> foundAssets = null;
+    private BrainConfiguration currentConfiguration;
+    private string stateName = "No name";
     
     [MenuItem("Window/FSMEditor %F12")]
     private static void OpenWindow()
@@ -45,10 +55,27 @@ public class FSMEditor : EditorWindow
         _outPointStyle.border = new RectOffset(4, 4, 12, 12);
     }
 
+    private void OnRemovedNode(Node node)
+    {
+        var states = currentConfiguration.states.ToList();
+        states.Remove(node.FsmState);
+        currentConfiguration.states = states.ToArray();
+        node.OnRemoveNode -= OnRemovedNode;
+    }
+
     private void OnGUI()
     {
         DrawGrid(20, 0.2f, Color.gray);
         DrawGrid(100, 0.4f, Color.gray);
+
+        if (GUILayout.Button("Find Assets"))
+        {
+            foundAssets = FindAssetsNameByType<FSMSO.BrainConfiguration>();
+        }
+
+        stateName = EditorGUILayout.TextField("State Name", stateName);
+        
+        DrawFoundFsmBrains();
         
         DrawNodes();
         DrawConnections();
@@ -62,6 +89,37 @@ public class FSMEditor : EditorWindow
             Repaint();
     }
 
+    private void DrawFoundFsmBrains()
+    {
+        if (foundAssets == null)
+            return;
+
+        string[] assetsToDisplay = foundAssets.Keys.ToArray();
+        int selected = EditorGUILayout.Popup("FSM Brains", 0, assetsToDisplay, EditorStyles.toolbarPopup);
+
+        currentConfiguration =
+            AssetDatabase.LoadAssetAtPath<BrainConfiguration>(foundAssets[assetsToDisplay[selected]]);
+    }
+
+    private Dictionary<string,string> FindAssetsNameByType<T>()
+    {
+        string[] guiDsFound = AssetDatabase.FindAssets("t:" + typeof(T));
+        Dictionary<string,string> assets = new Dictionary<string,string>();
+        
+        if (guiDsFound != null)
+        {
+            foreach (var guid in guiDsFound)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                string name = Path.GetFileName(path);
+                assets[name] = path;
+                Debug.Log(assets[name]);
+            }
+        }
+
+        return assets;
+    }
+    
     private void DrawGrid(int gridSpacing, float gridOpacity, Color gridColor)
     {
         int widthDivs = Mathf.CeilToInt(position.width / gridSpacing);
@@ -151,9 +209,13 @@ public class FSMEditor : EditorWindow
         switch (e.type)
         {  
                 case EventType.MouseDown:
-                    if(e.button == 0) ClearConnectionSelection();
+                    if (e.button == 0)
+                    {
+                        ClearConnectionSelection();
+                    }
                     
-                    if (e.button == 1) ProcessContextMenu(e.mousePosition);
+                    if (e.button == 1) 
+                        ProcessContextMenu(e.mousePosition);
                     break;
                 
                 case EventType.MouseDrag:
@@ -181,16 +243,36 @@ public class FSMEditor : EditorWindow
     private void ProcessContextMenu(Vector2 mousePosition)
     {
         GenericMenu genericMenu = new GenericMenu();
-        genericMenu.AddItem(new GUIContent("New State Node", "Add a new State Node"), false, () => OnClickAddNode(mousePosition));
+        genericMenu.AddItem(new GUIContent("New State Node", "Add a new State Node"), false, () => OnClickAddNode(mousePosition,stateName));
         genericMenu.ShowAsContext();
     }
 
-    private void OnClickAddNode(Vector2 mousePosition)
+    private void OnClickAddNode(Vector2 mousePosition, string stateName)
     {
         if(_nodes == null)
             _nodes = new List<Node>();
+        
+        Node node = new Node(mousePosition, 200, 50, _nodeStyle, _inPointStyle, _outPointStyle,_selectedNodeStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode,stateName);
+        _nodes.Add(node);
+        
+        var assetsFound = AssetDatabase.FindAssets(stateName);
 
-        _nodes.Add(new Node(mousePosition, 200, 50, _nodeStyle, _inPointStyle, _outPointStyle,_selectedNodeStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode));
+        if (assetsFound.Length > 0)
+        {
+            node.FsmState = AssetDatabase.LoadAssetAtPath<FSMSO.State>(AssetDatabase.GUIDToAssetPath(assetsFound[0]));
+        }
+        else
+        {
+            node.FsmState = ScriptableObject.CreateInstance<FSMSO.State>();
+            AssetDatabase.CreateAsset(node.FsmState, "Assets/" + stateName + ".asset");
+            AssetDatabase.SaveAssets();
+        }
+
+        node.OnRemoveNode += OnRemovedNode;
+        
+        var states = currentConfiguration.states.ToList();
+        states.Add(node.FsmState);
+        currentConfiguration.states = states.ToArray();
     }
 
     private void DrawNodes()
@@ -208,7 +290,7 @@ public class FSMEditor : EditorWindow
     {
         if (_connections != null)
         {
-            List<Connection> connectionsToRemove = new List<Connection>();
+            Boo.Lang.List<Connection> connectionsToRemove = new Boo.Lang.List<Connection>();
  
             for (int i = 0; i < _connections.Count; i++)
             {

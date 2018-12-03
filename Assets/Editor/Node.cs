@@ -1,4 +1,5 @@
 using System;
+using DG.DOTweenEditor.UI;
 using UnityEditor;
 using UnityEngine;
 using UnityScript.Macros;
@@ -20,7 +21,13 @@ namespace Editor
         public GUIStyle defaultNodeStyle;
         public GUIStyle selectedNodeStyle;
 
-        public Action<Node> OnRemoveNode;
+        public event Action<Node> OnRemoveNode;
+        private Rect labelRect;
+        private string labelName;
+        
+        #region FSMVariables
+        public FSMSO.State FsmState;
+        #endregion
  
         public Node(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle inPointStyle, GUIStyle outPointStyle,
             GUIStyle selectedStyle, Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint, Action<Node> OnClickRemoveNode)
@@ -32,11 +39,30 @@ namespace Editor
             defaultNodeStyle = nodeStyle;
             selectedNodeStyle = selectedStyle;
             OnRemoveNode = OnClickRemoveNode;
+            labelRect = new Rect(rect.x + rect.width/2 - 25, rect.y + rect.height/2 - 12.5f, 50, 25);
+            labelName = "default";
+
+        }
+        
+        public Node(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle inPointStyle, GUIStyle outPointStyle,
+            GUIStyle selectedStyle, Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint, Action<Node> OnClickRemoveNode,string labelName)
+        {
+            rect = new Rect(position.x, position.y, width, height);
+            style = nodeStyle;
+            inPoint = new ConnectionPoint(this,ConnectionPointType.In,inPointStyle,OnClickInPoint);
+            outPoint = new ConnectionPoint(this,ConnectionPointType.Out,outPointStyle,OnClickOutPoint);
+            defaultNodeStyle = nodeStyle;
+            selectedNodeStyle = selectedStyle;
+            OnRemoveNode = OnClickRemoveNode;
+            labelRect = new Rect(rect.x + rect.width/2 - 25, rect.y + rect.height/2 - 12.5f, 50, 25);
+            this.labelName = labelName;
+
         }
  
         public void Drag(Vector2 delta)
         {
             rect.position += delta;
+            labelRect.position += delta;
         }
  
         public void Draw()
@@ -44,6 +70,7 @@ namespace Editor
             inPoint.Draw();
             outPoint.Draw();
             GUI.Box(rect, title, style);
+            EditorGUI.LabelField(labelRect,labelName);
         }
  
         public bool ProcessEvents(Event e)
@@ -59,6 +86,7 @@ namespace Editor
                             GUI.changed = true;
                             isSelected = true;
                             style = selectedNodeStyle;
+                            ShowNodeInspector();
                         }
                         else
                         {
@@ -71,6 +99,15 @@ namespace Editor
                     if (e.button == 1 && isSelected && rect.Contains(e.mousePosition))
                     {
                         ProcessContextMenu();
+                        e.Use();
+                    }
+
+                    break;
+                
+                case EventType.KeyUp:
+                    if (e.keyCode == KeyCode.Delete && isSelected)
+                    {
+                        OnClickRemoveNode();
                         e.Use();
                     }
 
@@ -94,7 +131,14 @@ namespace Editor
 
             return false;
         }
-        
+
+        private void ShowNodeInspector()
+        {
+            var h = AssetDatabase.FindAssets(labelName);
+
+            Selection.activeObject = AssetDatabase.LoadAssetAtPath<FSMSO.State>(AssetDatabase.GUIDToAssetPath(h[0]));
+        }
+
         private void ProcessContextMenu()
         {
             GenericMenu genericMenu = new GenericMenu();
@@ -104,11 +148,9 @@ namespace Editor
         
         private void OnClickRemoveNode()
         {
-            if (OnRemoveNode != null)
-            {
-                OnRemoveNode(this);
-            }
+            OnRemoveNode?.Invoke(this);
         }
+
     }
     
 }
