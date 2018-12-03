@@ -8,10 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b6785cb63bec1f47b4cd9fe929da776, type: 3}
-  m_Name: No name
+  m_Script: {fileID: 11500000, guid: 6e5ed90d69ec4fd6aed9ccd34b46f959, type: 3}
+  m_Name: Esquelto
   m_EditorClassIdentifier: 
-  OnEnterActions: []
-  OnExitActions: []
-  actions: []
-  transitions: []
+  initialState: {fileID: 0}
+  remainState: {fileID: 0}
+  states: []

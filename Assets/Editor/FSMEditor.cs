@@ -23,9 +23,9 @@ public class FSMEditor : EditorWindow
     private Vector2 _offset;
     #endregion
 
-    private Dictionary<string,string> foundAssets = null;
-    private BrainConfiguration currentConfiguration;
-    private string stateName = "No name";
+    private Dictionary<string,string> _foundAssets = null;
+    private BrainConfiguration _currentConfiguration;
+    private string _stateName = "No name";
     
     [MenuItem("Window/FSMEditor %F12")]
     private static void OpenWindow()
@@ -57,9 +57,9 @@ public class FSMEditor : EditorWindow
 
     private void OnRemovedNode(Node node)
     {
-        var states = currentConfiguration.states.ToList();
+        var states = _currentConfiguration.states.ToList();
         states.Remove(node.FsmState);
-        currentConfiguration.states = states.ToArray();
+        _currentConfiguration.states = states.ToArray();
         node.OnRemoveNode -= OnRemovedNode;
     }
 
@@ -69,11 +69,13 @@ public class FSMEditor : EditorWindow
         DrawGrid(100, 0.4f, Color.gray);
 
         if (GUILayout.Button("Find Assets"))
-        {
-            foundAssets = FindAssetsNameByType<FSMSO.BrainConfiguration>();
-        }
+            _foundAssets = FindAssetsNameByType<FSMSO.BrainConfiguration>();
+        
+        if(GUILayout.Button("Show current Config"))
+            ShowCurrentConfiInspector();
+        
 
-        stateName = EditorGUILayout.TextField("State Name", stateName);
+        _stateName = EditorGUILayout.TextField("State Name", _stateName);
         
         DrawFoundFsmBrains();
         
@@ -91,14 +93,14 @@ public class FSMEditor : EditorWindow
 
     private void DrawFoundFsmBrains()
     {
-        if (foundAssets == null)
+        if (_foundAssets == null)
             return;
 
-        string[] assetsToDisplay = foundAssets.Keys.ToArray();
+        string[] assetsToDisplay = _foundAssets.Keys.ToArray();
         int selected = EditorGUILayout.Popup("FSM Brains", 0, assetsToDisplay, EditorStyles.toolbarPopup);
 
-        currentConfiguration =
-            AssetDatabase.LoadAssetAtPath<BrainConfiguration>(foundAssets[assetsToDisplay[selected]]);
+        _currentConfiguration =
+            AssetDatabase.LoadAssetAtPath<BrainConfiguration>(_foundAssets[assetsToDisplay[selected]]);
     }
 
     private Dictionary<string,string> FindAssetsNameByType<T>()
@@ -224,6 +226,11 @@ public class FSMEditor : EditorWindow
         }
     }
 
+    private void ShowCurrentConfiInspector()
+    {
+        Selection.activeObject = _currentConfiguration;
+    }
+
     private void OnDrag(Vector2 delta)
     {
         _drag = delta;
@@ -243,36 +250,36 @@ public class FSMEditor : EditorWindow
     private void ProcessContextMenu(Vector2 mousePosition)
     {
         GenericMenu genericMenu = new GenericMenu();
-        genericMenu.AddItem(new GUIContent("New State Node", "Add a new State Node"), false, () => OnClickAddNode(mousePosition,stateName));
+        genericMenu.AddItem(new GUIContent("New State Node", "Add a new State Node"), false, () => OnClickAddNode(mousePosition,_stateName));
         genericMenu.ShowAsContext();
     }
 
-    private void OnClickAddNode(Vector2 mousePosition, string stateName)
+    private void OnClickAddNode(Vector2 mousePosition, string name)
     {
         if(_nodes == null)
             _nodes = new List<Node>();
         
-        Node node = new Node(mousePosition, 200, 50, _nodeStyle, _inPointStyle, _outPointStyle,_selectedNodeStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode,stateName);
+        Node node = new Node(mousePosition, 200, 50, _nodeStyle, _inPointStyle, _outPointStyle,_selectedNodeStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode,name);
         _nodes.Add(node);
         
-        var assetsFound = AssetDatabase.FindAssets(stateName);
+        var assetsFound = AssetDatabase.FindAssets(name);
 
         if (assetsFound.Length > 0)
         {
             node.FsmState = AssetDatabase.LoadAssetAtPath<FSMSO.State>(AssetDatabase.GUIDToAssetPath(assetsFound[0]));
         }
-        else
+        else 
         {
             node.FsmState = ScriptableObject.CreateInstance<FSMSO.State>();
-            AssetDatabase.CreateAsset(node.FsmState, "Assets/" + stateName + ".asset");
+            AssetDatabase.CreateAsset(node.FsmState, "Assets/" + name + ".asset");
             AssetDatabase.SaveAssets();
         }
 
         node.OnRemoveNode += OnRemovedNode;
         
-        var states = currentConfiguration.states.ToList();
+        var states = _currentConfiguration.states.ToList();
         states.Add(node.FsmState);
-        currentConfiguration.states = states.ToArray();
+        _currentConfiguration.states = states.ToArray();
     }
 
     private void DrawNodes()
