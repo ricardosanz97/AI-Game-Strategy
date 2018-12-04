@@ -3,23 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class State : MonoBehaviour
-{    
-    public STATE stateName;
+public abstract class State : MonoBehaviour
+{
+    public NPC owner;
     public List<Action> actions;
-    
-    public State (STATE stateName)
+    public State(NPC owner)
     {
-        this.stateName = stateName;
+        this.owner = owner;
     }
 
-    public virtual void OnEnter()
-    {
+    public abstract void OnEnter();
+    public abstract void OnExit();
 
-    }
-
-    public virtual void OnExit()
-    {
-
-    }
 }

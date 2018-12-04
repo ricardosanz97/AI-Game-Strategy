@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 
+public enum NPC
+{
+    Minion,
+    Archer,
+    Tank,
+    None
+}
+
 public abstract class AbstracNPCBrain : MonoBehaviour
 {    
     public abstract void SetTransitions();
@@ -44,7 +52,9 @@ public abstract class AbstracNPCBrain : MonoBehaviour
                     {
                         continue;
                     }
+                    currentState.OnExit();
                     currentState = nsi.stateCaseTrue;
+                    currentState.OnEnter();
                 }
                 else
                 {
@@ -52,7 +62,9 @@ public abstract class AbstracNPCBrain : MonoBehaviour
                     {
                         continue;
                     }
+                    currentState.OnExit();
                     currentState = nsi.stateCaseFalse;
+                    currentState.OnEnter();
                 }
                 currentTransitions = transitions.FindAll(x => x.currentState == currentState);
                 return;
@@ -63,6 +75,7 @@ public abstract class AbstracNPCBrain : MonoBehaviour
     public void SetInitialState()
     {
         this.currentState = this.initialState;
+        this.currentState.OnEnter();
         currentTransitions = this.transitions.FindAll((x) => x.currentState == this.currentState);
     }
 

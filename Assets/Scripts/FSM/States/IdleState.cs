@@ -2,15 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : MonoBehaviour {
+public class IdleState : State
+{
+    public IdleState(NPC owner) : base((owner))
+    {
+        switch (owner)
+        {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        }
+    }
+
+    public override void OnEnter()
+    {
+        switch (owner)
+        {
+
+        }
+    }
+
+    public override void OnExit()
+    {
+        switch (owner)
+        {
+
+        }
+    }
 }

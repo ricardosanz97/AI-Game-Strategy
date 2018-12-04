@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class TankNPC : AbstracNPCBrain
 {
+    public NPC thisNPC = NPC.Tank;
+
     public override void SetStates()
     {
-        states.Add(new State(STATE.Idle));
-        states.Add(new State(STATE.Attack));
-        states.Add(new State(STATE.Alert));
+        SetMoveForwardState();
     }
 
     public override void SetTransitions()
     {
+    }
+
+    public void SetMoveForwardState()
+    {
+        FSMSystem.AddState(this, new MoveForwardState(thisNPC)); //acabamos de añadir a este NPC el estado MoveForwardState con los comportamientos del tanque.
     }
 }
