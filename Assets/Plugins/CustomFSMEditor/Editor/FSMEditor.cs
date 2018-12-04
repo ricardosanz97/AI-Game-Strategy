@@ -37,11 +37,11 @@ public class FSMEditor : EditorWindow
     private void OnEnable()
     {
         _nodeStyle = new GUIStyle();
-        _nodeStyle.normal.background = (Texture2D) EditorGUIUtility.Load("builtin skins/darkskin/images/node1.png");
+        _nodeStyle.normal.background = (Texture2D) EditorGUIUtility.Load("builtin skins/darkskin/images/node0.png");
         _nodeStyle.border = new RectOffset(12,12,12,12);
         
         _selectedNodeStyle = new GUIStyle();
-        _selectedNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node1 on.png") as Texture2D;
+        _selectedNodeStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/node0 on.png") as Texture2D;
         _selectedNodeStyle.border = new RectOffset(12, 12, 12, 12);
 
         _inPointStyle = new GUIStyle();
@@ -53,6 +53,7 @@ public class FSMEditor : EditorWindow
         _outPointStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/btn right.png") as Texture2D;
         _outPointStyle.active.background = EditorGUIUtility.Load("builtin skins/darkskin/images/btn right on.png") as Texture2D;
         _outPointStyle.border = new RectOffset(4, 4, 12, 12);
+        EditorGUIUtility.Load("");
     }
 
     private void OnRemovedNode(Node node)
@@ -268,7 +269,7 @@ public class FSMEditor : EditorWindow
         {
             node.FsmState = AssetDatabase.LoadAssetAtPath<FSMSO.State>(AssetDatabase.GUIDToAssetPath(assetsFound[0]));
         }
-        else 
+        else if(assetsFound.Length == 0) 
         {
             node.FsmState = ScriptableObject.CreateInstance<FSMSO.State>();
             AssetDatabase.CreateAsset(node.FsmState, "Assets/" + name + ".asset");
