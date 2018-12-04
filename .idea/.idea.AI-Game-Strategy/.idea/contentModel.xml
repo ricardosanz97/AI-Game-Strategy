@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\fijo\.Rider2018.1\system\resharper-host\Local\Transient\ReSharperHost\v12\SolutionCaches\_AI-Game-Strategy.1674462249.00" t="ExcludeRecursive" />
-    <e p="D:\REPOSITORIO\AI-Game-Strategy" t="IncludeRecursive">
+    <e p="C:\Users\edu97\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\edu97\.Rider2018.2\system\resharper-host\Local\Transient\ReSharperHost\v182\SolutionCaches\_AI-Game-Strategy.-866124567.00" t="ExcludeRecursive" />
+    <e p="D:\Unity\AI-Game-Strategy" t="IncludeRecursive">
       <e p="AI-Game-Strategy.sln" t="IncludeFlat" />
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
@@ -1198,6 +1199,7 @@
         <e p="Scripts" t="Include">
           <e p="AI" t="Include">
             <e p="Grid.cs" t="Include" />
+            <e p="InfluencePosition.cs" t="Include" />
             <e p="Node.cs" t="Include" />
             <e p="Originator.cs" t="Include" />
             <e p="Pathfinding" t="Include">
