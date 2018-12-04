@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class State
+public class State : MonoBehaviour
 {    
     public STATE stateName;
     public List<Action> actions;
@@ -13,4 +13,13 @@ public class State
         this.stateName = stateName;
     }
 
+    public virtual void OnEnter()
+    {
+
+    }
+
+    public virtual void OnExit()
+    {
+
+    }
 }

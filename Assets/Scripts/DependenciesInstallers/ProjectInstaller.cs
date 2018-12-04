@@ -15,6 +15,5 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
         Container.Bind<GameManager>().AsSingle().WithArguments(2);
         Container.Bind<PathfindingManager>().FromComponentInNewPrefab(PathfindingManagerPrefab).AsSingle();
         Container.Bind<SpawnablesManager>().FromComponentInNewPrefab(SpawnablesManager).AsSingle();
-        Container.Bind<FSMSystem>().AsSingle();
     }
 }

@@ -16,7 +16,7 @@ public abstract class AbstracNPCBrain : MonoBehaviour
 
     public virtual void Start()
     {
-        initialState = currentState;
+        SetInitialState();
     }
 
     public virtual void ActBehaviours()
