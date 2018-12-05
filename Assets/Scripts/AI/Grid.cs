@@ -13,7 +13,7 @@ namespace InfluenceMap
 
         private Node[,] _grid;
         private bool _renderGroundGrid;
-        private readonly List<Originator> _originators = new List<Originator>();
+        private List<Originator> _originators = new List<Originator>();
         private float _updateTimer;
 
         public void RegisterOriginator(Originator originator)
@@ -38,7 +38,26 @@ namespace InfluenceMap
             
             FillNeighbours(x, y);
         }
+        
+        public void UpdateMap()
+        {
+            _updateTimer -= Time.deltaTime;
+            
+            if(_updateTimer > 0)
+                return;
 
+            _updateTimer = 0.5f;
+            
+            ClearInfluenceData();
+
+            UpdateInfluences();
+            
+            ApplyToTexture();
+        }
+
+
+        #region HelperMethods
+        
         private void FillNeighbours(int x, int y)
         {
             for (int i = 0; i < x; i++)
@@ -97,9 +116,10 @@ namespace InfluenceMap
 
         private void InitializeInfluenceNode(int x, int y, float spacing, GameObject gridGameObject, int i, int j)
         {
-            Vector3 worldPos = new Vector3((-1 * x / 2 + i) * spacing, 0, (-1 * y / 2 + j) * spacing);
+            Vector3 worldPos = Vector3.zero + new Vector3(spacing / 2, 0, spacing / 2) + Vector3.right * i +
+                               Vector3.forward * j;
             Node temp = new Node();
-            temp.Influence = 0;
+            temp.Influences.Clear();
             temp.Neighbours = new List<Node>();
             temp.WorldGameObject = Object.Instantiate(gridGameObject, worldPos, Quaternion.identity);
             temp.WorldPosition = worldPos;
@@ -107,25 +127,102 @@ namespace InfluenceMap
             _grid[i, j] = temp;
         }
 
-        public void UpdateMap()
+        private void UpdateInfluences()
         {
-            _updateTimer -= Time.deltaTime;
-            
-            if(_updateTimer > 0)
-                return;
+            for (int i = 0; i < _originators.Count; i++)
+            {
+                Collider[] influencePositions =
+                    Physics.OverlapSphere(_originators[i].WorldPosition, _originators[i].InfluenceRange, InfluenceMask);
 
-            _updateTimer = 0.5f;
-            
-            ClearInfluenceData();
+                for (int j = 0; j < influencePositions.Length; j++)
+                {
+                    int indexI = influencePositions[j].GetComponent<InfluencePosition>().GridPositions[0];
+                    int indexJ = influencePositions[j].GetComponent<InfluencePosition>().GridPositions[1];
+
+                    //get the reference to the grid based on the position in the world
+                    Node node = _grid[indexI, indexJ];
+
+                    if (!node.HasInfluenceOfType(_originators[i].InfluenceType))
+                    {
+                        AssignInfluenceAtNode(i, influencePositions, j, node);
+                    }
+                    else
+                    {
+                        UpdateInfluenceAtNode(node, i, influencePositions, j);
+                    }
+
+                    SetMaterialAndDraw(node, i);
+                }
+            }
+        }
+
+        private void SetMaterialAndDraw(Node node, int i)
+        {
+            for (int k = 0; k < node.Influences.Count; k++)
+            {
+                if (_renderGroundGrid)
+                {
+                    node.WorldGameObject.GetComponent<Renderer>().enabled = true;
+                    node.WorldGameObject.GetComponent<Renderer>().material.color +=
+                        ((Color) _originators[i].Color) * (node.Influences[k].Value) *
+                        (_originators[i].Influence);
+                }
+
+                node.Color += ((Color) _originators[i].Color) * (node.Influences[k].Value) * (_originators[i].Influence);
+                if (!_renderGroundGrid)
+                    node.WorldGameObject.GetComponent<Renderer>().enabled = false;
+            }
+        }
+
+        private void ApplyToTexture()
+        {
+            for (int i = 0; i < _grid.GetLength(0); i++)
+            {
+                for (int j = 0; j < _grid.GetLength(1); j++)
+                {
+                    _grid[i, j].Color.a = 255;
+                    InfluenceMapTexture.SetPixel(i, j, _grid[i, j].Color);
+                }
+            }
+
+            InfluenceMapTexture.Apply();
+        }
+
+        private void AssignInfluenceAtNode(int i, Collider[] influencePositions, int j, Node node)
+        {
+//calculate the influence per node in range
+            KeyValuePair<InfluenceType, float> calculatedInfluence = new KeyValuePair<InfluenceType, float>(
+                _originators[i].InfluenceType,
+                (Vector3.Distance(_originators[i].WorldPosition, influencePositions[j].transform.position)) /
+                _originators[i].InfluenceRange
+            );
+            node.Influences.Add(calculatedInfluence);
+        }
+
+        private void UpdateInfluenceAtNode(Node node, int i, Collider[] influencePositions, int j)
+        {
+            KeyValuePair<InfluenceType, float> influenceAtNode =
+                node.GetInfluenceOfType(_originators[i].InfluenceType);
+
+            //calculate the influence per node in range
+            KeyValuePair<InfluenceType, float> calculatedInfluence = new KeyValuePair<InfluenceType, float>(
+                _originators[i].InfluenceType,
+                influenceAtNode.Value +
+                (Vector3.Distance(_originators[i].WorldPosition, influencePositions[j].transform.position)) /
+                _originators[i].InfluenceRange
+            );
+
+            if (influenceAtNode.Value != -1)
+                node.Influences[(int) influenceAtNode.Key] = calculatedInfluence;
         }
 
         private void ClearInfluenceData()
         {
             for (int i = 0; i < _grid.GetLength(0); i++)
             {
-                for (int j = 0; j < _grid.GetLength(1); j++)
+                for (int j = 0; j < _grid.GetLength(1); j++) 
                 {
-                    _grid[i, j].Influence = 0;
+                    _grid[i, j].Influences = new List<KeyValuePair<InfluenceType, float>>();
                     _grid[i, j].Color = Color.black;
                     if (_grid[i, j].WorldGameObject.GetComponent<Renderer>().enabled)
                     {
@@ -136,5 +233,9 @@ namespace InfluenceMap
                 }
             }
         }
+        
+        #endregion
     }
+
+        
 }

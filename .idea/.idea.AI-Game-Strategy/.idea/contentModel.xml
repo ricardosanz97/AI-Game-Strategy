@@ -1193,13 +1193,17 @@
         </e>
         <e p="Resources" t="Include">
           <e p="Shaders" t="Include">
+            <e p="DoubleSided.shader" t="Include" />
             <e p="Flames.shader" t="Include" />
           </e>
         </e>
         <e p="Scripts" t="Include">
           <e p="AI" t="Include">
             <e p="Grid.cs" t="Include" />
+            <e p="InfluenceMapComponent.cs" t="Include" />
             <e p="InfluencePosition.cs" t="Include" />
+            <e p="Influencer.cs" t="Include" />
+            <e p="InfluenceType.cs" t="Include" />
             <e p="Node.cs" t="Include" />
             <e p="Originator.cs" t="Include" />
             <e p="Pathfinding" t="Include">
@@ -1219,20 +1223,25 @@
           </e>
           <e p="FSM" t="Include">
             <e p="AbstracNPCBrain.cs" t="Include" />
+            <e p="ArcherNPC.cs" t="Include" />
             <e p="ChangeConditions" t="Include">
               <e p="Condition.cs" t="Include" />
             </e>
             <e p="ConfigurationSO.cs" t="Include" />
             <e p="FSMSystem.cs" t="Include" />
+            <e p="MinionNPC.cs" t="Include" />
             <e p="NextStateInfo" t="Include">
               <e p="NextStateInfo.cs" t="Include" />
             </e>
             <e p="States" t="Include">
+              <e p="AttackState.cs" t="Include" />
+              <e p="IdleState.cs" t="Include" />
               <e p="State.cs" t="Include" />
             </e>
             <e p="SteeringBehaviours" t="Include">
               <e p="Action.cs" t="Include" />
             </e>
+            <e p="TankNPC.cs" t="Include" />
             <e p="Transitions" t="Include">
               <e p="Transition.cs" t="Include" />
             </e>
