@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,5 +35,12 @@ namespace InfluenceMap
             influenceGrid.UpdateMap();
         }
 
+        private void OnGUI()
+        {
+            if(GUI.Button(new Rect(100,0, 100,50), "Update Influence"))
+            {
+                influenceGrid.UpdateMap();
+            }
+        }
     }
 }
