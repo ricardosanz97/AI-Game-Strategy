@@ -53,7 +53,6 @@ public class FSMEditor : EditorWindow
         _outPointStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/btn right.png") as Texture2D;
         _outPointStyle.active.background = EditorGUIUtility.Load("builtin skins/darkskin/images/btn right on.png") as Texture2D;
         _outPointStyle.border = new RectOffset(4, 4, 12, 12);
-        EditorGUIUtility.Load("");
     }
 
     private void OnRemovedNode(Node node)
