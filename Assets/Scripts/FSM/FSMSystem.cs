@@ -5,23 +5,10 @@ using System.Linq;
 
 public enum STATE
 {
-    Default,
+    None,
     Attack,
-    Patrol,
     Idle,
-    Alert,
-    Recolocate,
-    Hidden,
-    MoveForward,
-    None
-}
-
-public enum BEHAVIOUR
-{
-    Patrol,
-    Hit,
-    Shoot,
-    Rotate,
+    MoveForward
 }
 
 public static class FSMSystem{

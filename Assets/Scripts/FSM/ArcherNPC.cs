@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherNPC : MonoBehaviour {
+public class ArcherNPC : AbstracNPCBrain
+{
+    public override void Start()
+    {
+        initialState = new State(STATE.Idle, this);
+        SetInitialState();
+    }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public override void SetStates()
+    {
+
+    }
+
+    public override void SetTransitions()
+    {
+            
+    }
 }

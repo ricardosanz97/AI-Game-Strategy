@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33442470040337752}
   - component: {fileID: 23139630933784412}
   - component: {fileID: 136500941576074114}
+  - component: {fileID: 114335559014152314}
   m_Layer: 0
   m_Name: Minion
   m_TagString: Untagged
@@ -84,6 +85,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1014920631684202}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114335559014152314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1014920631684202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe73f10f79c01a841a265fb91c69ebe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc: 1
+  healthPoints: 100
+  currentLevel: 1
+  transitions: []
+  states: []
+  currentState: {fileID: 0}
+  currentTransitions: []
 --- !u!136 &136500941576074114
 CapsuleCollider:
   m_ObjectHideFlags: 1

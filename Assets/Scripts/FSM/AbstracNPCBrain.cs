@@ -3,28 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 
-public enum NPC
-{
-    Minion,
-    Archer,
-    Tank,
-    None
-}
-
 public abstract class AbstracNPCBrain : MonoBehaviour
-{    
+{
+    public TROOP npc = TROOP.None;
+    public float healthPoints = 100f;
+    public int currentLevel = 1;
+
     public abstract void SetTransitions();
     public abstract void SetStates();
 
-    public List<Transition> transitions;
-    public List<State> states;
+    [HideInInspector]public List<Transition> transitions;
+    [HideInInspector]public List<State> states;
     public State currentState;
-    public State initialState;
-    public List<Transition> currentTransitions;
+    [HideInInspector]public State initialState;
+    [HideInInspector]public List<Transition> currentTransitions;
 
     public virtual void Start()
     {
-        SetInitialState();
+        if (npc == TROOP.None)
+        {
+            Debug.LogError("NPC type unassigned. ");
+        }
     }
 
     public virtual void ActBehaviours()

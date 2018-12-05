@@ -3,16 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class State : MonoBehaviour
+public class State
 {
-    public NPC owner;
+    public STATE stateName;
+    public AbstracNPCBrain brain;
     public List<Action> actions;
-    public State(NPC owner)
+    public State(STATE stateName, AbstracNPCBrain brain)
     {
-        this.owner = owner;
+        this.stateName = stateName;
+        this.brain = brain;
     }
 
-    public abstract void OnEnter();
-    public abstract void OnExit();
+    public void OnEnter(bool stateByDefault = false, bool npcByDefault = false)
+    {
+        StateInfo.ExecuteOnEnter(stateByDefault ? STATE.None : stateName, npcByDefault ? TROOP.None : brain.npc);
+    }
+
+    public void OnExit(bool stateByDefault = false, bool npcByDefault = false) 
+    {
+        StateInfo.ExecuteOnExit(stateByDefault ? STATE.None : stateName, npcByDefault ? TROOP.None : brain.npc);
+    }
 
 }
