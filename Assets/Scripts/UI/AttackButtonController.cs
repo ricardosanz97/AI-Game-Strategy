@@ -26,14 +26,13 @@ public class AttackButtonController : MonoBehaviour {
         }
     }
 
-    private void ShowButtons()
+    public void ShowButtons()
     {
         Sequence s = DOTween.Sequence();
         int childCount = this.transform.childCount;
         for (int i = 0; i < childCount; i++)
         {
             GameObject child = this.transform.GetChild(i).gameObject;
-            Debug.Log(this.transform.GetChild(i).name);
             s.AppendCallback(() =>
             {
                 EnableButton(child);
@@ -48,14 +47,13 @@ public class AttackButtonController : MonoBehaviour {
         });
     }
 
-    private void HideButtons()
+    public void HideButtons()
     {
         Sequence s = DOTween.Sequence();
         int childCount = this.transform.childCount;
         for (int i = childCount - 1; i >= 0; i--)
         {
             GameObject child = this.transform.GetChild(i).gameObject;
-            Debug.Log(this.transform.GetChild(i).name);
             s.AppendCallback(() =>
             {
                 DisableButton(child);

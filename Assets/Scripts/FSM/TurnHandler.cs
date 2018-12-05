@@ -65,9 +65,8 @@ public class TurnHandler : MonoBehaviour {
                 yield return new WaitForSeconds(2f);
                 currentTurn = ENTITY.Player;
             }
+
+            yield return true;
         }
-
-        yield return null;
-
     }
 }

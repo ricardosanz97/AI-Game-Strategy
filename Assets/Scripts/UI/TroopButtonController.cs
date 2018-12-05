@@ -10,11 +10,6 @@ public class TroopButtonController : MonoBehaviour {
     [Inject]
     private SpawnablesManager _spawnablesManager;
 
-    private void Awake()
-    {
-        _spawnablesManager = FindObjectOfType<SpawnablesManager>().GetComponent<SpawnablesManager>();
-    }
-
     public void SelectTroop()
     {
         _spawnablesManager.SetCurrentTroop(troopType);

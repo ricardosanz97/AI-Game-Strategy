@@ -14,12 +14,6 @@ public class CellBehaviour : MonoBehaviour
     public ENTITY owner;
     public AbstracNPCBrain troopIn;
 
-    private void Awake()
-    {
-        _spawnablesManager = GameObject.FindObjectOfType<SpawnablesManager>().GetComponent<SpawnablesManager>();
-        _turnHandler = GameObject.FindObjectOfType<TurnHandler>().GetComponent<TurnHandler>();
-    }
-
     private void OnMouseOver()
     {
         if (_spawnablesManager.GetCurrentTroop() == TROOP.None || _turnHandler.currentTurn != ENTITY.Player || owner != ENTITY.Player) //si no hay tropa seleccionada o no es el turno del player o la casilla no es del player...
@@ -36,7 +30,7 @@ public class CellBehaviour : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (this.owner != FindObjectOfType<TurnHandler>().GetComponent<TurnHandler>().currentTurn)
+        if (this.owner != ENTITY.Player || _turnHandler.currentTurn != ENTITY.Player) //si la casilla no es tipo player o no es nuestro turno -> return
         {
             return;
         }
