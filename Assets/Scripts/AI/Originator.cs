@@ -9,7 +9,6 @@ namespace InfluenceMap
         public float Influence;
         public float InfluenceRange;
         public Color Color;
-
-        //todo expand it with influence type
+        public InfluenceType InfluenceType;
     }
 }
