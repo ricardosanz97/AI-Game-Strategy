@@ -56,6 +56,8 @@ MonoBehaviour:
     type: 2}
   SpawnablesManager: {fileID: 114347095190066154, guid: 4d355638e97d39b43bb6c732fe3405b1,
     type: 2}
+  TurnHandler: {fileID: 114189675402328346, guid: e5ab90dc63c7242388c52f92cda80838,
+    type: 2}
 --- !u!114 &114770247962680934
 MonoBehaviour:
   m_ObjectHideFlags: 1
