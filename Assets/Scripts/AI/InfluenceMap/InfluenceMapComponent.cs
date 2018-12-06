@@ -17,11 +17,6 @@ namespace InfluenceMap
 
         private InfluenceMap.Grid influenceGrid;
 
-        private void OnDisable()
-        {
-            Entity.OnTroopSpawned -= influenceGrid.UpdateMap;
-        }
-
         private void Start()
         {
             influenceGrid = new Grid();
@@ -36,13 +31,14 @@ namespace InfluenceMap
 
         private void UpdateInfluenceMap()
         {
-            var influencers = FindObjectsOfType<Influencer>();
-
-            foreach (var influencer in influencers)
+            foreach (var influencer in FindObjectsOfType<Influencer>())
             {
+                //si no se le asigna la posicion calculara la influencia desde el 0.
+                influencer.Originator.WorldPosition = influencer.transform.position;
                 influenceGrid.RegisterOriginator(influencer.Originator);
                 Originators.Add(influencer);
             }
+            
             influenceGrid.UpdateMap();
         }
     }

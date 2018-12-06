@@ -39,6 +39,7 @@ namespace InfluenceMap
         public void UpdateMap()
         {
             Debug.Log("Updating influence map. ");
+            
             ClearInfluenceData();
 
             UpdateInfluences();

@@ -22,7 +22,7 @@ public class RaycastCamera : MonoBehaviour {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, cell))
         {
-            if (_spawnablesManager.GetCurrentTroop() == TROOP.None || _turnHandler.currentTurn != ENTITY.Player || hit.collider.GetComponent<CellBehaviour>().GetOwner() != ENTITY.Player) //si no hay tropa seleccionada o no es el turno del player o la casilla no es del player...
+            if (_spawnablesManager.GetCurrentTroop() == TROOP.None || _turnHandler.currentTurn != PlayerType.Player || hit.collider.GetComponent<CellBehaviour>().GetOwner() != PlayerType.Player) //si no hay tropa seleccionada o no es el turno del player o la casilla no es del player...
             {
                 return;
             }

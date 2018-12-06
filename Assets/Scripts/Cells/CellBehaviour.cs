@@ -6,12 +6,12 @@ using Zenject;
 
 public class CellBehaviour : MonoBehaviour
 {
-    public ENTITY owner;
+    public PlayerType owner;
     public AbstracNPCBrain troopIn;
 
-    public void SetOwner(ENTITY entity)
+    public void SetOwner(PlayerType playerType)
     {
-        this.owner = entity;
+        this.owner = playerType;
     }
 
     public void SetTroopIn(AbstracNPCBrain brain)
@@ -19,7 +19,7 @@ public class CellBehaviour : MonoBehaviour
         this.troopIn = brain;
     }
 
-    public ENTITY GetOwner()
+    public PlayerType GetOwner()
     {
         return this.owner;
     }
