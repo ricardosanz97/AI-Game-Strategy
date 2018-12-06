@@ -30,7 +30,17 @@ namespace CustomPathfinding
 		
 		public int NodeCount => GridSizeX * GridSizeZ;
 
-		void Start ()
+        private void OnEnable()
+        {
+            Entity.OnTroopSpawned += CreateGrid;
+        }
+
+        private void OnDisable()
+        {
+            Entity.OnTroopSpawned -= CreateGrid;
+        }
+
+        void Start ()
 		{
 			InitializePathfindingGrid();
 		}

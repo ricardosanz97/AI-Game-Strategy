@@ -29,7 +29,12 @@ public class RaycastCamera : MonoBehaviour {
             lastCellSelected = hit.collider.GetComponent<CellBehaviour>();
             Debug.Log("aiming on a cell!");
             hit.collider.transform.DOLocalMoveY(0.5f, 0.3f);
+            if (Input.GetMouseButtonDown(0))
+            {
+                _spawnablesManager.SpawnTroop(hit.collider.gameObject);
+            }
         }
+
         if (lastCellSelected != null)
         {
             lastCellSelected.BackToInitialPosition();

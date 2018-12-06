@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 
-public abstract class AbstracNPCBrain : MonoBehaviour
+public abstract class AbstracNPCBrain : Entity
 {
     public TROOP npc = TROOP.None;
     public float healthPoints = 100f;

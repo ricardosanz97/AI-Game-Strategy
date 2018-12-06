@@ -40,13 +40,7 @@ namespace InfluenceMap
         
         public void UpdateMap()
         {
-            _updateTimer -= Time.deltaTime;
-            
-            if(_updateTimer > 0)
-                return;
-
-            _updateTimer = 0.5f;
-            
+            Debug.Log("Updating influence map. ");
             ClearInfluenceData();
 
             UpdateInfluences();

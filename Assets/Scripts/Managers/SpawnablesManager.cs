@@ -57,6 +57,13 @@ public class SpawnablesManager : MonoBehaviour {
 
         if (troopSpawned != null)
         {
+            /*
+            if (Entity.OnTroopSpawned != null)
+            {
+                Entity.OnTroopSpawned.Invoke();
+            }
+            */
+            Entity.OnTroopSpawned?.Invoke();
             FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().HideButtons();
             cell.GetComponent<CellBehaviour>().troopIn = troopSpawned.GetComponent<AbstracNPCBrain>();
         }
