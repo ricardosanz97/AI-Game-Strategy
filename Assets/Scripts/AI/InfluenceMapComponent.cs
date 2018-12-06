@@ -20,7 +20,7 @@ namespace InfluenceMap
         private void Start()
         {
             influenceGrid = new Grid();
-            influenceGrid.CreateMap(X, Y, Spacing, InfluenceNodePredab, true);
+            influenceGrid.CreateMap(X, Y, Spacing, InfluenceNodePredab, true, gameObject);
             influenceGrid.InfluenceMask = InfluenceMask;
             InfluenceMapTexture.texture = influenceGrid.InfluenceMapTexture;
 
@@ -35,12 +35,9 @@ namespace InfluenceMap
             influenceGrid.UpdateMap();
         }
 
-        private void OnGUI()
+        private void Update()
         {
-            if(GUI.Button(new Rect(100,0, 100,50), "Update Influence"))
-            {
-                influenceGrid.UpdateMap();
-            }
+            influenceGrid.UpdateMap();
         }
     }
 }
