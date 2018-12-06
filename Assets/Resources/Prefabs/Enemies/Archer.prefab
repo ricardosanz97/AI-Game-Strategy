@@ -22,7 +22,10 @@ GameObject:
   - component: {fileID: 33978069624904012}
   - component: {fileID: 23054368536528446}
   - component: {fileID: 136731337379363358}
+<<<<<<< HEAD
   - component: {fileID: 114281887662068264}
+=======
+>>>>>>> Edu
   - component: {fileID: 114043960876891638}
   m_Layer: 0
   m_Name: Archer
@@ -86,6 +89,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1057076223415276}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+<<<<<<< HEAD
 --- !u!114 &114281887662068264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,6 +108,8 @@ MonoBehaviour:
   states: []
   currentState: {fileID: 0}
   currentTransitions: []
+=======
+>>>>>>> Edu
 --- !u!114 &114043960876891638
 MonoBehaviour:
   m_ObjectHideFlags: 1
