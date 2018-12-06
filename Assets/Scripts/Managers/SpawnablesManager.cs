@@ -14,6 +14,7 @@ public enum TROOP {
 public class SpawnablesManager : MonoBehaviour {
 
 	[SerializeField]private TROOP currentTroopSelected;
+    public TROOP lastTroopSpawned;
 
     public void SetCurrentTroop(TROOP troop)
     {
@@ -35,22 +36,27 @@ public class SpawnablesManager : MonoBehaviour {
                 FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().ShowButtons();
                 break;
             case TROOP.Minion:
+                lastTroopSpawned = TROOP.Minion;
                 troopSpawned = Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Minion.ToString()), new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), Quaternion.identity);
                 currentTroopSelected = TROOP.None;
                 break;
             case TROOP.Archer:
+                lastTroopSpawned = TROOP.Archer;
                 troopSpawned = Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Archer.ToString()), new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), Quaternion.identity);
                 currentTroopSelected = TROOP.None;
                 break;
             case TROOP.Tank:
+                lastTroopSpawned = TROOP.Tank;
                 troopSpawned = Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Tank.ToString()), new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), Quaternion.identity);
                 currentTroopSelected = TROOP.None;
                 break;
             case TROOP.Wall:
+                lastTroopSpawned = TROOP.Wall;
                 troopSpawned = Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Wall.ToString()), new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), Quaternion.identity);
                 break;
             case TROOP.Construction:
                 troopSpawned = Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Construction.ToString()), new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), Quaternion.identity);
+                lastTroopSpawned = TROOP.Construction;
                 currentTroopSelected = TROOP.None;
                 break;
         }
@@ -64,6 +70,7 @@ public class SpawnablesManager : MonoBehaviour {
             }
             */
             Entity.OnTroopSpawned?.Invoke();
+            Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup"), cell.transform.position, Quaternion.identity).GetComponent<SimpleInfoPopupController>().SetPopup("Hola!", "Que\ntal\nestas?");
             FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().HideButtons();
             cell.GetComponent<CellBehaviour>().troopIn = troopSpawned.GetComponent<AbstracNPCBrain>();
         }

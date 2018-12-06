@@ -27,7 +27,7 @@ public class TurnHandler : MonoBehaviour {
     IEnumerator StartGame()
     {
         yield return new WaitForSeconds(2f);
-        currentTurn = currentTurn = Random.value > .5f ? ENTITY.Player : ENTITY.AI;
+        currentTurn = Random.value > .5f ? ENTITY.Player : ENTITY.AI;
     }
 
     IEnumerator HandleTurn()
