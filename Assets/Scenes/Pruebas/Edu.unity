@@ -407,20 +407,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114921962470318644, guid: 6e3fd88aabe7c154c9b74035b324c323,
         type: 2}
-      propertyPath: InfluenceMask.m_Bits
-      value: 2048
-      objectReference: {fileID: 0}
-    - target: {fileID: 114921962470318644, guid: 6e3fd88aabe7c154c9b74035b324c323,
-        type: 2}
       propertyPath: InfluenceMapTexture
       value: 
       objectReference: {fileID: 963893722}
     - target: {fileID: 114921962470318644, guid: 6e3fd88aabe7c154c9b74035b324c323,
         type: 2}
-      propertyPath: InfluenceNodePredab
-      value: 
-      objectReference: {fileID: 1645983821051024, guid: 3a177baf56cae6341a0483e034f29356,
-        type: 2}
+      propertyPath: InfluenceMask.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e3fd88aabe7c154c9b74035b324c323, type: 2}
   m_IsPrefabAsset: 0
@@ -673,6 +667,16 @@ Prefab:
     - target: {fileID: 4591794694150484, guid: 83e48a9fbbe10e841840653f5070ae39, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114043960876891638, guid: 83e48a9fbbe10e841840653f5070ae39,
+        type: 2}
+      propertyPath: Originator.Influence
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114043960876891638, guid: 83e48a9fbbe10e841840653f5070ae39,
+        type: 2}
+      propertyPath: Originator.InfluenceRange
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e48a9fbbe10e841840653f5070ae39, type: 2}

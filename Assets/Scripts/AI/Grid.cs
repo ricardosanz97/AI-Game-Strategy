@@ -3,13 +3,12 @@ using UnityEngine;
 
 namespace InfluenceMap
 {
+    [System.Serializable]
     public class Grid
     {
         public LayerMask InfluenceMask;
-        public Material TestMat;
-        public Material TestMat2;
-        public Material StartingMat;
         public Texture2D InfluenceMapTexture;
+        public GameObject ParentObject;
 
         private Node[,] _grid;
         private bool _renderGroundGrid;
@@ -21,7 +20,7 @@ namespace InfluenceMap
             _originators.Add(originator);
         }
 
-        public void CreateMap(int x, int y, float spacing, GameObject gridGameObject, bool hasToRenderGround)
+        public void CreateMap(int x, int y, float spacing, GameObject gridGameObject, bool hasToRenderGround, GameObject parentObject)
         {
             _renderGroundGrid = hasToRenderGround;
             InfluenceMapTexture = new Texture2D(x,y);
@@ -32,7 +31,7 @@ namespace InfluenceMap
             {
                 for (int j = 0; j < y; j++)
                 {
-                    InitializeInfluenceNode(x, y, spacing, gridGameObject, i, j);
+                    InitializeInfluenceNode(x, y, spacing, gridGameObject, i, j, parentObject);
                 }
             }
             
@@ -114,14 +113,14 @@ namespace InfluenceMap
             }
         }
 
-        private void InitializeInfluenceNode(int x, int y, float spacing, GameObject gridGameObject, int i, int j)
+        private void InitializeInfluenceNode(int x, int y, float spacing, GameObject gridGameObject, int i, int j, GameObject parentObject)
         {
             Vector3 worldPos = Vector3.zero + new Vector3(spacing / 2, 0, spacing / 2) + Vector3.right * i +
                                Vector3.forward * j;
             Node temp = new Node();
             temp.Influences.Clear();
             temp.Neighbours = new List<Node>();
-            temp.WorldGameObject = Object.Instantiate(gridGameObject, worldPos, Quaternion.identity);
+            temp.WorldGameObject = Object.Instantiate(gridGameObject, worldPos, Quaternion.identity, parentObject.transform);
             temp.WorldPosition = worldPos;
             temp.WorldGameObject.GetComponent<InfluencePosition>().GridPositions = new[] {i, j};
             _grid[i, j] = temp;
