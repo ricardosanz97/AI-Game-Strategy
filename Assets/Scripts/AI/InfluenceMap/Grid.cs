@@ -13,7 +13,6 @@ namespace InfluenceMap
         private Node[,] _grid;
         private bool _renderGroundGrid;
         private List<Originator> _originators = new List<Originator>();
-        private float _updateTimer;
 
         public void RegisterOriginator(Originator originator)
         {
@@ -24,7 +23,6 @@ namespace InfluenceMap
         {
             _renderGroundGrid = hasToRenderGround;
             InfluenceMapTexture = new Texture2D(x,y);
-            _updateTimer = .5f;
             _grid = new Node[x,y];
 
             for (int i = 0; i < x; i++)
@@ -40,13 +38,7 @@ namespace InfluenceMap
         
         public void UpdateMap()
         {
-            _updateTimer -= Time.deltaTime;
-            
-            if(_updateTimer > 0)
-                return;
-
-            _updateTimer = 0.5f;
-            
+            Debug.Log("Updating influence map. ");
             ClearInfluenceData();
 
             UpdateInfluences();
