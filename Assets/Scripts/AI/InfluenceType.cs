@@ -2,6 +2,10 @@ namespace InfluenceMap
 {
     public enum InfluenceType
     {
-        Player
+        Archer,
+        Minion,
+        Tank,
+        Construction,
+        Wall
     }
 }

@@ -415,6 +415,16 @@ Prefab:
       propertyPath: InfluenceMask.m_Bits
       value: 2048
       objectReference: {fileID: 0}
+    - target: {fileID: 114921962470318644, guid: 6e3fd88aabe7c154c9b74035b324c323,
+        type: 2}
+      propertyPath: Y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114921962470318644, guid: 6e3fd88aabe7c154c9b74035b324c323,
+        type: 2}
+      propertyPath: X
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e3fd88aabe7c154c9b74035b324c323, type: 2}
   m_IsPrefabAsset: 0

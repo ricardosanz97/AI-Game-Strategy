@@ -9,7 +9,7 @@ namespace InfluenceMap
     {
         public RawImage InfluenceMapTexture;
         public GameObject InfluenceNodePredab;
-        public List<Influencer> Originators;
+        [HideInInspector]public List<Influencer> Originators;
         public LayerMask InfluenceMask;
         public int X = 10;
         public int Y = 10;
