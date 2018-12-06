@@ -36,3 +36,5 @@ sysinfo.txt
 *.apk
 *.unitypackage
 ProjectSettings/ProjectVersion.txt
+
+\.idea/\.idea\.AI-Game-Strategy/\.idea/
