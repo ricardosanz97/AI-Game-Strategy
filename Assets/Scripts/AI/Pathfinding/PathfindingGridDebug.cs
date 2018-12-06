@@ -16,7 +16,7 @@ public class PathfindingGridDebug : MonoBehaviour
     private void OnGUI()
     {
         #if UNITY_EDITOR
-        if (GUILayout.Button("Generate Grid"))
+        if (GUI.Button(new Rect(0,0,100,50),"Generate Grid"))
         {
             _grid.CreateGrid();
         }

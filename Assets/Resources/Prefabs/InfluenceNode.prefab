@@ -9,50 +9,46 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1855356798494636}
+  m_RootGameObject: {fileID: 1645983821051024}
   m_IsPrefabAsset: 1
---- !u!1 &1855356798494636
+--- !u!1 &1645983821051024
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4577821691837428}
-  - component: {fileID: 33433366884848692}
-  - component: {fileID: 23954676197131956}
-  - component: {fileID: 136967388340665190}
-<<<<<<< HEAD
-  - component: {fileID: 114173206774722920}
-  m_Layer: 0
-=======
+  - component: {fileID: 4692152802407840}
+  - component: {fileID: 33269373817470600}
+  - component: {fileID: 23011545753891200}
+  - component: {fileID: 114414640419504128}
+  - component: {fileID: 65705043747483064}
   m_Layer: 11
->>>>>>> Edu
-  m_Name: Tank
+  m_Name: InfluenceNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4577821691837428
+--- !u!4 &4692152802407840
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1855356798494636}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 1.42, z: 1.18}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_GameObject: {fileID: 1645983821051024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23954676197131956
+--- !u!23 &23011545753891200
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1855356798494636}
+  m_GameObject: {fileID: 1645983821051024}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -62,7 +58,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 5a3fbf195298cf44db970779af245d92, type: 2}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,41 +78,34 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33433366884848692
+--- !u!33 &33269373817470600
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1855356798494636}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114173206774722920
+  m_GameObject: {fileID: 1645983821051024}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65705043747483064
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1645983821051024}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114414640419504128
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1855356798494636}
+  m_GameObject: {fileID: 1645983821051024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9fe519accc194249875319807a55acc, type: 3}
+  m_Script: {fileID: 11500000, guid: 036fa975b38e482a8370279534ec1974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc: 3
-  healthPoints: 100
-  currentLevel: 1
-  transitions: []
-  states: []
-  currentState: {fileID: 0}
-  currentTransitions: []
---- !u!136 &136967388340665190
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1855356798494636}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  GridPositions: 
