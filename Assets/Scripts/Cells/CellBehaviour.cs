@@ -6,28 +6,34 @@ using Zenject;
 
 public class CellBehaviour : MonoBehaviour
 {
-    [Inject]
-    private SpawnablesManager _spawnablesManager;
-    [Inject]
-    private TurnHandler _turnHandler;
-    private bool canClick = false;
     public ENTITY owner;
     public AbstracNPCBrain troopIn;
 
-    private void OnMouseOver()
+    public void SetOwner(ENTITY entity)
     {
-        if (_spawnablesManager.GetCurrentTroop() == TROOP.None || _turnHandler.currentTurn != ENTITY.Player || owner != ENTITY.Player) //si no hay tropa seleccionada o no es el turno del player o la casilla no es del player...
-        {
-            return;
-        }
-        this.transform.DOLocalMoveY(0.5f, 0f);
+        this.owner = entity;
     }
 
-    private void OnMouseExit()
+    public void SetTroopIn(AbstracNPCBrain brain)
     {
-        this.transform.DOLocalMoveY(0f, 0f);
+        this.troopIn = brain;
     }
 
+    public ENTITY GetOwner()
+    {
+        return this.owner;
+    }
+
+    public AbstracNPCBrain GetTroopIn()
+    {
+        return this.troopIn;
+    }
+
+    public void BackToInitialPosition()
+    {
+        this.transform.DOLocalMoveY(0f, 0.3f);
+    }
+    /*
     private void OnMouseDown()
     {
         if (this.owner != ENTITY.Player || _turnHandler.currentTurn != ENTITY.Player) //si la casilla no es tipo player o no es nuestro turno -> return
@@ -36,5 +42,6 @@ public class CellBehaviour : MonoBehaviour
         }
         _spawnablesManager.SpawnTroop(this.gameObject);
     }
+    */
 
 }

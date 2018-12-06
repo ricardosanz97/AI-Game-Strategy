@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class AttackButtonController : MonoBehaviour {
 
     public bool buttonsEnabled = false;
-    private bool canPressButton = true;
+    [SerializeField] private bool canPressButton = true;
 
     public void HandleButtons()
     {
