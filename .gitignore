@@ -38,3 +38,7 @@ sysinfo.txt
 ProjectSettings/ProjectVersion.txt
 
 \.idea/\.idea\.AI-Game-Strategy/\.idea/
+
+Assets/Plugins/Zenject/OptionalExtras/ReflectionBaking/Zenject-ReflectionBaking\.csproj\.meta
+
+Assets/Plugins/Zenject/OptionalExtras/Signals/Zenject-Signals\.csproj\.meta
