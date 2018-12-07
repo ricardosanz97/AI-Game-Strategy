@@ -6,7 +6,12 @@ using DG.Tweening;
 public class PopupController : MonoBehaviour{
     public void ClosePopup()
     {
-
+        Sequence s = DOTween.Sequence();
+        s.Append(this.gameObject.transform.DOScale(0f, 0.5f).SetEase(Ease.InOutCubic));
+        s.OnComplete(() =>
+        {
+            Destroy(this.gameObject);
+        });
     }
 
     public void OpenPopup()
