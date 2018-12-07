@@ -9,13 +9,11 @@ public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 {
     public PathfindingManager PathfindingManagerPrefab;
     public SpawnablesManager SpawnablesManager;
-    public TurnHandler TurnHandler;
     
     public override void InstallBindings()
     {
         Container.Bind<GameManager>().AsSingle().WithArguments(2);
         Container.Bind<PathfindingManager>().FromComponentInNewPrefab(PathfindingManagerPrefab).AsSingle();
         Container.Bind<SpawnablesManager>().FromComponentInNewPrefab(SpawnablesManager).AsSingle();
-        Container.Bind<TurnHandler>().FromComponentInNewPrefab(TurnHandler).AsSingle();
     }
 }

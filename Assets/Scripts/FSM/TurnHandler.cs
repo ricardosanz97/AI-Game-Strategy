@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AI.StrategicAI;
 using UnityEngine;
+using Zenject;
 
-public enum ENTITY
+public enum PlayerType
 {
     None,
     Player,
@@ -11,11 +13,17 @@ public enum ENTITY
 
 public class TurnHandler : MonoBehaviour {
 
-    public ENTITY currentTurn = ENTITY.None;
-    public ENTITY lastTurn = ENTITY.None;
-
+    public PlayerType currentTurn = PlayerType.None;
+    public PlayerType lastTurn = PlayerType.None;
+    public float WaitingTime = 2.0f;
     public bool playerDone = false;
     public bool AIDone = false;
+    
+    private bool isGameFinished = false;
+    [Inject]private AiGeneralStrategy _globalAi;
+    
+
+    private WaitForSeconds _waitForSeconds = new WaitForSeconds(2.0f);
 
 	void Start () {
     
@@ -26,20 +34,20 @@ public class TurnHandler : MonoBehaviour {
 
     IEnumerator StartGame()
     {
-        yield return new WaitForSeconds(2f);
-        currentTurn = Random.value > .5f ? ENTITY.Player : ENTITY.AI;
+        yield return _waitForSeconds;
+        currentTurn = Random.value > .5f ? PlayerType.Player : PlayerType.AI;
     }
 
     IEnumerator HandleTurn()
     {
-        while (true)
+        while (!isGameFinished)
         {
-            while (currentTurn == ENTITY.None)
+            while (currentTurn == PlayerType.None)
             {
                 yield return null;
             }
 
-            if (currentTurn == ENTITY.Player)
+            if (currentTurn == PlayerType.Player)
             {
                 Debug.Log("TIRA EL PLAYER!");
                 while (!playerDone)
@@ -47,26 +55,26 @@ public class TurnHandler : MonoBehaviour {
                     yield return null;
                 }
                 playerDone = false;
-                currentTurn = ENTITY.None;
-                yield return new WaitForSeconds(2f);
-                currentTurn = ENTITY.AI;
+                currentTurn = PlayerType.None;
+                yield return _waitForSeconds;
+                currentTurn = PlayerType.AI;
             }
 
-            else if (currentTurn == ENTITY.AI)
+            else if (currentTurn == PlayerType.AI)
             {
-                //AIManager.ExecutePlay();
+                _globalAi.PlayTurn();
                 Debug.Log("TIRA LA IA");
                 while (!AIDone)
                 {
                     yield return null;
                 }
                 AIDone = false;
-                currentTurn = ENTITY.None;
-                yield return new WaitForSeconds(2f);
-                currentTurn = ENTITY.Player;
+                currentTurn = PlayerType.None;
+                yield return _waitForSeconds;
+                currentTurn = PlayerType.Player;
             }
 
-            yield return true;
+            yield return null;
         }
     }
 }

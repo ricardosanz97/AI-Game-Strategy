@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseBehaviour : MonoBehaviour {
-    public ENTITY owner;
+    public PlayerType owner;
 }
