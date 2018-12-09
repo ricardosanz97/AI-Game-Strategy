@@ -72,6 +72,7 @@ public class SpawnablesManager : MonoBehaviour {
 
             GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleOptionsPopup"), cell.transform.position, Quaternion.identity);
                 go.GetComponent<SimpleOptionsPopupController>().SetPopup(
+                Vector3.zero,
                 lastTroopSpawned.ToString(),
                 "Mover",
                 "Atacar",
