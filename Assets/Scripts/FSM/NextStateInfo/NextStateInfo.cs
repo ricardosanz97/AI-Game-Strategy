@@ -9,13 +9,13 @@ public class NextStateInfo
 {
     public State stateCaseTrue;
     public State stateCaseFalse;
-    public Condition changeCondition;
+    public Order order;
     
-    public NextStateInfo (AbstracNPCBrain abstractNpc, STATE stateTrue, STATE stateFalse, Condition changeCondition)
+    public NextStateInfo (AbstracNPCBrain abstractNpc, STATE stateTrue, STATE stateFalse, Order order)
     {
         this.stateCaseTrue = FSMSystem.FindState(abstractNpc, stateTrue);
         this.stateCaseFalse = FSMSystem.FindState(abstractNpc, stateFalse);
-        this.changeCondition = changeCondition;
+        this.order = order;
     }
 	
 }

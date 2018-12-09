@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 
+[RequireComponent(typeof(MoveOrder))]
+[RequireComponent(typeof(AttackOrder))]
 public abstract class AbstracNPCBrain : Entity
 {
     public TROOP npc = TROOP.None;
     public float healthPoints = 100f;
     public int currentLevel = 1;
+    public bool popupOptionsEnabled = false;
 
     public abstract void SetTransitions();
     public abstract void SetStates();
@@ -16,7 +19,7 @@ public abstract class AbstracNPCBrain : Entity
     [HideInInspector]public List<State> states;
     public State currentState;
     [HideInInspector]public State initialState;
-    [HideInInspector]public List<Transition> currentTransitions;
+    public List<Transition> currentTransitions;
 
     public virtual void Start()
     {
@@ -24,6 +27,11 @@ public abstract class AbstracNPCBrain : Entity
         {
             Debug.LogError("NPC type unassigned. ");
         }
+    }
+
+    public void SetRemainState()
+    {
+        FSMSystem.AddState(this, new State(STATE.Remain, this));
     }
 
     public virtual void ActBehaviours()
@@ -37,17 +45,18 @@ public abstract class AbstracNPCBrain : Entity
         }
     }
 
-    public virtual void CheckConditions()
+    public virtual void CheckOrder()
     {
         foreach (Transition trans in currentTransitions)
         {
             foreach (NextStateInfo nsi in trans.nextStateInfo)
             {
-                bool result = nsi.changeCondition.Check();
+                bool result = nsi.order.Check();
+                Debug.Log(nsi.order.ToString());
                 
                 if (result)
                 {
-                    if (nsi.stateCaseTrue.stateName == STATE.None)
+                    if (nsi.stateCaseTrue.stateName == STATE.Remain)
                     {
                         continue;
                     }
@@ -57,7 +66,7 @@ public abstract class AbstracNPCBrain : Entity
                 }
                 else
                 {
-                    if (nsi.stateCaseFalse.stateName == STATE.None)
+                    if (nsi.stateCaseFalse.stateName == STATE.Remain)
                     {
                         continue;
                     }
@@ -71,12 +80,35 @@ public abstract class AbstracNPCBrain : Entity
         }
     }
 
-    public void SetInitialState()
+    public void OnMouseDown()
     {
-        this.currentState = this.initialState;
-        this.currentState.OnEnter();
-        currentTransitions = this.transitions.FindAll((x) => x.currentState == this.currentState);
+        if (popupOptionsEnabled)
+        {
+            return;
+        }
+        GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleOptionsPopup"));
+        go.GetComponent<SimpleOptionsPopupController>().SetPopup(
+        this.transform.localPosition,
+        this.npc.ToString(),
+        "Mover",
+        "Atacar",
+        () => {
+            Debug.Log("MOVER");
+            GetComponent<MoveOrder>().Move = true;
+            go.GetComponent<SimpleOptionsPopupController>().ClosePopup();
+        },
+        () => {
+            Debug.Log("ATACAR");
+            GetComponent<AttackOrder>().Attack = true;
+            go.GetComponent<SimpleOptionsPopupController>().ClosePopup();
+        });
     }
 
-    
+    private void Update()
+    {
+        CheckOrder();
+        ActBehaviours();
+    }
+
+
 }

@@ -18,4 +18,11 @@ public class Entity : MonoBehaviour
     {
         throw new System.NotImplementedException();
     }
+
+    public static System.Action OnTroopSpawned;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 }

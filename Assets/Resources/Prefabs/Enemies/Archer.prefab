@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 136731337379363358}
   - component: {fileID: 114536286861462398}
   - component: {fileID: 114097329890938066}
+  - component: {fileID: 114527889360197610}
+  - component: {fileID: 114603960898411722}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -103,6 +105,18 @@ MonoBehaviour:
     InfluenceRange: 4
     Color: {r: 0.5647059, g: 0.20784315, b: 0.19607845, a: 1}
     InfluenceType: 0
+--- !u!114 &114527889360197610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1057076223415276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebfbdaaa17f92464ea3711db1666bd9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attack: 0
 --- !u!114 &114536286861462398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,6 +132,7 @@ MonoBehaviour:
   npc: 2
   healthPoints: 110
   currentLevel: 1
+  popupOptionsEnabled: 0
   transitions: []
   states: []
   currentState:
@@ -129,6 +144,18 @@ MonoBehaviour:
     brain: {fileID: 0}
     actions: []
   currentTransitions: []
+--- !u!114 &114603960898411722
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1057076223415276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f3e0dfd5029493eaa724a7afd80ed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Move: 0
 --- !u!136 &136731337379363358
 CapsuleCollider:
   m_ObjectHideFlags: 1

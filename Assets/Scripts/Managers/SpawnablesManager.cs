@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public enum TROOP 
+public enum TROOP
 {
     None,
     Minion,
@@ -69,9 +69,10 @@ public class SpawnablesManager : MonoBehaviour {
         if (troopSpawned != null)
         {
             OnSpawnedTroop?.Invoke(troopSpawned.GetComponent<Entity>());
-            
+
             GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleOptionsPopup"), cell.transform.position, Quaternion.identity);
                 go.GetComponent<SimpleOptionsPopupController>().SetPopup(
+                Vector3.zero,
                 lastTroopSpawned.ToString(),
                 "Mover",
                 "Atacar",
