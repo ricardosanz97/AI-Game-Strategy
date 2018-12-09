@@ -64,17 +64,6 @@ public class SpawnablesManager : MonoBehaviour {
         if (troopSpawned != null)
         {
             Entity.OnTroopSpawned?.Invoke();
-            GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleOptionsPopup"), cell.transform.position, Quaternion.identity);
-                go.GetComponent<SimpleOptionsPopupController>().SetPopup(
-                lastTroopSpawned.ToString(),
-                "Mover",
-                "Atacar",
-                () => {
-                    Debug.Log("MOVER");
-                    go.GetComponent<SimpleOptionsPopupController>().ClosePopup();
-                      },
-                () => { Debug.Log("ATACAR");
-                    go.GetComponent<SimpleOptionsPopupController>().ClosePopup(); });
 
             FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().HideButtons();
             cell.GetComponent<CellBehaviour>().troopIn = troopSpawned.GetComponent<AbstracNPCBrain>();

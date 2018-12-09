@@ -8,7 +8,8 @@ public enum STATE
     None,
     Attack,
     Idle,
-    MoveForward
+    Move,
+    Remain
 }
 
 public static class FSMSystem{
@@ -57,7 +58,7 @@ public static class FSMSystem{
         }
     }
 
-    public static State GetNextState(AbstracNPCBrain abstracNpc, bool _bool, State currentState, Condition condition)
+    public static State GetNextState(AbstracNPCBrain abstracNpc, bool _bool, State currentState, Order order)
     {
         foreach (Transition trans in abstracNpc.transitions)
         {
@@ -65,11 +66,11 @@ public static class FSMSystem{
             {
                 foreach (NextStateInfo nsi in trans.nextStateInfo)
                 {
-                    if (condition == nsi.changeCondition && _bool)
+                    if (order == nsi.order && _bool)
                     {
                         return nsi.stateCaseTrue;
                     }
-                    else if (condition == nsi.changeCondition && !_bool)
+                    else if (order == nsi.order && !_bool)
                     {
                         return nsi.stateCaseFalse;
                     }

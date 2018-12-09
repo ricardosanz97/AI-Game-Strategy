@@ -16,8 +16,8 @@ public static class StateInfo {
                     case STATE.Attack:
                         EnterAttackMinion();
                         break;
-                    case STATE.MoveForward:
-                        EnterMoveForwardMinion();
+                    case STATE.Move:
+                        EnterMoveMinion();
                         break;
                     case STATE.Idle:
                         EnterIdleMinion();
@@ -34,8 +34,8 @@ public static class StateInfo {
                     case STATE.Attack:
                         EnterAttackArcher();
                         break;
-                    case STATE.MoveForward:
-                        EnterMoveForwardArcher();
+                    case STATE.Move:
+                        EnterMoveArcher();
                         break;
                     case STATE.Idle:
                         EnterIdleArcher();
@@ -52,8 +52,8 @@ public static class StateInfo {
                     case STATE.Attack:
                         EnterAttackTank();
                         break;
-                    case STATE.MoveForward:
-                        EnterMoveForwardTank();
+                    case STATE.Move:
+                        EnterMoveTank();
                         break;
                     case STATE.Idle:
                         EnterIdleTank();
@@ -69,8 +69,8 @@ public static class StateInfo {
                     case STATE.Attack:
                         EnterAttackDefault();
                         break;
-                    case STATE.MoveForward:
-                        EnterMoveForwardDefault();
+                    case STATE.Move:
+                        EnterMoveDefault();
                         break;
                     case STATE.Idle:
                         EnterIdleDefault();
@@ -93,8 +93,8 @@ public static class StateInfo {
                     case STATE.Attack:
                         ExitAttackMinion();
                         break;
-                    case STATE.MoveForward:
-                        ExitMoveForwardMinion();
+                    case STATE.Move:
+                        ExitMoveMinion();
                         break;
                     case STATE.Idle:
                         ExitIdleMinion();
@@ -108,11 +108,11 @@ public static class StateInfo {
                     case STATE.Attack:
                         ExitAttackArcher();
                         break;
-                    case STATE.MoveForward:
-                        ExitMoveForwardArcher();
+                    case STATE.Move:
+                        ExitMoveArcher();
                         break;
                     case STATE.Idle:
-                        ExitMoveForwardArcher();
+                        ExitMoveArcher();
                         break;
                 }
                 break;
@@ -123,8 +123,8 @@ public static class StateInfo {
                     case STATE.Attack:
                         ExitAttackTank();
                         break;
-                    case STATE.MoveForward:
-                        ExitMoveForwardTank();
+                    case STATE.Move:
+                        ExitMoveTank();
                         break;
                     case STATE.Idle:
                         ExitIdleTank();
@@ -138,8 +138,8 @@ public static class StateInfo {
                     case STATE.Attack:
                         ExitAttackDefault();
                         break;
-                    case STATE.MoveForward:
-                        ExitMoveForwardDefault();
+                    case STATE.Move:
+                        ExitMoveDefault();
                         break;
                     case STATE.Idle:
                         ExitIdleDefault();
@@ -154,143 +154,118 @@ public static class StateInfo {
 
     private static void EnterDefault()
     {
-        throw new NotImplementedException();
     }
 
     private static void EnterIdleDefault()
     {
-        throw new NotImplementedException();
     }
 
-    private static void EnterMoveForwardDefault()
+    private static void EnterMoveDefault()
     {
-        throw new NotImplementedException();
     }
 
     private static void EnterAttackDefault()
     {
-        throw new NotImplementedException();
     }
 
     private static void EnterDefaultTank()
     {
-        throw new NotImplementedException();
     }
 
     private static void EnterIdleTank()
     {
-        throw new NotImplementedException();
     }
 
-    private static void EnterMoveForwardTank()
+    private static void EnterMoveTank()
     {
-        throw new NotImplementedException();
     }
 
     private static void EnterAttackTank()
     {
-        throw new NotImplementedException();
     }
 
     private static void EnterAttackMinion()
     {
-        throw new NotImplementedException();
     }
 
-    private static void EnterMoveForwardMinion()
+    private static void EnterMoveMinion()
     {
-        throw new NotImplementedException();
     }
 
     private static void EnterIdleMinion()
     {
-        throw new NotImplementedException();
     }
 
     private static void EnterDefaultMinion()
     {
-        throw new NotImplementedException();
     }
 
     private static void EnterAttackArcher()
     {
-        throw new NotImplementedException();
     }
 
-    private static void EnterMoveForwardArcher()
+    private static void EnterMoveArcher()
     {
-        throw new NotImplementedException();
     }
 
     private static void EnterIdleArcher()
     {
-        throw new NotImplementedException();
     }
 
     private static void EnterDefaultArcher()
     {
-        throw new NotImplementedException();
     }
 
 
 
     private static void ExitAttackMinion()
     {
-        throw new NotImplementedException();
     }
 
-    private static void ExitMoveForwardMinion()
+    private static void ExitMoveMinion()
     {
-        throw new NotImplementedException();
     }
 
     private static void ExitIdleMinion()
     {
-        throw new NotImplementedException();
     }
 
     private static void ExitAttackArcher()
     {
-        throw new NotImplementedException();
     }
 
-    private static void ExitMoveForwardArcher()
+    private static void ExitMoveArcher()
     {
-        throw new NotImplementedException();
+        Debug.Log("ExitMoveArcher()");
     }
 
     private static void ExitAttackTank()
     {
-        throw new NotImplementedException();
     }
 
-    private static void ExitMoveForwardTank()
+    private static void ExitMoveTank()
     {
-        throw new NotImplementedException();
     }
 
     private static void ExitIdleTank()
     {
-        throw new NotImplementedException();
     }
 
     private static void ExitAttackDefault()
     {
-        throw new NotImplementedException();
     }
 
-    private static void ExitMoveForwardDefault()
+    private static void ExitMoveDefault()
     {
-        throw new NotImplementedException();
+        Debug.Log("ExitMoveDefault");
     }
 
     private static void ExitIdleDefault()
     {
-        throw new NotImplementedException();
+        Debug.Log("ExitIdleDefault()");
     }
 
     private static void ExitDefault()
     {
-        throw new NotImplementedException();
     }
 }

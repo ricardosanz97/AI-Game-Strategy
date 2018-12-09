@@ -50,6 +50,9 @@ public class TurnHandler : MonoBehaviour {
             if (currentTurn == PlayerType.Player)
             {
                 Debug.Log("TIRA EL PLAYER!");
+
+                Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "TU TURNO!");
+
                 while (!playerDone)
                 {
                     yield return null;
