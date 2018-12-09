@@ -17,4 +17,9 @@ public class AiTask
 	{
 		Debug.Log($"Task with priority: {Priority}assigned to: {Doer.name}");
 	}
+
+	public bool IsAssigned()
+	{
+		throw new System.NotImplementedException();
+	}
 }
