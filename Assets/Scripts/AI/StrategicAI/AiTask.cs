@@ -1,16 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using AI.StrategicAI;
 using UnityEngine;
 
-public class AiTask : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
+[System.Serializable]
+public class AiTask
+{
+	public int Priority;
+	public string Description;
+	public HighLevelAI.IAPersonality IaPersonality;
 	
-	// Update is called once per frame
-	void Update () {
-		
+	[SerializeField] private Entity Doer;
+	private Entity Objective;
+
+	public void Assign(Entity doer)
+	{
+		Debug.Log($"Task with priority: {Priority}assigned to: {Doer.name}");
 	}
 }
