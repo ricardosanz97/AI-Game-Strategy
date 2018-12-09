@@ -10,12 +10,14 @@ namespace AI.StrategicAI
         //tareas asignadas en funcion de la personalidad a la IA.
         [SerializeField] private StrategicObjectives StrategicObjectives;      
         [SerializeField] private HighLevelAI _highLevelAI;
+        [SerializeField] private AIResourcesAllocator _aiResourcesAllocator;
         [SerializeField] private List<AiTask> _selectableTasks;
 
         [Inject]
-        public AiAnalyzer(HighLevelAI highLevelAi, StrategicObjectives objectives)
+        public AiAnalyzer(HighLevelAI highLevelAi, AIResourcesAllocator aiResourcesAllocator, StrategicObjectives objectives)
         {
             _highLevelAI = highLevelAi;
+            _aiResourcesAllocator = aiResourcesAllocator;
             _selectableTasks = new List<AiTask>();
             StrategicObjectives = objectives;
             OnPersonalityChanged();
@@ -25,8 +27,10 @@ namespace AI.StrategicAI
         public void GenerateTasks()
         {
             Entity[] controlledEntities = _highLevelAI.ControlledEntites.ToArray();
+            //en funcion de las losobjetivos estrategicos asigna unas tareas o otras usando el mapa de influencias
+            List<AiTask> tasks = new List<AiTask>();
             
-            //recorrerlas y hacer comprobaciones de cada unidad para saber que tarea tiene que componer, con que objetivo.
+            _aiResourcesAllocator.OnTasksGenerated(tasks.ToArray(), controlledEntities);
         }
 
         public void OnPersonalityChanged()

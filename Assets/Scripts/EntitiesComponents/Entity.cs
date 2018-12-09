@@ -13,4 +13,9 @@ public class Entity : MonoBehaviour
 
     public Owner owner;
     public Rigidbody rb;
+
+    public bool isTaskSuitable(AiTask aiTask)
+    {
+        throw new System.NotImplementedException();
+    }
 }
