@@ -20,7 +20,7 @@ public class TurnHandler : MonoBehaviour {
     public bool AIDone = false;
     
     private bool isGameFinished = false;
-    [Inject]private AiGeneralStrategy _globalAi;
+    [Inject]private HighLevelAI _globalHighLevelAi;
     
 
     private WaitForSeconds _waitForSeconds = new WaitForSeconds(2.0f);
@@ -65,7 +65,7 @@ public class TurnHandler : MonoBehaviour {
 
             else if (currentTurn == PlayerType.AI)
             {
-                _globalAi.PlayTurn();
+                _globalHighLevelAi.PlayTurn();
                 Debug.Log("TIRA LA IA");
                 while (!AIDone)
                 {

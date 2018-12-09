@@ -24,12 +24,12 @@ namespace InfluenceMap
             influenceGrid.InfluenceMask = InfluenceMask;
             InfluenceMapTexture.texture = influenceGrid.InfluenceMapTexture;
 
-            UpdateInfluenceMap();
+            InitializeInfluenceMap();
             
-            Entity.OnTroopSpawned += UpdateInfluenceMap;
+            SpawnablesManager.OnSpawnedTroop += UpdateInfluenceMap;
         }
 
-        private void UpdateInfluenceMap()
+        private void InitializeInfluenceMap()
         {
             foreach (var influencer in FindObjectsOfType<Influencer>())
             {
@@ -38,6 +38,22 @@ namespace InfluenceMap
                 influenceGrid.RegisterOriginator(influencer.Originator);
                 Originators.Add(influencer);
             }
+            
+            influenceGrid.UpdateMap();
+        }
+        
+        private void UpdateInfluenceMap(Entity spawned)
+        {
+            Influencer influencer = spawned.GetComponent<Influencer>();
+            
+            if(influencer == null)
+            {
+                return;
+            }
+            
+            influencer.Originator.WorldPosition = influencer.transform.position;
+            influenceGrid.RegisterOriginator(influencer.Originator);
+            Originators.Add(influencer);
             
             influenceGrid.UpdateMap();
         }

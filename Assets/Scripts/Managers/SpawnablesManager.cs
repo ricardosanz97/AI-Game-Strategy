@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public enum TROOP {
+public enum TROOP
+{
     None,
     Minion,
     Archer,
@@ -11,10 +13,13 @@ public enum TROOP {
     Wall,
     Construction
 }
+
 public class SpawnablesManager : MonoBehaviour {
 
 	[SerializeField]private TROOP currentTroopSelected;
     public TROOP lastTroopSpawned;
+
+    public static event Action<Entity> OnSpawnedTroop;
 
     public void SetCurrentTroop(TROOP troop)
     {
@@ -63,7 +68,19 @@ public class SpawnablesManager : MonoBehaviour {
 
         if (troopSpawned != null)
         {
-            Entity.OnTroopSpawned?.Invoke();
+            OnSpawnedTroop?.Invoke(troopSpawned.GetComponent<Entity>());
+
+            GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleOptionsPopup"), cell.transform.position, Quaternion.identity);
+                go.GetComponent<SimpleOptionsPopupController>().SetPopup(
+                lastTroopSpawned.ToString(),
+                "Mover",
+                "Atacar",
+                () => {
+                    Debug.Log("MOVER");
+                    go.GetComponent<SimpleOptionsPopupController>().ClosePopup();
+                      },
+                () => { Debug.Log("ATACAR");
+                    go.GetComponent<SimpleOptionsPopupController>().ClosePopup(); });
 
             FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().HideButtons();
             cell.GetComponent<CellBehaviour>().troopIn = troopSpawned.GetComponent<AbstracNPCBrain>();

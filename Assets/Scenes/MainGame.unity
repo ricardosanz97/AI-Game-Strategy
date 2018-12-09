@@ -199,6 +199,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114760300805236182, guid: 7b839e4363c674d19b3927e1eedfddcc,
+        type: 2}
+      propertyPath: _analyzer.ObjectivesFileName
+      value: AIObjectives
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b839e4363c674d19b3927e1eedfddcc, type: 2}
   m_IsPrefabAsset: 0
@@ -817,6 +822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad52cc0cd6824512b376112f5493eb3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AIObjectives: {fileID: 11400000, guid: 7be88bf77e0ee9c48885c54812dc832e, type: 2}
 --- !u!1 &1167093616
 GameObject:
   m_ObjectHideFlags: 0

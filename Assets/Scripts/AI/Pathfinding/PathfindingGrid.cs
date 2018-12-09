@@ -32,12 +32,12 @@ namespace CustomPathfinding
 
         private void OnEnable()
         {
-            Entity.OnTroopSpawned += CreateGrid;
+            SpawnablesManager.OnSpawnedTroop += UpdateGrid;
         }
 
         private void OnDisable()
         {
-            Entity.OnTroopSpawned -= CreateGrid;
+	        SpawnablesManager.OnSpawnedTroop -= UpdateGrid;
         }
 
         void Start ()
@@ -52,6 +52,47 @@ namespace CustomPathfinding
 			GridSizeZ = Mathf.RoundToInt(GridWorldSize.y / _nodeDiameter);
 			
 			CreateGrid();
+		}
+
+
+		//todo this method can be optimized by sampling the nodes which arearound the spawned entity and only updating those
+		private void UpdateGrid(Entity entitySpawned)
+		{
+			if (nodeContainer != null)
+			{
+				Destroy(nodeContainer);
+			}
+			
+			nodeContainer = new GameObject("Node Container");
+			nodeContainer.transform.SetParent(this.transform);
+			Grid = new Node[GridSizeX, GridSizeZ];
+			Vector3 gridOrigin;
+			//Collider[] results = new Collider[16];
+			
+			if(UseTransformAsGridOrigin)
+				gridOrigin = transform.position;
+			else
+				gridOrigin = transform.position - Vector3.right * GridWorldSize.x/2 - Vector3.forward * GridWorldSize.y/2 ;
+			
+			Debug.DrawRay(Vector3.zero, gridOrigin);
+			for (int i = 0; i < GridSizeX; i++)
+			{
+				for (int j = 0; j < GridSizeZ; j++)
+				{
+					Node.ENodeType nodeType = Node.ENodeType.Walkable;
+					Vector3 nodeWorldPosition = gridOrigin + Vector3.right * (i * _nodeDiameter + NodePrefab.NodeRadius) +
+					                            Vector3.forward * (j * _nodeDiameter + NodePrefab.NodeRadius);
+
+					/*results = new Collider[16];
+					Physics.OverlapBoxNonAlloc(nodeWorldPosition,
+						new Vector3(NodeRadius, NodeRadius, NodeRadius), results,Quaternion.identity);*/
+
+					if (Physics.CheckBox(nodeWorldPosition, new Vector3(NodePrefab.NodeRadius,NodePrefab.NodeRadius,NodePrefab.NodeRadius),Quaternion.identity, _unwalkableMask))
+						nodeType = Node.ENodeType.NonWalkable;
+
+					InitializeNode(i,j,nodeWorldPosition,nodeType);
+				}
+			}
 		}
 
 		public void CreateGrid()
