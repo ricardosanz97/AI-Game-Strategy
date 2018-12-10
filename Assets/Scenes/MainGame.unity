@@ -266,7 +266,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 270
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114408443491801928, guid: 217a60a0bfa4d69449b7509849ccd9ac, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 217a60a0bfa4d69449b7509849ccd9ac, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &341886347
@@ -737,7 +738,8 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114408443491801928, guid: 217a60a0bfa4d69449b7509849ccd9ac, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 217a60a0bfa4d69449b7509849ccd9ac, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &942361474 stripped
@@ -1033,6 +1035,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1942024836984856, guid: 15caaaa594d8de444a6bc109a1735279, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108705533313096742, guid: 15caaaa594d8de444a6bc109a1735279,
+        type: 2}
+      propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 108705533313096742, guid: 15caaaa594d8de444a6bc109a1735279,
+        type: 2}
+      propertyPath: m_BounceIntensity
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -7,14 +7,14 @@ using Zenject;
 public class CellBehaviour : MonoBehaviour
 {
     public PlayerType owner;
-    public AbstracNPCBrain troopIn;
+    public AbstractNPCBrain troopIn;
 
     public void SetOwner(PlayerType playerType)
     {
         this.owner = playerType;
     }
 
-    public void SetTroopIn(AbstracNPCBrain brain)
+    public void SetTroopIn(AbstractNPCBrain brain)
     {
         this.troopIn = brain;
     }
@@ -24,7 +24,7 @@ public class CellBehaviour : MonoBehaviour
         return this.owner;
     }
 
-    public AbstracNPCBrain GetTroopIn()
+    public AbstractNPCBrain GetTroopIn()
     {
         return this.troopIn;
     }

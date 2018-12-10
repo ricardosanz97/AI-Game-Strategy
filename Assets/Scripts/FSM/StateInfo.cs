@@ -9,39 +9,39 @@ public static class StateInfo {
     {
         switch (npc)
         {
-            case TROOP.Minion:
+            case TROOP.Prisioner:
 
                 switch (stateName)
                 {
                     case STATE.Attack:
-                        EnterAttackMinion();
+                        EnterAttackPrisioner();
                         break;
                     case STATE.Move:
-                        EnterMoveMinion();
+                        EnterMovePrisioner();
                         break;
                     case STATE.Idle:
-                        EnterIdleMinion();
+                        EnterIdlePrisioner();
                         break;
                     case STATE.None:
-                        EnterDefaultMinion();
+                        EnterDefaultPrisioner();
                         break;
                 }
                 break;
 
-            case TROOP.Archer:
+            case TROOP.Launcher:
                 switch (stateName)
                 {
                     case STATE.Attack:
-                        EnterAttackArcher();
+                        EnterAttackLauncher();
                         break;
                     case STATE.Move:
-                        EnterMoveArcher();
+                        EnterMoveLauncher();
                         break;
                     case STATE.Idle:
-                        EnterIdleArcher();
+                        EnterIdleLauncher();
                         break;
                     case STATE.None:
-                        EnterDefaultArcher();
+                        EnterDefaultLauncher();
                         break;
                 }
                 break;
@@ -87,32 +87,32 @@ public static class StateInfo {
     {
         switch (npc)
         {
-            case TROOP.Minion:
+            case TROOP.Prisioner:
                 switch (stateName)
                 {
                     case STATE.Attack:
-                        ExitAttackMinion();
+                        ExitAttackPrisioner();
                         break;
                     case STATE.Move:
-                        ExitMoveMinion();
+                        ExitMovePrisioner();
                         break;
                     case STATE.Idle:
-                        ExitIdleMinion();
+                        ExitIdlePrisioner();
                         break;
                 }
                 break;
 
-            case TROOP.Archer:
+            case TROOP.Launcher:
                 switch (stateName)
                 {
                     case STATE.Attack:
-                        ExitAttackArcher();
+                        ExitAttackLauncher();
                         break;
                     case STATE.Move:
-                        ExitMoveArcher();
+                        ExitMoveLauncher();
                         break;
                     case STATE.Idle:
-                        ExitMoveArcher();
+                        ExitIdleLauncher();
                         break;
                 }
                 break;
@@ -152,6 +152,11 @@ public static class StateInfo {
         }
     }
 
+    private static void ExitIdleLauncher()
+    {
+        Debug.Log("ExitIdleLauncher()");
+    }
+
     private static void EnterDefault()
     {
     }
@@ -184,59 +189,59 @@ public static class StateInfo {
     {
     }
 
-    private static void EnterAttackMinion()
+    private static void EnterAttackPrisioner()
     {
     }
 
-    private static void EnterMoveMinion()
+    private static void EnterMovePrisioner()
     {
     }
 
-    private static void EnterIdleMinion()
+    private static void EnterIdlePrisioner()
     {
     }
 
-    private static void EnterDefaultMinion()
+    private static void EnterDefaultPrisioner()
     {
     }
 
-    private static void EnterAttackArcher()
+    private static void EnterAttackLauncher()
     {
     }
 
-    private static void EnterMoveArcher()
+    private static void EnterMoveLauncher()
     {
     }
 
-    private static void EnterIdleArcher()
+    private static void EnterIdleLauncher()
     {
     }
 
-    private static void EnterDefaultArcher()
+    private static void EnterDefaultLauncher()
     {
     }
 
 
 
-    private static void ExitAttackMinion()
+    private static void ExitAttackPrisioner()
     {
     }
 
-    private static void ExitMoveMinion()
+    private static void ExitMovePrisioner()
     {
     }
 
-    private static void ExitIdleMinion()
+    private static void ExitIdlePrisioner()
     {
     }
 
-    private static void ExitAttackArcher()
+    private static void ExitAttackLauncher()
     {
     }
 
-    private static void ExitMoveArcher()
+    private static void ExitMoveLauncher()
     {
-        Debug.Log("ExitMoveArcher()");
+        Debug.Log("ExitMoveLauncher()");
     }
 
     private static void ExitAttackTank()
@@ -257,7 +262,7 @@ public static class StateInfo {
 
     private static void ExitMoveDefault()
     {
-        Debug.Log("ExitMoveDefault");
+        Debug.Log("ExitMoveDefault()");
     }
 
     private static void ExitIdleDefault()

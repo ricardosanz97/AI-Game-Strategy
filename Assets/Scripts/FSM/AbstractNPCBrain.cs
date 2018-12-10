@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 
-[RequireComponent(typeof(MoveOrder))]
-[RequireComponent(typeof(AttackOrder))]
-public abstract class AbstracNPCBrain : Entity
+public abstract class AbstractNPCBrain : Entity
 {
     public TROOP npc = TROOP.None;
     public float healthPoints = 100f;
     public int currentLevel = 1;
-    public bool popupOptionsEnabled = false;
+
 
     public abstract void SetTransitions();
     public abstract void SetStates();
@@ -20,6 +18,8 @@ public abstract class AbstracNPCBrain : Entity
     public State currentState;
     [HideInInspector]public State initialState;
     public List<Transition> currentTransitions;
+
+    public bool popupOptionsEnabled = false;
 
     public virtual void Start()
     {
@@ -52,7 +52,7 @@ public abstract class AbstracNPCBrain : Entity
             foreach (NextStateInfo nsi in trans.nextStateInfo)
             {
                 bool result = nsi.order.Check();
-                Debug.Log(nsi.order.ToString());
+                //Debug.Log(nsi.order.ToString());
                 
                 if (result)
                 {
@@ -78,30 +78,6 @@ public abstract class AbstracNPCBrain : Entity
                 return;
             }
         }
-    }
-
-    public void OnMouseDown()
-    {
-        if (popupOptionsEnabled)
-        {
-            return;
-        }
-        GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleOptionsPopup"));
-        go.GetComponent<SimpleOptionsPopupController>().SetPopup(
-        this.transform.localPosition,
-        this.npc.ToString(),
-        "Mover",
-        "Atacar",
-        () => {
-            Debug.Log("MOVER");
-            GetComponent<MoveOrder>().Move = true;
-            go.GetComponent<SimpleOptionsPopupController>().ClosePopup();
-        },
-        () => {
-            Debug.Log("ATACAR");
-            GetComponent<AttackOrder>().Attack = true;
-            go.GetComponent<SimpleOptionsPopupController>().ClosePopup();
-        });
     }
 
     private void Update()

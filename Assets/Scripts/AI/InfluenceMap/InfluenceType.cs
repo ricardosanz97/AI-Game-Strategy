@@ -2,8 +2,8 @@ namespace InfluenceMap
 {
     public enum InfluenceType
     {
-        Archer,
-        Minion,
+        Launcher,
+        Prisioner,
         Tank,
         Construction,
         Wall

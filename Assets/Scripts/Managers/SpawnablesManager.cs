@@ -7,8 +7,8 @@ using Zenject;
 public enum TROOP
 {
     None,
-    Minion,
-    Archer,
+    Prisioner,
+    Launcher,
     Tank,
     Wall,
     Construction
@@ -40,28 +40,33 @@ public class SpawnablesManager : MonoBehaviour {
                 Debug.Log("Antes debes seleccionar una tropa! ");
                 FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().ShowButtons();
                 break;
-            case TROOP.Minion:
-                lastTroopSpawned = TROOP.Minion;
-                troopSpawned = Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Minion.ToString()), new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), Quaternion.identity);
+            case TROOP.Prisioner:
+                lastTroopSpawned = TROOP.Prisioner;
+                GameObject prisioner = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Prisioner.ToString());
+                troopSpawned = Instantiate(prisioner, new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), prisioner.transform.rotation);
                 currentTroopSelected = TROOP.None;
                 break;
-            case TROOP.Archer:
-                lastTroopSpawned = TROOP.Archer;
-                troopSpawned = Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Archer.ToString()), new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), Quaternion.identity);
+            case TROOP.Launcher:
+                lastTroopSpawned = TROOP.Launcher;
+                GameObject launcher = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Launcher.ToString());
+                troopSpawned = Instantiate(launcher, new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), launcher.transform.rotation);
                 currentTroopSelected = TROOP.None;
                 break;
             case TROOP.Tank:
                 lastTroopSpawned = TROOP.Tank;
-                troopSpawned = Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Tank.ToString()), new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), Quaternion.identity);
+                GameObject tank = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Tank.ToString());
+                troopSpawned = Instantiate(tank, new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), tank.transform.rotation);
                 currentTroopSelected = TROOP.None;
                 break;
             case TROOP.Wall:
                 lastTroopSpawned = TROOP.Wall;
-                troopSpawned = Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Wall.ToString()), new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), Quaternion.identity);
+                GameObject wall = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Wall.ToString());
+                troopSpawned = Instantiate(wall, new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), wall.transform.rotation);
                 break;
             case TROOP.Construction:
-                troopSpawned = Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Construction.ToString()), new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), Quaternion.identity);
                 lastTroopSpawned = TROOP.Construction;
+                GameObject construction = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Construction.ToString());
+                troopSpawned = Instantiate(construction, new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), construction.transform.rotation);
                 currentTroopSelected = TROOP.None;
                 break;
         }
@@ -70,22 +75,8 @@ public class SpawnablesManager : MonoBehaviour {
         {
             OnSpawnedTroop?.Invoke(troopSpawned.GetComponent<Entity>());
             //todo asignar si el que spawnea es la ia o player
-
-            GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleOptionsPopup"), cell.transform.position, Quaternion.identity);
-                go.GetComponent<SimpleOptionsPopupController>().SetPopup(
-                Vector3.zero,
-                lastTroopSpawned.ToString(),
-                "Mover",
-                "Atacar",
-                () => {
-                    Debug.Log("MOVER");
-                    go.GetComponent<SimpleOptionsPopupController>().ClosePopup();
-                      },
-                () => { Debug.Log("ATACAR");
-                    go.GetComponent<SimpleOptionsPopupController>().ClosePopup(); });
-
             FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().HideButtons();
-            cell.GetComponent<CellBehaviour>().troopIn = troopSpawned.GetComponent<AbstracNPCBrain>();
+            cell.GetComponent<CellBehaviour>().troopIn = troopSpawned.GetComponent<AbstractNPCBrain>();
         }
     }
 
