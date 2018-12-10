@@ -6,9 +6,9 @@ using UnityEngine;
 public class State
 {
     public STATE stateName;
-    public AbstracNPCBrain brain;
+    public AbstractNPCBrain brain;
     public List<Action> actions;
-    public State(STATE stateName, AbstracNPCBrain brain)
+    public State(STATE stateName, AbstractNPCBrain brain)
     {
         this.stateName = stateName;
         this.brain = brain;

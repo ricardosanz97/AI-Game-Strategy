@@ -4,6 +4,7 @@ using AI.StrategicAI;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Entity : MonoBehaviour 
 {
     public enum Owner

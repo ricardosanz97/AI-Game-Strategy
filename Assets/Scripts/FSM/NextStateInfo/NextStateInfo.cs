@@ -11,7 +11,7 @@ public class NextStateInfo
     public State stateCaseFalse;
     public Order order;
     
-    public NextStateInfo (AbstracNPCBrain abstractNpc, STATE stateTrue, STATE stateFalse, Order order)
+    public NextStateInfo (AbstractNPCBrain abstractNpc, STATE stateTrue, STATE stateFalse, Order order)
     {
         this.stateCaseTrue = FSMSystem.FindState(abstractNpc, stateTrue);
         this.stateCaseFalse = FSMSystem.FindState(abstractNpc, stateFalse);

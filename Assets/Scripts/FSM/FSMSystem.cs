@@ -14,7 +14,7 @@ public enum STATE
 
 public static class FSMSystem{
 
-	public static void AddTransition(AbstracNPCBrain abstracNpc, STATE currentStateName, List<NextStateInfo> nextStateInfos)
+	public static void AddTransition(AbstractNPCBrain abstracNpc, STATE currentStateName, List<NextStateInfo> nextStateInfos)
     {
         State _currentState = abstracNpc.states.Find((x) => x.stateName == currentStateName);
         List<NextStateInfo> _nextStateInfos = nextStateInfos;
@@ -30,7 +30,7 @@ public static class FSMSystem{
         abstracNpc.transitions.Add(_transition);
     }
 
-    public static void DeleteTransition(AbstracNPCBrain abstracNpc, State currentState, List<NextStateInfo> nextStatesInfos)
+    public static void DeleteTransition(AbstractNPCBrain abstracNpc, State currentState, List<NextStateInfo> nextStatesInfos)
     {
         Transition _transition = new Transition(currentState, nextStatesInfos);
         foreach (Transition trans in abstracNpc.transitions)
@@ -42,12 +42,12 @@ public static class FSMSystem{
         }
     }
 
-    public static void AddState(AbstracNPCBrain abstracNpc, State newState)
+    public static void AddState(AbstractNPCBrain abstracNpc, State newState)
     {
         abstracNpc.states.Add(newState);
     }
 
-    public static void AddBehaviours(AbstracNPCBrain abstracNpc, List<Action> _behaviours, State _state)
+    public static void AddBehaviours(AbstractNPCBrain abstracNpc, List<Action> _behaviours, State _state)
     {
         foreach (State state in abstracNpc.states)
         {
@@ -58,7 +58,7 @@ public static class FSMSystem{
         }
     }
 
-    public static State GetNextState(AbstracNPCBrain abstracNpc, bool _bool, State currentState, Order order)
+    public static State GetNextState(AbstractNPCBrain abstracNpc, bool _bool, State currentState, Order order)
     {
         foreach (Transition trans in abstracNpc.transitions)
         {
@@ -80,7 +80,7 @@ public static class FSMSystem{
         return null;
     }
 
-    public static State FindState(AbstracNPCBrain abstracNpc, STATE stateName)
+    public static State FindState(AbstractNPCBrain abstracNpc, STATE stateName)
     {
         State returnState = abstracNpc.states.Find((x) => x.stateName == stateName);
         return returnState;

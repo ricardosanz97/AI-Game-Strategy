@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankNPC : Troop
+public class PrisionerNPC : Troop
 {
-
-
 }
