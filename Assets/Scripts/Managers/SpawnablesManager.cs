@@ -69,6 +69,7 @@ public class SpawnablesManager : MonoBehaviour {
         if (troopSpawned != null)
         {
             OnSpawnedTroop?.Invoke(troopSpawned.GetComponent<Entity>());
+            //todo asignar si el que spawnea es la ia o player
 
             GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleOptionsPopup"), cell.transform.position, Quaternion.identity);
                 go.GetComponent<SimpleOptionsPopupController>().SetPopup(

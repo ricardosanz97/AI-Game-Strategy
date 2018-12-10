@@ -10,16 +10,17 @@ public class AiTask
 	public string Description;
 	public HighLevelAI.IAPersonality IaPersonality;
 	
-	[SerializeField] private Entity Doer;
+	private Entity Doer;
 	private Entity Objective;
 
 	public void Assign(Entity doer)
 	{
 		Debug.Log($"Task with priority: {Priority}assigned to: {Doer.name}");
+		Doer = doer;
 	}
 
 	public bool IsAssigned()
 	{
-		throw new System.NotImplementedException();
+		return Doer != null;
 	}
 }

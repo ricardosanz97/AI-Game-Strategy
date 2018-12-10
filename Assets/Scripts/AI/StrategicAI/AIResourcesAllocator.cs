@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace AI.StrategicAI
 {
@@ -34,11 +35,32 @@ namespace AI.StrategicAI
         }
 
         private List<PossibleTaskAssignment> _possibleTaskAssignments;
-        
+        private HighLevelAI _highLevelAi;
+
+        public AIResourcesAllocator(List<PossibleTaskAssignment> possibleTaskAssignments, HighLevelAI highLevelAi)
+        {
+            _possibleTaskAssignments = possibleTaskAssignments;
+            _highLevelAi = highLevelAi;
+        }
+
         public void OnTasksGenerated(AiTask[] tasks, Entity[] controlledEntities)
         {
             GenerateAllPossibleTasksAssignments(tasks, controlledEntities);
             SortPossibleAssignments(_possibleTaskAssignments);
+            AssignPossibleAssignments(_possibleTaskAssignments);
+
+            //now that everything is allocated notify the grand ai and send commands to each unit.
+            _highLevelAi.OnResourcesAllocated();
+
+        }
+
+        private void AssignPossibleAssignments(List<PossibleTaskAssignment> possibleTaskAssignments)
+        {
+            foreach (var possibleTaskAssignment in possibleTaskAssignments)
+            {
+                // al estar ordenadas las primeras tareas se asignan primero, si algun doer esta ocupado se le salta;
+                possibleTaskAssignment.Assign();
+            }
         }
 
         private void SortPossibleAssignments(List<PossibleTaskAssignment> possibleTaskAssignments)
@@ -53,7 +75,7 @@ namespace AI.StrategicAI
 
         private void GenerateAllPossibleTasksAssignments(AiTask[] tasks, Entity[] controlledEntities)
         {
-            _possibleTaskAssignments = new List<PossibleTaskAssignment>();
+            _possibleTaskAssignments.Clear();
 
             for (int i = 0; i < tasks.Length; i++)
             {

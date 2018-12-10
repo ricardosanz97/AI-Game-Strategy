@@ -63,7 +63,12 @@ namespace AI.StrategicAI
             if(e.owner == Entity.Owner.AI)
                 ControlledEntites.Add(e);
         }
-        
-        
+
+
+        public void OnResourcesAllocated()
+        {
+            //the assignments are done and now we have to iterate through each unity and depending on its task use a command or other
+            
+        }
     }
 }
