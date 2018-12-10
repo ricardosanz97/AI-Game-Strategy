@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Pathfinding
 {
     public class PathfindingManager : MonoBehaviour
-    {
+    {   
         private const int RESULTS_QUEUE_CAPACITY = 64;
         private readonly Queue<PathResult> results = new Queue<PathResult>(RESULTS_QUEUE_CAPACITY);
         [Range(1,4)]
@@ -43,7 +43,7 @@ namespace Pathfinding
                     {
                         PathResult result = results.Dequeue();
                         
-                        if(AStar.isDebugMode)
+                        if(PathfindingAlgorithms.isDebugMode)
                             //AStar.DebugPath(result.path);
                         
                         result.callback(result.path, result.success);
@@ -80,12 +80,18 @@ namespace Pathfinding
                 results.Enqueue(result);
             }
         }
+
+        public Node[] RequestWalkableNodesAtRadius(int radius, Vector3 origin)
+        {
+            return PathfindingAlgorithms.BFS(_pathfindingGraph,_pathfindingGraph.GetNodeFromWorldPosition(origin), radius);
+        }
         
+
         public void RequestPath(PathRequest request)
         {
             ThreadPool.QueueUserWorkItem(delegate(object state)
             {
-                AStar.AStarSearch(_pathfindingGraph, request, FinishedProcessingPath);
+                PathfindingAlgorithms.AStarSearch(_pathfindingGraph, request, FinishedProcessingPath);
             });
         }
 
@@ -96,7 +102,7 @@ namespace Pathfinding
             public int ThreadId;
             public Action<Vector3[], bool> callback;
 
-            public PathResult(Vector3[] path, bool success, Action<Vector3[], bool> callback, int threadId    )
+            public PathResult(Vector3[] path, bool success, Action<Vector3[], bool> callback, int threadId)
             {
                 this.path = path;
                 this.success = success;

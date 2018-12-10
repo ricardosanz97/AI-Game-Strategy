@@ -11,7 +11,7 @@ using Debug = UnityEngine.Debug;
 
 namespace CustomPathfinding
 {
-    public class AStar
+    public class PathfindingAlgorithms
     {
         private static List<float> mediciones = new List<float>();
         private static int MaxBfsSteps = 10;
@@ -47,8 +47,7 @@ namespace CustomPathfinding
                 
                 if(source.NodeType == Node.ENodeType.NonWalkable)
                 {
-                    Debug.LogError("No se puede inciar un camino desde este nodo, buscando uno nuevo... ");
-                    source = Bfs(pathfindingGrid, source, MaxBfsSteps);
+                    Debug.LogError("No se puede inciar un camino desde este nodo");
                 }
             }
 
@@ -138,9 +137,10 @@ namespace CustomPathfinding
             return total / mediciones.Count;
         }
 
-        public static Node Bfs(PathfindingGrid grid, Node start, int maxSearchSteps)
+        public static Node[] BFS(PathfindingGrid grid, Node start, int maxSearchSteps)
         {
-            //diccionario de los visitado, no contiene duplicados
+            List<Node> result = new List<Node>();
+            Queue<Node> queue = new Queue<Node>();
             Dictionary<Node,bool>  visited = new Dictionary<Node, bool>(grid.NodeCount);
 
             for (int i = 0; i < grid.GridSizeX; i++)
@@ -151,7 +151,6 @@ namespace CustomPathfinding
                 }
             }
 
-            Queue<Node> queue = new Queue<Node>(grid.NodeCount/4);
             queue.Enqueue(start);
             visited[start] = true;
             int steps = 0;
@@ -161,15 +160,18 @@ namespace CustomPathfinding
                 Node front = queue.Dequeue();
 
                 if (front.NodeType == Node.ENodeType.Walkable)
-                    return front;
+                {
+                    result.Add(front);
+                    visited[front] = true;
+                }
                 
                 foreach (var node in grid.GetNeighbors(front))
                 {
-                    if (node.NodeType == Node.ENodeType.Walkable)
-                        return node;
-                    
                     if (!visited[node])
                     {
+                        if (node.NodeType == Node.ENodeType.Walkable)
+                            result.Add(node);
+                        
                         visited[node] = true;
                         queue.Enqueue(node);
                     }
@@ -178,7 +180,7 @@ namespace CustomPathfinding
                 steps += 1;
             }
 
-            return start;
+            return result.ToArray();
         }
 
         public static void DebugPath(Vector3[] path)
