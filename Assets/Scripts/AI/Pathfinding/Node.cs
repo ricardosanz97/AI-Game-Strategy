@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 
 namespace CustomPathfinding
 {
@@ -25,6 +26,7 @@ namespace CustomPathfinding
 
         public bool Equals(Node other)
         {
+            Debug.Assert(other != null, nameof(other) + " != null");
             return GridX == other.GridX && GridZ == other.GridZ;
         }
         

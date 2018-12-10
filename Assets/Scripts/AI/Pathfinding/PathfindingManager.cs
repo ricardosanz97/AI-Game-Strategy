@@ -8,13 +8,7 @@ using UnityEngine;
 namespace Pathfinding
 {
     public class PathfindingManager : MonoBehaviour
-    {
-        public enum Pathfinder
-        {
-            AStar,
-            BFS
-        }
-        
+    {   
         private const int RESULTS_QUEUE_CAPACITY = 64;
         private readonly Queue<PathResult> results = new Queue<PathResult>(RESULTS_QUEUE_CAPACITY);
         [Range(1,4)]
@@ -86,23 +80,18 @@ namespace Pathfinding
                 results.Enqueue(result);
             }
         }
+
+        public Node[] RequestWalkableNodesAtRadius(int radius, Vector3 origin)
+        {
+            return PathfindingAlgorithms.BFS(_pathfindingGraph,_pathfindingGraph.GetNodeFromWorldPosition(origin), radius);
+        }
         
-        public void RequestPath(PathRequest request, Pathfinder pathfinder)
+
+        public void RequestPath(PathRequest request)
         {
             ThreadPool.QueueUserWorkItem(delegate(object state)
             {
-                switch (pathfinder)
-                {
-                        case Pathfinder.BFS:
-                            //todo
-                            PathfindingAlgorithms.BFS(_pathfindingGraph,
-                                _pathfindingGraph.GetNodeFromWorldPosition(request.PathStart), int.MaxValue);
-                            break;
-                        
-                        case Pathfinder.AStar:
-                            PathfindingAlgorithms.AStarSearch(_pathfindingGraph, request, FinishedProcessingPath);
-                            break;
-                }
+                PathfindingAlgorithms.AStarSearch(_pathfindingGraph, request, FinishedProcessingPath);
             });
         }
 
