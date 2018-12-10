@@ -19,7 +19,7 @@ public class SpawnablesManager : MonoBehaviour {
 	[SerializeField]private TROOP currentTroopSelected;
     public TROOP lastTroopSpawned;
 
-    public static event Action<Entity> OnSpawnedTroop;
+    public static event Action<Entity> OnSpawnedTroop; 
 
     public void SetCurrentTroop(TROOP troop)
     {

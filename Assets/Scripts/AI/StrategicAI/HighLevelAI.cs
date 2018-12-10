@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Serialization;
@@ -17,58 +18,80 @@ namespace AI.StrategicAI
         [Inject] [SerializeField] private AiAnalyzer _analyzer;
         [Inject] private AIResourcesAllocator _allocator;
         [Inject] private TurnHandler _turnHandler;
-        public List<Entity> ControlledEntites;
+        public List<Entity> AIControlledEntites;
+        public List<Entity> PlayerControlledEntities;
         
         public IAPersonality CurrentIaPersonality { get; private set; }
 
         private void OnEnable()
         {
-            SpawnablesManager.OnSpawnedTroop += RegisterControlledEntity;
+            SpawnablesManager.OnSpawnedTroop += RegisterSpawnedEntity;
+            Entity.OnTroopDeleted += UnregisterDeletedEntity;
         }
 
         private void OnDisable()
         {
-            SpawnablesManager.OnSpawnedTroop -= RegisterControlledEntity;
+            SpawnablesManager.OnSpawnedTroop -= RegisterSpawnedEntity;
+            Entity.OnTroopDeleted += UnregisterDeletedEntity;
         }
 
         private void Start()
         {
             CurrentIaPersonality = IAPersonality.Offensive;
-            ControlledEntites = new List<Entity>();
+            AIControlledEntites = new List<Entity>();
+            PlayerControlledEntities = new List<Entity>();
         }
 
         public void EvaluateGameState()
         { 
-            throw new System.NotImplementedException();
+            if(CalculateSetDamage(AIControlledEntites) >= CalculateSetDamage(PlayerControlledEntities))
+                ChangePersonality(IAPersonality.Offensive);
+            else
+                ChangePersonality(IAPersonality.Defensive);
+            
         }
 
         public void PlayTurn()
         {
             Debug.Log("Ia Player turn");
+            EvaluateGameState();
             _turnHandler.AIDone = true;
         }
 
         private void ChangePersonality(IAPersonality newPersonality)
-        {
-            //check they are different
-            Assert.AreNotEqual(newPersonality,CurrentIaPersonality);
-            
+        {   
             CurrentIaPersonality = newPersonality;
-            
             _analyzer.OnPersonalityChanged();
         }
 
-        private void RegisterControlledEntity(Entity e)
+        private void RegisterSpawnedEntity(Entity e)
         {
-            if(e.owner == Entity.Owner.AI)
-                ControlledEntites.Add(e);
+            if(e.owner == Entity.Owner.AI && !AIControlledEntites.Contains(e))
+                AIControlledEntites.Add(e);
+            else if(e.owner == Entity.Owner.Player && !PlayerControlledEntities.Contains(e))
+                PlayerControlledEntities.Add(e);    
+        }
+        
+        private void UnregisterDeletedEntity(Entity e)
+        {
+            if (e.owner == Entity.Owner.AI && AIControlledEntites.Contains(e))
+                AIControlledEntites.Remove(e);
+            else if (e.owner == Entity.Owner.Player && PlayerControlledEntities.Contains(e))
+                PlayerControlledEntities.Remove(e);
+                
         }
 
-
-        public void OnResourcesAllocated()
+        private int CalculateSetDamage(List<Entity> entities)
         {
-            //the assignments are done and now we have to iterate through each unity and depending on its task use a command or other
+            int totalSum = 0;
             
+            foreach (var entity in entities)
+            {
+                totalSum += (int)entity.value;
+            }
+
+            return totalSum;
         }
+
     }
 }

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using Zenject;
 using AI.StrategicAI;
+using InfluenceMap;
 using UnityEngine;
 
 namespace DependenciesInstallers
@@ -9,6 +10,7 @@ namespace DependenciesInstallers
     public class GameSceneInstaller : MonoInstaller<GameSceneInstaller>
     {
         public StrategicObjectives AIObjectives;
+        public InfluenceMapComponent InfluenceMapComponentPrefab;
         
         public override void InstallBindings()
         {
@@ -18,6 +20,7 @@ namespace DependenciesInstallers
             //cada ia tiene su propio modulo de analisis
             Container.Bind<AiAnalyzer>().FromNew().AsTransient().WithArguments(AIObjectives);
             Container.Bind<TurnHandler>().FromNewComponentOn(this.gameObject).AsSingle();
+            Container.Bind<InfluenceMapComponent>().FromComponentInNewPrefab(InfluenceMapComponentPrefab).AsSingle();
         }
     }
 }

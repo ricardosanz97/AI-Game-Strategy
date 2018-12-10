@@ -49,8 +49,8 @@ namespace AI.StrategicAI
             SortPossibleAssignments(_possibleTaskAssignments);
             AssignPossibleAssignments(_possibleTaskAssignments);
 
-            //now that everything is allocated notify the grand ai and send commands to each unit.
-            _highLevelAi.OnResourcesAllocated();
+            //send the commands
+            OnResourcesAllocated();
 
         }
 
@@ -87,6 +87,12 @@ namespace AI.StrategicAI
                     }
                 }
             }
+        }
+        
+        public void OnResourcesAllocated()
+        {
+            //the assignments are done and now we have to iterate through each unity and depending on its task use a command or other
+            
         }
     }
 }

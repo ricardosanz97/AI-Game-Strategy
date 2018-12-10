@@ -15,8 +15,9 @@ public class Entity : MonoBehaviour
     public Owner owner;
     public Rigidbody rb;
     public AiTask task;
+    public float value;
 
-    public static System.Action OnTroopSpawned;
+    public static System.Action<Entity> OnTroopDeleted;
 
     private void Awake()
     {
@@ -35,5 +36,10 @@ public class Entity : MonoBehaviour
     public bool isTaskSuitable(AiTask aiTask)
     {
         throw new System.NotImplementedException();
+    }
+
+    public void Die()
+    {
+        OnTroopDeleted?.Invoke(this);
     }
 }
