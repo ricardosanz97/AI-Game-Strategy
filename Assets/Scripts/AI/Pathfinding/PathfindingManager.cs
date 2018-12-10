@@ -9,6 +9,12 @@ namespace Pathfinding
 {
     public class PathfindingManager : MonoBehaviour
     {
+        public enum Pathfinder
+        {
+            AStar,
+            BFS
+        }
+        
         private const int RESULTS_QUEUE_CAPACITY = 64;
         private readonly Queue<PathResult> results = new Queue<PathResult>(RESULTS_QUEUE_CAPACITY);
         [Range(1,4)]
@@ -43,7 +49,7 @@ namespace Pathfinding
                     {
                         PathResult result = results.Dequeue();
                         
-                        if(AStar.isDebugMode)
+                        if(PathfindingAlgorithms.isDebugMode)
                             //AStar.DebugPath(result.path);
                         
                         result.callback(result.path, result.success);
@@ -81,11 +87,22 @@ namespace Pathfinding
             }
         }
         
-        public void RequestPath(PathRequest request)
+        public void RequestPath(PathRequest request, Pathfinder pathfinder)
         {
             ThreadPool.QueueUserWorkItem(delegate(object state)
             {
-                AStar.AStarSearch(_pathfindingGraph, request, FinishedProcessingPath);
+                switch (pathfinder)
+                {
+                        case Pathfinder.BFS:
+                            //todo
+                            PathfindingAlgorithms.BFS(_pathfindingGraph,
+                                _pathfindingGraph.GetNodeFromWorldPosition(request.PathStart), int.MaxValue);
+                            break;
+                        
+                        case Pathfinder.AStar:
+                            PathfindingAlgorithms.AStarSearch(_pathfindingGraph, request, FinishedProcessingPath);
+                            break;
+                }
             });
         }
 
@@ -96,7 +113,7 @@ namespace Pathfinding
             public int ThreadId;
             public Action<Vector3[], bool> callback;
 
-            public PathResult(Vector3[] path, bool success, Action<Vector3[], bool> callback, int threadId    )
+            public PathResult(Vector3[] path, bool success, Action<Vector3[], bool> callback, int threadId)
             {
                 this.path = path;
                 this.success = success;

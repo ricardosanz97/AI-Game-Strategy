@@ -11,7 +11,7 @@ using Debug = UnityEngine.Debug;
 
 namespace CustomPathfinding
 {
-    public class AStar
+    public class PathfindingAlgorithms
     {
         private static List<float> mediciones = new List<float>();
         private static int MaxBfsSteps = 10;
@@ -48,7 +48,7 @@ namespace CustomPathfinding
                 if(source.NodeType == Node.ENodeType.NonWalkable)
                 {
                     Debug.LogError("No se puede inciar un camino desde este nodo, buscando uno nuevo... ");
-                    source = Bfs(pathfindingGrid, source, MaxBfsSteps);
+                    source = BFS(pathfindingGrid, source, MaxBfsSteps);
                 }
             }
 
@@ -138,8 +138,9 @@ namespace CustomPathfinding
             return total / mediciones.Count;
         }
 
-        public static Node Bfs(PathfindingGrid grid, Node start, int maxSearchSteps)
+        public static Node BFS(PathfindingGrid grid, Node start, int maxSearchSteps)
         {
+            //todo meter un callback para que pueda buscar
             //diccionario de los visitado, no contiene duplicados
             Dictionary<Node,bool>  visited = new Dictionary<Node, bool>(grid.NodeCount);
 
