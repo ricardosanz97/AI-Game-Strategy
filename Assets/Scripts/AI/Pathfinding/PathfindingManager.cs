@@ -20,7 +20,7 @@ namespace Pathfinding
 
         private void Awake()
         {
-           _pathfindingGraph = GetComponent<PathfindingGrid>();
+            _pathfindingGraph = FindObjectOfType<PathfindingGrid>();
             _wfs = new WaitForSeconds(0.001f);
             ThreadPool.SetMaxThreads(MaxThreadCount, MaxThreadCount);
         }

@@ -1,11 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
+using Zenject;
 
-public static class StateInfo {
+public class StateInfo : MonoBehaviour{
+    
+    [Inject]
+    private Pathfinding.PathfindingManager _pathfindingManager;
 
-    public static void ExecuteOnEnter(STATE stateName, TROOP npc)
+    public void Start()
+    {
+        _pathfindingManager = FindObjectOfType<PathfindingManager>();
+    }
+
+    public void ExecuteOnEnter(STATE stateName, TROOP npc)
     {
         switch (npc)
         {
@@ -83,7 +93,7 @@ public static class StateInfo {
         }
     }
 
-    public static void ExecuteOnExit(STATE stateName, TROOP npc)
+    public void ExecuteOnExit(STATE stateName, TROOP npc)
     {
         switch (npc)
         {
@@ -152,125 +162,130 @@ public static class StateInfo {
         }
     }
 
-    private static void ExitIdleLauncher()
+    public void ExitIdleLauncher()
     {
         Debug.Log("ExitIdleLauncher()");
     }
 
-    private static void EnterDefault()
+    public void EnterDefault()
     {
     }
 
-    private static void EnterIdleDefault()
+    public void EnterIdleDefault()
     {
     }
 
-    private static void EnterMoveDefault()
+    public void EnterMoveDefault()
     {
     }
 
-    private static void EnterAttackDefault()
+    public void EnterAttackDefault()
     {
     }
 
-    private static void EnterDefaultTank()
+    public void EnterDefaultTank()
     {
     }
 
-    private static void EnterIdleTank()
+    public void EnterIdleTank()
     {
     }
 
-    private static void EnterMoveTank()
+    public void EnterMoveTank()
     {
     }
 
-    private static void EnterAttackTank()
+    public void EnterAttackTank()
     {
     }
 
-    private static void EnterAttackPrisioner()
+    public void EnterAttackPrisioner()
     {
     }
 
-    private static void EnterMovePrisioner()
+    public void EnterMovePrisioner()
     {
     }
 
-    private static void EnterIdlePrisioner()
+    public void EnterIdlePrisioner()
     {
     }
 
-    private static void EnterDefaultPrisioner()
+    public void EnterDefaultPrisioner()
     {
     }
 
-    private static void EnterAttackLauncher()
+    public void EnterAttackLauncher()
     {
     }
 
-    private static void EnterMoveLauncher()
+    public void EnterMoveLauncher()
+    {
+        
+    }
+
+    public void EnterIdleLauncher()
     {
     }
 
-    private static void EnterIdleLauncher()
-    {
-    }
-
-    private static void EnterDefaultLauncher()
+    public void EnterDefaultLauncher()
     {
     }
 
 
 
-    private static void ExitAttackPrisioner()
+    public void ExitAttackPrisioner()
     {
     }
 
-    private static void ExitMovePrisioner()
+    public void ExitMovePrisioner()
     {
     }
 
-    private static void ExitIdlePrisioner()
+    public void ExitIdlePrisioner()
     {
     }
 
-    private static void ExitAttackLauncher()
+    public void ExitAttackLauncher()
     {
     }
 
-    private static void ExitMoveLauncher()
+    public void ExitMoveLauncher()
     {
+        if (_pathfindingManager != null)
+        {
+            Debug.Log("Pathfinding manager != null");
+        }
         Debug.Log("ExitMoveLauncher()");
     }
 
-    private static void ExitAttackTank()
+    public void ExitAttackTank()
     {
     }
 
-    private static void ExitMoveTank()
+    public void ExitMoveTank()
     {
     }
 
-    private static void ExitIdleTank()
+    public void ExitIdleTank()
     {
     }
 
-    private static void ExitAttackDefault()
+    public void ExitAttackDefault()
     {
     }
 
-    private static void ExitMoveDefault()
+    public void ExitMoveDefault()
     {
         Debug.Log("ExitMoveDefault()");
     }
 
-    private static void ExitIdleDefault()
+    public void ExitIdleDefault()
     {
         Debug.Log("ExitIdleDefault()");
     }
 
-    private static void ExitDefault()
+    public void ExitDefault()
     {
     }
 }

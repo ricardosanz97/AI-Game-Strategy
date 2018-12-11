@@ -8,6 +8,12 @@ public class AttackButtonController : MonoBehaviour {
 
     public bool buttonsEnabled = false;
     [SerializeField] private bool canPressButton = true;
+    private LevelController _levelController;
+
+    private void Awake()
+    {
+        _levelController = FindObjectOfType<LevelController>().GetComponent<LevelController>();
+    }
 
     public void HandleButtons()
     {
@@ -28,6 +34,7 @@ public class AttackButtonController : MonoBehaviour {
 
     public void ShowButtons()
     {
+        _levelController.ClosePopups();
         Sequence s = DOTween.Sequence();
         int childCount = this.transform.childCount;
         for (int i = 0; i < childCount; i++)
@@ -49,6 +56,7 @@ public class AttackButtonController : MonoBehaviour {
 
     public void HideButtons()
     {
+        _levelController.ClosePopups();
         Sequence s = DOTween.Sequence();
         int childCount = this.transform.childCount;
         for (int i = childCount - 1; i >= 0; i--)

@@ -3,27 +3,32 @@ using System.Collections.Generic;
 using AI.StrategicAI;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Entity : MonoBehaviour 
 {
     public int bloodCost;
+    [HideInInspector]public CellBehaviour cell;
     public enum Owner
     {
         AI,
         Player
     }
 
-    public Owner owner;
-    public Rigidbody rb;
+    [HideInInspector]public Owner owner;
+    [HideInInspector]public Rigidbody rb;
     public AiTask task;
     public float value;
 
-    public static System.Action<Entity> OnTroopDeleted;
+    [HideInInspector]public LevelController _levelController;
 
-    private void Awake()
+    [HideInInspector]public static System.Action<Entity> OnTroopDeleted;
+
+    public virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        _levelController = FindObjectOfType<LevelController>();
     }
 
     public void Assign(AIResourcesAllocator.PossibleTaskAssignment possibleTaskAssignment)

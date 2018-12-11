@@ -7,7 +7,6 @@ using Zenject;
 
 public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 {
-    public PathfindingManager PathfindingManagerPrefab;
     public SpawnablesManager SpawnablesManager;
     
     public override void InstallBindings()

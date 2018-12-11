@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Move : Action
 {
-    public Vector3 OnGoingPosition;
-    public bool PathReceived = false;
+    public int maxMoves;
+
+    [HideInInspector]public CellBehaviour OnGoingCell;
+    [HideInInspector]public bool PathReceived = false;
     public override void Act()
     {
         if (!PathReceived)

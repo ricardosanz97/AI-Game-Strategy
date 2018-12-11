@@ -51,7 +51,7 @@ namespace AI.StrategicAI
             else
                 currentPersonality = IAPersonality.Defensive;
             
-            SendObjectivesToAnalyzer(StrategicObjectives.TasksDictionary[currentPersonality].AiObjectives);
+            //SendObjectivesToAnalyzer(StrategicObjectives.TasksDictionary[currentPersonality].objectives);
 
         }
 
