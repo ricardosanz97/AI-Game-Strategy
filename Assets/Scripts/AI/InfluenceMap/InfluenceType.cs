@@ -5,7 +5,7 @@ namespace InfluenceMap
         Launcher,
         Prisioner,
         Tank,
-        Construction,
+        Turret,
         Wall
     }
 }

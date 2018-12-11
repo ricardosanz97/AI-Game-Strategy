@@ -126,17 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d53d49bd5efa45cf998043dc5b36fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc: 4
-  healthPoints: Infinity
-  currentLevel: 1
-  transitions: []
-  states: []
-  currentState:
-    stateName: 0
-    brain: {fileID: 0}
-    actions: []
-  initialState:
-    stateName: 0
-    brain: {fileID: 0}
-    actions: []
-  currentTransitions: []
+  bloodCost: 1
+  owner: 0
+  rb: {fileID: 0}
+  task:
+    Priority: 0
+    Description: 
+    IaPersonality: 0

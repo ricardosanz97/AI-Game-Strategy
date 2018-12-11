@@ -27,7 +27,6 @@ public class RaycastCamera : MonoBehaviour {
                 return;
             }
             lastCellSelected = hit.collider.GetComponent<CellBehaviour>();
-            Debug.Log("aiming on a cell!");
             hit.collider.transform.DOLocalMoveY(0.5f, 0.3f);
             if (Input.GetMouseButtonDown(0))
             {

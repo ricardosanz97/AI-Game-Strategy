@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9fe519accc194249875319807a55acc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodCost: 3
   owner: 0
   rb: {fileID: 0}
   task:

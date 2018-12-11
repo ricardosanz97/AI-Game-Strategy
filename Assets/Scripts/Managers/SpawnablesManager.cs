@@ -11,7 +11,7 @@ public enum TROOP
     Launcher,
     Tank,
     Wall,
-    Construction
+    Turret
 }
 
 public class SpawnablesManager : MonoBehaviour {
@@ -20,6 +20,9 @@ public class SpawnablesManager : MonoBehaviour {
     public TROOP lastTroopSpawned;
 
     public static event Action<Entity> OnSpawnedTroop;
+
+    [Inject]
+    BloodIndicatorController _bloodIndicatorController;
 
     public void SetCurrentTroop(TROOP troop)
     {
@@ -34,6 +37,7 @@ public class SpawnablesManager : MonoBehaviour {
     public void SpawnTroop(GameObject cell)
     {
         GameObject troopSpawned = null;
+        GameObject troop = null;
         switch (currentTroopSelected)
         {
             case TROOP.None:
@@ -42,41 +46,42 @@ public class SpawnablesManager : MonoBehaviour {
                 break;
             case TROOP.Prisioner:
                 lastTroopSpawned = TROOP.Prisioner;
-                GameObject prisioner = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Prisioner.ToString());
-                troopSpawned = Instantiate(prisioner, new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), prisioner.transform.rotation);
-                currentTroopSelected = TROOP.None;
+                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Prisioner.ToString());
                 break;
             case TROOP.Launcher:
                 lastTroopSpawned = TROOP.Launcher;
-                GameObject launcher = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Launcher.ToString());
-                troopSpawned = Instantiate(launcher, new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), launcher.transform.rotation);
-                currentTroopSelected = TROOP.None;
+                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Launcher.ToString());
                 break;
             case TROOP.Tank:
                 lastTroopSpawned = TROOP.Tank;
-                GameObject tank = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Tank.ToString());
-                troopSpawned = Instantiate(tank, new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), tank.transform.rotation);
-                currentTroopSelected = TROOP.None;
+                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Tank.ToString());
                 break;
             case TROOP.Wall:
                 lastTroopSpawned = TROOP.Wall;
-                GameObject wall = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Wall.ToString());
-                troopSpawned = Instantiate(wall, new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), wall.transform.rotation);
+                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Wall.ToString());
                 break;
-            case TROOP.Construction:
-                lastTroopSpawned = TROOP.Construction;
-                GameObject construction = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Construction.ToString());
-                troopSpawned = Instantiate(construction, new Vector3(cell.transform.position.x, 0.6f, cell.transform.position.z), construction.transform.rotation);
-                currentTroopSelected = TROOP.None;
+            case TROOP.Turret:
+                lastTroopSpawned = TROOP.Turret;
+                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Turret.ToString());
                 break;
         }
 
-        if (troopSpawned != null)
+        if (troop != null && troop.GetComponent<Entity>().bloodCost <= _bloodIndicatorController.GetCurrentBlood())
         {
+            troopSpawned = Instantiate(troop, new Vector3(cell.transform.position.x, 1f, cell.transform.position.z), troop.transform.rotation);
+            currentTroopSelected = TROOP.None;
+
             OnSpawnedTroop?.Invoke(troopSpawned.GetComponent<Entity>());
             //todo asignar si el que spawnea es la ia o player
+
+            _bloodIndicatorController.DecreaseBloodValue(troopSpawned.GetComponent<Entity>().bloodCost);
+
             FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().HideButtons();
             cell.GetComponent<CellBehaviour>().troopIn = troopSpawned.GetComponent<AbstractNPCBrain>();
+        }
+        else
+        {
+            return;
         }
     }
 

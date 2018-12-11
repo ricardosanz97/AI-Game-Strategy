@@ -7,6 +7,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody))]
 public class Entity : MonoBehaviour 
 {
+    public int bloodCost;
     public enum Owner
     {
         AI,

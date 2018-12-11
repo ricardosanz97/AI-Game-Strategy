@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConstructionNPC : AbstractNPCBrain
+public class TurretNPC : AbstractNPCBrain
 {
     public override void Start()
     {
@@ -43,26 +43,35 @@ public class ConstructionNPC : AbstractNPCBrain
         go.GetComponent<SimpleOptionsPopupController>().SetPopup(
         this.transform.localPosition,
         this.npc.ToString(),
-        "Rotate 90",
-        "Rotate -90",
+        "RIGHT",
+        "LEFT",
         () => {
             //rotate 90
+            RotateRight();
             go.GetComponent<SimpleOptionsPopupController>().ClosePopup();
             popupOptionsEnabled = false;
 
         },
         () => {
             //rotate -90
-            GetComponent<AttackOrder>().Attack = true;
+            RotateLeft();
             go.GetComponent<SimpleOptionsPopupController>().ClosePopup();
             popupOptionsEnabled = false;
-
         },
         () =>
         {
             go.GetComponent<SimpleOptionsPopupController>().ClosePopup();
             popupOptionsEnabled = false;
         });
+    }
 
+    private void RotateRight()
+    {
+        this.transform.Rotate(Vector3.up * 90f);
+    }
+    
+    private void RotateLeft()
+    {
+        this.transform.Rotate(Vector3.up * -90f);
     }
 }

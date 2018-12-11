@@ -21,6 +21,7 @@ public class TurnHandler : MonoBehaviour {
     
     private bool isGameFinished = false;
     [Inject]private HighLevelAI _globalHighLevelAi;
+    [Inject]private BloodIndicatorController _bloodIndicatorController;
     
 
     private WaitForSeconds _waitForSeconds = new WaitForSeconds(2.0f);
@@ -59,6 +60,9 @@ public class TurnHandler : MonoBehaviour {
                 }
                 playerDone = false;
                 currentTurn = PlayerType.None;
+
+                _bloodIndicatorController.IncreaseBloodValue(5); //TODO: ajustar
+
                 yield return _waitForSeconds;
                 currentTurn = PlayerType.AI;
             }
