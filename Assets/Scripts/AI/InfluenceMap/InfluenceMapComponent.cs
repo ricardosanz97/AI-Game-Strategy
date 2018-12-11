@@ -57,5 +57,17 @@ namespace InfluenceMap
             
             influenceGrid.UpdateMap();
         }
+
+        public Node GetNodeAtLocation(Vector3 location)
+        {
+            float percentX = (location.x) / X;
+            float percentY = (location.z) / Y;
+            percentX = Mathf.Clamp01(percentX);
+            percentY = Mathf.Clamp01(percentY);
+
+            int x = Mathf.RoundToInt((X-1) * percentX);
+            int y = Mathf.RoundToInt((Y-1) * percentY);
+            return influenceGrid._grid[x,y];
+        }
     }
 }

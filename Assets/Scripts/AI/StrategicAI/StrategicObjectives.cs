@@ -5,7 +5,7 @@ using UnityEngine;
 namespace AI.StrategicAI
 {
     [System.Serializable]
-    public class TasksDictionary : SerializableDictionaryBase<int, AiTask>
+    public class TasksDictionary : SerializableDictionaryBase<HighLevelAI.IAPersonality, ObjectivesSet>
     {
     }
     
@@ -14,5 +14,11 @@ namespace AI.StrategicAI
     public class StrategicObjectives : ScriptableObject
     {
         public TasksDictionary TasksDictionary = new TasksDictionary();
+    }
+
+    [System.Serializable]
+    public class ObjectivesSet
+    {
+        [SerializeField] public Objective[] objectives;
     }
 }

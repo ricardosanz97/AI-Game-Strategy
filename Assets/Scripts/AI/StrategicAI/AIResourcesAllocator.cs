@@ -35,16 +35,15 @@ namespace AI.StrategicAI
         }
 
         private List<PossibleTaskAssignment> _possibleTaskAssignments;
-        private HighLevelAI _highLevelAi;
 
         public AIResourcesAllocator(List<PossibleTaskAssignment> possibleTaskAssignments, HighLevelAI highLevelAi)
         {
             _possibleTaskAssignments = possibleTaskAssignments;
-            _highLevelAi = highLevelAi;
         }
 
         public void OnTasksGenerated(AiTask[] tasks, Entity[] controlledEntities)
         {
+            //rehacer esto
             GenerateAllPossibleTasksAssignments(tasks, controlledEntities);
             SortPossibleAssignments(_possibleTaskAssignments);
             AssignPossibleAssignments(_possibleTaskAssignments);

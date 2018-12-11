@@ -14,9 +14,10 @@ namespace AI.StrategicAI
             Offensive,
             Defensive
         }
-        
-        [Inject] [SerializeField] private AiAnalyzer _analyzer;
-        [Inject] private AIResourcesAllocator _allocator;
+
+        [SerializeField] private IAPersonality currentPersonality;
+        [SerializeField] private StrategicObjectives StrategicObjectives;      
+        [Inject] private AiAnalyzer _analyzer;
         [Inject] private TurnHandler _turnHandler;
         public List<Entity> AIControlledEntites;
         public List<Entity> PlayerControlledEntities;
@@ -43,12 +44,19 @@ namespace AI.StrategicAI
         }
 
         public void EvaluateGameState()
-        { 
-            if(CalculateSetDamage(AIControlledEntites) >= CalculateSetDamage(PlayerControlledEntities))
-                ChangePersonality(IAPersonality.Offensive);
+        {
+            if (CalculateSetDamage(AIControlledEntites) >= CalculateSetDamage(PlayerControlledEntities))
+                currentPersonality = IAPersonality.Offensive;
             else
-                ChangePersonality(IAPersonality.Defensive);
+                currentPersonality = IAPersonality.Defensive;
             
+            SendObjectivesToAnalyzer(StrategicObjectives.TasksDictionary[currentPersonality].objectives);
+
+        }
+
+        private void SendObjectivesToAnalyzer(Objective[] objectives)
+        {
+            _analyzer.GenerateTasks(objectives);
         }
 
         public void PlayTurn()
@@ -58,11 +66,6 @@ namespace AI.StrategicAI
             _turnHandler.AIDone = true;
         }
 
-        private void ChangePersonality(IAPersonality newPersonality)
-        {   
-            CurrentIaPersonality = newPersonality;
-            _analyzer.OnPersonalityChanged();
-        }
 
         private void RegisterSpawnedEntity(Entity e)
         {
