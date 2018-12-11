@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using Zenject;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(BoxCollider))]
 public class Entity : MonoBehaviour 
 {
     public int bloodCost;
