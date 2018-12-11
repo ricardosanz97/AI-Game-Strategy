@@ -51,7 +51,7 @@ public override void Start()
     public void OnMouseDown()
     {
         Debug.Log("click in enemy");
-        if (popupOptionsEnabled)
+        if (_levelController.GetAnyPopupEnabled())
         {
             return;
         }

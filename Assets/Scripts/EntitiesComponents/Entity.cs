@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AI.StrategicAI;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Entity : MonoBehaviour 
@@ -19,11 +20,15 @@ public class Entity : MonoBehaviour
     public AiTask task;
     public float value;
 
+
+    public LevelController _levelController;
+
     public static System.Action<Entity> OnTroopDeleted;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        _levelController = FindObjectOfType<LevelController>().GetComponent<LevelController>();
     }
 
     public void Assign(AIResourcesAllocator.PossibleTaskAssignment possibleTaskAssignment)

@@ -12,7 +12,7 @@ public class SimpleOptionsPopupController : PopupController {
 
     public void SetPopup(Vector3 pos, string titleText, string button1Text, string button2Text, UnityAction button1Action, UnityAction button2Action, UnityAction closeButtonAction)
     {
-        this.transform.SetParent(GameObject.Find("Canvas").transform);
+        this.transform.SetParent(GameObject.FindGameObjectWithTag("PopupsContainer").transform);
         this.GetComponent<RectTransform>().localPosition = pos;
         OpenPopup();
         this.textPopup.text = titleText;

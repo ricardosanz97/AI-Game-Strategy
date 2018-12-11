@@ -11,7 +11,8 @@ public class SimpleInfoPopupController : PopupController
 
     public void SetPopup(string titleText, string infoText)
     {
-        this.transform.SetParent(GameObject.Find("Canvas").transform);
+
+        this.transform.SetParent(GameObject.FindGameObjectWithTag("PopupsContainer").transform);
         this.GetComponent<RectTransform>().localPosition = Vector3.zero;
         OpenPopup();
         this.titleText.text = titleText;
