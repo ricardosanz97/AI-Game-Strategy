@@ -72,8 +72,9 @@ public class SpawnablesManager : MonoBehaviour {
 
         if (troop != null && troop.GetComponent<Entity>().bloodCost <= _bloodIndicatorController.GetCurrentBlood())
         {
-            troopSpawned = Instantiate(troop, new Vector3(cell.transform.position.x, 1f, cell.transform.position.z), troop.transform.rotation);
+            troopSpawned = Instantiate(troop, new Vector3(cell.transform.position.x, 0f, cell.transform.position.z), troop.transform.rotation);
             troopSpawned.GetComponent<Entity>().owner = owner;
+            troopSpawned.GetComponent<AbstractNPCBrain>().npc = lastTroopSpawned;
             currentTroopSelected = TROOP.None;
 
             Node node = _influenceMapComponent.GetNodeAtLocation(new Vector3(cell.transform.position.x, 1f, cell.transform.position.z));

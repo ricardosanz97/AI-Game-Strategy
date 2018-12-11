@@ -155,7 +155,7 @@ namespace CustomPathfinding
             visited[start] = true;
             int steps = 0;
 
-            while (queue.Count > 0 || steps < maxSearchSteps)
+            while (queue.Count > 0 && steps < maxSearchSteps)
             {
                 Node front = queue.Dequeue();
 

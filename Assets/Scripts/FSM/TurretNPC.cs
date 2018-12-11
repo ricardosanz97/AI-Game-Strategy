@@ -24,11 +24,6 @@ public class TurretNPC : AbstractNPCBrain
 
     public override void SetTransitions()
     {
-        List<NextStateInfo> nextStatesInfo2 = new List<NextStateInfo>()
-        {
-            new NextStateInfo(this, STATE.Attack, STATE.Remain, GetComponent<AttackOrder>())
-        };
-        FSMSystem.AddTransition(this, STATE.Idle, nextStatesInfo2);
     }
 
     public void OnMouseDown()

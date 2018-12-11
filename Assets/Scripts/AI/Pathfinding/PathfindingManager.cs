@@ -83,6 +83,7 @@ namespace Pathfinding
 
         public Node[] RequestWalkableNodesAtRadius(int radius, Vector3 origin)
         {
+            Debug.Log("originX = " + _pathfindingGraph.GetNodeFromWorldPosition(origin).GridX + " y originZ = " + _pathfindingGraph.GetNodeFromWorldPosition(origin).GridZ);
             return PathfindingAlgorithms.BFS(_pathfindingGraph,_pathfindingGraph.GetNodeFromWorldPosition(origin), radius);
         }
         
