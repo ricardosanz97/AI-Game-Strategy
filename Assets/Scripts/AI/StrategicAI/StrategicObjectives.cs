@@ -19,6 +19,6 @@ namespace AI.StrategicAI
     [System.Serializable]
     public class ObjectivesSet
     {
-        [SerializeField] public Objective[] objectives;
+        [SerializeField] public AIObjective[] AiObjectives;
     }
 }

@@ -12,6 +12,7 @@ namespace AI.StrategicAI
         public enum IAPersonality
         {
             Offensive,
+            Neutro,
             Defensive
         }
 
@@ -54,9 +55,9 @@ namespace AI.StrategicAI
 
         }
 
-        private void SendObjectivesToAnalyzer(Objective[] objectives)
+        private void SendObjectivesToAnalyzer(AIObjective[] aiObjectives)
         {
-            _analyzer.GenerateTasks(objectives);
+            _analyzer.GenerateTasks(aiObjectives);
         }
 
         public void PlayTurn()

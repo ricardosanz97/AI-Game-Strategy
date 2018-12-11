@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f17452a0781403b9c60a5f95935dc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _analyzer:
-    _highLevelAI: {fileID: 0}
-    _selectableTasks: []
-    StrategicObjectives: {fileID: 11400000, guid: 7be88bf77e0ee9c48885c54812dc832e,
-      type: 2}
+  currentPersonality: 0
+  StrategicObjectives: {fileID: 11400000, guid: 7be88bf77e0ee9c48885c54812dc832e,
+    type: 2}
+  AIControlledEntites: []
+  PlayerControlledEntities: []

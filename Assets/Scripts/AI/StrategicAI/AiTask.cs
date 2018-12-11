@@ -6,12 +6,18 @@ using UnityEngine;
 [System.Serializable]
 public class AiTask
 {
+	public enum TaskType
+	{
+		Attack,
+		Move,
+		Upgrade
+	}
+	
 	public int Priority;
 	public string Description;
-	public HighLevelAI.IAPersonality IaPersonality;
-	
+	public TaskType type;
 	private Entity Doer;
-	private AIObjective Objective;
+
 
 	public void Assign(Entity doer)
 	{
