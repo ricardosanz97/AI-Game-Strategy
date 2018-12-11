@@ -75,7 +75,6 @@ public class SpawnablesManager : MonoBehaviour {
             troopSpawned = Instantiate(troop, new Vector3(cell.transform.position.x, 1f, cell.transform.position.z), troop.transform.rotation);
             currentTroopSelected = TROOP.None;
 
-            print(new Vector3(cell.transform.position.x, 1f, cell.transform.position.z));
             Node node = _influenceMapComponent.GetNodeAtLocation(new Vector3(cell.transform.position.x, 1f, cell.transform.position.z));
             print("spawned at: " + node.WorldGameObject.GetComponent<InfluencePosition>().GridPositions[0] + ", " + node.WorldGameObject.GetComponent<InfluencePosition>().GridPositions[1]);
 
@@ -86,6 +85,7 @@ public class SpawnablesManager : MonoBehaviour {
 
             FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().HideButtons();
             cell.GetComponent<CellBehaviour>().troopIn = troopSpawned.GetComponent<AbstractNPCBrain>();
+            troopSpawned.GetComponent<AbstractNPCBrain>().cell = cell.GetComponent<CellBehaviour>();
         }
         else
         {

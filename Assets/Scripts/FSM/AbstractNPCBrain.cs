@@ -60,9 +60,9 @@ public abstract class AbstractNPCBrain : Entity
                     {
                         continue;
                     }
-                    currentState.OnExit();
+                    currentState.OnExit?.Invoke();
                     currentState = nsi.stateCaseTrue;
-                    currentState.OnEnter();
+                    currentState.OnEnter?.Invoke();
                 }
                 else
                 {
@@ -70,9 +70,9 @@ public abstract class AbstractNPCBrain : Entity
                     {
                         continue;
                     }
-                    currentState.OnExit();
+                    currentState.OnExit?.Invoke();
                     currentState = nsi.stateCaseFalse;
-                    currentState.OnEnter();
+                    currentState.OnEnter?.Invoke();
                 }
                 currentTransitions = transitions.FindAll(x => x.currentState == currentState);
                 return;

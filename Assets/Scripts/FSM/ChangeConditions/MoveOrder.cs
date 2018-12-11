@@ -10,7 +10,6 @@ public class MoveOrder : Order
         if (Move)
         {
             Move = false;
-            Debug.Log("MOVE ORDER!");
             return true;
         }
         else

@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 114811214899955058}
   - component: {fileID: 136744519864988940}
   - component: {fileID: 114510196288402970}
+  - component: {fileID: 114970394704304772}
+  - component: {fileID: 114275016347918142}
   m_Layer: 0
   m_Name: Launcher
   m_TagString: Untagged
@@ -304,6 +306,20 @@ MonoBehaviour:
     InfluenceRange: 4
     Color: {r: 0.34117648, g: 0, b: 0, a: 0.015686275}
     InfluenceType: 0
+--- !u!114 &114275016347918142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620138081569692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6adfc145bc8a448ee8203367dc83b0ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMoves: 3
+  OnGoingCell: {fileID: 0}
+  PathReceived: 0
 --- !u!114 &114408588464955286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -352,6 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodCost: 2
+  cell: {fileID: 0}
   owner: 0
   rb: {fileID: 0}
   task:
@@ -359,6 +376,7 @@ MonoBehaviour:
     Description: 
     IaPersonality: 0
   value: 0
+  _levelController: {fileID: 0}
   npc: 2
   healthPoints: 100
   currentLevel: 1
@@ -374,6 +392,18 @@ MonoBehaviour:
     actions: []
   currentTransitions: []
   popupOptionsEnabled: 0
+--- !u!114 &114970394704304772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620138081569692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 219904cf804eb4ab19c44053bcc8df2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 3
 --- !u!136 &136744519864988940
 CapsuleCollider:
   m_ObjectHideFlags: 1

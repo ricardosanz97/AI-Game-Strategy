@@ -9,6 +9,7 @@ using Zenject;
 public class Entity : MonoBehaviour 
 {
     public int bloodCost;
+    public CellBehaviour cell;
     public enum Owner
     {
         AI,
@@ -25,10 +26,10 @@ public class Entity : MonoBehaviour
 
     public static System.Action<Entity> OnTroopDeleted;
 
-    private void Awake()
+    public virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        _levelController = FindObjectOfType<LevelController>().GetComponent<LevelController>();
+        _levelController = FindObjectOfType<LevelController>();
     }
 
     public void Assign(AIResourcesAllocator.PossibleTaskAssignment possibleTaskAssignment)

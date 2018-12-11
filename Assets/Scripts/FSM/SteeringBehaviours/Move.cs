@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Move : Action
 {
-    public Vector3 OnGoingPosition;
+    public int maxMoves;
+
+    public CellBehaviour OnGoingCell;
     public bool PathReceived = false;
     public override void Act()
     {

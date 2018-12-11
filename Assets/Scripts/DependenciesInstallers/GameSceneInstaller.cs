@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Zenject;
 using AI.StrategicAI;
 using InfluenceMap;
+using Pathfinding;
 using UnityEngine;
 
 namespace DependenciesInstallers
@@ -14,6 +15,7 @@ namespace DependenciesInstallers
         
         public override void InstallBindings()
         {
+            Container.Bind<PathfindingManager>().FromNewComponentOn(this.gameObject).AsSingle();
             Container.Bind<LevelController>().FromNewComponentOn(this.gameObject).AsSingle();
             //cada ia tiene su propio gestor de recursos
             Container.Bind<AIResourcesAllocator>().FromNew().AsTransient();
@@ -24,6 +26,7 @@ namespace DependenciesInstallers
             Container.Bind<InfluenceMapComponent>().FromComponentInNewPrefab(influenceMapPrefab).AsSingle();
             Container.Bind<BloodIndicatorController>().FromNewComponentOn(this.gameObject).AsSingle();
             Container.Bind<SpawnablesManager>().FromNewComponentOn(this.gameObject).AsSingle();
+            
             //Container.Bind<SpawnablesManager>().FromComponentInNewPrefab(SpawnablesManager).AsSingle();
             //Container.Bind<Pathfinding.PathfindingManager>().FromComponentInNewPrefab(PathfindingManagerPrefab).AsSingle();
         }
