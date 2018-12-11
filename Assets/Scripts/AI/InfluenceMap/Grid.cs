@@ -205,7 +205,11 @@ namespace InfluenceMap
             );
 
             if (influenceAtNode.Value != -1)
-                node.Influences[(int) influenceAtNode.Key] = calculatedInfluence;
+            {
+                int indexOf = node.Influences.IndexOf(influenceAtNode);
+                node.Influences[indexOf] = calculatedInfluence;
+            }
+                
         }
 
         private void ClearInfluenceData()

@@ -133,6 +133,7 @@ MonoBehaviour:
     Priority: 0
     Description: 
     IaPersonality: 0
+  value: 0
   npc: 5
   healthPoints: 300
   currentLevel: 1
@@ -163,7 +164,7 @@ MonoBehaviour:
     WorldPosition: {x: 0, y: 0, z: 0}
     Influence: 1.25
     InfluenceRange: 3
-    Color: {r: 0.16862746, g: 0.34901962, b: 0.46274513, a: 1}
+    Color: {r: 0, g: 0, b: 0.3137255, a: 0}
     InfluenceType: 3
 --- !u!114 &114792848684264612
 MonoBehaviour:

@@ -11,7 +11,7 @@ public class AiTask
 	public HighLevelAI.IAPersonality IaPersonality;
 	
 	private Entity Doer;
-	private Entity Objective;
+	private AIObjective Objective;
 
 	public void Assign(Entity doer)
 	{
