@@ -1,47 +1,51 @@
 fileFormatVersion: 2
-guid: 671608b6fe7aa9d44a50d558b992a573
+guid: 25691d427e72b0541ab0b50dea76a583
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Launcher
-    100002: //RootNode
-    100004: LauncherBody
-    400000: Launcher
-    400002: //RootNode
-    400004: LauncherBody
-    2100000: LauncherStructure
-    2100002: Spikes
-    2100004: LauncherFace
-    2100006: CannonBarrel
-    2100008: CannonDetail
-    2100010: BodyFace
-    2300000: Launcher
-    2300002: //RootNode
-    2300004: LauncherBody
-    3300000: Launcher
-    3300002: //RootNode
-    3300004: LauncherBody
-    4300000: LauncherStructure
-    4300002: Launcher
-    4300004: LauncherBody
-    7400000: LauncherStructure|LauncherIdle
-    7400002: LauncherStructure|LauncherShot
-    7400004: LauncherStructure|LauncherShot.001
-    7400006: LauncherStructure|PrisionerAttack
-    7400008: LauncherStructure|PrisionerIdle
-    7400010: LauncherStructure|TankAttack
-    7400012: LauncherStructure|TankIdle
-    7400014: LauncherStructure|TankIdleRotation
-    7400016: Launcher|LauncherIdle
-    7400018: Launcher|LauncherShot
-    7400020: Launcher|LauncherShot.001
-    7400022: Launcher|PrisionerAttack
-    7400024: Launcher|PrisionerIdle
-    7400026: Launcher|TankAttack
-    7400028: Launcher|TankIdle
-    7400030: Launcher|TankIdleRotation
-    9500000: //RootNode
-  externalObjects: {}
+    100000: //RootNode
+    100002: ConstructionBase
+    100004: ConstructionCannon
+    400000: //RootNode
+    400002: ConstructionBase
+    400004: ConstructionCannon
+    2100000: Bones
+    2100002: ConstructionBaseColor
+    2100004: CannonEmissive
+    2100006: CannonBaseColor
+    2100008: CannonBones
+    2300000: ConstructionBase
+    2300002: ConstructionCannon
+    3300000: ConstructionBase
+    3300002: ConstructionCannon
+    4300000: ConstructionBase
+    4300002: ConstructionCannon
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bones
+    second: {fileID: 2100000, guid: da5666c067b8c7d4382379beb746ff73, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CannonBaseColor
+    second: {fileID: 2100000, guid: 96f4cd2724f408048bdaf576635b18eb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CannonBones
+    second: {fileID: 2100000, guid: c2fe469125d22b84bb4740901e5cb5b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CannonEmissive
+    second: {fileID: 2100000, guid: f925f86a64744bc4d896c96bc838cd7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ConstructionBaseColor
+    second: {fileID: 2100000, guid: 078394c792895b141887dce317b8ed87, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -92,14 +96,14 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -117,7 +121,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
