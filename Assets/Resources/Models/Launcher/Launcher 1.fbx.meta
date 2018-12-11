@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 671608b6fe7aa9d44a50d558b992a573
+guid: 16a028276fb5a4c4b990674a30c94c37
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -24,29 +24,25 @@ ModelImporter:
     4300000: LauncherStructure
     4300002: Launcher
     4300004: LauncherBody
-    7400000: LauncherStructure|LauncherIdle
-    7400002: LauncherStructure|LauncherShot
-    7400004: LauncherStructure|LauncherShot.001
-    7400006: LauncherStructure|PrisionerAttack
-    7400008: LauncherStructure|PrisionerIdle
-    7400010: LauncherStructure|TankAttack
-    7400012: LauncherStructure|TankIdle
-    7400014: LauncherStructure|TankIdleRotation
+    7400000: LauncherStructure|AttackTank
+    7400002: LauncherStructure|IdleTank
+    7400004: LauncherStructure|LauncherIdle
+    7400006: LauncherStructure|LauncherShot
+    7400008: LauncherStructure|PrisionerAttack
+    7400010: LauncherStructure|PrisionerIdle
+    7400012: Launcher|AttackTank
+    7400014: Launcher|IdleTank
     7400016: Launcher|LauncherIdle
     7400018: Launcher|LauncherShot
-    7400020: Launcher|LauncherShot.001
-    7400022: Launcher|PrisionerAttack
-    7400024: Launcher|PrisionerIdle
-    7400026: Launcher|TankAttack
-    7400028: Launcher|TankIdle
-    7400030: Launcher|TankIdleRotation
+    7400020: Launcher|PrisionerAttack
+    7400022: Launcher|PrisionerIdle
     9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -68,7 +64,63 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: LauncherStructure|LauncherIdle
+      takeName: LauncherStructure|LauncherIdle
+      firstFrame: 0
+      lastFrame: 96
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Launcher|LauncherShot
+      takeName: Launcher|LauncherShot
+      firstFrame: 0
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -99,7 +151,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
