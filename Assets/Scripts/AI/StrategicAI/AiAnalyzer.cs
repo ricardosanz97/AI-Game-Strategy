@@ -16,7 +16,7 @@ namespace AI.StrategicAI
         [SerializeField] private InfluenceMapComponent _influenceMapComponent;
 
         [Inject]
-        public AiAnalyzer(HighLevelAI highLevelAi, AIResourcesAllocator aiResourcesAllocator, StrategicObjectives objectives, InfluenceMapComponent influenceMapComponent)
+        public AiAnalyzer(HighLevelAI highLevelAi, AIResourcesAllocator aiResourcesAllocator, InfluenceMapComponent influenceMapComponent)
         {
             _highLevelAI = highLevelAi;
             _aiResourcesAllocator = aiResourcesAllocator;
