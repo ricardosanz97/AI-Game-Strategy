@@ -6,8 +6,8 @@ public class Move : Action
 {
     public int maxMoves;
 
-    public CellBehaviour OnGoingCell;
-    public bool PathReceived = false;
+    [HideInInspector]public CellBehaviour OnGoingCell;
+    [HideInInspector]public bool PathReceived = false;
     public override void Act()
     {
         if (!PathReceived)
