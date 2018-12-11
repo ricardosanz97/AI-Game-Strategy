@@ -9,22 +9,21 @@ using Zenject;
 public class Entity : MonoBehaviour 
 {
     public int bloodCost;
-    public CellBehaviour cell;
+    [HideInInspector]public CellBehaviour cell;
     public enum Owner
     {
         AI,
         Player
     }
 
-    public Owner owner;
-    public Rigidbody rb;
+    [HideInInspector]public Owner owner;
+    [HideInInspector]public Rigidbody rb;
     public AiTask task;
     public float value;
 
+    [HideInInspector]public LevelController _levelController;
 
-    public LevelController _levelController;
-
-    public static System.Action<Entity> OnTroopDeleted;
+    [HideInInspector]public static System.Action<Entity> OnTroopDeleted;
 
     public virtual void Awake()
     {

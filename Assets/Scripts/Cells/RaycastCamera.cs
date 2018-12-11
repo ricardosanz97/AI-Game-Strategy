@@ -30,7 +30,7 @@ public class RaycastCamera : MonoBehaviour {
             hit.collider.transform.DOLocalMoveY(0.5f, 0.3f);
             if (Input.GetMouseButtonDown(0) && lastCellSelected.GetTroopIn() == null)
             {
-                _spawnablesManager.SpawnTroop(hit.collider.gameObject);
+                _spawnablesManager.SpawnTroop(hit.collider.gameObject, Entity.Owner.Player);
             }
         }
 

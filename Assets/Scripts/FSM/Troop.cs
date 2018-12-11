@@ -7,11 +7,12 @@ using Zenject;
 [RequireComponent(typeof(MoveOrder))]
 [RequireComponent(typeof(AttackOrder))]
 [RequireComponent(typeof(IdleOrder))]
-
+[RequireComponent(typeof(Attack))]
+[RequireComponent(typeof(Move))]
 public class Troop : AbstractNPCBrain
 {
     [Inject]
-    public PathfindingManager _pathfindingManager;
+    [HideInInspector]public PathfindingManager _pathfindingManager;
 
     public override void Awake()
     {
@@ -35,7 +36,7 @@ public class Troop : AbstractNPCBrain
     public void OnMouseDown()
     {
         Debug.Log("click in enemy");
-        if (_levelController.GetAnyPopupEnabled())
+        if (_levelController.GetAnyPopupEnabled() || this.owner == Owner.AI) //si hay algun popup abierto o el pertenece a la IA no te abras.
         {
             return;
         }

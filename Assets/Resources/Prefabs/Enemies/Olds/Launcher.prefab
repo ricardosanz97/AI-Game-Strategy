@@ -392,6 +392,7 @@ MonoBehaviour:
     actions: []
   currentTransitions: []
   popupOptionsEnabled: 0
+  _pathfindingManager: {fileID: 0}
 --- !u!114 &114970394704304772
 MonoBehaviour:
   m_ObjectHideFlags: 1

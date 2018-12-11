@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodCost: 2
+  cell: {fileID: 0}
   owner: 0
   rb: {fileID: 0}
   task:
@@ -230,6 +231,7 @@ MonoBehaviour:
     Description: 
     IaPersonality: 0
   value: 0
+  _levelController: {fileID: 0}
   npc: 1
   healthPoints: 100
   currentLevel: 1
@@ -245,6 +247,7 @@ MonoBehaviour:
     actions: []
   currentTransitions: []
   popupOptionsEnabled: 0
+  _pathfindingManager: {fileID: 0}
 --- !u!114 &114242321545125418
 MonoBehaviour:
   m_ObjectHideFlags: 1

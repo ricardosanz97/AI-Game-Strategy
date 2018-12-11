@@ -5,7 +5,7 @@ using System.Reflection;
 
 public abstract class AbstractNPCBrain : Entity
 {
-    public TROOP npc = TROOP.None;
+    [HideInInspector]public TROOP npc = TROOP.None;
     public float healthPoints = 100f;
     public int currentLevel = 1;
 
@@ -17,9 +17,9 @@ public abstract class AbstractNPCBrain : Entity
     [HideInInspector]public List<State> states;
     public State currentState;
     [HideInInspector]public State initialState;
-    public List<Transition> currentTransitions;
+    [HideInInspector]public List<Transition> currentTransitions;
 
-    public bool popupOptionsEnabled = false;
+    [HideInInspector]public bool popupOptionsEnabled = false;
 
     public virtual void Start()
     {

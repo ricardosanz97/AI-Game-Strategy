@@ -8,16 +8,14 @@ using UnityEngine.Events;
 public class State
 {
     public STATE stateName;
-    public AbstractNPCBrain brain;
+    [HideInInspector]public AbstractNPCBrain brain;
     public List<Action> actions;
-    private StateInfo _stateInfo;
 
-    public UnityAction OnEnter;
-    public UnityAction OnExit;
+    [HideInInspector]public UnityAction OnEnter;
+    [HideInInspector]public UnityAction OnExit;
 
     public State(STATE stateName, AbstractNPCBrain brain, UnityAction onEnter = null, UnityAction onExit = null)
     {
-        _stateInfo = GameObject.FindObjectOfType<StateInfo>().GetComponent<StateInfo>();
         this.stateName = stateName;
         this.brain = brain;
         this.OnEnter = onEnter;

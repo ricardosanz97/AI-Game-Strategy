@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4848839746413018}
   - component: {fileID: 114408443491801928}
   m_Layer: 0
-  m_Name: Core
+  m_Name: CoreAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -367,6 +367,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f070d8ff391b749d59c1572aad1b3282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodCost: 0
+  cell: {fileID: 0}
+  owner: 0
+  rb: {fileID: 0}
+  task:
+    Priority: 0
+    Description: 
+    IaPersonality: 0
+  value: 0
+  _levelController: {fileID: 0}
   npc: 5
   healthPoints: 100
   currentLevel: 1
@@ -381,6 +391,7 @@ MonoBehaviour:
     brain: {fileID: 0}
     actions: []
   currentTransitions: []
+  popupOptionsEnabled: 0
 --- !u!198 &198002137609185306
 ParticleSystem:
   m_ObjectHideFlags: 1

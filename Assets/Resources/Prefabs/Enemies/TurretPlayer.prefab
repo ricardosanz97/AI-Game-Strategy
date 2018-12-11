@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114564544833523780}
   - component: {fileID: 54426669594870884}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: TurretPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodCost: 3
+  cell: {fileID: 0}
   owner: 0
   rb: {fileID: 0}
   task:
@@ -134,6 +135,7 @@ MonoBehaviour:
     Description: 
     IaPersonality: 0
   value: 0
+  _levelController: {fileID: 0}
   npc: 5
   healthPoints: 300
   currentLevel: 1
