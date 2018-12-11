@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using InfluenceMap;
 using UnityEngine;
 using Zenject;
+using Zenject.Asteroids;
 
 public enum TROOP
 {
@@ -23,6 +25,8 @@ public class SpawnablesManager : MonoBehaviour {
 
     [Inject]
     BloodIndicatorController _bloodIndicatorController;
+
+    [Inject] private InfluenceMapComponent _influenceMapComponent;
 
     public void SetCurrentTroop(TROOP troop)
     {
@@ -70,6 +74,10 @@ public class SpawnablesManager : MonoBehaviour {
         {
             troopSpawned = Instantiate(troop, new Vector3(cell.transform.position.x, 1f, cell.transform.position.z), troop.transform.rotation);
             currentTroopSelected = TROOP.None;
+
+            print(new Vector3(cell.transform.position.x, 1f, cell.transform.position.z));
+            Node node = _influenceMapComponent.GetNodeAtLocation(new Vector3(cell.transform.position.x, 1f, cell.transform.position.z));
+            print("spawned at: " + node.WorldGameObject.GetComponent<InfluencePosition>().GridPositions[0] + ", " + node.WorldGameObject.GetComponent<InfluencePosition>().GridPositions[1]);
 
             OnSpawnedTroop?.Invoke(troopSpawned.GetComponent<Entity>());
             //todo asignar si el que spawnea es la ia o player

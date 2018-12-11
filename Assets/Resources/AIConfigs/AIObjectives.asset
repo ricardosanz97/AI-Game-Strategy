@@ -34,10 +34,16 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 01000000
-    _keys: 01000000
+    _keyValues: 0100000000000000
+    _keys: 0100000000000000
     _values:
-    - Priority: 10
-      Description: Destroy de enemy Base
-      IaPersonality: 0
-      Doer: {fileID: 0}
+    - objectives:
+      - description: 
+        type: 0
+      - description: 
+        type: 0
+    - objectives:
+      - description: 
+        type: 0
+      - description: 
+        type: 0

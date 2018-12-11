@@ -10,7 +10,7 @@ namespace InfluenceMap
         public Texture2D InfluenceMapTexture;
         public GameObject ParentObject;
 
-        private Node[,] _grid;
+        public Node[,] _grid { get; private set; }
         private bool _renderGroundGrid;
         private List<Originator> _originators = new List<Originator>();
 

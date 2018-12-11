@@ -9,7 +9,6 @@ namespace AI.StrategicAI
     public class AiAnalyzer
     {
         //tareas asignadas en funcion de la personalidad a la IA.
-        [SerializeField] private StrategicObjectives StrategicObjectives;      
         [SerializeField] private HighLevelAI _highLevelAI;
         [SerializeField] private AIResourcesAllocator _aiResourcesAllocator;
         [SerializeField] private List<AiTask> _selectableTasks;
@@ -22,14 +21,16 @@ namespace AI.StrategicAI
             _aiResourcesAllocator = aiResourcesAllocator;
             _influenceMapComponent = influenceMapComponent;
             _selectableTasks = new List<AiTask>();
-            StrategicObjectives = objectives;
         }
 
         //Esta clase se encarga de generar la lista de tareas para el resource allocator teniendo en cuenta el mapa de influencias
-        public void GenerateTasks()
+        public void GenerateTasks(Objective[] objectives)
         {
+            //input las tareas para esta personalidad con pesos asociados
+            
             Entity[] controlledEntities = _highLevelAI.AIControlledEntites.ToArray();
             Entity[] playerControlledEntites = _highLevelAI.PlayerControlledEntities.ToArray();
+
             
             List<AiTask> tasks = new List<AiTask>();
             
@@ -42,15 +43,7 @@ namespace AI.StrategicAI
 
         public void OnPersonalityChanged()
         {
-            _selectableTasks.Clear();
-            
-            foreach (var task in StrategicObjectives.TasksDictionary.Values)
-            {
-                if(task.IaPersonality == _highLevelAI.CurrentIaPersonality)
-                    _selectableTasks.Add(task);
-            } 
-            
-            GenerateTasks();
+
         }
     }
 }
