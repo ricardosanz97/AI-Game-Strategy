@@ -4,15 +4,26 @@ using InfluenceMap;
 using UnityEngine;
 using Zenject;
 
-namespace AI.StrategicAI
+namespace StrategicAI
 {
+    public class TacticalObjective
+    {
+        public Entity Objective { get; }
+        public float Modifier { get; }
+
+        public TacticalObjective(Entity objective, float modifier)
+        {
+            this.Objective = objective;
+            this.Modifier = modifier;
+        }
+    }
+    
     [System.Serializable]
     public class AiAnalyzer
     {
         //tareas asignadas en funcion de la personalidad a la IA.
         [SerializeField] private HighLevelAI _highLevelAI;
         [SerializeField] private AIResourcesAllocator _aiResourcesAllocator;
-        [SerializeField] private List<AiTask> _selectableTasks;
         [SerializeField] private InfluenceMapComponent _influenceMapComponent;
 
         [Inject]
@@ -21,7 +32,6 @@ namespace AI.StrategicAI
             _highLevelAI = highLevelAi;
             _aiResourcesAllocator = aiResourcesAllocator;
             _influenceMapComponent = influenceMapComponent;
-            _selectableTasks = new List<AiTask>();
         }
 
         //Esta clase se encarga de generar la lista de tareas para el resource allocator teniendo en cuenta el mapa de influencias
@@ -29,6 +39,7 @@ namespace AI.StrategicAI
         {
             //input las tareas para esta personalidad con prioridades asociadas, las ordenamos para que genere tareas primero para las prioridades altas
             Array.Sort(aiObjectives);
+            List<TacticalObjective> specificObjectives = new List<TacticalObjective>();
             
             Entity[] controlledEntities = _highLevelAI.AIControlledEntites.ToArray();
             Entity[] playerControlledEntites = _highLevelAI.PlayerControlledEntities.ToArray();
@@ -41,13 +52,13 @@ namespace AI.StrategicAI
                 }
             }
 
-            List<AiTask> tasks = new List<AiTask>();
+           
             
             //check your controlled entities and see the influences they have in their surroundings
             //dos opciones, o bien hacer un arbol de decision para añadir tareas o bien usar reglas
             
             
-            _aiResourcesAllocator.OnTasksGenerated(tasks.ToArray(), controlledEntities);
+            _aiResourcesAllocator.OnTasksGenerated(specificObjectives, controlledEntities);
         }
 
         private void AnalyzeSurroundingInfluences(Entity e, AIObjective objective)

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace AI.StrategicAI
+namespace StrategicAI
 {
     [System.Serializable]
     public class AIObjective : IComparable<AIObjective>

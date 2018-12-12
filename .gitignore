@@ -42,3 +42,13 @@ ProjectSettings/ProjectVersion.txt
 Assets/Plugins/Zenject/OptionalExtras/ReflectionBaking/Zenject-ReflectionBaking\.csproj\.meta
 
 Assets/Plugins/Zenject/OptionalExtras/Signals/Zenject-Signals\.csproj\.meta
+
+Assets/Plugins/PandaBehaviour/Core/Editor/Gizmos\.meta
+
+Assets/Plugins/PandaBehaviour/Examples/00_ChangeColor/
+
+Assets/Plugins/PandaBehaviour/Examples/01_Move/
+
+Assets/Plugins/PandaBehaviour/Examples/02_PlayTag/
+
+Assets/Plugins/PandaBehaviour/Examples/03_Shooter/

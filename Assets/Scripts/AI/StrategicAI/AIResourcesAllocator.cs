@@ -1,56 +1,50 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using Zenject;
 
-namespace AI.StrategicAI
+namespace StrategicAI
 {
     [System.Serializable]
     public class AIResourcesAllocator
     {
         public class PossibleTaskAssignment : IComparable<PossibleTaskAssignment>
         {
-            public AiTask Task { get;}
+            private TacticalObjective _objective;
             public float score;
-            public Entity PossibleTaskDoer { get; private set; }
+            public Entity PossibleTaskDoer { get; set; }
+            private float distance;
 
-            public PossibleTaskAssignment(AiTask task)
+            public bool IsAssigned
             {
-                Task = task;
-                score = 0;
+                get { return PossibleTaskDoer != null; }
             }
 
-            public void Assign()
+            public PossibleTaskAssignment(TacticalObjective objective)
             {
-                if (Task.IsAssigned()) return;
-                PossibleTaskDoer.Assign(this);
+                _objective = objective;
+                score = objective.Modifier;
+                distance = Vector3.Distance(objective.Objective.transform.position,
+                    PossibleTaskDoer.transform.position);
             }
 
             public int CompareTo(PossibleTaskAssignment other)
             {
                 //testear si no es capaz de ordenar las tareas
+                if (Math.Abs(score - other.score) < 0.001f)
+                    return distance.CompareTo(other.distance);
+                
                 return score.CompareTo(other.score);
             }
         }
 
-        private List<PossibleTaskAssignment> _possibleTaskAssignments;
-
-        public AIResourcesAllocator(List<PossibleTaskAssignment> possibleTaskAssignments, HighLevelAI highLevelAi)
-        {
-            _possibleTaskAssignments = possibleTaskAssignments;
-        }
-
-        public void OnTasksGenerated(AiTask[] tasks, Entity[] controlledEntities)
+        public void OnTasksGenerated(List<TacticalObjective> tacticalObjectives, Entity[] controlledEntities)
         {
             //rehacer esto
-            GenerateAllPossibleTasksAssignments(tasks, controlledEntities);
-            SortPossibleAssignments(_possibleTaskAssignments);
-            AssignPossibleAssignments(_possibleTaskAssignments);
-
-            //send the commands
-            OnResourcesAllocated();
-
+            var possibleTaskAssignments = GenerateAllPossibleTasksAssignments(tacticalObjectives, controlledEntities);
+            AssignPossibleAssignments(possibleTaskAssignments);
         }
 
         private void AssignPossibleAssignments(List<PossibleTaskAssignment> possibleTaskAssignments)
@@ -58,39 +52,41 @@ namespace AI.StrategicAI
             foreach (var possibleTaskAssignment in possibleTaskAssignments)
             {
                 // al estar ordenadas las primeras tareas se asignan primero, si algun doer esta ocupado se le salta;
-                possibleTaskAssignment.Assign();
-            }
-        }
-
-        private void SortPossibleAssignments(List<PossibleTaskAssignment> possibleTaskAssignments)
-        {
-            for (int i = 0; i < possibleTaskAssignments.Count; i++)
-            {
-                //calculate the score of each assignment
+                
             }
             
-            possibleTaskAssignments.Sort();
+            OnResourcesAllocated(possibleTaskAssignments);
         }
 
-        private void GenerateAllPossibleTasksAssignments(AiTask[] tasks, Entity[] controlledEntities)
+        private List<PossibleTaskAssignment> GenerateAllPossibleTasksAssignments(List<TacticalObjective> objectives, Entity[] controlledEntities)
         {
-            _possibleTaskAssignments.Clear();
-
-            for (int i = 0; i < tasks.Length; i++)
+            List<PossibleTaskAssignment> possibleTaskAssignments = new List<PossibleTaskAssignment>();
+            
+            for (int i = 0; i < objectives.Count; i++)
             {
                 for (int j = 0; j < controlledEntities.Length; j++)
                 {
-                    if (controlledEntities[j].isTaskSuitable(tasks[i]))
-                    {
-                        _possibleTaskAssignments.Add(new PossibleTaskAssignment(tasks[i]));
-                    }
+                    possibleTaskAssignments.Add(new PossibleTaskAssignment(objectives[i]));
                 }
             }
+            
+            possibleTaskAssignments.Sort();
+
+            return possibleTaskAssignments;
         }
         
-        public void OnResourcesAllocated()
+        public void OnResourcesAllocated(List<PossibleTaskAssignment> possibleTaskAssignments)
         {
             //the assignments are done and now we have to iterate through each unity and depending on its task use a command or other
+            for (int i = 0; i < possibleTaskAssignments.Count; i++)
+            {
+                if (possibleTaskAssignments[i].IsAssigned)
+                {
+                    //si el objetivo es de la IA sera mejora
+                    
+                    //si es del enemigo tienes que atacar
+                }
+            }
             
         }
     }

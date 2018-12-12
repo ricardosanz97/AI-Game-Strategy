@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using AI.StrategicAI;
+using StrategicAI;
 using UnityEngine;
 using Zenject;
 

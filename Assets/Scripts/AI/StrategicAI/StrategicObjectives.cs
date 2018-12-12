@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine;
 
-namespace AI.StrategicAI
+namespace StrategicAI
 {
     [System.Serializable]
     public class TasksDictionary : SerializableDictionaryBase<HighLevelAI.IAPersonality, ObjectivesSet>

@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 using UnityEngine.Serialization;
 using Zenject;
 
-namespace AI.StrategicAI
+namespace StrategicAI
 {
     public class HighLevelAI : MonoBehaviour
     {

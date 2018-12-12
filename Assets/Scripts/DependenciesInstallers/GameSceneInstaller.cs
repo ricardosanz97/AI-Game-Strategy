@@ -1,9 +1,9 @@
 
 using System.ComponentModel;
 using Zenject;
-using AI.StrategicAI;
 using InfluenceMap;
 using Pathfinding;
+using StrategicAI;
 using UnityEngine;
 
 namespace DependenciesInstallers
