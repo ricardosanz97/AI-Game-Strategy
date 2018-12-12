@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using InfluenceMap;
 using Pathfinding;
 using Priority_Queue;
 using UnityEngine;

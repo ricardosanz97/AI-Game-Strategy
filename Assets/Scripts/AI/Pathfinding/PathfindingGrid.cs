@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using InfluenceMap;
 using Pathfinding;
 using UnityEngine;
 using Zenject;
@@ -27,6 +28,7 @@ namespace CustomPathfinding
 		public int GridSizeX { get; private set; }
 		public int GridSizeZ { get; private set; }
 		private GameObject nodeContainer;
+		[Inject] private InfluenceMapComponent _influenceMapComponent;
 		
 		public int NodeCount => GridSizeX * GridSizeZ;
 
@@ -212,6 +214,9 @@ namespace CustomPathfinding
 		//it gives as the cost of the edge between these two nodes
 		public float Cost(Node currentNode, Node neighbor)
 		{	
+			//todo aqui hay que coger del influence map el coste.
+			//1. Coger la misma celda que la que estas del pathfinding
+			//2. Añadirle el valor de todas las influences si son enemigas al coste del camino
 			if (currentNode.GridX == neighbor.GridX || currentNode.GridZ == neighbor.GridZ && neighbor.NodeType == Node.ENodeType.Walkable)
 				return 1f;
 
@@ -220,6 +225,7 @@ namespace CustomPathfinding
 				return 1.4f;
 			
 
+			//en caso de que no se pueda pasar
 			return int.MaxValue;
 
 		}

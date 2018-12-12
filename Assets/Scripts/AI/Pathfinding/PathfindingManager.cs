@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using CustomPathfinding;
+using InfluenceMap;
 using UnityEngine;
+using Zenject;
+using Node = CustomPathfinding.Node;
 
 namespace Pathfinding
 {
@@ -13,7 +16,6 @@ namespace Pathfinding
         private readonly Queue<PathResult> results = new Queue<PathResult>(RESULTS_QUEUE_CAPACITY);
         [Range(1,4)]
         public int MaxThreadCount;
-        
         private PathfindingGrid _pathfindingGraph;
         private WaitForSeconds _wfs;
         private Thread[] _threads;

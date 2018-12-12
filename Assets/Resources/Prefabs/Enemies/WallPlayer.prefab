@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 65628302499356416}
   - component: {fileID: 114864061671993944}
   - component: {fileID: 114563248727234456}
+  - component: {fileID: 114036372980741624}
   m_Layer: 9
   m_Name: WallPlayer
   m_TagString: Untagged
@@ -98,6 +99,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114036372980741624
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1692355206896390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a907fa3d1334032bdf460cb4cdd796c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Originator:
+    WorldPosition: {x: 0, y: 0, z: 0}
+    Influence: 0
+    InfluenceRange: 0
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    InfluenceType: 0
 --- !u!114 &114563248727234456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -130,9 +148,5 @@ MonoBehaviour:
   cell: {fileID: 0}
   owner: 0
   rb: {fileID: 0}
-  task:
-    Priority: 0
-    Description: 
-    IaPersonality: 0
   value: 0
   _levelController: {fileID: 0}

@@ -53,6 +53,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4848839746413018}
+  - component: {fileID: 114275607707205294}
   m_Layer: 0
   m_Name: CorePlayer
   m_TagString: Untagged
@@ -355,6 +356,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1018838463350110}
   m_Mesh: {fileID: 4300000, guid: e8e54110920603c4b83b7344ec40f87a, type: 3}
+--- !u!114 &114275607707205294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1280929516748388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a907fa3d1334032bdf460cb4cdd796c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Originator:
+    WorldPosition: {x: 0, y: 0, z: 0}
+    Influence: 0
+    InfluenceRange: 0
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    InfluenceType: 0
 --- !u!198 &198002137609185306
 ParticleSystem:
   m_ObjectHideFlags: 1

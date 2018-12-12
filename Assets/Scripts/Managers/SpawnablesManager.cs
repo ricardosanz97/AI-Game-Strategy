@@ -81,7 +81,6 @@ public class SpawnablesManager : MonoBehaviour {
             print("spawned at: " + node.WorldGameObject.GetComponent<InfluencePosition>().GridPositions[0] + ", " + node.WorldGameObject.GetComponent<InfluencePosition>().GridPositions[1]);
         
             OnSpawnedTroop?.Invoke(troopSpawned.GetComponent<Entity>());
-            //todo asignar si el que spawnea es la ia o player
             _bloodIndicatorController.DecreaseBloodValue(troopSpawned.GetComponent<Entity>().bloodCost);
             FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().HideButtons();
             cell.GetComponent<CellBehaviour>().troopIn = troopSpawned.GetComponent<AbstractNPCBrain>();
