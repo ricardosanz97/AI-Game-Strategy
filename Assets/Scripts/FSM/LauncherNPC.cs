@@ -27,7 +27,7 @@ public class LauncherNPC : Troop
                 Debug.Log("nodeList tiene " + nodeList.Length + " elementos. ");
                 foreach (CustomPathfinding.Node node in nodeList)
                 {
-                    node.GetComponent<MeshRenderer>().material.color = Color.black;
+                    node.GetComponent<MeshRenderer>().material.color = Color.blue;
                 }
             }, 
             ()=> {

@@ -62,10 +62,8 @@ namespace InfluenceMap
         {
             float percentX = (location.x) / X;
             float percentY = (location.z) / Y;
-            percentX = Mathf.Clamp01(percentX);
-            percentY = Mathf.Clamp01(percentY);
 
-            int x = Mathf.RoundToInt((X-1) * percentX);
+            int x = Mathf.RoundToInt((X) * percentX);
             int y = Mathf.RoundToInt((Y-1) * percentY);
             return influenceGrid._grid[x,y];
         }

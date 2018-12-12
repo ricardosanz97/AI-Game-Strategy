@@ -157,8 +157,8 @@ MonoBehaviour:
   InfluenceMask:
     serializedVersion: 2
     m_Bits: 2048
-  X: 12
-  Y: 8
+  X: 24
+  Y: 16
   Spacing: 1
 --- !u!222 &222352856994185010
 CanvasRenderer:

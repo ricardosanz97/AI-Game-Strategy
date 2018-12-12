@@ -160,10 +160,10 @@ namespace CustomPathfinding
 
 		public Node GetNodeFromWorldPosition(Vector3 worldPosition)
 		{
-			float percentX = (worldPosition.x + GridWorldSize.x/2) / GridWorldSize.x;
-			float percentY = (worldPosition.z + GridWorldSize.y/2) / GridWorldSize.y;
-			percentX = Mathf.Clamp01(percentX);
-			percentY = Mathf.Clamp01(percentY);
+			float percentX = (worldPosition.x) / GridWorldSize.x;
+			float percentY = (worldPosition.z) / GridWorldSize.y;
+			//percentX = Mathf.Clamp01(percentX);
+			//percentY = Mathf.Clamp01(percentY);
 
 			int x = Mathf.RoundToInt((GridSizeX-1) * percentX);
 			int y = Mathf.RoundToInt((GridSizeZ-1) * percentY);
