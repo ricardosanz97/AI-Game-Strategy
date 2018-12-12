@@ -140,6 +140,7 @@ namespace CustomPathfinding
 
         public static Node[] BFS(PathfindingGrid grid, Node start, int maxSearchSteps)
         {
+            Debug.Log(start.GridX + ", " + start.GridZ);
             List<Node> result = new List<Node>();
             Queue<Node> queue = new Queue<Node>();
             Dictionary<Node,bool>  visited = new Dictionary<Node, bool>(grid.NodeCount);
@@ -156,29 +157,27 @@ namespace CustomPathfinding
             visited[start] = true;
             int steps = 0;
 
-            while (queue.Count > 0 && steps < maxSearchSteps)
+            while (queue.Count > 0)
             {
                 Node front = queue.Dequeue();
-
-                if (front.NodeType == Node.ENodeType.Walkable)
+                
+                if (steps <= maxSearchSteps)
                 {
-                    result.Add(front);
-                    visited[front] = true;
+                    foreach (var node in grid.GetNeighbors(front))
+                    {
+                        if (!visited[node])
+                        {
+                            if (node.NodeType == Node.ENodeType.Walkable)
+                                result.Add(node);
+
+                            visited[node] = true;
+                            queue.Enqueue(node);
+                        }
+                    }
+
+                    steps += 1;
                 }
                 
-                foreach (var node in grid.GetNeighbors(front))
-                {
-                    if (!visited[node])
-                    {
-                        if (node.NodeType == Node.ENodeType.Walkable)
-                            result.Add(node);
-                        
-                        visited[node] = true;
-                        queue.Enqueue(node);
-                    }
-                }
-
-                steps += 1;
             }
 
             return result.ToArray();
