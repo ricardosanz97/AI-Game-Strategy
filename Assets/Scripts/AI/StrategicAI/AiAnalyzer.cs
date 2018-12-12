@@ -9,12 +9,12 @@ namespace StrategicAI
     public class TacticalObjective
     {
         public Entity Objective { get; }
-        public float Modifier { get; }
+        public float Distance { get; set; }
 
-        public TacticalObjective(Entity objective, float modifier)
+        public TacticalObjective(Entity objective, float distance)
         {
             this.Objective = objective;
-            this.Modifier = modifier;
+            this.Distance = distance;
         }
     }
     
@@ -48,12 +48,10 @@ namespace StrategicAI
             {
                 for (int j = 0; j < controlledEntities.Length; j++)
                 {
-                    AnalyzeSurroundingInfluences(controlledEntities[i], aiObjectives[i]);
+                    AnalyzeSurroundingInfluences(controlledEntities[i], aiObjectives[i], playerControlledEntites, specificObjectives);
                 }
             }
 
-           
-            
             //check your controlled entities and see the influences they have in their surroundings
             //dos opciones, o bien hacer un arbol de decision para añadir tareas o bien usar reglas
             
@@ -61,7 +59,8 @@ namespace StrategicAI
             _aiResourcesAllocator.OnTasksGenerated(specificObjectives, controlledEntities);
         }
 
-        private void AnalyzeSurroundingInfluences(Entity e, AIObjective objective)
+        private void AnalyzeSurroundingInfluences(Entity e, AIObjective objective, Entity[] playerControlledEntites,
+            List<TacticalObjective> specificObjectives)
         {
             AbstractNPCBrain brain = e.GetComponent<AbstractNPCBrain>();
             
@@ -77,7 +76,8 @@ namespace StrategicAI
                     break;
                     
                 case AIObjective.ObjectiveType.AttackTroops:
-                        //genera tareas de atacar a cualquier tropa que este cerca y si no se acerca a ellas
+                        //genera una lista de las entidades a las que hay que atacar
+                    GetClosestTacticalObjective(e, playerControlledEntites, specificObjectives);
                     break;
                     
                 case AIObjective.ObjectiveType.DefendBase:
@@ -92,6 +92,25 @@ namespace StrategicAI
                         //genera tareas de mejora de estructuras
                     break;
             }
+        }
+
+        private static void GetClosestTacticalObjective(Entity e, Entity[] playerControlledEntites, List<TacticalObjective> specificObjectives)
+        {
+            float currentDistance = 0;
+            float minDistance = int.MaxValue;
+            Entity closestEntity = null;
+
+            for (int i = 0; i < playerControlledEntites.Length; i++)
+            {
+                currentDistance = Vector3.Distance(e.transform.position, playerControlledEntites[i].transform.position);
+                if (currentDistance < minDistance)
+                {
+                    closestEntity = playerControlledEntites[i];
+                    minDistance = currentDistance;
+                }
+            }
+
+            specificObjectives.Add(new TacticalObjective(closestEntity, currentDistance));
         }
 
         public void OnPersonalityChanged()

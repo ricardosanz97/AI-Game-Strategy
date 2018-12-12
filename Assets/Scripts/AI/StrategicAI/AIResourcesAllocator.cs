@@ -15,7 +15,6 @@ namespace StrategicAI
             private TacticalObjective _objective;
             public float score;
             public Entity PossibleTaskDoer { get; set; }
-            private float distance;
 
             public bool IsAssigned
             {
@@ -25,17 +24,11 @@ namespace StrategicAI
             public PossibleTaskAssignment(TacticalObjective objective)
             {
                 _objective = objective;
-                score = objective.Modifier;
-                distance = Vector3.Distance(objective.Objective.transform.position,
-                    PossibleTaskDoer.transform.position);
+                score = objective.Distance;
             }
 
             public int CompareTo(PossibleTaskAssignment other)
             {
-                //testear si no es capaz de ordenar las tareas
-                if (Math.Abs(score - other.score) < 0.001f)
-                    return distance.CompareTo(other.distance);
-                
                 return score.CompareTo(other.score);
             }
         }
