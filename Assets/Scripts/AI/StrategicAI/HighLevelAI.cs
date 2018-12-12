@@ -46,6 +46,7 @@ namespace StrategicAI
 
         public void EvaluateGameState()
         {
+            //todo establecer las diferentes reglas
             if (CalculateSetDamage(AIControlledEntites) >= CalculateSetDamage(PlayerControlledEntities))
                 currentPersonality = IAPersonality.Offensive;
             else
