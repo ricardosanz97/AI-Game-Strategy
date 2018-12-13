@@ -63,6 +63,7 @@ GameObject:
   - component: {fileID: 65332214502130652}
   - component: {fileID: 114020082314885878}
   - component: {fileID: 114604054831589730}
+  - component: {fileID: 114672673549251076}
   m_Layer: 0
   m_Name: PrisionerPlayer
   m_TagString: Untagged
@@ -106,7 +107,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1425212281524628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 6.49, y: 0, z: 0.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4216257910884260}
@@ -327,23 +328,29 @@ MonoBehaviour:
   owner: 0
   rb: {fileID: 0}
   value: 0
+  tryingTo: 2
+  _spawnablesManager: {fileID: 0}
   _levelController: {fileID: 0}
+  _influenceMapComp: {fileID: 0}
   npc: 0
   healthPoints: 100
   currentLevel: 1
   transitions: []
   states: []
-  currentState:
-    stateName: 0
-    brain: {fileID: 0}
-    actions: []
   initialState:
     stateName: 0
     brain: {fileID: 0}
     actions: []
   currentTransitions: []
+  currentState:
+    stateName: 0
+    brain: {fileID: 0}
+    actions: []
   popupOptionsEnabled: 0
+  executed: 0
   _pathfindingManager: {fileID: 0}
+  possibleMovements: []
+  possibleAttacks: []
 --- !u!114 &114086400043942724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -370,6 +377,7 @@ MonoBehaviour:
   maxMoves: 3
   OnGoingCell: {fileID: 0}
   PathReceived: 0
+  path: []
 --- !u!114 &114586406008278652
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -381,7 +389,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219904cf804eb4ab19c44053bcc8df2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 2
   range: 1
+  ObjectiveAssigned: 0
+  NPCObjectiveAttack: {fileID: 0}
 --- !u!114 &114604054831589730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -399,6 +410,18 @@ MonoBehaviour:
     InfluenceRange: 0
     Color: {r: 0, g: 0, b: 0, a: 0}
     InfluenceType: 0
+--- !u!114 &114672673549251076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1425212281524628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6168b011147eb1e469b8a172bfccc41f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
 --- !u!114 &114684851979715614
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(Health))]
 public abstract class AbstractNPCBrain : Entity
 {
-    [HideInInspector]public TROOP npc = TROOP.None;
-    public float healthPoints = 100f;
+    public TROOP npc = TROOP.None;
     public int currentLevel = 1;
+    [SerializeField]public Slider sliderHealth;
 
 
     public abstract void SetTransitions();
@@ -22,12 +24,20 @@ public abstract class AbstractNPCBrain : Entity
 
     public bool executed = false;
 
+    public override void Awake()
+    {
+        base.Awake();
+        sliderHealth = this.GetComponentInChildren<Slider>();
+    }
+
     public virtual void Start()
     {
         if (npc == TROOP.None)
         {
             Debug.LogError("NPC type unassigned. ");
         }
+        sliderHealth.maxValue = GetComponent<Health>().health;
+        sliderHealth.value = sliderHealth.maxValue;
     }
 
     public void SetRemainState()

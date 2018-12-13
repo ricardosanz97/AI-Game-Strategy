@@ -31,8 +31,8 @@ public class Move : Action
         if (isPossible)
         {
             this.path = path;
-        Debug.Log("Se ha generado el camino y tiene " + path.Length + " nodos. ");
-        StartCoroutine(FollowPath(path));
+            Debug.Log("Se ha generado el camino y tiene " + path.Length + " nodos. ");
+            StartCoroutine(FollowPath(path));
         }
         
     }
