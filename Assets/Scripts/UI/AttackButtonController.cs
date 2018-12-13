@@ -9,16 +9,23 @@ public class AttackButtonController : MonoBehaviour {
     public bool buttonsEnabled = false;
     [SerializeField] private bool canPressButton = true;
     private LevelController _levelController;
+    private TurnHandler _turnHandler;
 
     private void Awake()
     {
-        _levelController = FindObjectOfType<LevelController>().GetComponent<LevelController>();
+        _levelController = FindObjectOfType<LevelController>();
+        _turnHandler = FindObjectOfType<TurnHandler>();
     }
 
     public void HandleButtons()
     {
-        if (!canPressButton)
+        if (!canPressButton || !_levelController.CheckIfCanSpawn() || _turnHandler.currentTurn != PlayerType.Player)
         {
+            if (buttonsEnabled)
+            {
+                HideButtons();
+            }
+            
             return;
         }
         canPressButton = false;

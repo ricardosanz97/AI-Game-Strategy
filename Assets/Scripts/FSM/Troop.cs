@@ -13,6 +13,8 @@ public class Troop : AbstractNPCBrain
 {
     [Inject]
     [HideInInspector]public PathfindingManager _pathfindingManager;
+    public List<CustomPathfinding.Node> possibleMovements;
+    public List<CustomPathfinding.Node> possibleAttacks;
 
     public override void Awake()
     {
@@ -22,6 +24,8 @@ public class Troop : AbstractNPCBrain
 
     public override void Start()
     {
+        possibleMovements = new List<CustomPathfinding.Node>();
+
         initialState = new State(STATE.Idle, this, ()=> { }, ()=> { });
         FSMSystem.AddState(this, initialState);
         SetStates();
@@ -73,5 +77,17 @@ public class Troop : AbstractNPCBrain
 
     public override void SetStates()
     {
+    }
+
+    public bool ListPossibleMovementsContains(CustomPathfinding.Node node)
+    {
+        for (int i = 0; i<possibleMovements.Count; i++)
+        {
+            if (possibleMovements[i].gameObject == node.gameObject)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

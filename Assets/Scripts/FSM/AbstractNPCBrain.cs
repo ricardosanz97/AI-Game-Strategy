@@ -15,10 +15,9 @@ public abstract class AbstractNPCBrain : Entity
 
     [HideInInspector]public List<Transition> transitions;
     [HideInInspector]public List<State> states;
-    public State currentState;
     [HideInInspector]public State initialState;
     [HideInInspector]public List<Transition> currentTransitions;
-
+    public State currentState;
     [HideInInspector]public bool popupOptionsEnabled = false;
 
     public virtual void Start()

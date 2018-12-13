@@ -8,6 +8,10 @@ public class CellBehaviour : MonoBehaviour
 {
     public PlayerType owner;
     public AbstractNPCBrain troopIn;
+    private bool PNodeAssigned = false;
+    private bool INodeAssigned = false;
+    public CustomPathfinding.Node PNode;
+    public InfluenceMap.Node INode;
 
     public void SetOwner(PlayerType playerType)
     {
@@ -32,6 +36,15 @@ public class CellBehaviour : MonoBehaviour
     public void BackToInitialPosition()
     {
         this.transform.DOLocalMoveY(0f, 0.3f);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<CustomPathfinding.Node>() && PNode == null)
+        {
+            Debug.Log("Get reference of the PNode in this cell. ");
+            PNode = other.GetComponent<CustomPathfinding.Node>();
+        }
     }
     /*
     private void OnMouseDown()

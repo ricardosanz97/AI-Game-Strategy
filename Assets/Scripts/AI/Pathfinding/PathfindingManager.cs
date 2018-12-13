@@ -16,13 +16,13 @@ namespace Pathfinding
         private readonly Queue<PathResult> results = new Queue<PathResult>(RESULTS_QUEUE_CAPACITY);
         [Range(1,4)]
         public int MaxThreadCount;
-        private PathfindingGrid _pathfindingGraph;
+        private PathfindingGrid _pathfindingGrid;
         private WaitForSeconds _wfs;
         private Thread[] _threads;
 
         private void Awake()
         {
-            _pathfindingGraph = FindObjectOfType<PathfindingGrid>();
+            _pathfindingGrid = FindObjectOfType<PathfindingGrid>();
             _wfs = new WaitForSeconds(0.001f);
             ThreadPool.SetMaxThreads(MaxThreadCount, MaxThreadCount);
         }
@@ -85,8 +85,8 @@ namespace Pathfinding
 
         public Node[] RequestWalkableNodesAtRadius(int radius, Vector3 origin)
         {
-            Debug.Log("originX = " + _pathfindingGraph.GetNodeFromWorldPosition(origin).GridX + " y originZ = " + _pathfindingGraph.GetNodeFromWorldPosition(origin).GridZ);
-            return PathfindingAlgorithms.BFS(_pathfindingGraph,_pathfindingGraph.GetNodeFromWorldPosition(origin), radius);
+            Debug.Log("originX = " + _pathfindingGrid.GetNodeFromWorldPosition(origin).GridX + " y originZ = " + _pathfindingGrid.GetNodeFromWorldPosition(origin).GridZ);
+            return PathfindingAlgorithms.BFS(_pathfindingGrid.GetNodeFromWorldPosition(origin), radius, _pathfindingGrid).ToArray();
         }
         
 
@@ -94,7 +94,7 @@ namespace Pathfinding
         {
             ThreadPool.QueueUserWorkItem(delegate(object state)
             {
-                PathfindingAlgorithms.AStarSearch(_pathfindingGraph, request, FinishedProcessingPath);
+                PathfindingAlgorithms.AStarSearch(_pathfindingGrid, request, FinishedProcessingPath);
             });
         }
 

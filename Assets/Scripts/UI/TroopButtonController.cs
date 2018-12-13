@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using DG.Tweening;
+using UnityEngine.EventSystems;
 
-public class TroopButtonController : MonoBehaviour {
+public class TroopButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
     public TROOP troopType;
     
@@ -23,4 +25,25 @@ public class TroopButtonController : MonoBehaviour {
         _spawnablesManager.SetCurrentTroop(troopType);
     }
 
+    private void OnMouseOver()
+    {
+        
+    }
+
+    private void OnMouseExit()
+    {
+        
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("hola");
+        this.gameObject.transform.Translate(Vector3.up * 5f);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("adios");
+        this.gameObject.transform.Translate(Vector3.down * 5f);
+    }
 }

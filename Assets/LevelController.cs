@@ -6,6 +6,8 @@ using Zenject;
 public class LevelController : MonoBehaviour {
 
     private GameObject canvasGameObject;
+    public List<Entity> PlayerEntities;
+    public List<Entity> AIEntities;
 
     private void Awake()
     {
@@ -34,4 +36,31 @@ public class LevelController : MonoBehaviour {
         }
     }
 
+    public bool CheckIfCanSpawn()
+    {
+        bool can = true;
+        foreach (Entity entity in PlayerEntities)
+        {
+            if (entity.gameObject.GetComponent<AbstractNPCBrain>() != null 
+                && entity.gameObject.GetComponent<AbstractNPCBrain>().currentState != null 
+                && entity.gameObject.GetComponent<AbstractNPCBrain>().currentState.stateName != STATE.Idle) //is moving or attacking
+            {
+                can = false;
+            }
+        }
+
+        return can;
+    }
+
+    public Entity TryingToMove()
+    {
+        foreach (Entity entity in PlayerEntities)
+        {
+            if (entity.gameObject.GetComponent<AbstractNPCBrain>().currentState.stateName == STATE.Move)
+            {
+                return entity;
+            }
+        }
+        return null;
+    }
 }

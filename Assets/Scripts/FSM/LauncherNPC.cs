@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,32 +9,8 @@ public class LauncherNPC : Troop
     {
         base.SetStates();
         FSMSystem.AddState(this, new State(STATE.Remain, this));
-        FSMSystem.AddState(this, new State(STATE.Move, this, 
-            ()=>
-            {
-                CustomPathfinding.Node[] nodeList = _pathfindingManager.RequestWalkableNodesAtRadius(GetComponent<Move>().maxMoves, transform.position);
-                Debug.Log("nodeList tiene " + nodeList.Length + " elementos. ");
-                foreach (CustomPathfinding.Node node in nodeList)
-                {
-                    node.GetComponent<MeshRenderer>().material.color = Color.black;
-                }
-            },
-            ()=> 
-            {
-            }));
-        FSMSystem.AddState(this, new State(STATE.Attack, this, 
-            ()=> {
-                CustomPathfinding.Node[] nodeList = _pathfindingManager.RequestWalkableNodesAtRadius(GetComponent<Attack>().range, transform.position);
-                Debug.Log("nodeList tiene " + nodeList.Length + " elementos. ");
-                foreach (CustomPathfinding.Node node in nodeList)
-                {
-                    node.GetComponent<MeshRenderer>().material.color = Color.blue;
-                }
-            }, 
-            ()=> {
-                Debug.Log("ONEXIT!");
-            })
-        );
+        SetAttackState();    
+        SetMoveState();  
     }
 
     public override void SetTransitions()
@@ -58,4 +35,56 @@ public class LauncherNPC : Troop
         };
         FSMSystem.AddTransition(this, STATE.Attack, nextStateInfo4);
     }
+    private void SetAttackState()
+    {
+        FSMSystem.AddState(this, new State(STATE.Attack, this,
+            () => {//on enter attack state
+                CustomPathfinding.Node[] nodeList = _pathfindingManager.RequestWalkableNodesAtRadius(GetComponent<Attack>().range, transform.position);
+                Debug.Log("nodeList tiene " + nodeList.Length + " elementos. ");
+                foreach (CustomPathfinding.Node node in nodeList)
+                {
+                    possibleAttacks.Add(node);
+                    node.GetComponent<MeshRenderer>().material.color = Color.blue;
+                }
+                tryingTo = TryingTo.Attack;
+            },
+            () => {
+                Debug.Log("ONEXIT!");
+            })
+        );
+
+        List<Action> behavioursAttackState = new List<Action>()
+        {
+            GetComponent<Attack>()
+        };
+
+        FSMSystem.AddBehaviours(this, behavioursAttackState, states.Find((x) => x.stateName == STATE.Attack));
+    }
+
+    public void SetMoveState()
+    {
+        FSMSystem.AddState(this, new State(STATE.Move, this,
+            () =>//on enter move state
+            {
+                CustomPathfinding.Node[] nodeList = _pathfindingManager.RequestWalkableNodesAtRadius(GetComponent<Move>().maxMoves, transform.position);
+                Debug.Log("nodeList tiene " + nodeList.Length + " elementos. ");
+                foreach (CustomPathfinding.Node node in nodeList)
+                {
+                    possibleMovements.Add(node);
+                    node.GetComponent<MeshRenderer>().material.color = Color.black;
+                }
+                tryingTo = TryingTo.Move;
+            },
+            () =>
+            {
+            }));
+
+        List<Action> behavioursMoveState = new List<Action>()
+        {
+            GetComponent<Move>()
+        };
+
+        FSMSystem.AddBehaviours(this, behavioursMoveState, states.Find((x) => x.stateName == STATE.Move));
+    }
+
 }

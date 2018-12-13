@@ -136,51 +136,47 @@ namespace CustomPathfinding
             }
 
             return total / mediciones.Count;
-        }
-
-        public static Node[] BFS(PathfindingGrid grid, Node start, int maxSearchSteps)
+        }/*
+        public IEnumerable<Node> GetNeighbors(Node currentNode)
         {
-            Debug.Log(start.GridX + ", " + start.GridZ);
-            List<Node> result = new List<Node>();
-            Queue<Node> queue = new Queue<Node>();
-            Dictionary<Node,bool>  visited = new Dictionary<Node, bool>(grid.NodeCount);
-
-            for (int i = 0; i < grid.GridSizeX; i++)
+            for (int i = -1; i <= 1; i++)
             {
-                for (int j = 0; j < grid.GridSizeZ; j++)
+                for (int j = -1; j <= 1; j++)
                 {
-                    visited.Add(grid.Grid[i,j],false);
-                }
-            }
+                    if (i == 0 && j == 0) continue;
 
-            queue.Enqueue(start);
-            visited[start] = true;
-            int steps = 0;
+                    var x = currentNode.GridX + i;
+                    var z = currentNode.GridZ + j;
 
-            while (queue.Count > 0)
-            {
-                Node front = queue.Dequeue();
-                
-                if (steps <= maxSearchSteps)
-                {
-                    foreach (var node in grid.GetNeighbors(front))
+                    if ((x >= 0 && x < GridSizeX) && (z >= 0 && z < GridSizeZ) && (Grid[x, z].NodeType == Node.ENodeType.Walkable || Grid[x, z].NodeType == Node.ENodeType.NextToWall))
                     {
-                        if (!visited[node])
-                        {
-                            if (node.NodeType == Node.ENodeType.Walkable)
-                                result.Add(node);
-
-                            visited[node] = true;
-                            queue.Enqueue(node);
-                        }
+                        yield return Grid[currentNode.GridX + i, currentNode.GridZ + j];
                     }
-
-                    steps += 1;
                 }
-                
             }
+        }
+        */
+        public static List<Node> BFS(Node currentNode, int k, PathfindingGrid pathfindingGrid)
+        {
+            List<Node> nodeList = new List<Node>();
+            for (int i = -k; i <= k; i++)
+            {
+                for (int j = -k; j <= k; j++)
+                {
+                    if (i == 0 && j == 0) continue;
 
-            return result.ToArray();
+                    var x = currentNode.GridX + i;
+                    var z = currentNode.GridZ + j;
+
+                    if ((x >= 0 && x < pathfindingGrid.GridSizeX) && (z >= 0 && z < pathfindingGrid.GridSizeZ) && 
+                        (pathfindingGrid.Grid[x, z].NodeType == Node.ENodeType.Walkable || 
+                        pathfindingGrid.Grid[x, z].NodeType == Node.ENodeType.NextToWall))
+                    {
+                        nodeList.Add(pathfindingGrid.Grid[currentNode.GridX + i, currentNode.GridZ + j]);
+                    }
+                }
+            }
+            return nodeList;
         }
 
         public static void DebugPath(Vector3[] path)
