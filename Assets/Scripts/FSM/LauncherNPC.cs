@@ -39,12 +39,20 @@ public class LauncherNPC : Troop
     {
         FSMSystem.AddState(this, new State(STATE.Attack, this,
             () => {//on enter attack state
-                CustomPathfinding.Node[] nodeList = _pathfindingManager.RequestWalkableNodesAtRadius(GetComponent<Attack>().range, transform.position);
+                CustomPathfinding.Node[] nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Attack>().range, transform.position);
                 Debug.Log("nodeList tiene " + nodeList.Length + " elementos. ");
                 foreach (CustomPathfinding.Node node in nodeList)
                 {
-                    possibleAttacks.Add(node);
-                    node.GetComponent<MeshRenderer>().material.color = Color.blue;
+                    node.GetComponent<CustomPathfinding.Node>().ColorAsPossibleAttackDistance();
+                    if (node.cell.troopIn != null && node.cell.troopIn.owner != owner) //the enemy in the cell is an enemy.
+                    {
+                        possibleAttacks.Add(node);
+                        node.GetComponent<CustomPathfinding.Node>().ColorAsPossibleAttack();
+                    }
+                }
+                foreach (CustomPathfinding.Node node in nodeList)
+                {
+                      
                 }
                 tryingTo = TryingTo.Attack;
             },
@@ -66,18 +74,19 @@ public class LauncherNPC : Troop
         FSMSystem.AddState(this, new State(STATE.Move, this,
             () =>//on enter move state
             {
-                CustomPathfinding.Node[] nodeList = _pathfindingManager.RequestWalkableNodesAtRadius(GetComponent<Move>().maxMoves, transform.position);
+                CustomPathfinding.Node[] nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Move>().maxMoves, transform.position);
                 Debug.Log("nodeList tiene " + nodeList.Length + " elementos. ");
                 foreach (CustomPathfinding.Node node in nodeList)
                 {
                     possibleMovements.Add(node);
-                    node.GetComponent<MeshRenderer>().material.color = Color.black;
+                    node.GetComponent<CustomPathfinding.Node>().ColorAsPossibleMovementDistance();
                 }
                 tryingTo = TryingTo.Move;
             },
             () =>
             {
-            }));
+            })
+        );
 
         List<Action> behavioursMoveState = new List<Action>()
         {

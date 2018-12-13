@@ -23,7 +23,7 @@ public class Entity : MonoBehaviour
         Player
     }
 
-    [HideInInspector]public Owner owner;
+    public Owner owner;
     [HideInInspector]public Rigidbody rb;
     public float value;
     public TryingTo tryingTo = TryingTo.None;
@@ -48,11 +48,11 @@ public class Entity : MonoBehaviour
         this.owner = owner;
         if (owner == Owner.Player)
         {
-            _levelController.PlayerEntities.Add(this);
+            _levelController.AddPlayerEntities(this);
         }
         else if (owner == Owner.AI)
         {
-            _levelController.AIEntities.Add(this);
+            _levelController.AddAIEntities(this);
         }
     }
 }

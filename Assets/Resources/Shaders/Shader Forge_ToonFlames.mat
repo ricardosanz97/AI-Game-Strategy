@@ -28,5 +28,5 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Cutoff: 0.5
-    - _TimeSpeed: 0.5
+    - _TimeSpeed: 0.1
     m_Colors: []

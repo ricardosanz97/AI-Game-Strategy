@@ -47,14 +47,28 @@ public class RaycastCamera : MonoBehaviour {
 
             if (_levelController.TryingToMove() != null)
             {
-                bool nodeAccesible = _levelController.TryingToMove().gameObject.GetComponent<Troop>().ListPossibleMovementsContains(hit.collider.GetComponent<CellBehaviour>().PNode);
-                Debug.Log("this node is accesible: " + nodeAccesible);
+                bool nodeMovementAccesible = _levelController.TryingToMove().gameObject.GetComponent<Troop>().ListPossibleMovementsContains(hit.collider.GetComponent<CellBehaviour>().PNode);
+                Debug.Log("this node is accesible: " + nodeMovementAccesible);
                 if (Input.GetMouseButtonDown(0) 
-                    && nodeAccesible)
+                    && nodeMovementAccesible)
                 {
                     if (_levelController.TryingToMove().gameObject.GetComponent<Move>() != null){
                         _levelController.TryingToMove().gameObject.GetComponent<Move>().OnGoingCell = lastCellSelected;
                         _levelController.TryingToMove().gameObject.GetComponent<Move>().PathReceived = true;
+                    }
+                }
+            }
+            else if (_levelController.TryingToAttack() != null)
+            {
+                bool nodeAttackAccesible = _levelController.TryingToAttack().gameObject.GetComponent<Troop>().ListPossibleAttacksContains(hit.collider.GetComponent<CellBehaviour>().PNode);
+                if (Input.GetMouseButtonDown(0)
+                    && nodeAttackAccesible)
+                {
+                    if (_levelController.TryingToAttack().gameObject.GetComponent<Attack>() != null)
+                    {
+                        _levelController.TryingToAttack().gameObject.GetComponent<Attack>().NPCObjectiveAttack = lastCellSelected.troopIn;
+                        _levelController.TryingToAttack().gameObject.GetComponent<Attack>().ObjectiveAssigned = true;
+
                     }
                 }
             }

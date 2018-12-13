@@ -44,6 +44,7 @@ public class CellBehaviour : MonoBehaviour
         {
             Debug.Log("Get reference of the PNode in this cell. ");
             PNode = other.GetComponent<CustomPathfinding.Node>();
+            other.GetComponent<CustomPathfinding.Node>().cell = this;
         }
     }
     /*
