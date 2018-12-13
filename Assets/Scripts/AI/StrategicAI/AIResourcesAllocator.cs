@@ -82,5 +82,10 @@ namespace StrategicAI
             }
             
         }
+
+        public void OnTaskCommandsReceived(List<AITaskCommand> aiTaskCommands)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
