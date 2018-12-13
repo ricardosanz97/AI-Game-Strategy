@@ -29,7 +29,7 @@ public class TurretNPC : AbstractNPCBrain
     public void OnMouseDown()
     {
         Debug.Log("click in enemy");
-        if (_levelController.GetAnyPopupEnabled())
+        if (_levelController.GetAnyPopupEnabled() || this.owner == Owner.AI || this.GetComponent<AbstractNPCBrain>().executed)
         {
             return;
         }

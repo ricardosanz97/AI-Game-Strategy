@@ -17,6 +17,13 @@ namespace CustomPathfinding
         public int GridZ { get; set; }
         public ENodeType NodeType { get; set; }
         public float NodeRadius;
+        public Color initialColor;
+        public CellBehaviour cell;
+
+        private void Start()
+        {
+            initialColor = this.GetComponent<MeshRenderer>().material.color;
+        }
 
         public int Cost
         {
@@ -38,6 +45,27 @@ namespace CustomPathfinding
                 return (GridX * 397) ^ GridZ;
             }
         }
-    
+
+        public void ColorAsPossibleMovementDistance()
+        {
+            this.GetComponent<MeshRenderer>().material.color = Color.blue;
+        }
+
+        public void ResetColor()
+        {
+            this.GetComponent<MeshRenderer>().material.color = initialColor;
+        }
+
+        public void ColorAsPossibleAttackDistance()
+        {
+            this.GetComponent<MeshRenderer>().material.color = Color.yellow;
+        }
+
+        public void ColorAsPossibleAttack()
+        {
+            this.GetComponent<MeshRenderer>().material.color = Color.black;
+        }
+
+
     }
 }

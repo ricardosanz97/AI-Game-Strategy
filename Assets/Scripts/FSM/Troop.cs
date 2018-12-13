@@ -26,7 +26,20 @@ public class Troop : AbstractNPCBrain
     {
         possibleMovements = new List<CustomPathfinding.Node>();
 
-        initialState = new State(STATE.Idle, this, ()=> { }, ()=> { });
+        initialState = new State(STATE.Idle, this, 
+            ()=> {
+                if (possibleMovements.Count > 0)
+                {
+                    foreach (CustomPathfinding.Node node in possibleMovements)
+                    {
+                        node.GetComponent<CustomPathfinding.Node>().ResetColor();
+                    }
+                }
+            }, 
+            ()=> {
+
+            }
+        );
         FSMSystem.AddState(this, initialState);
         SetStates();
         SetTransitions();
@@ -84,6 +97,18 @@ public class Troop : AbstractNPCBrain
         for (int i = 0; i<possibleMovements.Count; i++)
         {
             if (possibleMovements[i].gameObject == node.gameObject)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool ListPossibleAttacksContains(CustomPathfinding.Node node)
+    {
+        for (int i = 0; i<possibleAttacks.Count; i++)
+        {
+            if (possibleAttacks[i].gameObject == node.gameObject)
             {
                 return true;
             }

@@ -8,6 +8,7 @@ public class LevelController : MonoBehaviour {
     private GameObject canvasGameObject;
     public List<Entity> PlayerEntities;
     public List<Entity> AIEntities;
+    public List<Entity> TotalEntities;
 
     private void Awake()
     {
@@ -52,6 +53,18 @@ public class LevelController : MonoBehaviour {
         return can;
     }
 
+    public void AddPlayerEntities(Entity entity)
+    {
+        PlayerEntities.Add(entity);
+        TotalEntities.Add(entity);
+    }
+
+    public void AddAIEntities(Entity entity)
+    {
+        AIEntities.Add(entity);
+        TotalEntities.Add(entity);
+    }
+
     public Entity TryingToMove()
     {
         foreach (Entity entity in PlayerEntities)
@@ -63,4 +76,18 @@ public class LevelController : MonoBehaviour {
         }
         return null;
     }
+
+    public Entity TryingToAttack()
+    {
+        foreach (Entity entity in PlayerEntities)
+        {
+            if (entity.gameObject.GetComponent<AbstractNPCBrain>().currentState.stateName == STATE.Attack)
+            {
+                return entity;
+            }
+        }
+        return null;
+    }
+    
+    
 }
