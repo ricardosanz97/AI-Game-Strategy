@@ -29,13 +29,14 @@ public class Entity : MonoBehaviour
     public TryingTo tryingTo = TryingTo.None;
     [HideInInspector] [Inject] public SpawnablesManager _spawnablesManager;
     [HideInInspector]public LevelController _levelController;
-
     [HideInInspector]public static System.Action<Entity> OnTroopDeleted;
+    public InfluenceMap.InfluenceMapComponent _influenceMapComp; 
 
     public virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
         _levelController = FindObjectOfType<LevelController>();
+        _influenceMapComp = FindObjectOfType<InfluenceMap.InfluenceMapComponent>();
     }
 
     public void Die()

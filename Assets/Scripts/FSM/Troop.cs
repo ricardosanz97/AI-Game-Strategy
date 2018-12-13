@@ -40,7 +40,7 @@ public class Troop : AbstractNPCBrain
     public void OnMouseDown()
     {
         Debug.Log("click in enemy");
-        if (_levelController.GetAnyPopupEnabled() || this.owner == Owner.AI) //si hay algun popup abierto o el pertenece a la IA no te abras.
+        if (_levelController.GetAnyPopupEnabled() || this.owner == Owner.AI || this.GetComponent<AbstractNPCBrain>().executed) //si hay algun popup abierto o el pertenece a la IA no te abras.
         {
             return;
         }
