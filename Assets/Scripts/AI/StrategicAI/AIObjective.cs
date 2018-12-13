@@ -5,18 +5,7 @@ namespace StrategicAI
 {
     [System.Serializable]
     public class AIObjective : IComparable<AIObjective>
-    {
-        [System.Serializable]
-        public enum ObjectiveType
-        {
-            AttackBase,
-            DefendBase,
-            AttackDefenses,
-            AttackTroops,
-            UpgradeDefenses,
-            ProtectTroops
-        }
-        
+    {        
         public string description;
         public ObjectiveType objectiveType;
         

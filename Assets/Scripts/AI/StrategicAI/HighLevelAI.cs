@@ -17,7 +17,7 @@ namespace StrategicAI
         }
 
         [SerializeField] private IAPersonality currentPersonality;
-        [SerializeField] private StrategicObjectives StrategicObjectives;      
+        [SerializeField] private StrategicObjective _strategicObjective;      
         [Inject] private AiAnalyzer _analyzer;
         [Inject] private TurnHandler _turnHandler;
         public List<Entity> AIControlledEntites;
@@ -46,13 +46,11 @@ namespace StrategicAI
 
         public void EvaluateGameState()
         {
+            /*
             //todo establecer las diferentes reglas
             if (CalculateSetDamage(AIControlledEntites) >= CalculateSetDamage(PlayerControlledEntities))
-                currentPersonality = IAPersonality.Offensive;
-            else
-                currentPersonality = IAPersonality.Defensive;
-            
-            //SendObjectivesToAnalyzer(StrategicObjectives.TasksDictionary[currentPersonality].objectives);
+                return GetComponent<AttackTroopsObjective>();
+            //SendObjectivesToAnalyzer(StrategicObjectives.TasksDictionary[currentPersonality].objectives);*/
 
         }
 
