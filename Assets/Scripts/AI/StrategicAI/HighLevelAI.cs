@@ -46,17 +46,15 @@ namespace StrategicAI
 
         public void EvaluateGameState()
         {
-            /*
+            StrategicObjective chosenStrategicObjective = GetOrAddComponent<AttackTroopsObjective>();
+            
             //todo establecer las diferentes reglas
             if (CalculateSetDamage(AIControlledEntites) >= CalculateSetDamage(PlayerControlledEntities))
-                return GetComponent<AttackTroopsObjective>();
-            //SendObjectivesToAnalyzer(StrategicObjectives.TasksDictionary[currentPersonality].objectives);*/
+                chosenStrategicObjective = GetOrAddComponent<AttackTroopsObjective>();
 
-        }
+            _analyzer.AnalyzeGameTerrain(chosenStrategicObjective);
+            Debug.Log("Choosen Strategic Objective: " + chosenStrategicObjective);
 
-        private void SendObjectivesToAnalyzer(AIObjective[] aiObjectives)
-        {
-            _analyzer.GenerateTasks(aiObjectives);
         }
 
         public void PlayTurn()
@@ -96,5 +94,11 @@ namespace StrategicAI
             return totalSum;
         }
 
+        private T GetOrAddComponent<T>() where T : MonoBehaviour
+        {
+            T component = GetComponent<T>();
+
+            return component ? component : gameObject.AddComponent<T>();
+        }
     }
 }
