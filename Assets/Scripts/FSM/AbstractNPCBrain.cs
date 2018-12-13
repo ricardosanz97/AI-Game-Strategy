@@ -20,6 +20,8 @@ public abstract class AbstractNPCBrain : Entity
     public State currentState;
     [HideInInspector]public bool popupOptionsEnabled = false;
 
+    public bool executed = false;
+
     public virtual void Start()
     {
         if (npc == TROOP.None)

@@ -43,6 +43,9 @@ public class Move : Action
         {
             yield return StartCoroutine(GoToPosition(path[i]));
         }
+        GetComponent<IdleOrder>().Idle = true;
+        this.GetComponent<AbstractNPCBrain>().executed = true;
+        this.GetComponent<Entity>()._influenceMapComp.UpdateInfluenceMap(this.GetComponent<Entity>());
     }
 
     private IEnumerator GoToPosition(Vector3 point)

@@ -29,7 +29,7 @@ namespace InfluenceMap
             SpawnablesManager.OnSpawnedTroop += UpdateInfluenceMap;
         }
 
-        private void InitializeInfluenceMap()
+        public void InitializeInfluenceMap()
         {
             foreach (var influencer in FindObjectsOfType<Influencer>())
             {
@@ -42,7 +42,7 @@ namespace InfluenceMap
             influenceGrid.UpdateMap();
         }
         
-        private void UpdateInfluenceMap(Entity spawned)
+        public void UpdateInfluenceMap(Entity spawned)
         {
             Influencer influencer = spawned.GetComponent<Influencer>();
             
