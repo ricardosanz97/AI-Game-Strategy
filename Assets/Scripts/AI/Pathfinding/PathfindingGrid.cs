@@ -140,6 +140,7 @@ namespace CustomPathfinding
 		{
 			Grid[i,j] = Instantiate(NodePrefab, nodeWorldPosition, Quaternion.identity, nodeContainer.transform);
 			Grid[i, j].NodeType = nodeType;
+			Grid[i,j].WorldPosition = nodeWorldPosition;
 
 			if (nodeType == Node.ENodeType.NonWalkable)
 			{

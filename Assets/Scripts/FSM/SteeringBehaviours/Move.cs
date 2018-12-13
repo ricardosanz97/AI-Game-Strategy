@@ -10,6 +10,7 @@ public class Move : Action
     public CellBehaviour OnGoingCell;
     public bool PathReceived = false;
     public Vector3[] path;
+    
     public override void Act()
     {
         if (!PathReceived)
@@ -17,6 +18,7 @@ public class Move : Action
             Debug.Log("no path received.");
             return;
         }
+        
         //ya tenemos destino
         Vector3 initial = GetComponent<Troop>().gameObject.transform.position;
         Debug.Log("request entre " + initial + " y " + OnGoingCell.PNode.gameObject.transform.position);
