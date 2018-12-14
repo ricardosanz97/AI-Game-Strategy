@@ -26,7 +26,7 @@ public class TurretNPC : AbstractNPCBrain
             {
                  GetInitialDamage();
                 SetAffectedCells();
-                
+
             },
             () =>
             {
@@ -111,7 +111,7 @@ public class TurretNPC : AbstractNPCBrain
                 break;
         }
     }
-    
+
     private void RotateLeft()
     {
         this.transform.Rotate(Vector3.up * -90f);
@@ -206,6 +206,12 @@ public class TurretNPC : AbstractNPCBrain
                 CellsUnderMyAttack[i].troopIn.GetComponent<Health>().ReceiveDamage(this.GetComponent<AreaAttack>().damage);
             }
         }
+    }
+
+
+    public override void DoAttackAnimation()
+    {
+        FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().turretSoundShot);
     }
 
 }

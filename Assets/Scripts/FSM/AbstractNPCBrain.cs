@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 using System.Reflection;
 using UnityEngine.UI;
 
@@ -104,6 +105,11 @@ public abstract class AbstractNPCBrain : Entity
                 this.GetComponent<Health>().ReceiveDamage(t.GetComponent<AreaAttack>().damage);
             }
         }
+
+    }
+
+    public virtual void DoAttackAnimation()
+    {
 
     }
 

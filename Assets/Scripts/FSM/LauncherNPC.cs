@@ -95,4 +95,9 @@ public class LauncherNPC : Troop
         FSMSystem.AddBehaviours(this, behavioursMoveState, states.Find((x) => x.stateName == STATE.Move));
     }
 
+    public override void DoAttackAnimation()
+    {
+        FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().launcherSoundShot);
+    }
+
 }
