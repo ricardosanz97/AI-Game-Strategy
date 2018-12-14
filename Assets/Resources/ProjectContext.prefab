@@ -52,11 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc95dc4bc7bbdbb478c6770dd54d1df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PathfindingManagerPrefab: {fileID: 114238072562047484, guid: 33a1bee944c12c94383e29d37e7989a3,
-    type: 2}
   SpawnablesManager: {fileID: 114347095190066154, guid: 4d355638e97d39b43bb6c732fe3405b1,
     type: 2}
-  TurnHandler: {fileID: 114189675402328346, guid: e5ab90dc63c7242388c52f92cda80838,
+  soundManagerPrefab: {fileID: 114579983879833604, guid: 8b4773b84c682464cbbc25371a7a8819,
     type: 2}
 --- !u!114 &114770247962680934
 MonoBehaviour:

@@ -34,4 +34,9 @@ public class PrisionerNPC : Troop
         };
         FSMSystem.AddTransition(this, STATE.Attack, nextStateInfo4);
     }
+
+    public override void DoAttackAnimation()
+    {
+        FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().cageSoundAttack);
+    }
 }

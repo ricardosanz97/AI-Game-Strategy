@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TankNPC : Troop
 {
+    
     public override void SetStates()
     {
         base.SetStates();
@@ -33,5 +34,10 @@ public class TankNPC : Troop
             new NextStateInfo(this, STATE.Idle, STATE.Remain, GetComponent<IdleOrder>())
         };
         FSMSystem.AddTransition(this, STATE.Attack, nextStateInfo4);
+    }
+
+    public override void DoAttackAnimation()
+    {
+        FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().tankSoundAttack);
     }
 }

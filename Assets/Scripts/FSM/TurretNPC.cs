@@ -188,4 +188,8 @@ public class TurretNPC : AbstractNPCBrain
         }
     }
 
+    public override void DoAttackAnimation()
+    {
+        FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().turretSoundShot);
+    }
 }

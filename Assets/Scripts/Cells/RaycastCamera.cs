@@ -65,6 +65,7 @@ public class RaycastCamera : MonoBehaviour {
                 {
                     if (_levelController.TryingToAttack().gameObject.GetComponent<Attack>() != null)
                     {
+                        _levelController.TryingToAttack().gameObject.GetComponent<AbstractNPCBrain>().DoAttackAnimation();
                         _levelController.TryingToAttack().gameObject.GetComponent<Attack>().NPCObjectiveAttack = lastCellSelected.troopIn;
                         _levelController.TryingToAttack().gameObject.GetComponent<Attack>().ObjectiveAssigned = true;
 
