@@ -16,6 +16,8 @@ namespace CustomPathfinding
 		public bool UseTransformAsGridOrigin;
 		[SerializeField] 
 		private LayerMask _unwalkableMask;
+        [SerializeField]
+        private LayerMask _cellMask;
 		[Header("Debug Properties")] 
 		public Color WalkableColor;
 		public Color UnWalkableColor;
@@ -84,15 +86,18 @@ namespace CustomPathfinding
 					Node.ENodeType nodeType = Node.ENodeType.Walkable;
 					Vector3 nodeWorldPosition = gridOrigin + Vector3.right * (i * _nodeDiameter + NodePrefab.NodeRadius) +
 					                            Vector3.forward * (j * _nodeDiameter + NodePrefab.NodeRadius);
+                    CellBehaviour cell = null;
 
-					/*results = new Collider[16];
+                    /*results = new Collider[16];
 					Physics.OverlapBoxNonAlloc(nodeWorldPosition,
 						new Vector3(NodeRadius, NodeRadius, NodeRadius), results,Quaternion.identity);*/
 
-					if (Physics.CheckBox(nodeWorldPosition, new Vector3(NodePrefab.NodeRadius,NodePrefab.NodeRadius,NodePrefab.NodeRadius),Quaternion.identity, _unwalkableMask))
+                    if (Physics.CheckBox(nodeWorldPosition, new Vector3(0,NodePrefab.NodeRadius,0),Quaternion.identity, _unwalkableMask))
 						nodeType = Node.ENodeType.NonWalkable;
 
-					InitializeNode(i,j,nodeWorldPosition,nodeType);
+                    Collider[] cols = Physics.OverlapBox(nodeWorldPosition, new Vector3(0, NodePrefab.NodeRadius, 0), Quaternion.identity, _cellMask);
+                    cell = cols[0].gameObject.GetComponent<CellBehaviour>();
+                    InitializeNode(i,j,nodeWorldPosition,nodeType, cell);
 				}
 			}
 		}
@@ -121,6 +126,7 @@ namespace CustomPathfinding
 				for (int j = 0; j < GridSizeZ; j++)
 				{
 					Node.ENodeType nodeType = Node.ENodeType.Walkable;
+                    CellBehaviour cell = null;
 					Vector3 nodeWorldPosition = gridOrigin + Vector3.right * (i * _nodeDiameter + NodePrefab.NodeRadius) +
 					                            Vector3.forward * (j * _nodeDiameter + NodePrefab.NodeRadius);
 
@@ -128,19 +134,23 @@ namespace CustomPathfinding
 					Physics.OverlapBoxNonAlloc(nodeWorldPosition,
 						new Vector3(NodeRadius, NodeRadius, NodeRadius), results,Quaternion.identity);*/
 
-					if (Physics.CheckBox(nodeWorldPosition, new Vector3(NodePrefab.NodeRadius,NodePrefab.NodeRadius,NodePrefab.NodeRadius),Quaternion.identity, _unwalkableMask))
+					if (Physics.CheckBox(nodeWorldPosition, new Vector3(0,NodePrefab.NodeRadius,0),Quaternion.identity, _unwalkableMask))
 						nodeType = Node.ENodeType.NonWalkable;
 
-					InitializeNode(i,j,nodeWorldPosition,nodeType);
+                    Collider[] cols = Physics.OverlapBox(nodeWorldPosition, new Vector3(0,NodePrefab.NodeRadius,0), Quaternion.identity, _cellMask);
+                    cell = cols[0].gameObject.GetComponent<CellBehaviour>();
+					InitializeNode(i,j,nodeWorldPosition,nodeType, cell);
 				}
 			}
 		}
 
-		private void InitializeNode(int i, int j, Vector3 nodeWorldPosition, Node.ENodeType nodeType)
+		private void InitializeNode(int i, int j, Vector3 nodeWorldPosition, Node.ENodeType nodeType, CellBehaviour cell)
 		{
 			Grid[i,j] = Instantiate(NodePrefab, nodeWorldPosition, Quaternion.identity, nodeContainer.transform);
 			Grid[i, j].NodeType = nodeType;
 			Grid[i,j].WorldPosition = nodeWorldPosition;
+            Grid[i, j].cell = cell;
+            Grid[i, j].pathfindingGrid = this;
 
 			if (nodeType == Node.ENodeType.NonWalkable)
 			{

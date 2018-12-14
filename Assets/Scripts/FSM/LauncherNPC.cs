@@ -54,7 +54,6 @@ public class LauncherNPC : Troop
                 {
                       
                 }
-                tryingTo = TryingTo.Attack;
             },
             () => {
                 Debug.Log("ONEXIT!");
@@ -81,10 +80,21 @@ public class LauncherNPC : Troop
                     possibleMovements.Add(node);
                     node.GetComponent<CustomPathfinding.Node>().ColorAsPossibleMovementDistance();
                 }
-                tryingTo = TryingTo.Move;
             },
             () =>
             {
+                CellBehaviour currentCell = cell;
+                if (currentCell.explosionBelongsTo.Count > 0)
+                {
+                    foreach (TurretNPC t in currentCell.explosionBelongsTo)
+                    {
+                        if (t.owner != this.owner)
+                        {
+                            this.GetComponent<Health>().ReceiveDamage(t.GetComponent<AreaAttack>().damage);
+                        }
+                    }
+                    
+                }
             })
         );
 

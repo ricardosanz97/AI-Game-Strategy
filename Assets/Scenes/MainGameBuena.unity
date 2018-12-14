@@ -6314,6 +6314,11 @@ Prefab:
       propertyPath: GridWorldSize.y
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 114484714985080646, guid: c753c96830369654fb29c8752004a0ea,
+        type: 2}
+      propertyPath: _cellMask.m_Bits
+      value: 4096
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114962751060168446, guid: c753c96830369654fb29c8752004a0ea, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: c753c96830369654fb29c8752004a0ea, type: 2}

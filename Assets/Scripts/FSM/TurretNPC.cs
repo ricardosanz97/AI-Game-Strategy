@@ -48,7 +48,7 @@ public class TurretNPC : AbstractNPCBrain
 
                 if (node != null)
                 {
-                  
+
                     nodeAffectedList = _pathfindingManager.RequestNodesAtRadius(GetComponent<AreaAttack>().areaSize, node.WorldPosition);
                     /*
                     foreach (Node n in nodeAffectedList)
@@ -61,10 +61,15 @@ public class TurretNPC : AbstractNPCBrain
                     for (int i = 0; i<nodeAffectedList.Count; i++)
                     {
                         nodeAffectedList[i].ColorAsPossibleTurretExplosion();
+                        nodeAffectedList[i].cell.gameObject.transform.Find("ProjectilePlacement").gameObject.SetActive(true);
                         this.CellsUnderMyAttack.Add(nodeAffectedList[i].GetOurCell());
+                        nodeAffectedList[i].cell.explosionBelongsTo.Add(this);
                     }
 
+                    node.ColorAsPossibleTurretExplosion();
+                    node.cell.gameObject.transform.Find("ProjectilePlacement").gameObject.SetActive(true);
                     this.CellsUnderMyAttack.Add(node.GetOurCell());
+                    node.cell.explosionBelongsTo.Add(this);
 
                     Debug.Log("el nodo en " + node.GridX + ", " + node.GridZ + " se pinta?");
                 }       

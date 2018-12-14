@@ -19,6 +19,7 @@ namespace CustomPathfinding
         public float NodeRadius;
         public Color initialColor;
         public CellBehaviour cell;
+        public PathfindingGrid pathfindingGrid;
 
         private void Start()
         {
@@ -58,22 +59,14 @@ namespace CustomPathfinding
             int returnNodeX = currentNodeX + x;
             int returnNodeZ = currentNodeZ + z;
 
-            Node returnNode = GetNodeAt(returnNodeX, returnNodeZ);
-            return returnNode;
+            return GetNodeAt(returnNodeX, returnNodeZ);
         }
 
         public Node GetNodeAt(int x, int z)
         {
             print("Intentando obtener el nodo en " + x + ", " + z);
             Transform parent = this.transform.parent;
-            for (int i = 0; i<parent.childCount; i++)
-            {
-                if (parent.GetChild(i).GetComponent<Node>().GridX == x && parent.GetChild(i).GetComponent<Node>().GridZ == z)
-                {
-                    return parent.GetChild(i).GetComponent<Node>();
-                }
-            }
-            return null;
+            return pathfindingGrid.Grid[x, z];
         }
 
         public void ColorAsPossibleMovementDistance()

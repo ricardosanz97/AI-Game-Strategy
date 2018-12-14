@@ -6,6 +6,7 @@ public class AreaAttack : Action {
 
     public int areaSize = 1;
     public int offset = 2;
+    public int damage = 1;
     public CellBehaviour AreaCenterCell;
     public bool AreaCenterSet = false;
 
