@@ -67,5 +67,31 @@ namespace InfluenceMap
             int y = Mathf.RoundToInt((Y-1) * percentY);
             return influenceGrid._grid[x,y];
         }
+        
+        public List<Node> GetKRingsOfNodes(Node currentNode, int k)
+        {
+            List<Node> nodeList = new List<Node>();
+            
+            for (int i = -k; i <= k; i++)
+            {
+                for (int j = -k; j <= k; j++)
+                {
+                    if (i == 0 && j == 0) continue;
+
+                    var indexI = currentNode.WorldGameObject.GetComponent<InfluencePosition>().GridPositions[0];
+                    var indexJ = currentNode.WorldGameObject.GetComponent<InfluencePosition>().GridPositions[1];
+                    
+                    var x = indexI + i;
+                    var z = indexJ + j;
+
+                    if ((x >= 0 && x < X) && (z >= 0 && z < Y))
+                    {
+                        nodeList.Add(influenceGrid._grid[indexI + i, indexJ + j]);
+                    }
+                }
+            }
+            
+            return nodeList;
+        }
     }
 }
