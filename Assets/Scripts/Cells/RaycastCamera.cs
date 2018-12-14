@@ -35,11 +35,10 @@ public class RaycastCamera : MonoBehaviour {
                 hit.collider.transform.DOLocalMoveY(0.5f, 0.3f);
             }
             
-            if (_spawnablesManager.GetCurrentTroop() != TROOP.None 
-                && _turnHandler.currentTurn == PlayerType.Player 
+            if (_turnHandler.currentTurn == PlayerType.Player
                 && hit.collider.GetComponent<CellBehaviour>().GetOwner() == PlayerType.Player
-                && Input.GetMouseButtonDown(0) 
-                && lastCellSelected.GetTroopIn() == null 
+                && Input.GetMouseButtonDown(0)
+                && lastCellSelected.GetTroopIn() == null
                 && _levelController.CheckIfCanSpawn()) //ningun NPC nuestro spawneado esta en estado ataque o move
             {
                 _spawnablesManager.SpawnTroopPlayer(hit.collider.gameObject, Entity.Owner.Player);

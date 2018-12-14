@@ -38,6 +38,7 @@ public class AttackButtonController : MonoBehaviour {
         }
         else
         {
+            soundManagerRef.PlaySingle(soundManagerRef.cardsSound);
             HideButtons();
         }
     }
@@ -67,7 +68,6 @@ public class AttackButtonController : MonoBehaviour {
 
     public void HideButtons()
     {
-        soundManagerRef.PlaySingle(soundManagerRef.cardsSound);
         _levelController.ClosePopups();
         Sequence s = DOTween.Sequence();
         int childCount = this.transform.childCount;

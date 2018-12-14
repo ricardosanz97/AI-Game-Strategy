@@ -35,6 +35,9 @@ public class SpawnablesManager : MonoBehaviour {
 
     [Inject] private InfluenceMapComponent _influenceMapComponent;
 
+    [Inject]
+    private SoundManager soundManagerRef;
+
     private void Awake()
     {
         _levelController = FindObjectOfType<LevelController>();
@@ -59,23 +62,28 @@ public class SpawnablesManager : MonoBehaviour {
 
         GameObject troopSpawned = null;
         GameObject troop = null;
+        
         switch (currentTroopSelected)
         {
             case TROOP.None:
                 Debug.Log("Antes debes seleccionar una tropa! ");
                 FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().ShowButtons();
+                soundManagerRef.PlaySingle(soundManagerRef.incorrectMovement);
                 break;
             case TROOP.Prisioner:
                 lastTroopSpawned = TROOP.Prisioner;
                 troop = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Prisioner.ToString() + owner.ToString());
+                soundManagerRef.PlaySingle(soundManagerRef.cageSoundSpawn);
                 break;
             case TROOP.Launcher:
                 lastTroopSpawned = TROOP.Launcher;
                 troop = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Launcher.ToString() + owner.ToString());
+                soundManagerRef.PlaySingle(soundManagerRef.launcherSoundSpawn);
                 break;
             case TROOP.Tank:
                 lastTroopSpawned = TROOP.Tank;
                 troop = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Tank.ToString() + owner.ToString());
+                soundManagerRef.PlaySingle(soundManagerRef.tankSoundSpawn);
                 break;
             case TROOP.Wall:
                 lastTroopSpawned = TROOP.Wall;
@@ -84,6 +92,7 @@ public class SpawnablesManager : MonoBehaviour {
             case TROOP.Turret:
                 lastTroopSpawned = TROOP.Turret;
                 troop = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Turret.ToString() + owner.ToString());
+                soundManagerRef.PlaySingle(soundManagerRef.turretSoundSpawn);
                 break;
         }
 
