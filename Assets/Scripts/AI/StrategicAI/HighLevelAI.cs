@@ -50,11 +50,12 @@ namespace StrategicAI
             
             //todo establecer las diferentes reglas para cambiar entre objetivos estrategicos
             if (CalculateSetDamage(AIControlledEntites) >= CalculateSetDamage(PlayerControlledEntities))
+                chosenStrategicObjective = GetOrAddComponent<AttackBaseObjective>();
+            else
                 chosenStrategicObjective = GetOrAddComponent<AttackTroopsObjective>();
 
             _analyzer.AnalyzeGameTerrain(chosenStrategicObjective);
             Debug.Log("Chosen Strategic Objective: " + chosenStrategicObjective);
-
         }
 
         public void PlayTurn()

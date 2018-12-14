@@ -24,7 +24,8 @@ namespace StrategicAI
             _influenceMapComponent = influenceMapComponent;
         }
 
-        private void AnalyzeSurroundingInfluences(StrategicObjective chosenStrategicObjective, Entity e,
+        private void AnalyzeSurroundingInfluences(List<AITaskCommand> aiTaskCommands,
+            StrategicObjective chosenStrategicObjective, Entity e,
             Entity[] playerControlledEntites)
         {
             AbstractNPCBrain brain = e.GetComponent<AbstractNPCBrain>();
@@ -36,8 +37,16 @@ namespace StrategicAI
                 InfluenceMap.Node node = _influenceMapComponent.GetNodeAtLocation(brain.transform.position);
                 List<Node> influenceData = _influenceMapComponent.GetKRingsOfNodes(node, chosenStrategicObjective.SampleRadius);
 
-                chosenStrategicObjective.DecideBasedOnInfluenceData(influenceData);
+                Entity[] chosenTargets = chosenStrategicObjective.DecideBasedOnInfluenceData(influenceData);
 
+
+                for (int i = 0; i < chosenTargets.Length; i++)
+                {
+                    if(chosenTargets[i].owner == Entity.Owner.AI) //mejorar
+                        aiTaskCommands.Add(new UpgradeAITaskCommand());
+                    else
+                        aiTaskCommands.Add(new AttackAITaskCommand());
+                }
             }
             else // es un muro
             {
@@ -74,10 +83,10 @@ namespace StrategicAI
             //en funcion del objetivo estrategico se fijaran las tareas que podran ser de un tipo o de otro.
             for (int i = 0; i < controlledEntities.Length; i++)
             {
-                AnalyzeSurroundingInfluences(chosenStrategicObjective, controlledEntities[i], playerControlledEntites);
+                AnalyzeSurroundingInfluences(aiTaskCommands,chosenStrategicObjective, controlledEntities[i], playerControlledEntites);
             }
 
-            _aiResourcesAllocator.OnTaskCommandsReceived(aiTaskCommands);
+            _aiResourcesAllocator.OnTaskCommandsReceived(aiTaskCommands, controlledEntities);
         }
     }
 }
