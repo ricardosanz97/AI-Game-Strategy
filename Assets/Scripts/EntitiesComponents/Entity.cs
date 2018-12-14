@@ -4,12 +4,7 @@ using StrategicAI;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
-public enum TryingTo
-{
-    Move,
-    Attack,
-    None
-}
+
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
 public class Entity : MonoBehaviour 
@@ -26,7 +21,6 @@ public class Entity : MonoBehaviour
     public Owner owner;
     [HideInInspector]public Rigidbody rb;
     public float value;
-    public TryingTo tryingTo = TryingTo.None;
     [HideInInspector] [Inject] public SpawnablesManager _spawnablesManager;
     [HideInInspector]public LevelController _levelController;
     [HideInInspector]public static System.Action<Entity> OnTroopDeleted;
