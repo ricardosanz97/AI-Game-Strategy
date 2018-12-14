@@ -19,12 +19,10 @@ namespace StrategicAI
     [System.Serializable]
     public abstract class StrategicObjective : MonoBehaviour
     {
-        [SerializeField] private ObjectiveType _objectiveType;
         [SerializeField] private int _sampleRadius;
         
-        public ObjectiveType ObjectiveType => _objectiveType;
         public int SampleRadius => _sampleRadius;
 
-        public abstract Entity[] DecideBasedOnInfluenceData(List<Node> influenceData);
+        public abstract Entity DecideBasedOnInfluenceData(AbstractNPCBrain brain, List<Node> influenceData);
     }
 }

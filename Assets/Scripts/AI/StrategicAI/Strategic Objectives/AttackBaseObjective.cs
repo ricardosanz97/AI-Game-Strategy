@@ -7,7 +7,7 @@ namespace StrategicAI
 {
     public class AttackBaseObjective : StrategicObjective
     {
-        public override Entity[] DecideBasedOnInfluenceData(List<Node> influenceData)
+        public override Entity DecideBasedOnInfluenceData(AbstractNPCBrain brain, List<Node> influenceData)
         {
             return null;
         }

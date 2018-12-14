@@ -18,7 +18,7 @@ namespace StrategicAI
 
         [SerializeField] private IAPersonality currentPersonality;
         [SerializeField] private StrategicObjective _strategicObjective;      
-        [Inject] private AiAnalyzer _analyzer;
+        [Inject] private GameBoardAnalyzer _analyzer;
         [Inject] private TurnHandler _turnHandler;
         public List<Entity> AIControlledEntites;
         public List<Entity> PlayerControlledEntities;
@@ -44,18 +44,19 @@ namespace StrategicAI
             PlayerControlledEntities = new List<Entity>();
         }
 
+        [ContextMenu("Evaluate Game State")]
         public void EvaluateGameState()
         {
-            StrategicObjective chosenStrategicObjective = GetOrAddComponent<AttackTroopsObjective>();
+            _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
             
             //todo establecer las diferentes reglas para cambiar entre objetivos estrategicos
             if (CalculateSetDamage(AIControlledEntites) >= CalculateSetDamage(PlayerControlledEntities))
-                chosenStrategicObjective = GetOrAddComponent<AttackBaseObjective>();
+                _strategicObjective = GetOrAddComponent<AttackBaseObjective>();
             else
-                chosenStrategicObjective = GetOrAddComponent<AttackTroopsObjective>();
+                _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
 
-            _analyzer.AnalyzeGameTerrain(chosenStrategicObjective);
-            Debug.Log("Chosen Strategic Objective: " + chosenStrategicObjective);
+            _analyzer.AnalyzeGameTerrain(_strategicObjective);
+            Debug.Log("Chosen Strategic Objective: " + _strategicObjective);
         }
 
         public void PlayTurn()

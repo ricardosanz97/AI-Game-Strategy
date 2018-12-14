@@ -8,8 +8,10 @@ using Zenject;
 namespace StrategicAI
 {
     [System.Serializable]
-    public class AIResourcesAllocator
+    public class TasksAllocator
     {
+        [Inject]private TurnHandler _turnHandler;
+        
         public void OnTaskCommandsReceived(List<AITaskCommand> aiTaskCommands, Entity[] controlledEntities)
         {
             //analiar los recursos de sangre que tenemos
@@ -21,19 +23,24 @@ namespace StrategicAI
             if (Mathf.Abs(controlledEntities.Length - aiTaskCommands.Count) > 3)
                 DecideWhatToSpawn(aiTaskCommands);
             
-            
             for (int i = 0; i < aiTaskCommands.Count; i++)
             {
                 //el perform command se encarga de o bien comunicarle a la fsm
                 //la señal necesaria como ataque o defensa
-                aiTaskCommands[i].PerformCommand();
+                //aiTaskCommands[i].PerformCommand();
+                Debug.Log("Performing Command: " + aiTaskCommands.ToString());
             }
+            
+            //añadirlo a una cola en algun monobehaviour para que una corutina lo vaya sacando poco a poco.
+
+            _turnHandler.AIDone = true;
 
         }
 
         private void DecideWhatToSpawn(List<AITaskCommand> aiTaskCommands)
         {
             //decide what to spawn and add it to the aitaskcommand
+            //list.insert(aiTaskCommands,0);
         }
     }
 }

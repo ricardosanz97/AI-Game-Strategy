@@ -7,7 +7,7 @@ namespace StrategicAI
 {
     public class AttackTroopsObjective : StrategicObjective
     {
-        public override Entity[] DecideBasedOnInfluenceData(List<Node> influenceData)
+        public override Entity DecideBasedOnInfluenceData(AbstractNPCBrain brain, List<Node> influenceData)
         {
             throw new System.NotImplementedException();
         }
