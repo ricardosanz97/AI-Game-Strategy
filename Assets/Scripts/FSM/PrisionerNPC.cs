@@ -7,9 +7,7 @@ public class PrisionerNPC : Troop
     public override void SetStates()
     {
         base.SetStates();
-        FSMSystem.AddState(this, new State(STATE.Remain, this));
-        FSMSystem.AddState(this, new State(STATE.Move, this));
-        FSMSystem.AddState(this, new State(STATE.Attack, this));
+        FSMSystem.AddState(this, new State(STATE.Remain, this));  
     }
 
     public override void SetTransitions()
@@ -33,6 +31,63 @@ public class PrisionerNPC : Troop
             new NextStateInfo(this, STATE.Idle, STATE.Remain, GetComponent<IdleOrder>())
         };
         FSMSystem.AddTransition(this, STATE.Attack, nextStateInfo4);
+    }
+
+    private void SetAttackState()
+    {
+        FSMSystem.AddState(this, new State(STATE.Attack, this,
+            () =>
+            {
+                List<CustomPathfinding.Node> nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Attack>().range, transform.position);
+                Debug.Log("nodeList tiene " + nodeList.Count + " elementos. ");
+                foreach (CustomPathfinding.Node node in nodeList)
+                {
+                    node.ColorAsPossibleAttackDistance();
+                    if (node.cell.troopIn != null && node.cell.troopIn.owner != owner) //the enemy in the cell is an enemy.
+                    {
+                        possibleAttacks.Add(node);
+                        node.GetComponent<CustomPathfinding.Node>().ColorAsPossibleAttack();
+                    }
+                }
+            },
+            () =>
+            {
+                possibleAttacks.Clear();
+            }));
+
+        List<Action> behavioursAttackState = new List<Action>()
+        {
+            GetComponent<Attack>()
+        };
+
+        FSMSystem.AddBehaviours(this, behavioursAttackState, states.Find((x) => x.stateName == STATE.Attack));
+    }
+
+    private void SetMoveState()
+    {
+        FSMSystem.AddState(this, new State(STATE.Move, this,
+            ()=>
+            {
+                List<CustomPathfinding.Node> nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Move>().maxMoves, transform.position);
+                Debug.Log("nodeList tiene " + nodeList.Count + " elementos. ");
+                foreach (CustomPathfinding.Node node in nodeList)
+                {
+                    possibleMovements.Add(node);
+                    node.GetComponent<CustomPathfinding.Node>().ColorAsPossibleMovementDistance();
+                }
+            },
+            ()=>
+            {
+                possibleMovements.Clear();
+                GetInitialDamage();
+            }));
+
+        List<Action> behavioursMoveState = new List<Action>()
+        {
+            GetComponent<Move>()
+        };
+
+        FSMSystem.AddBehaviours(this, behavioursMoveState, states.Find((x) => x.stateName == STATE.Move));
     }
 
     public override void DoAttackAnimation()

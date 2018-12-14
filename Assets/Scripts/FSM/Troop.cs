@@ -24,7 +24,7 @@ public class Troop : AbstractNPCBrain
     {
         possibleMovements = new List<CustomPathfinding.Node>();
 
-        initialState = new State(STATE.Idle, this, 
+        FSMSystem.AddState(this,new State(STATE.Idle, this, 
             ()=> {
                 if (possibleMovements.Count > 0)
                 {
@@ -33,15 +33,12 @@ public class Troop : AbstractNPCBrain
                         node.GetComponent<CustomPathfinding.Node>().ResetColor();
                     }
                 }
-
                 GetInitialDamage();
-
             }, 
             ()=> {
-
             }
-        );
-        FSMSystem.AddState(this, initialState);
+        ));
+        
         SetStates();
         SetTransitions();
         currentState = initialState;

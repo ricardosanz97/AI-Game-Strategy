@@ -59,14 +59,28 @@ namespace CustomPathfinding
             int returnNodeX = currentNodeX + x;
             int returnNodeZ = currentNodeZ + z;
 
-            return GetNodeAt(returnNodeX, returnNodeZ);
+            Node node = GetNodeAt(returnNodeX, returnNodeZ);
+            if (node != null)
+            {
+                return node;
+            }
+            return null;
         }
 
         public Node GetNodeAt(int x, int z)
         {
             print("Intentando obtener el nodo en " + x + ", " + z);
-            Transform parent = this.transform.parent;
-            return pathfindingGrid.Grid[x, z];
+            
+            if (x < 0 || z < 0 || x >= pathfindingGrid.GridWorldSize.x || z >= pathfindingGrid.GridWorldSize.y)
+            {
+                return null;
+            }
+
+            if (pathfindingGrid.Grid[x,z] != null)
+            {
+                return pathfindingGrid.Grid[x, z];
+            }
+            return null;
         }
 
         public void ColorAsPossibleMovementDistance()

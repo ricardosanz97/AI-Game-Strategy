@@ -25,8 +25,7 @@ public class TurretNPC : AbstractNPCBrain
             () =>
             {
                  GetInitialDamage();
-                SetAffectedCells();
-
+                 SetAffectedCells();
             },
             () =>
             {
@@ -110,6 +109,7 @@ public class TurretNPC : AbstractNPCBrain
                 CurrentRotation = TROTATION.Front;
                 break;
         }
+        UpdateAffectedCells();
     }
 
     private void RotateLeft()
@@ -130,6 +130,7 @@ public class TurretNPC : AbstractNPCBrain
                 CurrentRotation = TROTATION.Back;
                 break;
         }
+        UpdateAffectedCells();
     }
 
     public void UpdateAffectedCells()
@@ -137,9 +138,14 @@ public class TurretNPC : AbstractNPCBrain
         List<CellBehaviour> affectedCells = CellsUnderMyAttack;
         foreach (CellBehaviour cell in affectedCells)
         {
-            cell.explosionBelongsTo.Remove(cell.explosionBelongsTo.Find((x) => x == this));
-            affectedCells.Remove(cell);
+            cell.explosionBelongsTo.Remove(this);
+            if (cell.explosionBelongsTo.Count <= 0)
+            {
+                //cell.PNode.ResetColor();
+                cell.gameObject.transform.Find("ProjectilePlacement").gameObject.SetActive(false);
+            }
         }
+        CellsUnderMyAttack.Clear();
 
         SetAffectedCells();
 
@@ -153,19 +159,15 @@ public class TurretNPC : AbstractNPCBrain
         {
             case TROTATION.Front:
                 node = this.cell.PNode.FindNodeFromThis(offset, 0);
-                Debug.Log("centro de la explosión en " + node.GridX + ", " + node.GridZ);
                 break;
             case TROTATION.Right:
                 node = this.cell.PNode.FindNodeFromThis(0, -offset);
-                Debug.Log("centro de la explosión en " + node.GridX + ", " + node.GridZ);
                 break;
             case TROTATION.Back:
                 node = this.cell.PNode.FindNodeFromThis(-offset, 0);
-                Debug.Log("centro de la explosión en " + node.GridX + ", " + node.GridZ);
                 break;
             case TROTATION.Left:
                 node = this.cell.PNode.FindNodeFromThis(0, offset);
-                Debug.Log("centro de la explosión en " + node.GridX + ", " + node.GridZ);
                 break;
         }
 
@@ -173,23 +175,16 @@ public class TurretNPC : AbstractNPCBrain
         {
 
             nodeAffectedList = _pathfindingManager.RequestNodesAtRadius(GetComponent<AreaAttack>().areaSize, node.WorldPosition);
-            /*
-            foreach (Node n in nodeAffectedList)
-            {
-                n.ColorAsPossibleTurretExplosion();
-                this.CellsUnderMyAttack.Add(n.GetOurCell());
-            }
-            */
 
             for (int i = 0; i < nodeAffectedList.Count; i++)
             {
-                nodeAffectedList[i].ColorAsPossibleTurretExplosion();
+                //nodeAffectedList[i].ColorAsPossibleTurretExplosion();
                 nodeAffectedList[i].cell.gameObject.transform.Find("ProjectilePlacement").gameObject.SetActive(true);
                 this.CellsUnderMyAttack.Add(nodeAffectedList[i].GetOurCell());
                 nodeAffectedList[i].cell.explosionBelongsTo.Add(this);
             }
 
-            node.ColorAsPossibleTurretExplosion();
+            //node.ColorAsPossibleTurretExplosion();
             node.cell.gameObject.transform.Find("ProjectilePlacement").gameObject.SetActive(true);
             this.CellsUnderMyAttack.Add(node.GetOurCell());
             node.cell.explosionBelongsTo.Add(this);

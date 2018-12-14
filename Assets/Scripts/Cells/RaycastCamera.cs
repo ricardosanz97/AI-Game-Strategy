@@ -28,7 +28,6 @@ public class RaycastCamera : MonoBehaviour {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, cell) && ! _levelController.GetAnyPopupEnabled())
         {
-            
             if (_turnHandler.currentTurn == PlayerType.Player && hit.collider.GetComponent<CellBehaviour>().GetOwner() == PlayerType.Player)
             {
                 lastCellSelected = hit.collider.GetComponent<CellBehaviour>();

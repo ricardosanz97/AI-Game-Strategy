@@ -9,8 +9,6 @@ public class TankNPC : Troop
     {
         base.SetStates();
         FSMSystem.AddState(this, new State(STATE.Remain, this));
-        FSMSystem.AddState(this, new State(STATE.Move, this));
-        FSMSystem.AddState(this, new State(STATE.Attack, this));
     }
 
     public override void SetTransitions()
@@ -34,6 +32,16 @@ public class TankNPC : Troop
             new NextStateInfo(this, STATE.Idle, STATE.Remain, GetComponent<IdleOrder>())
         };
         FSMSystem.AddTransition(this, STATE.Attack, nextStateInfo4);
+    }
+
+    private void SetAttackState()
+    {
+        FSMSystem.AddState(this, new State(STATE.Attack, this));
+    }
+
+    private void SetMoveState()
+    {
+        FSMSystem.AddState(this, new State(STATE.Move, this));
     }
 
     public override void DoAttackAnimation()

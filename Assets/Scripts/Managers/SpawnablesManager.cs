@@ -119,7 +119,7 @@ public class SpawnablesManager : MonoBehaviour {
         
     }
 
-    public void SpawnEntityIA(TROOP troop, CellBehaviour cellBehaviour)
+    public void SpawnEntityAI(TROOP troop, CellBehaviour cellBehaviour)
     {
 
         Entity entityToSpawn = null;

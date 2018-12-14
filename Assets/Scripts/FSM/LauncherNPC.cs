@@ -50,13 +50,10 @@ public class LauncherNPC : Troop
                         node.GetComponent<CustomPathfinding.Node>().ColorAsPossibleAttack();
                     }
                 }
-                foreach (CustomPathfinding.Node node in nodeList)
-                {
-                      
-                }
+                
             },
             () => {
-                Debug.Log("ONEXIT!");
+                possibleAttacks.Clear();
             })
         );
 
@@ -83,6 +80,7 @@ public class LauncherNPC : Troop
             },
             () =>
             {
+                possibleMovements.Clear();
                 GetInitialDamage();
             })
         );
