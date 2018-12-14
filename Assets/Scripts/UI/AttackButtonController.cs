@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Zenject;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ public class AttackButtonController : MonoBehaviour {
     [SerializeField] private bool canPressButton = true;
     private LevelController _levelController;
     private TurnHandler _turnHandler;
+    [Inject]
+    private SoundManager soundManagerRef;
 
     private void Awake()
     {
@@ -41,6 +44,7 @@ public class AttackButtonController : MonoBehaviour {
 
     public void ShowButtons()
     {
+        soundManagerRef.PlaySingle(soundManagerRef.cardsSound);
         _levelController.ClosePopups();
         Sequence s = DOTween.Sequence();
         int childCount = this.transform.childCount;
@@ -63,6 +67,7 @@ public class AttackButtonController : MonoBehaviour {
 
     public void HideButtons()
     {
+        soundManagerRef.PlaySingle(soundManagerRef.cardsSound);
         _levelController.ClosePopups();
         Sequence s = DOTween.Sequence();
         int childCount = this.transform.childCount;
