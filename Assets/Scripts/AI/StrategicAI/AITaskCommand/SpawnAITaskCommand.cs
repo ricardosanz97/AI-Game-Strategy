@@ -24,7 +24,7 @@ namespace StrategicAI
                 //todo implement
                     case TROOP.Launcher:
                         //todo get random cell
-                        _spawnablesManager.SpawnEntityIA(troopToSpawn,spawnableCells[0]);
+                        //_spawnablesManager.SpawnEntityIA(troopToSpawn,spawnableCells[0]);
                         break;
                         
                     case TROOP.Prisioner:

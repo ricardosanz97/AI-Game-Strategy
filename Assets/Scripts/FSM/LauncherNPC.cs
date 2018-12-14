@@ -83,18 +83,7 @@ public class LauncherNPC : Troop
             },
             () =>
             {
-                CellBehaviour currentCell = cell;
-                if (currentCell.explosionBelongsTo.Count > 0)
-                {
-                    foreach (TurretNPC t in currentCell.explosionBelongsTo)
-                    {
-                        if (t.owner != this.owner)
-                        {
-                            this.GetComponent<Health>().ReceiveDamage(t.GetComponent<AreaAttack>().damage);
-                        }
-                    }
-                    
-                }
+                GetInitialDamage();
             })
         );
 

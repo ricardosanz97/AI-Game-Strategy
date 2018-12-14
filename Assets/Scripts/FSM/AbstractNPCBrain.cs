@@ -94,6 +94,19 @@ public abstract class AbstractNPCBrain : Entity
         }
     }
 
+    public void GetInitialDamage()
+    {
+        CellBehaviour cell = this.cell;
+        if (cell.explosionBelongsTo.Count > 0)
+        {
+            foreach (TurretNPC t in cell.explosionBelongsTo)
+            {
+                this.GetComponent<Health>().ReceiveDamage(t.GetComponent<AreaAttack>().damage);
+            }
+        }
+
+    }
+
     private void Update()
     {
         CheckOrder();

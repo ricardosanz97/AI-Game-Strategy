@@ -33,6 +33,9 @@ public class Troop : AbstractNPCBrain
                         node.GetComponent<CustomPathfinding.Node>().ResetColor();
                     }
                 }
+
+                GetInitialDamage();
+
             }, 
             ()=> {
 
