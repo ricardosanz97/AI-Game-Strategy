@@ -72,7 +72,17 @@ public class TurretNPC : AbstractNPCBrain
                     node.cell.explosionBelongsTo.Add(this);
 
                     Debug.Log("el nodo en " + node.GridX + ", " + node.GridZ + " se pinta?");
-                }       
+                }
+
+                GetInitialDamage();
+
+                for (int i = 0; i < CellsUnderMyAttack.Count; i++)
+                {
+                    if (CellsUnderMyAttack[i].troopIn != null && CellsUnderMyAttack[i].troopIn.owner != this.owner)
+                    {
+                        CellsUnderMyAttack[i].troopIn.GetComponent<Health>().ReceiveDamage(this.GetComponent<AreaAttack>().damage);
+                    }
+                }
             },
             () =>
             {
@@ -177,4 +187,5 @@ public class TurretNPC : AbstractNPCBrain
                 break;
         }
     }
+
 }

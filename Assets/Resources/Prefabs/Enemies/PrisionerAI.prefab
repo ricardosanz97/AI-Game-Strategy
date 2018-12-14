@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 65174763640485096}
   - component: {fileID: 114039038674549626}
   - component: {fileID: 114274927040903852}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PrisionerAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224330143116511796}
   - component: {fileID: 114938562402391590}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224997222858220334}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 33302060398476952}
   - component: {fileID: 23742492297241960}
   - component: {fileID: 95809788834144804}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PrisionerCage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4181507934102020}
   - component: {fileID: 33470084369605268}
   - component: {fileID: 23481445326351056}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4694502821203466}
   - component: {fileID: 108751026806951450}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 224636981241681288}
   - component: {fileID: 222135601651656644}
   - component: {fileID: 114914757410794492}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 224101868154875700}
   - component: {fileID: 222462273819904794}
   - component: {fileID: 114577434161354688}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 114171618752845494}
   - component: {fileID: 114992007423091992}
   - component: {fileID: 114521769195204336}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,13 +412,12 @@ MonoBehaviour:
   owner: 0
   rb: {fileID: 0}
   value: 0
-  tryingTo: 2
   _spawnablesManager: {fileID: 0}
   _levelController: {fileID: 0}
   _influenceMapComp: {fileID: 0}
   npc: 1
-  healthPoints: 100
   currentLevel: 1
+  sliderHealth: {fileID: 0}
   transitions: []
   states: []
   initialState:
@@ -431,8 +430,8 @@ MonoBehaviour:
     brain: {fileID: 0}
     actions: []
   popupOptionsEnabled: 0
-  executed: 0
   _pathfindingManager: {fileID: 0}
+  executed: 0
   possibleMovements: []
   possibleAttacks: []
 --- !u!114 &114043929757683760
@@ -519,6 +518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMoves: 3
+  moving: 0
   OnGoingCell: {fileID: 0}
   PathReceived: 0
   path: []

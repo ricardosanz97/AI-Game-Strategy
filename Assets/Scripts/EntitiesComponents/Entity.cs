@@ -10,8 +10,8 @@ using Zenject;
 public class Entity : MonoBehaviour 
 {
     public int bloodCost;
-    
-    [HideInInspector]public CellBehaviour cell;
+
+    [HideInInspector] public CellBehaviour cell;
     public enum Owner
     {
         AI,
