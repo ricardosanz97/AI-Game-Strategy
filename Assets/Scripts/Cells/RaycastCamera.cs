@@ -26,7 +26,7 @@ public class RaycastCamera : MonoBehaviour {
     private void Update()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, cell) && !_levelController.GetAnyPopupEnabled())
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, cell) && ! _levelController.GetAnyPopupEnabled())
         {
             
             if (_turnHandler.currentTurn == PlayerType.Player && hit.collider.GetComponent<CellBehaviour>().GetOwner() == PlayerType.Player)

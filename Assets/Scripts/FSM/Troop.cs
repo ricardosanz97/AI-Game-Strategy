@@ -11,15 +11,12 @@ using Zenject;
 [RequireComponent(typeof(Move))]
 public class Troop : AbstractNPCBrain
 {
-    [Inject]
-    [HideInInspector]public PathfindingManager _pathfindingManager;
     public List<CustomPathfinding.Node> possibleMovements;
     public List<CustomPathfinding.Node> possibleAttacks;
 
     public override void Awake()
     {
         base.Awake();
-        _pathfindingManager = FindObjectOfType<PathfindingManager>();
     }
 
     public override void Start()

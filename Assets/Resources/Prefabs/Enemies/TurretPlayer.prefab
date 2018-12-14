@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 114447519726471864}
   - component: {fileID: 114236630606657206}
   - component: {fileID: 114269649529667876}
+  - component: {fileID: 114729038957734332}
   m_Layer: 0
   m_Name: TurretPlayer
   m_TagString: Untagged
@@ -474,8 +475,8 @@ MonoBehaviour:
   _levelController: {fileID: 0}
   _influenceMapComp: {fileID: 0}
   npc: 0
-  healthPoints: 100
   currentLevel: 1
+  sliderHealth: {fileID: 0}
   transitions: []
   states: []
   initialState:
@@ -488,7 +489,9 @@ MonoBehaviour:
     brain: {fileID: 0}
     actions: []
   popupOptionsEnabled: 0
+  _pathfindingManager: {fileID: 0}
   executed: 0
+  CurrentRotation: 3
 --- !u!114 &114506134304350822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -510,6 +513,21 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114729038957734332
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1349131080531974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed13bcf06331fc443bc88d4d022cf3dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaSize: 1
+  offset: 2
+  AreaCenterCell: {fileID: 0}
+  AreaCenterSet: 0
 --- !u!114 &114729271653163420
 MonoBehaviour:
   m_ObjectHideFlags: 1

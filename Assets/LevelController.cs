@@ -69,7 +69,7 @@ public class LevelController : MonoBehaviour {
     {
         foreach (Entity entity in PlayerEntities)
         {
-            if (entity.gameObject.GetComponent<AbstractNPCBrain>().currentState.stateName == STATE.Move)
+            if (entity.gameObject.GetComponent<AbstractNPCBrain>().currentState.stateName == STATE.Move && !entity.gameObject.GetComponent<Move>().moving)
             {
                 return entity;
             }

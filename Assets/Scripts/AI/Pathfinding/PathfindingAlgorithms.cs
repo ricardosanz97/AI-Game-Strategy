@@ -176,6 +176,7 @@ namespace CustomPathfinding
                     }
                 }
             }
+            //nodeList.Add(currentNode);
             return nodeList;
         }
 

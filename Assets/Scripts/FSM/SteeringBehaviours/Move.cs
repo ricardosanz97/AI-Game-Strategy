@@ -7,6 +7,7 @@ using DG.Tweening;
 public class Move : Action
 {
     public int maxMoves;
+    public bool moving = false;
     public CellBehaviour OnGoingCell;
     public bool PathReceived = false;
     public Vector3[] path;
@@ -18,7 +19,7 @@ public class Move : Action
             Debug.Log("no path received.");
             return;
         }
-        
+        moving = true;
         //ya tenemos destino
         Vector3 initial = GetComponent<Troop>().gameObject.transform.position;
         Debug.Log("request entre " + initial + " y " + OnGoingCell.PNode.gameObject.transform.position);

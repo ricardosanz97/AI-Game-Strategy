@@ -43,7 +43,7 @@ public class LauncherNPC : Troop
                 Debug.Log("nodeList tiene " + nodeList.Length + " elementos. ");
                 foreach (CustomPathfinding.Node node in nodeList)
                 {
-                    node.GetComponent<CustomPathfinding.Node>().ColorAsPossibleAttackDistance();
+                    node.ColorAsPossibleAttackDistance();
                     if (node.cell.troopIn != null && node.cell.troopIn.owner != owner) //the enemy in the cell is an enemy.
                     {
                         possibleAttacks.Add(node);

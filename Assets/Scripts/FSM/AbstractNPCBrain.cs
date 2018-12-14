@@ -21,6 +21,8 @@ public abstract class AbstractNPCBrain : Entity
     [HideInInspector]public List<Transition> currentTransitions;
     public State currentState;
     [HideInInspector]public bool popupOptionsEnabled = false;
+    [HideInInspector]public Pathfinding.PathfindingManager _pathfindingManager;
+
 
     public bool executed = false;
 
@@ -28,6 +30,7 @@ public abstract class AbstractNPCBrain : Entity
     {
         base.Awake();
         sliderHealth = this.GetComponentInChildren<Slider>();
+        _pathfindingManager = FindObjectOfType<Pathfinding.PathfindingManager>();
     }
 
     public virtual void Start()

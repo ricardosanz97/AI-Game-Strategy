@@ -46,6 +46,32 @@ namespace CustomPathfinding
             }
         }
 
+        public Node FindNodeFromThis(int x, int z)
+        {
+            int currentNodeX = GridX;
+            int currentNodeZ = GridZ;
+
+            int returnNodeX = currentNodeX + x;
+            int returnNodeZ = currentNodeZ + z;
+
+            Node returnNode = GetNodeAt(returnNodeX, returnNodeZ);
+            return returnNode;
+        }
+
+        public Node GetNodeAt(int x, int z)
+        {
+            print("Intentando obtener el nodo en " + x + ", " + z);
+            Transform parent = this.transform.parent;
+            for (int i = 0; i<parent.childCount; i++)
+            {
+                if (parent.GetChild(i).GetComponent<Node>().GridX == x && parent.GetChild(i).GetComponent<Node>().GridZ == z)
+                {
+                    return parent.GetChild(i).GetComponent<Node>();
+                }
+            }
+            return null;
+        }
+
         public void ColorAsPossibleMovementDistance()
         {
             this.GetComponent<MeshRenderer>().material.color = Color.blue;
@@ -66,6 +92,10 @@ namespace CustomPathfinding
             this.GetComponent<MeshRenderer>().material.color = Color.black;
         }
 
-
+        public void ColorAsPossibleTurretExplosion()
+        {
+            this.GetComponent<MeshRenderer>().material.color = Color.cyan;
+        }
+    
     }
 }
