@@ -8,7 +8,7 @@ public class BloodIndicatorController : MonoBehaviour {
     private Image bloodIndicator;
     private Text bloodValueText;
     private int minValue = 0;
-    private int maxValue = 10;
+    private int maxValue = 100;
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class BloodIndicatorController : MonoBehaviour {
 
     public void DecreaseBloodValue (int value)
     {
-        float value2 = value / 10f;
+        float value2 = value / (float)maxValue;
 
         if (bloodIndicator.fillAmount - value2 > minValue)
         {
@@ -39,7 +39,7 @@ public class BloodIndicatorController : MonoBehaviour {
 
     public void IncreaseBloodValue (int value)
     {
-        float value2 = value / 10f;
+        float value2 = value / (float)maxValue;
 
         if (bloodIndicator.fillAmount + value2 < maxValue)
         {
