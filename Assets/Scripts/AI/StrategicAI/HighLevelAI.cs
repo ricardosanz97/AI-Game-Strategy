@@ -9,21 +9,14 @@ namespace StrategicAI
 {
     public class HighLevelAI : MonoBehaviour
     {
-        public enum IAPersonality
-        {
-            Offensive,
-            Neutro,
-            Defensive
-        }
-
-        [SerializeField] private IAPersonality currentPersonality;
         [SerializeField] private StrategicObjective _strategicObjective;      
         [Inject] private GameBoardAnalyzer _analyzer;
         [Inject] private TurnHandler _turnHandler;
         public List<Entity> AIControlledEntites;
         public List<Entity> PlayerControlledEntities;
-        
-        public IAPersonality CurrentIaPersonality { get; private set; }
+        [SerializeField] private CellBehaviour[] _spawnableCells;
+
+        public CellBehaviour[] SpawnableCells => _spawnableCells;
 
         private void OnEnable()
         {
@@ -39,9 +32,9 @@ namespace StrategicAI
 
         private void Start()
         {
-            CurrentIaPersonality = IAPersonality.Offensive;
             AIControlledEntites = new List<Entity>();
             PlayerControlledEntities = new List<Entity>();
+            Assert.IsNotNull(_spawnableCells);
         }
 
         [ContextMenu("Evaluate Game State")]
