@@ -24,65 +24,9 @@ public class TurretNPC : AbstractNPCBrain
         FSMSystem.AddState(this, new State(STATE.Idle, this,
             () =>
             {
-                int offset = GetComponent<AreaAttack>().offset  + 2;
-                CustomPathfinding.Node node = null;
-                switch (CurrentRotation)
-                {
-                    case TROTATION.Front:
-                        node = this.cell.PNode.FindNodeFromThis(offset,0);
-                        Debug.Log("centro de la explosión en " + node.GridX + ", " + node.GridZ);
-                        break;
-                    case TROTATION.Right:
-                        node = this.cell.PNode.FindNodeFromThis(0,-offset);
-                        Debug.Log("centro de la explosión en " + node.GridX + ", " + node.GridZ);
-                        break;
-                    case TROTATION.Back:
-                        node = this.cell.PNode.FindNodeFromThis(-offset,0);
-                        Debug.Log("centro de la explosión en " + node.GridX + ", " + node.GridZ);
-                        break;
-                    case TROTATION.Left:
-                        node = this.cell.PNode.FindNodeFromThis(0,offset);
-                        Debug.Log("centro de la explosión en " + node.GridX + ", " + node.GridZ);
-                        break;
-                }
-
-                if (node != null)
-                {
-
-                    nodeAffectedList = _pathfindingManager.RequestNodesAtRadius(GetComponent<AreaAttack>().areaSize, node.WorldPosition);
-                    /*
-                    foreach (Node n in nodeAffectedList)
-                    {
-                        n.ColorAsPossibleTurretExplosion();
-                        this.CellsUnderMyAttack.Add(n.GetOurCell());
-                    }
-                    */
-
-                    for (int i = 0; i<nodeAffectedList.Count; i++)
-                    {
-                        nodeAffectedList[i].ColorAsPossibleTurretExplosion();
-                        nodeAffectedList[i].cell.gameObject.transform.Find("ProjectilePlacement").gameObject.SetActive(true);
-                        this.CellsUnderMyAttack.Add(nodeAffectedList[i].GetOurCell());
-                        nodeAffectedList[i].cell.explosionBelongsTo.Add(this);
-                    }
-
-                    node.ColorAsPossibleTurretExplosion();
-                    node.cell.gameObject.transform.Find("ProjectilePlacement").gameObject.SetActive(true);
-                    this.CellsUnderMyAttack.Add(node.GetOurCell());
-                    node.cell.explosionBelongsTo.Add(this);
-
-                    Debug.Log("el nodo en " + node.GridX + ", " + node.GridZ + " se pinta?");
-                }
-
-                GetInitialDamage();
-
-                for (int i = 0; i < CellsUnderMyAttack.Count; i++)
-                {
-                    if (CellsUnderMyAttack[i].troopIn != null && CellsUnderMyAttack[i].troopIn.owner != this.owner)
-                    {
-                        CellsUnderMyAttack[i].troopIn.GetComponent<Health>().ReceiveDamage(this.GetComponent<AreaAttack>().damage);
-                    }
-                }
+                 GetInitialDamage();
+                SetAffectedCells();
+                
             },
             () =>
             {
@@ -185,6 +129,82 @@ public class TurretNPC : AbstractNPCBrain
             case TROTATION.Left:
                 CurrentRotation = TROTATION.Back;
                 break;
+        }
+    }
+
+    public void UpdateAffectedCells()
+    {
+        List<CellBehaviour> affectedCells = CellsUnderMyAttack;
+        foreach (CellBehaviour cell in affectedCells)
+        {
+            cell.explosionBelongsTo.Remove(cell.explosionBelongsTo.Find((x) => x == this));
+            affectedCells.Remove(cell);
+        }
+
+        SetAffectedCells();
+
+    }
+
+    public void SetAffectedCells()
+    {
+        int offset = GetComponent<AreaAttack>().offset + 2;
+        CustomPathfinding.Node node = null;
+        switch (CurrentRotation)
+        {
+            case TROTATION.Front:
+                node = this.cell.PNode.FindNodeFromThis(offset, 0);
+                Debug.Log("centro de la explosión en " + node.GridX + ", " + node.GridZ);
+                break;
+            case TROTATION.Right:
+                node = this.cell.PNode.FindNodeFromThis(0, -offset);
+                Debug.Log("centro de la explosión en " + node.GridX + ", " + node.GridZ);
+                break;
+            case TROTATION.Back:
+                node = this.cell.PNode.FindNodeFromThis(-offset, 0);
+                Debug.Log("centro de la explosión en " + node.GridX + ", " + node.GridZ);
+                break;
+            case TROTATION.Left:
+                node = this.cell.PNode.FindNodeFromThis(0, offset);
+                Debug.Log("centro de la explosión en " + node.GridX + ", " + node.GridZ);
+                break;
+        }
+
+        if (node != null)
+        {
+
+            nodeAffectedList = _pathfindingManager.RequestNodesAtRadius(GetComponent<AreaAttack>().areaSize, node.WorldPosition);
+            /*
+            foreach (Node n in nodeAffectedList)
+            {
+                n.ColorAsPossibleTurretExplosion();
+                this.CellsUnderMyAttack.Add(n.GetOurCell());
+            }
+            */
+
+            for (int i = 0; i < nodeAffectedList.Count; i++)
+            {
+                nodeAffectedList[i].ColorAsPossibleTurretExplosion();
+                nodeAffectedList[i].cell.gameObject.transform.Find("ProjectilePlacement").gameObject.SetActive(true);
+                this.CellsUnderMyAttack.Add(nodeAffectedList[i].GetOurCell());
+                nodeAffectedList[i].cell.explosionBelongsTo.Add(this);
+            }
+
+            node.ColorAsPossibleTurretExplosion();
+            node.cell.gameObject.transform.Find("ProjectilePlacement").gameObject.SetActive(true);
+            this.CellsUnderMyAttack.Add(node.GetOurCell());
+            node.cell.explosionBelongsTo.Add(this);
+
+            Debug.Log("el nodo en " + node.GridX + ", " + node.GridZ + " se pinta?");
+        }
+
+
+
+        for (int i = 0; i < CellsUnderMyAttack.Count; i++)
+        {
+            if (CellsUnderMyAttack[i].troopIn != null && CellsUnderMyAttack[i].troopIn.owner != this.owner)
+            {
+                CellsUnderMyAttack[i].troopIn.GetComponent<Health>().ReceiveDamage(this.GetComponent<AreaAttack>().damage);
+            }
         }
     }
 
