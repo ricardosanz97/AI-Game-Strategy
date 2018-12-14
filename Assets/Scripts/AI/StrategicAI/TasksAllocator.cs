@@ -11,6 +11,7 @@ namespace StrategicAI
     public class TasksAllocator
     {
         [Inject]private TurnHandler _turnHandler;
+        [Inject] private HighLevelAI _highLevelAi;
         
         public void OnTaskCommandsReceived(List<AITaskCommand> aiTaskCommands, Entity[] controlledEntities)
         {
@@ -19,15 +20,15 @@ namespace StrategicAI
             
             //antes de llamar a todos lo comandos hay que ver si hay una desproporcion entre tareas
             //y tropas controladas por nosotros
-            //todo cambiar el magic number por un parametro
-            if (Mathf.Abs(controlledEntities.Length - aiTaskCommands.Count) > 3)
+            //todo cambiar el magic number por un parametro desde el high level
+            if (IsSpawnNeeded(aiTaskCommands, controlledEntities, 2))
                 DecideWhatToSpawn(aiTaskCommands);
             
             for (int i = 0; i < aiTaskCommands.Count; i++)
             {
                 //el perform command se encarga de o bien comunicarle a la fsm
                 //la señal necesaria como ataque o defensa
-                //aiTaskCommands[i].PerformCommand();
+                aiTaskCommands[i].PerformCommand();
                 Debug.Log("Performing Command: " + aiTaskCommands.ToString());
             }
             
@@ -37,10 +38,25 @@ namespace StrategicAI
 
         }
 
+        private bool IsSpawnNeeded(List<AITaskCommand> aiTaskCommands, Entity[] controlledEntities, int threshhold)
+        {
+            return Mathf.Abs(controlledEntities.Length - aiTaskCommands.Count) > threshhold || controlledEntities.Length == 0;
+        }
+
         private void DecideWhatToSpawn(List<AITaskCommand> aiTaskCommands)
         {
-            //decide what to spawn and add it to the aitaskcommand
-            //list.insert(aiTaskCommands,0);
+            if (HasResourcesToSpawn())
+            {
+                //decide what to spawn and add it to the aitaskcommand
+                SpawnAITaskCommand spawnCommand = new SpawnAITaskCommand(TROOP.Launcher, _highLevelAi.SpawnableCells);
+                aiTaskCommands.Insert(0,spawnCommand);  
+            }
+        }
+
+        private bool HasResourcesToSpawn()
+        {
+            //todo meter el contador de la sangre en el high level
+            return true;
         }
     }
 }

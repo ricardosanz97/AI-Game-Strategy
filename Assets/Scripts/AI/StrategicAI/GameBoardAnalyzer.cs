@@ -4,6 +4,7 @@ using System.Net;
 using InfluenceMap;
 using TMPro;
 using UnityEngine;
+using UnityEngine.VR;
 using Zenject;
 
 namespace StrategicAI
@@ -53,14 +54,18 @@ namespace StrategicAI
                 // look in a ring
                 InfluenceMap.Node node = _influenceMapComponent.GetNodeAtLocation(brain.transform.position);
                 List<Node> influenceData = _influenceMapComponent.GetKRingsOfNodes(node, chosenStrategicObjective.SampleRadius);
+                
+                Debug.Log(influenceData.Count);
 
                 Entity chosenTarget = chosenStrategicObjective.DecideBasedOnInfluenceData(brain,influenceData);
 
 
                 if(chosenTarget.owner == Entity.Owner.AI) //mejorar
                     aiTaskCommands.Add(new UpgradeAITaskCommand(chosenTarget));
-                else
+                else if(chosenTarget.owner == Entity.Owner.Player)
                     aiTaskCommands.Add(new AttackAITaskCommand(brain,chosenTarget));
+                else if (chosenTarget == null)
+                    return;
                 
             }
             else // es un muro

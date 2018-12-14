@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using InfluenceMap;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Zenject;
 using Zenject.Asteroids;
 
@@ -48,7 +50,7 @@ public class SpawnablesManager : MonoBehaviour {
         return currentTroopSelected;
     }
 
-    public void SpawnTroop(GameObject cell, Entity.Owner owner)
+    public void SpawnTroopPlayer(GameObject cell, Entity.Owner owner)
     {
         if (!_levelController.CheckIfCanSpawn())
         {
@@ -105,6 +107,46 @@ public class SpawnablesManager : MonoBehaviour {
         {
             return;
         }
+        
+    }
+
+    public void SpawnEntityIA(TROOP troop, CellBehaviour cellBehaviour)
+    {
+
+        Entity entityToSpawn = null;
+        Entity.Owner owner = Entity.Owner.AI;
+        
+        switch (currentTroopSelected)
+        {
+            case TROOP.Prisioner:
+                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + TROOP.Prisioner.ToString() + owner.ToString());
+                break;
+            case TROOP.Launcher:
+                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + TROOP.Launcher.ToString() + owner.ToString());
+                break;
+            case TROOP.Tank:
+                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + TROOP.Tank.ToString() + owner.ToString());
+                break;
+            case TROOP.Wall:
+                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + TROOP.Wall.ToString() + owner.ToString());
+                break;
+            case TROOP.Turret:
+                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + TROOP.Turret.ToString() + owner.ToString());
+                break;
+        }
+        
+        Assert.IsNotNull(entityToSpawn);
+        entityToSpawn.owner = Entity.Owner.AI;
+
+        Entity spawned = Instantiate(entityToSpawn, new Vector3(cellBehaviour.transform.position.x, 0f, cellBehaviour.transform.position.z), entityToSpawn.transform.rotation);
+        spawned.owner = Entity.Owner.AI;
+
+       
+    
+        OnSpawnedTroop?.Invoke(spawned);
+        cellBehaviour.troopIn = spawned.GetComponent<AbstractNPCBrain>();
+        spawned.GetComponent<AbstractNPCBrain>().cell = cellBehaviour;
+        
     }
 
 }
