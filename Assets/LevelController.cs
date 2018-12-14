@@ -5,6 +5,8 @@ using Zenject;
 
 public class LevelController : MonoBehaviour {
 
+    public GameObject rightSideCells;
+    public GameObject leftSideCells;
     private GameObject canvasGameObject;
     public List<Entity> PlayerEntities;
     public List<Entity> AIEntities;
@@ -13,6 +15,31 @@ public class LevelController : MonoBehaviour {
     private void Awake()
     {
         canvasGameObject = FindObjectOfType<Canvas>().gameObject;
+    }
+
+    private void Start()
+    {
+        ResetAllShadersCells();
+    }
+
+    void ResetAllShadersCells()
+    {
+        for (int i = 0; i < rightSideCells.transform.childCount; i++)
+        {
+            if (rightSideCells.transform.GetChild(i).transform.Find("ProjectilePlacement") != null)
+            {
+                rightSideCells.transform.GetChild(i).transform.Find("ProjectilePlacement").gameObject.SetActive(false);
+            }
+            
+        }
+
+        for (int i = 0; i < leftSideCells.transform.childCount; i++)
+        {
+            if (leftSideCells.transform.GetChild(i).transform.Find("ProjectilePlacement") != null)
+            {
+                leftSideCells.transform.GetChild(i).transform.Find("ProjectilePlacement").gameObject.SetActive(false);
+            }
+        }
     }
 
     public bool GetAnyPopupEnabled()

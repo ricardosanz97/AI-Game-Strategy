@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using CustomPathfinding;
 using Zenject;
 
 [RequireComponent(typeof(MoveOrder))]

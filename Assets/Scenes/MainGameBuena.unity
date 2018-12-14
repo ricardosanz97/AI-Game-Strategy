@@ -1723,6 +1723,14 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90.00001
       objectReference: {fileID: 0}
+    - target: {fileID: 1653481908596182, guid: 2cfe25b3d48e96a4893e8d71e0c61750, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078219093495894, guid: 2cfe25b3d48e96a4893e8d71e0c61750, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cfe25b3d48e96a4893e8d71e0c61750, type: 2}
   m_IsPrefabAsset: 0
@@ -7044,6 +7052,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!1 &1457855499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1244975389193970, guid: 2cfe25b3d48e96a4893e8d71e0c61750,
+    type: 2}
+  m_PrefabInternal: {fileID: 312188607}
 --- !u!1 &1466011159 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1937018200205356, guid: 2cfe25b3d48e96a4893e8d71e0c61750,
@@ -7830,6 +7843,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!1 &1587870977 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1453337387901806, guid: 2cfe25b3d48e96a4893e8d71e0c61750,
+    type: 2}
+  m_PrefabInternal: {fileID: 312188607}
 --- !u!1 &1590006430 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1955829064763724, guid: 2cfe25b3d48e96a4893e8d71e0c61750,
@@ -10772,6 +10790,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85af7791407754dd598c8a8ecd78f271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rightSideCells: {fileID: 1457855499}
+  leftSideCells: {fileID: 1587870977}
   PlayerEntities: []
   AIEntities: []
   TotalEntities: []

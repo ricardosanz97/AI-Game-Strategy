@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CustomPathfinding;
 
 [RequireComponent(typeof(AreaAttack))]
 public class TurretNPC : AbstractNPCBrain
@@ -14,6 +15,8 @@ public class TurretNPC : AbstractNPCBrain
         Back,
         Left
     }
+    public List<CellBehaviour> CellsUnderMyAttack = new List<CellBehaviour>();
+    public List<Node> nodeAffectedList = new List<Node>();
     public override void Start()
     {
         CurrentRotation = TROTATION.Front;
@@ -45,26 +48,25 @@ public class TurretNPC : AbstractNPCBrain
 
                 if (node != null)
                 {
-                    Transform t = GameObject.Find("Node Container").transform; 
-                    for (int i = 0; i<t.childCount; i++)
-                    {
-                        if (t.GetChild(i).GetComponent<CustomPathfinding.Node>().GridX == node.GridX && t.GetChild(i).GetComponent<CustomPathfinding.Node>().GridZ == node.GridZ)
-                        {
-                            t.GetChild(i).GetComponent<MeshRenderer>().material.color = Color.cyan;
-                        }
-                    }
-                    this.cell.PNode.FindNodeFromThis(0, 0).ColorAsPossibleTurretExplosion();
-                    //TODO: esto no se pq no va.
-                    //CustomPathfinding.Node[] listNodes = _pathfindingManager.RequestNodesAtRadius(GetComponent<AreaAttack>().areaSize, node.WorldPosition);
+                  
+                    nodeAffectedList = _pathfindingManager.RequestNodesAtRadius(GetComponent<AreaAttack>().areaSize, node.WorldPosition);
                     /*
-                    foreach (CustomPathfinding.Node n in listNodes)
+                    foreach (Node n in nodeAffectedList)
                     {
                         n.ColorAsPossibleTurretExplosion();
+                        this.CellsUnderMyAttack.Add(n.GetOurCell());
                     }
                     */
 
+                    for (int i = 0; i<nodeAffectedList.Count; i++)
+                    {
+                        nodeAffectedList[i].ColorAsPossibleTurretExplosion();
+                        this.CellsUnderMyAttack.Add(nodeAffectedList[i].GetOurCell());
+                    }
+
+                    this.CellsUnderMyAttack.Add(node.GetOurCell());
+
                     Debug.Log("el nodo en " + node.GridX + ", " + node.GridZ + " se pinta?");
-                    //this.cell.PNode.ColorAsPossibleTurretExplosion();
                 }       
             },
             () =>

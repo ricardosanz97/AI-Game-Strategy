@@ -83,10 +83,10 @@ namespace Pathfinding
             }
         }
 
-        public Node[] RequestNodesAtRadius(int radius, Vector3 origin)
+        public List<Node> RequestNodesAtRadius(int radius, Vector3 origin)
         {
             Debug.Log("originX = " + _pathfindingGrid.GetNodeFromWorldPosition(origin).GridX + " y originZ = " + _pathfindingGrid.GetNodeFromWorldPosition(origin).GridZ);
-            return PathfindingAlgorithms.BFS(_pathfindingGrid.GetNodeFromWorldPosition(origin), radius, _pathfindingGrid).ToArray();
+            return PathfindingAlgorithms.BFS(_pathfindingGrid.GetNodeFromWorldPosition(origin), radius, _pathfindingGrid);
         }
         
 
