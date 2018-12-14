@@ -39,8 +39,8 @@ public class LauncherNPC : Troop
     {
         FSMSystem.AddState(this, new State(STATE.Attack, this,
             () => {//on enter attack state
-                CustomPathfinding.Node[] nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Attack>().range, transform.position);
-                Debug.Log("nodeList tiene " + nodeList.Length + " elementos. ");
+                List<CustomPathfinding.Node> nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Attack>().range, transform.position);
+                Debug.Log("nodeList tiene " + nodeList.Count + " elementos. ");
                 foreach (CustomPathfinding.Node node in nodeList)
                 {
                     node.ColorAsPossibleAttackDistance();
@@ -74,8 +74,8 @@ public class LauncherNPC : Troop
         FSMSystem.AddState(this, new State(STATE.Move, this,
             () =>//on enter move state
             {
-                CustomPathfinding.Node[] nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Move>().maxMoves, transform.position);
-                Debug.Log("nodeList tiene " + nodeList.Length + " elementos. ");
+                List<CustomPathfinding.Node> nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Move>().maxMoves, transform.position);
+                Debug.Log("nodeList tiene " + nodeList.Count + " elementos. ");
                 foreach (CustomPathfinding.Node node in nodeList)
                 {
                     possibleMovements.Add(node);

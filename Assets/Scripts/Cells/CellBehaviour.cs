@@ -13,6 +13,8 @@ public class CellBehaviour : MonoBehaviour
     public CustomPathfinding.Node PNode;
     public InfluenceMap.Node INode;
 
+    public List<TurretNPC> explosionBelongsTo = new List<TurretNPC>();
+
     public void SetOwner(PlayerType playerType)
     {
         this.owner = playerType;
