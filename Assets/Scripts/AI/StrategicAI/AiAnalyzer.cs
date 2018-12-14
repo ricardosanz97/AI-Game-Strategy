@@ -1,51 +1,52 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using InfluenceMap;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
 namespace StrategicAI
-{
-    public class TacticalObjective
-    {
-        public Entity Objective { get; }
-        public float Distance { get; set; }
-
-        public TacticalObjective(Entity objective, float distance)
-        {
-            this.Objective = objective;
-            this.Distance = distance;
-        }
-    }
-    
+{   
     [System.Serializable]
     public class AiAnalyzer
     {
         //tareas asignadas en funcion de la personalidad a la IA.
-        [SerializeField] private HighLevelAI _highLevelAI;
+        [SerializeField] private HighLevelAI _highLevelAi;
         [SerializeField] private AIResourcesAllocator _aiResourcesAllocator;
         [SerializeField] private InfluenceMapComponent _influenceMapComponent;
 
         [Inject]
         public AiAnalyzer(HighLevelAI highLevelAi, AIResourcesAllocator aiResourcesAllocator, InfluenceMapComponent influenceMapComponent)
         {
-            _highLevelAI = highLevelAi;
+            _highLevelAi = highLevelAi;
             _aiResourcesAllocator = aiResourcesAllocator;
             _influenceMapComponent = influenceMapComponent;
         }
 
-        //Esta clase se encarga de generar la lista de tareas para el resource allocator teniendo en cuenta el mapa de influencias
-        public void GenerateTasks(AIObjective[] aiObjectives)
-        {
-            
-        }
-
-        private void AnalyzeSurroundingInfluences(Entity e,Entity[] playerControlledEntites)
+        private void AnalyzeSurroundingInfluences(StrategicObjective chosenStrategicObjective, Entity e,
+            Entity[] playerControlledEntites)
         {
             AbstractNPCBrain brain = e.GetComponent<AbstractNPCBrain>();
+
+            if (brain != null) // es una entidad con brain, es decir, no es un muro
+            {
+                //get node of the entity in the influence map
+                // look in a ring
+                InfluenceMap.Node node = _influenceMapComponent.GetNodeAtLocation(brain.transform.position);
+                List<Node> influenceData = _influenceMapComponent.GetKRingsOfNodes(node, chosenStrategicObjective.SampleRadius);
+
+                chosenStrategicObjective.DecideBasedOnInfluenceData(influenceData);
+
+            }
+            else // es un muro
+            {
+                return;
+            }
+                
         }
 
-        private static void GetClosestTacticalObjective(Entity e, Entity[] playerControlledEntites, List<TacticalObjective> specificObjectives)
+        private static void GetClosestTacticalObjective(Entity e, Entity[] playerControlledEntites)
         {
             float currentDistance = 0;
             float minDistance = int.MaxValue;
@@ -60,26 +61,21 @@ namespace StrategicAI
                     minDistance = currentDistance;
                 }
             }
-
-            specificObjectives.Add(new TacticalObjective(closestEntity, currentDistance));
         }
 
         public void AnalyzeGameTerrain(StrategicObjective chosenStrategicObjective)
         {   
             List<AITaskCommand> aiTaskCommands = new List<AITaskCommand>();
             
-            Entity[] controlledEntities = _highLevelAI.AIControlledEntites.ToArray();
-            Entity[] playerControlledEntites = _highLevelAI.PlayerControlledEntities.ToArray();
-
-            for (int i = 0; i < controlledEntities.Length; i++)
-            {
-                AnalyzeSurroundingInfluences(controlledEntities[i], playerControlledEntites);
-            }
-
+            Entity[] controlledEntities = _highLevelAi.AIControlledEntites.ToArray();
+            Entity[] playerControlledEntites = _highLevelAi.PlayerControlledEntities.ToArray();
 
             //check your controlled entities and see the influences they have in their surroundings
-            //dos opciones, o bien hacer un arbol de decision para añadir tareas o bien usar reglas
-
+            //en funcion del objetivo estrategico se fijaran las tareas que podran ser de un tipo o de otro.
+            for (int i = 0; i < controlledEntities.Length; i++)
+            {
+                AnalyzeSurroundingInfluences(chosenStrategicObjective, controlledEntities[i], playerControlledEntites);
+            }
 
             _aiResourcesAllocator.OnTaskCommandsReceived(aiTaskCommands);
         }
