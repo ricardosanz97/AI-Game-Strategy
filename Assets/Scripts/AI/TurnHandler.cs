@@ -21,12 +21,18 @@ public class TurnHandler : MonoBehaviour {
     
     private bool isGameFinished = false;
     [Inject]private HighLevelAI _globalHighLevelAi;
-    [Inject]private BloodController _bloodIndicatorController;
+    [Inject]private BloodController _bloodController;
+    private LevelController _levelController;
     
 
     private WaitForSeconds _waitForSeconds = new WaitForSeconds(2.0f);
 
-	void Start () {
+    private void Awake()
+    {
+        _levelController = FindObjectOfType<LevelController>();
+    }
+
+    void Start () {
     
         StartCoroutine(StartGame());
         StartCoroutine(HandleTurn());
@@ -61,7 +67,15 @@ public class TurnHandler : MonoBehaviour {
                 playerDone = false;
                 currentTurn = PlayerType.None;
 
-                _bloodIndicatorController.IncreasePlayerBloodValue(5); //TODO: ajustar
+                if (_bloodController.PlayerBlood + _levelController.PlayerRewardBloodTurn > _bloodController.maxValue)
+                {
+                    _bloodController.SetPlayerBlood(_bloodController.maxValue);
+                }
+                else
+                {
+                    _bloodController.IncreasePlayerBloodValue(_levelController.PlayerRewardBloodTurn);
+                }
+                //TODO: ajustar
 
                 yield return _waitForSeconds;
                 currentTurn = PlayerType.AI;

@@ -16,6 +16,11 @@ public class LevelController : MonoBehaviour {
     public List<Entity> playerCoreEntities;
     public List<Entity> AICoreEntities;
 
+    public int MinBloodReward = 3;
+
+    public int PlayerRewardBloodTurn = 3;
+    public int AIRewardBloodTurn = 3;
+
     private void Awake()
     {
         canvasGameObject = FindObjectOfType<Canvas>().gameObject;
@@ -23,7 +28,7 @@ public class LevelController : MonoBehaviour {
 
     private void Start()
     {
-        ResetAllShadersCells();
+        //ResetAllShadersCells();
         GameObject[] AIEntitiesGO = GameObject.FindGameObjectsWithTag("CoreAI");
         GameObject[] PlayerEntitiesGO = GameObject.FindGameObjectsWithTag("CorePlayer");
 
@@ -97,7 +102,7 @@ public class LevelController : MonoBehaviour {
         return can;
     }
 
-    public void ResetTroopBooleans(PlayerType nextTurn)
+    public void ResetTroopParameters(PlayerType nextTurn)
     {
         if (nextTurn == PlayerType.AI)
         {
@@ -109,6 +114,7 @@ public class LevelController : MonoBehaviour {
                     e.GetComponent<AbstractNPCBrain>().damageTurretReceived = false;
                 }
             }
+            PlayerRewardBloodTurn = MinBloodReward;
         }
         else if (nextTurn == PlayerType.Player)
         {
@@ -120,6 +126,7 @@ public class LevelController : MonoBehaviour {
                     e.GetComponent<AbstractNPCBrain>().damageTurretReceived = false;
                 }
             }
+            AIRewardBloodTurn = MinBloodReward;
         }
     }
 

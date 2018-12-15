@@ -15,7 +15,6 @@ namespace DependenciesInstallers
         public override void InstallBindings()
         {
             Container.Bind<PathfindingManager>().FromNewComponentOn(this.gameObject).AsSingle();
-            Container.Bind<LevelController>().FromNewComponentOn(this.gameObject).AsSingle();
             Container.Bind<TasksAllocator>().FromNew().AsSingle();
             Container.Bind<GameBoardAnalyzer>().FromNew().AsSingle();
             Container.Bind<TurnHandler>().FromNewComponentOn(this.gameObject).AsSingle();

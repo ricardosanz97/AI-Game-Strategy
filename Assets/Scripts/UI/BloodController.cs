@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,8 +9,8 @@ public class BloodController : MonoBehaviour {
     private Image bloodPlayerIndicator;
     private Text bloodPlayerValueText;
 
-    private int minValue = 0;
-    private int maxValue = 100;
+    public int minValue = 0;
+    public int maxValue = 100;
 
     public int PlayerBlood;
     public int AIBlood;
@@ -68,6 +69,17 @@ public class BloodController : MonoBehaviour {
         bloodPlayerValueText.text = PlayerBlood.ToString();
     }
 
+    public void SetPlayerBlood(int value)
+    {
+        PlayerBlood = value;
+        bloodPlayerValueText.text = PlayerBlood.ToString();
+    }
+
+    public void SetAIBlood(int value)
+    {
+        AIBlood = value;
+    }
+
     public int GetCurrentPlayerBlood()
     {
         return PlayerBlood;
@@ -77,9 +89,10 @@ public class BloodController : MonoBehaviour {
     {
         float value2 = value / (float)maxValue;
 
-        if (AIBlood / maxValue - value2 > minValue)
+        float division = (float)AIBlood / (float)maxValue;
+        if (division - value2 > minValue)
         {
-            AIBlood -= (int)(value2 * maxValue);
+            AIBlood -= Mathf.RoundToInt(value2 * maxValue);
         }
         else
         {
@@ -91,9 +104,10 @@ public class BloodController : MonoBehaviour {
     {
         float value2 = value / (float)maxValue;
 
-        if (AIBlood / maxValue + value2 < maxValue)
+        float division = (float)AIBlood / (float)maxValue;
+        if (division + value2 < maxValue)
         {
-            AIBlood += (int)(value2 * maxValue);
+            AIBlood += Mathf.RoundToInt(value2 * maxValue);
         }
         else
         {

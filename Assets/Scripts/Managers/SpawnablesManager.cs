@@ -103,6 +103,10 @@ public class SpawnablesManager : MonoBehaviour {
                 break;
         }
 
+        if (entityToSpawn == null)
+        {
+            return;
+        }
         int bloodCost = entityToSpawn.GetComponent<Entity>().bloodCost;
         bool bloodEnough = owner == Entity.Owner.Player ? bloodCost <= _bloodController.GetCurrentPlayerBlood() : bloodCost <= _bloodController.GetCurrentAIBlood();
         if (entityToSpawn != null && bloodEnough)
@@ -124,50 +128,14 @@ public class SpawnablesManager : MonoBehaviour {
             }
             else if (owner == Entity.Owner.AI)
             {
-                _bloodController.DecreasePlayerBloodValue(entitySpawned.GetComponent<Entity>().bloodCost);
+                Debug.Log("decreasing blood");
+                _bloodController.DecreaseAIBloodValue(entitySpawned.GetComponent<Entity>().bloodCost);
             }
             
             FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().HideButtons();
             cell.GetComponent<CellBehaviour>().entityIn = entitySpawned.GetComponent<AbstractNPCBrain>();
             entitySpawned.GetComponent<AbstractNPCBrain>().cell = cell.GetComponent<CellBehaviour>();
         }
-    }
-
-    public void SpawnEntityAI(ENTITY troop, CellBehaviour cellBehaviour)
-    {
-
-        Entity entityToSpawn = null;
-        Entity.Owner owner = Entity.Owner.AI;
-        
-        switch (troop)
-        {
-            case ENTITY.Prisioner:
-                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + ENTITY.Prisioner.ToString() + owner.ToString());
-                break;
-            case ENTITY.Launcher:
-                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + ENTITY.Launcher.ToString() + owner.ToString());
-                break;
-            case ENTITY.Tank:
-                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + ENTITY.Tank.ToString() + owner.ToString());
-                break;
-            case ENTITY.Wall:
-                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + ENTITY.Wall.ToString() + owner.ToString());
-                break;
-            case ENTITY.Turret:
-                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + ENTITY.Turret.ToString() + owner.ToString());
-                break;
-        }
-        
-        Assert.IsNotNull(entityToSpawn);
-        entityToSpawn.owner = Entity.Owner.AI;
-
-        Entity spawned = Instantiate(entityToSpawn, new Vector3(cellBehaviour.transform.position.x, 0f, cellBehaviour.transform.position.z), entityToSpawn.transform.rotation);
-        spawned.owner = Entity.Owner.AI;
-
-        OnSpawnedTroop?.Invoke(spawned);
-        cellBehaviour.entityIn = spawned.GetComponent<AbstractNPCBrain>();
-        spawned.GetComponent<AbstractNPCBrain>().cell = cellBehaviour;
-        
     }
 
 }
