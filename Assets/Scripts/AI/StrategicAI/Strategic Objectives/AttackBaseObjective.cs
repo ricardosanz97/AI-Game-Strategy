@@ -7,10 +7,10 @@ namespace StrategicAI
 {
     public class AttackBaseObjective : StrategicObjective
     {
-        public override Entity DecideBasedOnInfluenceData(AbstractNPCBrain brain, List<Node> influenceData,
+        public override Entity DecideBasedOnInfluenceData(AbstractNPCBrain analyzedNPC, List<Node> influenceData,
             Entity[] playerControlledEntites)
         {
-            if (brain.npc == TROOP.Launcher)
+            if (analyzedNPC.npc == TROOP.Launcher)
             {
                 float coreInfluenceSum = 0f;
                 float prisionerSum = 0f;
@@ -36,7 +36,8 @@ namespace StrategicAI
                     //return base ref
                 }     
             }
-
+            
+            //solo para que no haya nulls
             return playerControlledEntites[0];
 
         }

@@ -42,7 +42,7 @@ namespace StrategicAI
         {
             _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
             
-            //todo establecer las diferentes reglas para cambiar entre objetivos estrategicos
+            //todo programar el arbol
             if (CalculateSetDamage(AIControlledEntites) >= CalculateSetDamage(PlayerControlledEntities))
                 _strategicObjective = GetOrAddComponent<AttackBaseObjective>();
             else
