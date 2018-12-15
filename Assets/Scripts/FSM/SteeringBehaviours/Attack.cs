@@ -7,7 +7,9 @@ public class Attack : Action
     public int damage;
     public int range;
     public bool ObjectiveAssigned;
-    public AbstractNPCBrain NPCObjectiveAttack;
+    public Entity targetEntity;
+    public float WaitTimeUntilAttack = 1.0f;
+    
     public override void Act()
     {
         if (!ObjectiveAssigned)
@@ -16,9 +18,23 @@ public class Attack : Action
         }
 
         ObjectiveAssigned = false;
-        NPCObjectiveAttack.GetComponent<Health>().ReceiveDamage(damage);
+        targetEntity.GetComponent<Health>().ReceiveDamage(damage);
         GetComponent<IdleOrder>().Idle = true;
         this.GetComponent<AbstractNPCBrain>().executed = true;
-        NPCObjectiveAttack = null;
+        targetEntity = null;
+    }
+    
+    public void StartAttack(Entity target)
+    {
+        ObjectiveAssigned = true;
+        
+        StartCoroutine(Wait(WaitTimeUntilAttack));
+        
+        targetEntity = target;
+    }
+
+    private IEnumerator Wait(float waitTimeUntilAttack)
+    {
+        yield return new WaitForSeconds(WaitTimeUntilAttack);
     }
 }

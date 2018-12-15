@@ -15,7 +15,8 @@ namespace StrategicAI
 
         public override void PerformCommand()
         {
-            throw new System.NotImplementedException();
+            _doer.GetComponent<AttackOrder>().Attack = true;
+            _doer.GetComponent<Attack>().StartAttack(chosenTarget);
         }
     }
 }
