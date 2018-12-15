@@ -15769,6 +15769,11 @@ Prefab:
       propertyPath: cell
       value: 
       objectReference: {fileID: 1343592155}
+    - target: {fileID: 114039038674549626, guid: ff7c26da4bb21d2418308aaffafd3e94,
+        type: 2}
+      propertyPath: entityType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff7c26da4bb21d2418308aaffafd3e94, type: 2}
   m_IsPrefabAsset: 0
@@ -33647,7 +33652,7 @@ GameObject:
   - component: {fileID: 1994292578}
   - component: {fileID: 1994292577}
   m_Layer: 5
-  m_Name: BloodHandler
+  m_Name: BloodController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33775,6 +33780,7 @@ MonoBehaviour:
   TotalEntities: []
   playerCoreEntities: []
   AICoreEntities: []
+  MaxWalls: 8
 --- !u!4 &2146703504
 Transform:
   m_ObjectHideFlags: 0

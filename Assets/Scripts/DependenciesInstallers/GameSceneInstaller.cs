@@ -21,7 +21,7 @@ namespace DependenciesInstallers
             Container.Bind<TurnHandler>().FromNewComponentOn(this.gameObject).AsSingle();
             Container.Bind<HighLevelAI>().FromComponentInHierarchy(true).AsSingle().NonLazy();
             Container.Bind<InfluenceMapComponent>().FromComponentInNewPrefab(influenceMapPrefab).AsSingle();
-            Container.Bind<BloodIndicatorController>().FromNewComponentOn(this.gameObject).AsSingle();
+            Container.Bind<BloodController>().FromNewComponentOn(this.gameObject).AsSingle();
             Container.Bind<SpawnablesManager>().FromNewComponentOn(this.gameObject).AsSingle();
             
             //Container.Bind<SpawnablesManager>().FromComponentInNewPrefab(SpawnablesManager).AsSingle();

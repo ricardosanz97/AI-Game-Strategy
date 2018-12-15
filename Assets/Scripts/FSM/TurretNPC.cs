@@ -17,13 +17,14 @@ public class TurretNPC : AbstractNPCBrain
     }
     public List<CellBehaviour> CellsUnderMyAttack = new List<CellBehaviour>();
     public List<Node> nodeAffectedList = new List<Node>();
+    public int RotateBloodCost = 2;
     public override void Start()
     {
         CurrentRotation = TROTATION.Front;
         initialState = new State(STATE.Attack, this,
             () =>
             {
-                GetInitialDamage();
+                GetTurretDamage();
                 //SetAffectedCells(); //todo -> descomentar para nada más spawnear, causar daño
             },
             () =>

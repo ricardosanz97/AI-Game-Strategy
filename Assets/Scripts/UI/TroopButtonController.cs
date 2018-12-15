@@ -26,7 +26,7 @@ public class TroopButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
     {
         soundManager.PlaySingle(soundManager.buttonPressedSound);
         _levelController.ClosePopups();
-        _spawnablesManager.SetCurrentTroop(troopType);
+        _spawnablesManager.SetCurrentEntity(troopType);
     }
 
     private void OnMouseOver()

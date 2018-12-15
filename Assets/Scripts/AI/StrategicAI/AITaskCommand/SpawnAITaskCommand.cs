@@ -24,8 +24,8 @@ namespace StrategicAI
             {
                 //todo implement
                     case ENTITY.Launcher:
-                        //todo get random cell
-                        Object.FindObjectOfType<SpawnablesManager>().SpawnEntityAI(troopToSpawn,spawnableCells[0]);
+                    //todo get random cell
+                        Object.FindObjectOfType<SpawnablesManager>().SpawnEntity(spawnableCells[0], troopToSpawn, Entity.Owner.AI);
                         break;
                         
                     case ENTITY.Prisioner:

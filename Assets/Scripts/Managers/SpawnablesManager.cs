@@ -21,7 +21,8 @@ public enum ENTITY
 
 public class SpawnablesManager : MonoBehaviour {
 
-	[SerializeField]private ENTITY currentTroopSelected;
+	[SerializeField]public ENTITY currentEntitySelected;
+
     public ENTITY lastTroopSpawned;
     public bool canSpawnTroop = true;
     public bool selectingWhereToMove = false;
@@ -30,7 +31,7 @@ public class SpawnablesManager : MonoBehaviour {
     public static event Action<Entity> OnSpawnedTroop; 
 
     [Inject]
-    BloodIndicatorController _bloodIndicatorController;
+    BloodController _bloodController;
 
     LevelController _levelController;
 
@@ -44,27 +45,32 @@ public class SpawnablesManager : MonoBehaviour {
         _levelController = FindObjectOfType<LevelController>();
     }
 
-    public void SetCurrentTroop(ENTITY troop)
+    public void SetCurrentEntity(ENTITY troop)
     {
-        currentTroopSelected = troop;
+        currentEntitySelected = troop;
     }
 
-    public ENTITY GetCurrentTroop()
+    public ENTITY GetCurrentEntity()
     {
-        return currentTroopSelected;
+        return currentEntitySelected;
     }
 
-    public void SpawnTroopPlayer(GameObject cell, Entity.Owner owner)
+    public Entity GetEntity(ENTITY entity)
+    {
+        return Resources.Load<GameObject>("Prefabs/Enemies/" + currentEntitySelected.ToString() + "Player").GetComponent<Entity>();
+    }
+
+    public void SpawnEntity(CellBehaviour cell, ENTITY _entityToSpawn, Entity.Owner owner)
     {
         if (!_levelController.CheckIfCanSpawn())
         {
             return;
         }
-
-        GameObject troopSpawned = null;
-        GameObject troop = null;
         
-        switch (currentTroopSelected)
+        GameObject entitySpawned = null;
+        GameObject entityToSpawn = null;
+
+        switch (_entityToSpawn)
         {
             case ENTITY.None:
                 Debug.Log("Antes debes seleccionar una tropa! ");
@@ -73,51 +79,58 @@ public class SpawnablesManager : MonoBehaviour {
                 break;
             case ENTITY.Prisioner:
                 lastTroopSpawned = ENTITY.Prisioner;
-                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Prisioner.ToString() + owner.ToString());
+                entityToSpawn = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Prisioner.ToString() + owner.ToString());
                 soundManagerRef.PlaySingle(soundManagerRef.cageSoundSpawn);
                 break;
             case ENTITY.Launcher:
                 lastTroopSpawned = ENTITY.Launcher;
-                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Launcher.ToString() + owner.ToString());
+                entityToSpawn = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Launcher.ToString() + owner.ToString());
                 soundManagerRef.PlaySingle(soundManagerRef.launcherSoundSpawn);
                 break;
             case ENTITY.Tank:
                 lastTroopSpawned = ENTITY.Tank;
-                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Tank.ToString() + owner.ToString());
+                entityToSpawn = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Tank.ToString() + owner.ToString());
                 soundManagerRef.PlaySingle(soundManagerRef.tankSoundSpawn);
                 break;
             case ENTITY.Wall:
                 lastTroopSpawned = ENTITY.Wall;
-                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Wall.ToString() + owner.ToString());
+                entityToSpawn = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Wall.ToString() + owner.ToString());
                 break;
             case ENTITY.Turret:
                 lastTroopSpawned = ENTITY.Turret;
-                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Turret.ToString() + owner.ToString());
+                entityToSpawn = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Turret.ToString() + owner.ToString());
                 soundManagerRef.PlaySingle(soundManagerRef.turretSoundSpawn);
                 break;
         }
 
-        if (troop != null && troop.GetComponent<Entity>().bloodCost <= _bloodIndicatorController.GetCurrentBlood())
+        int bloodCost = entityToSpawn.GetComponent<Entity>().bloodCost;
+        bool bloodEnough = owner == Entity.Owner.Player ? bloodCost <= _bloodController.GetCurrentPlayerBlood() : bloodCost <= _bloodController.GetCurrentAIBlood();
+        if (entityToSpawn != null && bloodEnough)
         {
-            troopSpawned = Instantiate(troop, new Vector3(cell.transform.position.x, 0f, cell.transform.position.z), troop.transform.rotation);
-            troopSpawned.GetComponent<Entity>().SetEntity(owner);
-            troopSpawned.GetComponent<AbstractNPCBrain>().entityType = lastTroopSpawned;
-            currentTroopSelected = ENTITY.None;
+            entitySpawned = Instantiate(entityToSpawn, new Vector3(cell.transform.position.x, 0f, cell.transform.position.z), entityToSpawn.transform.rotation);
+            entitySpawned.GetComponent<Entity>().SetEntity(owner);
+            entitySpawned.GetComponent<AbstractNPCBrain>().entityType = lastTroopSpawned;
+            
+            if (owner == Entity.Owner.Player)
+                currentEntitySelected = ENTITY.None;
 
             Node node = _influenceMapComponent.GetNodeAtLocation(new Vector3(cell.transform.position.x, 1f, cell.transform.position.z));
-            print("spawned at: " + node.WorldGameObject.GetComponent<InfluencePosition>().GridPositions[0] + ", " + node.WorldGameObject.GetComponent<InfluencePosition>().GridPositions[1]);
         
-            OnSpawnedTroop?.Invoke(troopSpawned.GetComponent<Entity>());
-            _bloodIndicatorController.DecreaseBloodValue(troopSpawned.GetComponent<Entity>().bloodCost);
+            OnSpawnedTroop?.Invoke(entitySpawned.GetComponent<Entity>());
+
+            if (owner == Entity.Owner.Player)
+            {
+                _bloodController.DecreasePlayerBloodValue(entitySpawned.GetComponent<Entity>().bloodCost);
+            }
+            else if (owner == Entity.Owner.AI)
+            {
+                _bloodController.DecreasePlayerBloodValue(entitySpawned.GetComponent<Entity>().bloodCost);
+            }
+            
             FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().HideButtons();
-            cell.GetComponent<CellBehaviour>().entityIn = troopSpawned.GetComponent<AbstractNPCBrain>();
-            troopSpawned.GetComponent<AbstractNPCBrain>().cell = cell.GetComponent<CellBehaviour>();
+            cell.GetComponent<CellBehaviour>().entityIn = entitySpawned.GetComponent<AbstractNPCBrain>();
+            entitySpawned.GetComponent<AbstractNPCBrain>().cell = cell.GetComponent<CellBehaviour>();
         }
-        else
-        {
-            return;
-        }
-        
     }
 
     public void SpawnEntityAI(ENTITY troop, CellBehaviour cellBehaviour)
@@ -151,8 +164,6 @@ public class SpawnablesManager : MonoBehaviour {
         Entity spawned = Instantiate(entityToSpawn, new Vector3(cellBehaviour.transform.position.x, 0f, cellBehaviour.transform.position.z), entityToSpawn.transform.rotation);
         spawned.owner = Entity.Owner.AI;
 
-       
-    
         OnSpawnedTroop?.Invoke(spawned);
         cellBehaviour.entityIn = spawned.GetComponent<AbstractNPCBrain>();
         spawned.GetComponent<AbstractNPCBrain>().cell = cellBehaviour;

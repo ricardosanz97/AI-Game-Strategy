@@ -11,9 +11,11 @@ public class LevelController : MonoBehaviour {
     public List<Entity> PlayerEntities;
     public List<Entity> AIEntities;
     public List<Entity> TotalEntities;
+    public int MaxWalls = 8;
+
     public List<Entity> playerCoreEntities;
     public List<Entity> AICoreEntities;
-    
+
     private void Awake()
     {
         canvasGameObject = FindObjectOfType<Canvas>().gameObject;
@@ -45,7 +47,7 @@ public class LevelController : MonoBehaviour {
             {
                 rightSideCells.transform.GetChild(i).transform.Find("ProjectilePlacement").gameObject.SetActive(false);
             }
-            
+
         }
 
         for (int i = 0; i < leftSideCells.transform.childCount; i++)
@@ -84,7 +86,7 @@ public class LevelController : MonoBehaviour {
         bool can = true;
         foreach (Entity entity in PlayerEntities)
         {
-            if (entity.gameObject.GetComponent<Troop>() != null 
+            if (entity.gameObject.GetComponent<Troop>() != null
                 && entity.gameObject.GetComponent<AbstractNPCBrain>().currentState != null
                 && entity.gameObject.GetComponent<AbstractNPCBrain>().currentState.stateName != STATE.Idle) //is moving or attacking
             {
@@ -93,6 +95,32 @@ public class LevelController : MonoBehaviour {
         }
 
         return can;
+    }
+
+    public void ResetTroopBooleans(PlayerType nextTurn)
+    {
+        if (nextTurn == PlayerType.AI)
+        {
+            foreach (Entity e in AIEntities)
+            {
+                if (e.GetComponent<AbstractNPCBrain>() != null)
+                {
+                    e.GetComponent<AbstractNPCBrain>().executed = false;
+                    e.GetComponent<AbstractNPCBrain>().damageTurretReceived = false;
+                }
+            }
+        }
+        else if (nextTurn == PlayerType.Player)
+        {
+            foreach (Entity e in PlayerEntities)
+            {
+                if (e.GetComponent<AbstractNPCBrain>() != null)
+                {
+                    e.GetComponent<AbstractNPCBrain>().executed = false;
+                    e.GetComponent<AbstractNPCBrain>().damageTurretReceived = false;
+                }
+            }
+        }
     }
 
     public void AddPlayerEntities(Entity entity)
@@ -130,6 +158,6 @@ public class LevelController : MonoBehaviour {
         }
         return null;
     }
-    
-    
+
+
 }
