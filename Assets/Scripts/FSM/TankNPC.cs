@@ -115,4 +115,12 @@ public class TankNPC : Troop
     {
         FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().tankSoundAttack);
     }
+
+    public override void UpgradeNPC()
+    {
+        base.UpgradeNPC();
+        this.UpgradeCost += 3;
+        this.GetComponent<Attack>().damage += 2;
+        this.GetComponent<Move>().maxMoves++;
+    }
 }

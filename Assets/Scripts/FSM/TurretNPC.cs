@@ -89,6 +89,10 @@ public class TurretNPC : AbstractNPCBrain
         },
         () =>
         {
+            this.UpgradeNPC();
+        },
+        () =>
+        {
             go.GetComponent<SimpleOptionsPopupController>().ClosePopup();
             popupOptionsEnabled = false;
         });
@@ -210,6 +214,14 @@ public class TurretNPC : AbstractNPCBrain
     public override void DoAttackAnimation()
     {
         FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().turretSoundShot);
+    }
+
+    public override void UpgradeNPC()
+    {
+        base.UpgradeNPC();
+        this.UpgradeCost += 3;
+        this.GetComponent<AreaAttack>().areaSize++;
+        this.GetComponent<AreaAttack>().damage++;
     }
 
 }

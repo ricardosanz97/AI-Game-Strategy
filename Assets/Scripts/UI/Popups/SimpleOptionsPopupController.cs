@@ -8,9 +8,10 @@ public class SimpleOptionsPopupController : PopupController {
     public Text textPopup;
     public Button button1;
     public Button button2;
+    public Button button3;
     public Button closeButton;
 
-    public void SetPopup(Vector3 pos, string titleText, string button1Text, string button2Text, UnityAction button1Action, UnityAction button2Action, UnityAction closeButtonAction)
+    public void SetPopup(Vector3 pos, string titleText, string button1Text, string button2Text, UnityAction button1Action, UnityAction button2Action, UnityAction button3Action, UnityAction closeButtonAction)
     {
         this.transform.SetParent(GameObject.FindGameObjectWithTag("PopupsContainer").transform);
         this.GetComponent<RectTransform>().localPosition = pos;
@@ -20,6 +21,7 @@ public class SimpleOptionsPopupController : PopupController {
         this.button2.GetComponentInChildren<Text>().text = button2Text;
         button1.onClick.AddListener(button1Action);
         button2.onClick.AddListener(button2Action);
+        button3.onClick.AddListener(button3Action);
         closeButton.onClick.AddListener(closeButtonAction);
     }
 }
