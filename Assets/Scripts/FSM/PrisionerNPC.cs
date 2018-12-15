@@ -115,5 +115,6 @@ public class PrisionerNPC : Troop
     public override void DoAttackAnimation()
     {
         FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().cageSoundAttack);
+        GetComponentInChildren<Animator>().SetTrigger("Attack");
     }
 }

@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 33902359717162074}
   - component: {fileID: 23081871660036184}
   - component: {fileID: 95375773628728410}
+  - component: {fileID: 114693757680137316}
   m_Layer: 0
   m_Name: TankSkeleton
   m_TagString: Untagged
@@ -168,7 +169,7 @@ Transform:
   - {fileID: 4669923644065208}
   m_Father: {fileID: 4661457774627070}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -43.086456}
 --- !u!4 &4661457774627070
 Transform:
   m_ObjectHideFlags: 1
@@ -436,6 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodCost: 4
+  entityType: 0
   cell: {fileID: 0}
   owner: 0
   rb: {fileID: 0}
@@ -443,7 +445,7 @@ MonoBehaviour:
   _spawnablesManager: {fileID: 0}
   _levelController: {fileID: 0}
   _influenceMapComp: {fileID: 0}
-  npc: 3
+  damageTurretReceived: 0
   currentLevel: 1
   sliderHealth: {fileID: 0}
   transitions: []
@@ -506,6 +508,17 @@ MonoBehaviour:
     InfluenceRange: 4
     Color: {r: 1, g: 0, b: 0.8461652, a: 0}
     InfluenceType: 2
+--- !u!114 &114693757680137316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1876299144793988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cdc543f20b883a4b808953b1772b05f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114717599870032630
 MonoBehaviour:
   m_ObjectHideFlags: 1

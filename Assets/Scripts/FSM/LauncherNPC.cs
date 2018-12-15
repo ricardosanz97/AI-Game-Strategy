@@ -113,7 +113,7 @@ public class LauncherNPC : Troop
 
     public override void DoAttackAnimation()
     {
-        FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().launcherSoundShot);
+        GetComponentInChildren<Animator>().SetTrigger("Attack");
     }
 
 }
