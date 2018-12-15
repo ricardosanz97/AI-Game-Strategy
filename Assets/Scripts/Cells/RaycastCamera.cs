@@ -30,72 +30,98 @@ public class RaycastCamera : MonoBehaviour {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, cell) && ! _levelController.GetAnyPopupEnabled())
         {
-            if (_turnHandler.currentTurn == PlayerType.Player && hit.collider.GetComponent<CellBehaviour>().GetOwner() == PlayerType.Player)
-            {
-                lastCellSelected = hit.collider.GetComponent<CellBehaviour>();
-                hit.collider.transform.DOLocalMoveY(0.5f, 0.3f);
-            }
+            EffectCell();
+
+            SpawnIfPossibleInCell();
+
+            MoveIfSomeoneIsTryingTo();
+
+            AttackIfSomeoneIsTryingTo();
             
-            if (_turnHandler.currentTurn == PlayerType.Player
-                && hit.collider.GetComponent<CellBehaviour>().GetOwner() == PlayerType.Player
-                && Input.GetMouseButtonDown(0)
-                && lastCellSelected.GetEntityIn() == null
-                && _levelController.CheckIfCanSpawn()) //ningun NPC nuestro spawneado esta en estado ataque o move
-            {
-                _spawnablesManager.SpawnEntity(hit.collider.GetComponent<CellBehaviour>(), _spawnablesManager.currentEntitySelected, Entity.Owner.Player);
-            }
-
-            if (_levelController.TryingToMove() != null)
-            {
-                if (hit.collider.GetComponent<CellBehaviour>().entityIn == _levelController.TryingToMove() && Input.GetMouseButtonDown(0))
-                {
-                    hit.collider.GetComponent<CellBehaviour>().entityIn.GetComponent<IdleOrder>().Idle = true; //cancelamos.
-                    soundManager.PlaySingle(soundManager.cancelActionSound);
-                }
-
-                bool nodeMovementAccesible = _levelController.TryingToMove().gameObject.GetComponent<Troop>().ListPossibleMovementsContains(hit.collider.GetComponent<CellBehaviour>().PNode);
-                Debug.Log("this node is accesible: " + nodeMovementAccesible);
-                if (Input.GetMouseButtonDown(0) 
-                    && nodeMovementAccesible)
-                {
-                    if (_levelController.TryingToMove().gameObject.GetComponent<Move>() != null){
-                        soundManager.PlaySingle(soundManager.buttonPressedSound);
-                        _levelController.TryingToMove().gameObject.GetComponent<Move>().OnGoingCell = lastCellSelected;
-                        _levelController.TryingToMove().gameObject.GetComponent<Move>().PathReceived = true;
-                    }
-                }
-            }
-
-            else if (_levelController.TryingToAttack() != null)
-            {
-                if (_levelController.TryingToAttack().gameObject.GetComponent<Troop>() != null) //si esta en estado atacar pero no es la torre (que siempre esta en ataque atacar).
-                {
-                    if (hit.collider.GetComponent<CellBehaviour>().entityIn == _levelController.TryingToAttack() && Input.GetMouseButtonDown(0))
-                    {
-                        hit.collider.GetComponent<CellBehaviour>().entityIn.GetComponent<IdleOrder>().Idle = true;
-                        soundManager.PlaySingle(soundManager.cancelActionSound);
-                    }
-
-                    bool nodeAttackAccesible = _levelController.TryingToAttack().gameObject.GetComponent<Troop>().ListPossibleAttacksContains(hit.collider.GetComponent<CellBehaviour>().PNode);
-                    if (Input.GetMouseButtonDown(0)
-                        && nodeAttackAccesible)
-                    {
-                        if (_levelController.TryingToAttack().gameObject.GetComponent<Attack>() != null)
-                        {
-                            _levelController.TryingToAttack().gameObject.GetComponent<AbstractNPCBrain>().DoAttackAnimation();
-                            _levelController.TryingToAttack().gameObject.GetComponent<Attack>().NPCObjectiveAttack = lastCellSelected.entityIn.GetComponent<AbstractNPCBrain>();
-                            _levelController.TryingToAttack().gameObject.GetComponent<Attack>().ObjectiveAssigned = true;
-
-                        }
-                    }
-                }
-               
-            }
         }
 
         if (lastCellSelected != null)
         {
             lastCellSelected.BackToInitialPosition();
+        }
+    }
+
+    private void SpawnIfPossibleInCell()
+    {
+        if (_turnHandler.currentTurn == PlayerType.Player
+                && hit.collider.GetComponent<CellBehaviour>().GetOwner() == PlayerType.Player
+                && Input.GetMouseButtonDown(0)
+                && lastCellSelected.GetEntityIn() == null
+                && _levelController.CheckIfCanSpawn()) //ningun NPC nuestro spawneado esta en estado ataque o move
+        {
+            _spawnablesManager.SpawnEntity(hit.collider.GetComponent<CellBehaviour>(), _spawnablesManager.currentEntitySelected, Entity.Owner.Player);
+        }
+    }
+
+    private void MoveIfSomeoneIsTryingTo()
+    {
+        if (_levelController.TryingToMove() != null)
+        {
+            if (hit.collider.GetComponent<CellBehaviour>().entityIn == _levelController.TryingToMove() && Input.GetMouseButtonDown(0))
+            {
+                hit.collider.GetComponent<CellBehaviour>().entityIn.GetComponent<IdleOrder>().Idle = true; //cancelamos.
+                soundManager.PlaySingle(soundManager.cancelActionSound);
+            }
+
+            bool nodeMovementAccesible = _levelController.TryingToMove().gameObject.GetComponent<Troop>().ListPossibleMovementsContains(hit.collider.GetComponent<CellBehaviour>().PNode);
+            Debug.Log("this node is accesible: " + nodeMovementAccesible);
+            if (Input.GetMouseButtonDown(0)
+                && nodeMovementAccesible)
+            {
+                Debug.Log("aqui entra. ");
+                if (_levelController.TryingToMove().gameObject.GetComponent<Move>() != null)
+                {
+                    soundManager.PlaySingle(soundManager.buttonPressedSound);
+                    _levelController.TryingToMove().gameObject.GetComponent<Move>().OnGoingCell = lastCellSelected;
+                    _levelController.TryingToMove().gameObject.GetComponent<Move>().PathReceived = true;
+                }
+            }
+        }
+    }
+
+    private void AttackIfSomeoneIsTryingTo()
+    {
+        if (_levelController.TryingToAttack() != null)
+        {
+            if (_levelController.TryingToAttack().gameObject.GetComponent<Troop>() != null) //si esta en estado atacar pero no es la torre (que siempre esta en ataque atacar).
+            {
+                if (hit.collider.GetComponent<CellBehaviour>().entityIn == _levelController.TryingToAttack() && Input.GetMouseButtonDown(0))
+                {
+                    hit.collider.GetComponent<CellBehaviour>().entityIn.GetComponent<IdleOrder>().Idle = true;
+                    soundManager.PlaySingle(soundManager.cancelActionSound);
+                }
+
+                bool nodeAttackAccesible = _levelController.TryingToAttack().gameObject.GetComponent<Troop>().ListPossibleAttacksContains(hit.collider.GetComponent<CellBehaviour>().PNode);
+                if (Input.GetMouseButtonDown(0)
+                    && nodeAttackAccesible)
+                {
+                    if (_levelController.TryingToAttack().gameObject.GetComponent<Attack>() != null)
+                    {
+                        _levelController.TryingToAttack().gameObject.GetComponent<AbstractNPCBrain>().DoAttackAnimation();
+                        _levelController.TryingToAttack().gameObject.GetComponent<Attack>().NPCObjectiveAttack = lastCellSelected.entityIn.GetComponent<AbstractNPCBrain>();
+                        _levelController.TryingToAttack().gameObject.GetComponent<Attack>().ObjectiveAssigned = true;
+
+                    }
+                }
+            }
+
+        }
+    }
+
+    private void EffectCell()
+    {
+        if (_turnHandler.currentTurn == PlayerType.Player)
+        {
+            lastCellSelected = hit.collider.GetComponent<CellBehaviour>();
+            if (hit.collider.GetComponent<CellBehaviour>().GetOwner() == PlayerType.Player)
+            {
+                hit.collider.transform.DOLocalMoveY(0.5f, 0.3f);
+            }
         }
     }
 }
