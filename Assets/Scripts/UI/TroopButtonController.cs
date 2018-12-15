@@ -14,6 +14,9 @@ public class TroopButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
 
     private LevelController _levelController;
 
+    [Inject]
+    private SoundManager soundManager;
+
     private void Awake()
     {
         _levelController = FindObjectOfType<LevelController>().GetComponent<LevelController>();
@@ -21,6 +24,7 @@ public class TroopButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void SelectTroop()
     {
+        soundManager.PlaySingle(soundManager.buttonPressedSound);
         _levelController.ClosePopups();
         _spawnablesManager.SetCurrentTroop(troopType);
     }
