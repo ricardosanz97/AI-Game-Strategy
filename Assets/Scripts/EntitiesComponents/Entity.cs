@@ -10,6 +10,7 @@ using Zenject;
 public class Entity : MonoBehaviour 
 {
     public int bloodCost;
+    public ENTITY entityType = ENTITY.None;
 
     public CellBehaviour cell;
     public enum Owner

@@ -52,7 +52,7 @@ namespace StrategicAI
             {
                 //decide what to spawn and add it to the aitaskcommand
                 Assert.IsNotNull(_highLevelAi.SpawnableCells);
-                SpawnAITaskCommand spawnCommand = new SpawnAITaskCommand(TROOP.Launcher, _highLevelAi.SpawnableCells);
+                SpawnAITaskCommand spawnCommand = new SpawnAITaskCommand(ENTITY.Launcher, _highLevelAi.SpawnableCells);
                 aiTaskCommands.Insert(0,spawnCommand);  
             }
         }

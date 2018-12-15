@@ -8,7 +8,6 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Health))]
 public abstract class AbstractNPCBrain : Entity
 {
-    public TROOP npc = TROOP.None;
     public int currentLevel = 1;
     [SerializeField]public Slider sliderHealth;
 
@@ -36,7 +35,7 @@ public abstract class AbstractNPCBrain : Entity
 
     public virtual void Start()
     {
-        if (npc == TROOP.None)
+        if (entityType == ENTITY.None)
         {
             Debug.LogError("NPC type unassigned. ");
         }

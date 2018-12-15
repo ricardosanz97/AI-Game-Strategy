@@ -10,36 +10,32 @@ namespace StrategicAI
         public override Entity DecideBasedOnInfluenceData(AbstractNPCBrain analyzedNPC, List<Node> influenceData,
             Entity[] playerControlledEntites)
         {
-            if (analyzedNPC.npc == TROOP.Launcher)
+
+            Entity coreEntity = playerControlledEntites[0];
+
+            float coreSum = 0f;
+
+            if (analyzedNPC.entityType == ENTITY.Launcher || analyzedNPC.entityType == ENTITY.Prisioner || analyzedNPC.entityType == ENTITY.Tank)
             {
-                float coreInfluenceSum = 0f;
-                float prisionerSum = 0f;
-            
                 foreach (var node in influenceData)
                 {
                     if (node.HasInfluenceOfType(InfluenceType.Core))
-                        coreInfluenceSum += node.GetInfluenceOfType(InfluenceType.Core).Value;
-                    else if (node.HasInfluenceOfType(InfluenceType.Prisioner))
-                        prisionerSum += node.GetInfluenceOfType(InfluenceType.Prisioner).Value;
-                }
+                    {
+                        coreSum += node.GetInfluenceOfType(InfluenceType.Core).Value;
+                    }
 
-                if (coreInfluenceSum < prisionerSum) // entonces vamos a por el prisioner
-                {
-                    //todo encontrar la referencia al prisioner
-                    //parece que el metodo mas efectivo es por distancia
-                    //return prisioner ref
+                    foreach(Entity e in playerControlledEntites)
+                    {
+                        if(e.entityType == ENTITY.Core){
+                            coreEntity = e;
+                        }
+                    }
                 }
-                else
-                {
-                    //todo encontrar la referencia a la base enemiga
-                    //coger la referencia de la lista de las entidades
-                    //return base ref
-                }     
+                return coreEntity;
             }
-            
+           
             //solo para que no haya nulls
             return playerControlledEntites[0];
-
         }
     }
 }

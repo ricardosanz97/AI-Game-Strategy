@@ -15,11 +15,11 @@ public class StateInfo : MonoBehaviour{
         _pathfindingManager = FindObjectOfType<PathfindingManager>();
     }
 
-    public void ExecuteOnEnter(STATE stateName, TROOP npc)
+    public void ExecuteOnEnter(STATE stateName, ENTITY npc)
     {
         switch (npc)
         {
-            case TROOP.Prisioner:
+            case ENTITY.Prisioner:
 
                 switch (stateName)
                 {
@@ -38,7 +38,7 @@ public class StateInfo : MonoBehaviour{
                 }
                 break;
 
-            case TROOP.Launcher:
+            case ENTITY.Launcher:
                 switch (stateName)
                 {
                     case STATE.Attack:
@@ -56,7 +56,7 @@ public class StateInfo : MonoBehaviour{
                 }
                 break;
 
-            case TROOP.Tank:
+            case ENTITY.Tank:
                 switch (stateName)
                 {
                     case STATE.Attack:
@@ -73,7 +73,7 @@ public class StateInfo : MonoBehaviour{
                         break;
                 }
                 break;
-            case TROOP.None:
+            case ENTITY.None:
                 switch (stateName)
                 {
                     case STATE.Attack:
@@ -93,11 +93,11 @@ public class StateInfo : MonoBehaviour{
         }
     }
 
-    public void ExecuteOnExit(STATE stateName, TROOP npc)
+    public void ExecuteOnExit(STATE stateName, ENTITY npc)
     {
         switch (npc)
         {
-            case TROOP.Prisioner:
+            case ENTITY.Prisioner:
                 switch (stateName)
                 {
                     case STATE.Attack:
@@ -112,7 +112,7 @@ public class StateInfo : MonoBehaviour{
                 }
                 break;
 
-            case TROOP.Launcher:
+            case ENTITY.Launcher:
                 switch (stateName)
                 {
                     case STATE.Attack:
@@ -127,7 +127,7 @@ public class StateInfo : MonoBehaviour{
                 }
                 break;
 
-            case TROOP.Tank:
+            case ENTITY.Tank:
                 switch (stateName)
                 {
                     case STATE.Attack:
@@ -142,7 +142,7 @@ public class StateInfo : MonoBehaviour{
                 }
                 break;
 
-            case TROOP.None:
+            case ENTITY.None:
                 switch (stateName)
                 {
                     case STATE.Attack:

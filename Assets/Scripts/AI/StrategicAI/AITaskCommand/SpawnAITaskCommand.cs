@@ -6,11 +6,11 @@ namespace StrategicAI
 {
     public class SpawnAITaskCommand : AITaskCommand
     {
-        private TROOP troopToSpawn;
+        private ENTITY troopToSpawn;
         private CellBehaviour[] spawnableCells;
         [Inject] private SpawnablesManager _spawnablesManager;
 
-        public SpawnAITaskCommand(TROOP troopToSpawn, CellBehaviour[] cells)
+        public SpawnAITaskCommand(ENTITY troopToSpawn, CellBehaviour[] cells)
         {
             this.troopToSpawn = troopToSpawn;
             spawnableCells = cells;
@@ -23,21 +23,21 @@ namespace StrategicAI
             switch (troopToSpawn)
             {
                 //todo implement
-                    case TROOP.Launcher:
+                    case ENTITY.Launcher:
                         //todo get random cell
                         Object.FindObjectOfType<SpawnablesManager>().SpawnEntityAI(troopToSpawn,spawnableCells[0]);
                         break;
                         
-                    case TROOP.Prisioner:
+                    case ENTITY.Prisioner:
                         break;
                         
-                    case TROOP.Tank:
+                    case ENTITY.Tank:
                         break;
                     
-                    case TROOP.Turret:
+                    case ENTITY.Turret:
                         break;
                     
-                    case TROOP.Wall:
+                    case ENTITY.Wall:
                         break;
             }
         }

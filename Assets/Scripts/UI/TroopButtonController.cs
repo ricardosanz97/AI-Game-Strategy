@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class TroopButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
-    public TROOP troopType;
+    public ENTITY troopType;
     
     [Inject]
     private SpawnablesManager _spawnablesManager;

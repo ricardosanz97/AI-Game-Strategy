@@ -15,13 +15,13 @@ public class InitialNPCPhrasePopupController : PopupController {
     {
         switch (_spawnablesManager.lastTroopSpawned)
         {
-            case TROOP.Prisioner:
+            case ENTITY.Prisioner:
                 initialPhrase.text = prisioner;
                 break;
-            case TROOP.Launcher:
+            case ENTITY.Launcher:
                 initialPhrase.text = launcher;
                 break;
-            case TROOP.Tank:
+            case ENTITY.Tank:
                 initialPhrase.text = tank;
                 break;
         }

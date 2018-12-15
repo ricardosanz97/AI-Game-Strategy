@@ -8,20 +8,21 @@ using UnityEngine.Assertions;
 using Zenject;
 using Zenject.Asteroids;
 
-public enum TROOP
+public enum ENTITY
 {
     None,
     Prisioner,
     Launcher,
     Tank,
     Wall,
-    Turret
+    Turret,
+    Core
 }
 
 public class SpawnablesManager : MonoBehaviour {
 
-	[SerializeField]private TROOP currentTroopSelected;
-    public TROOP lastTroopSpawned;
+	[SerializeField]private ENTITY currentTroopSelected;
+    public ENTITY lastTroopSpawned;
     public bool canSpawnTroop = true;
     public bool selectingWhereToMove = false;
     public bool selectingWhereToAttack = false;
@@ -43,12 +44,12 @@ public class SpawnablesManager : MonoBehaviour {
         _levelController = FindObjectOfType<LevelController>();
     }
 
-    public void SetCurrentTroop(TROOP troop)
+    public void SetCurrentTroop(ENTITY troop)
     {
         currentTroopSelected = troop;
     }
 
-    public TROOP GetCurrentTroop()
+    public ENTITY GetCurrentTroop()
     {
         return currentTroopSelected;
     }
@@ -65,33 +66,33 @@ public class SpawnablesManager : MonoBehaviour {
         
         switch (currentTroopSelected)
         {
-            case TROOP.None:
+            case ENTITY.None:
                 Debug.Log("Antes debes seleccionar una tropa! ");
                 FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().ShowButtons();
                 soundManagerRef.PlaySingle(soundManagerRef.incorrectMovement);
                 break;
-            case TROOP.Prisioner:
-                lastTroopSpawned = TROOP.Prisioner;
-                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Prisioner.ToString() + owner.ToString());
+            case ENTITY.Prisioner:
+                lastTroopSpawned = ENTITY.Prisioner;
+                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Prisioner.ToString() + owner.ToString());
                 soundManagerRef.PlaySingle(soundManagerRef.cageSoundSpawn);
                 break;
-            case TROOP.Launcher:
-                lastTroopSpawned = TROOP.Launcher;
-                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Launcher.ToString() + owner.ToString());
+            case ENTITY.Launcher:
+                lastTroopSpawned = ENTITY.Launcher;
+                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Launcher.ToString() + owner.ToString());
                 soundManagerRef.PlaySingle(soundManagerRef.launcherSoundSpawn);
                 break;
-            case TROOP.Tank:
-                lastTroopSpawned = TROOP.Tank;
-                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Tank.ToString() + owner.ToString());
+            case ENTITY.Tank:
+                lastTroopSpawned = ENTITY.Tank;
+                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Tank.ToString() + owner.ToString());
                 soundManagerRef.PlaySingle(soundManagerRef.tankSoundSpawn);
                 break;
-            case TROOP.Wall:
-                lastTroopSpawned = TROOP.Wall;
-                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Wall.ToString() + owner.ToString());
+            case ENTITY.Wall:
+                lastTroopSpawned = ENTITY.Wall;
+                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Wall.ToString() + owner.ToString());
                 break;
-            case TROOP.Turret:
-                lastTroopSpawned = TROOP.Turret;
-                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + TROOP.Turret.ToString() + owner.ToString());
+            case ENTITY.Turret:
+                lastTroopSpawned = ENTITY.Turret;
+                troop = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Turret.ToString() + owner.ToString());
                 soundManagerRef.PlaySingle(soundManagerRef.turretSoundSpawn);
                 break;
         }
@@ -100,8 +101,8 @@ public class SpawnablesManager : MonoBehaviour {
         {
             troopSpawned = Instantiate(troop, new Vector3(cell.transform.position.x, 0f, cell.transform.position.z), troop.transform.rotation);
             troopSpawned.GetComponent<Entity>().SetEntity(owner);
-            troopSpawned.GetComponent<AbstractNPCBrain>().npc = lastTroopSpawned;
-            currentTroopSelected = TROOP.None;
+            troopSpawned.GetComponent<AbstractNPCBrain>().entityType = lastTroopSpawned;
+            currentTroopSelected = ENTITY.None;
 
             Node node = _influenceMapComponent.GetNodeAtLocation(new Vector3(cell.transform.position.x, 1f, cell.transform.position.z));
             print("spawned at: " + node.WorldGameObject.GetComponent<InfluencePosition>().GridPositions[0] + ", " + node.WorldGameObject.GetComponent<InfluencePosition>().GridPositions[1]);
@@ -119,7 +120,7 @@ public class SpawnablesManager : MonoBehaviour {
         
     }
 
-    public void SpawnEntityAI(TROOP troop, CellBehaviour cellBehaviour)
+    public void SpawnEntityAI(ENTITY troop, CellBehaviour cellBehaviour)
     {
 
         Entity entityToSpawn = null;
@@ -127,20 +128,20 @@ public class SpawnablesManager : MonoBehaviour {
         
         switch (troop)
         {
-            case TROOP.Prisioner:
-                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + TROOP.Prisioner.ToString() + owner.ToString());
+            case ENTITY.Prisioner:
+                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + ENTITY.Prisioner.ToString() + owner.ToString());
                 break;
-            case TROOP.Launcher:
-                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + TROOP.Launcher.ToString() + owner.ToString());
+            case ENTITY.Launcher:
+                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + ENTITY.Launcher.ToString() + owner.ToString());
                 break;
-            case TROOP.Tank:
-                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + TROOP.Tank.ToString() + owner.ToString());
+            case ENTITY.Tank:
+                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + ENTITY.Tank.ToString() + owner.ToString());
                 break;
-            case TROOP.Wall:
-                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + TROOP.Wall.ToString() + owner.ToString());
+            case ENTITY.Wall:
+                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + ENTITY.Wall.ToString() + owner.ToString());
                 break;
-            case TROOP.Turret:
-                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + TROOP.Turret.ToString() + owner.ToString());
+            case ENTITY.Turret:
+                entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + ENTITY.Turret.ToString() + owner.ToString());
                 break;
         }
         

@@ -57,7 +57,7 @@ public class Troop : AbstractNPCBrain
         GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleOptionsPopup"));
         go.GetComponent<SimpleOptionsPopupController>().SetPopup(
         this.transform.localPosition,
-        this.npc.ToString(),
+        this.entityType.ToString(),
         "Mover",
         "Atacar",
         () => {

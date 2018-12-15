@@ -70,7 +70,7 @@ public class TurretNPC : AbstractNPCBrain
         GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleOptionsPopup"));
         go.GetComponent<SimpleOptionsPopupController>().SetPopup(
         this.transform.localPosition,
-        this.npc.ToString(),
+        this.entityType.ToString(),
         "RIGHT",
         "LEFT",
         () => {
