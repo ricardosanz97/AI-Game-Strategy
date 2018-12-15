@@ -7,8 +7,13 @@ public class PrisionerNPC : Troop
     public override void Start()
     {
         base.Start();
+        //ya hemos iniciado a currentState
         SetStates();
         SetTransitions();
+
+        currentTransitions = transitions.FindAll((x) => x.currentState.stateName == currentState.stateName);
+        Debug.Log("current transitions es " + currentTransitions.Count);
+        currentState.OnEnter();
     }
 
     public override void SetStates()
@@ -51,7 +56,7 @@ public class PrisionerNPC : Troop
                 foreach (CustomPathfinding.Node node in nodeList)
                 {
                     node.ColorAsPossibleAttackDistance();
-                    if (node.cell.troopIn != null && node.cell.troopIn.owner != owner) //the enemy in the cell is an enemy.
+                    if (node.cell.entityIn != null && node.cell.entityIn.owner != owner) //the enemy in the cell is an enemy.
                     {
                         possibleAttacks.Add(node);
                         node.GetComponent<CustomPathfinding.Node>().ColorAsPossibleAttack();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Zenject;
 
 namespace StrategicAI
@@ -29,25 +30,28 @@ namespace StrategicAI
                 //el perform command se encarga de o bien comunicarle a la fsm
                 //la señal necesaria como ataque o defensa
                 aiTaskCommands[i].PerformCommand();
-                Debug.Log("Performing Command: " + aiTaskCommands.ToString());
+                Debug.Log("Performing Command");
             }
             
             //añadirlo a una cola en algun monobehaviour para que una corutina lo vaya sacando poco a poco.
 
+            Debug.Log("AI Done");
             _turnHandler.AIDone = true;
 
         }
 
         private bool IsSpawnNeeded(List<AITaskCommand> aiTaskCommands, Entity[] controlledEntities, int threshhold)
         {
-            return Mathf.Abs(controlledEntities.Length - aiTaskCommands.Count) > threshhold || controlledEntities.Length == 0;
+            return Mathf.Abs(controlledEntities.Length - aiTaskCommands.Count) > threshhold || controlledEntities.Length == 0 || aiTaskCommands.Count == 0;
         }
 
         private void DecideWhatToSpawn(List<AITaskCommand> aiTaskCommands)
         {
+            Debug.Log("spawning");
             if (HasResourcesToSpawn())
             {
                 //decide what to spawn and add it to the aitaskcommand
+                Assert.IsNotNull(_highLevelAi.SpawnableCells);
                 SpawnAITaskCommand spawnCommand = new SpawnAITaskCommand(TROOP.Launcher, _highLevelAi.SpawnableCells);
                 aiTaskCommands.Insert(0,spawnCommand);  
             }

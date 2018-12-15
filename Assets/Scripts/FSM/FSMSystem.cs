@@ -44,10 +44,6 @@ public static class FSMSystem{
 
     public static void AddState(AbstractNPCBrain abstracNpc, State newState)
     {
-        if (abstracNpc.states.Find((x)=>x.stateName == newState.stateName) != null)
-        {
-            return;
-        }
         abstracNpc.states.Add(newState);
     }
 

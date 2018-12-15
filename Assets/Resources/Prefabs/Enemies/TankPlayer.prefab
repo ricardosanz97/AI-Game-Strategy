@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 114699215550618784}
   - component: {fileID: 114345308607994982}
   - component: {fileID: 114165272344937700}
-  - component: {fileID: 114700207213551736}
+  - component: {fileID: 65237370518212664}
   m_Layer: 0
   m_Name: TankPlayer
   m_TagString: Untagged
@@ -303,6 +303,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!65 &65237370518212664
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1267227540241094}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!95 &95713241463904406
 Animator:
   serializedVersion: 3
@@ -469,10 +481,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0
-    InfluenceRange: 0
-    Color: {r: 0, g: 0, b: 0, a: 0}
-    InfluenceType: 0
+    Influence: 1.1
+    InfluenceRange: 4
+    Color: {r: 0.9365586, g: 0.11124954, b: 0.9433962, a: 0}
+    InfluenceType: 2
 --- !u!114 &114497335065571596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -540,6 +552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMoves: 3
+  moving: 0
   OnGoingCell: {fileID: 0}
   PathReceived: 0
   path: []
@@ -559,13 +572,12 @@ MonoBehaviour:
   owner: 0
   rb: {fileID: 0}
   value: 0
-  tryingTo: 2
   _spawnablesManager: {fileID: 0}
   _levelController: {fileID: 0}
   _influenceMapComp: {fileID: 0}
   npc: 3
-  healthPoints: 150
   currentLevel: 1
+  sliderHealth: {fileID: 0}
   transitions: []
   states: []
   initialState:
@@ -578,22 +590,10 @@ MonoBehaviour:
     brain: {fileID: 0}
     actions: []
   popupOptionsEnabled: 0
-  executed: 0
   _pathfindingManager: {fileID: 0}
+  executed: 0
   possibleMovements: []
   possibleAttacks: []
---- !u!114 &114700207213551736
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1267227540241094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6168b011147eb1e469b8a172bfccc41f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 8
 --- !u!114 &114803742157858414
 MonoBehaviour:
   m_ObjectHideFlags: 1

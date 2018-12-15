@@ -37,7 +37,7 @@ public class RaycastCamera : MonoBehaviour {
             if (_turnHandler.currentTurn == PlayerType.Player
                 && hit.collider.GetComponent<CellBehaviour>().GetOwner() == PlayerType.Player
                 && Input.GetMouseButtonDown(0)
-                && lastCellSelected.GetTroopIn() == null
+                && lastCellSelected.GetEntityIn() == null
                 && _levelController.CheckIfCanSpawn()) //ningun NPC nuestro spawneado esta en estado ataque o move
             {
                 _spawnablesManager.SpawnTroopPlayer(hit.collider.gameObject, Entity.Owner.Player);
@@ -65,7 +65,7 @@ public class RaycastCamera : MonoBehaviour {
                     if (_levelController.TryingToAttack().gameObject.GetComponent<Attack>() != null)
                     {
                         _levelController.TryingToAttack().gameObject.GetComponent<AbstractNPCBrain>().DoAttackAnimation();
-                        _levelController.TryingToAttack().gameObject.GetComponent<Attack>().NPCObjectiveAttack = lastCellSelected.troopIn;
+                        _levelController.TryingToAttack().gameObject.GetComponent<Attack>().NPCObjectiveAttack = lastCellSelected.entityIn.GetComponent<AbstractNPCBrain>();
                         _levelController.TryingToAttack().gameObject.GetComponent<Attack>().ObjectiveAssigned = true;
 
                     }
