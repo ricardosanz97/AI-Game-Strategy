@@ -53,7 +53,7 @@ public class LauncherNPC : Troop
                 foreach (CustomPathfinding.Node node in nodeList)
                 {
                     node.ColorAsPossibleAttackDistance();
-                    if (node.cell.troopIn != null && node.cell.troopIn.owner != owner) //the enemy in the cell is an enemy.
+                    if (node.cell.entityIn != null && node.cell.entityIn.owner != owner) //the enemy in the cell is an enemy.
                     {
                         possibleAttacks.Add(node);
                         node.GetComponent<CustomPathfinding.Node>().ColorAsPossibleAttack();

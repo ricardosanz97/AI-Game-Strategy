@@ -7,7 +7,7 @@ using Zenject;
 public class CellBehaviour : MonoBehaviour
 {
     public PlayerType owner;
-    public AbstractNPCBrain troopIn;
+    public Entity entityIn;
     private bool PNodeAssigned = false;
     private bool INodeAssigned = false;
     public CustomPathfinding.Node PNode;
@@ -20,9 +20,9 @@ public class CellBehaviour : MonoBehaviour
         this.owner = playerType;
     }
 
-    public void SetTroopIn(AbstractNPCBrain brain)
+    public void SetEntityIn(Entity brain)
     {
-        this.troopIn = brain;
+        this.entityIn = brain;
     }
 
     public PlayerType GetOwner()
@@ -30,9 +30,9 @@ public class CellBehaviour : MonoBehaviour
         return this.owner;
     }
 
-    public AbstractNPCBrain GetTroopIn()
+    public Entity GetEntityIn()
     {
-        return this.troopIn;
+        return this.entityIn;
     }
 
     public void BackToInitialPosition()

@@ -109,7 +109,7 @@ public class SpawnablesManager : MonoBehaviour {
             OnSpawnedTroop?.Invoke(troopSpawned.GetComponent<Entity>());
             _bloodIndicatorController.DecreaseBloodValue(troopSpawned.GetComponent<Entity>().bloodCost);
             FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().HideButtons();
-            cell.GetComponent<CellBehaviour>().troopIn = troopSpawned.GetComponent<AbstractNPCBrain>();
+            cell.GetComponent<CellBehaviour>().entityIn = troopSpawned.GetComponent<AbstractNPCBrain>();
             troopSpawned.GetComponent<AbstractNPCBrain>().cell = cell.GetComponent<CellBehaviour>();
         }
         else
@@ -153,7 +153,7 @@ public class SpawnablesManager : MonoBehaviour {
        
     
         OnSpawnedTroop?.Invoke(spawned);
-        cellBehaviour.troopIn = spawned.GetComponent<AbstractNPCBrain>();
+        cellBehaviour.entityIn = spawned.GetComponent<AbstractNPCBrain>();
         spawned.GetComponent<AbstractNPCBrain>().cell = cellBehaviour;
         
     }

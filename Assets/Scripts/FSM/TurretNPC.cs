@@ -196,9 +196,9 @@ public class TurretNPC : AbstractNPCBrain
 
         for (int i = 0; i < CellsUnderMyAttack.Count; i++)
         {
-            if (CellsUnderMyAttack[i].troopIn != null && CellsUnderMyAttack[i].troopIn.owner != this.owner)
+            if (CellsUnderMyAttack[i].entityIn != null && CellsUnderMyAttack[i].entityIn.owner != this.owner)
             {
-                CellsUnderMyAttack[i].troopIn.GetComponent<Health>().ReceiveDamage(this.GetComponent<AreaAttack>().damage);
+                CellsUnderMyAttack[i].entityIn.GetComponent<Health>().ReceiveDamage(this.GetComponent<AreaAttack>().damage);
             }
         }
     }
