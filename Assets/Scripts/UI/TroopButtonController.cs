@@ -37,13 +37,11 @@ public class TroopButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("hola");
         this.gameObject.transform.Translate(Vector3.up * 5f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("adios");
         this.gameObject.transform.Translate(Vector3.down * 5f);
     }
 }

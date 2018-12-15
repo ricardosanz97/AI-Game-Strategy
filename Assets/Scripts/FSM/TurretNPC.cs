@@ -20,32 +20,32 @@ public class TurretNPC : AbstractNPCBrain
     public override void Start()
     {
         CurrentRotation = TROTATION.Front;
-
-        FSMSystem.AddState(this, new State(STATE.Idle, this,
+        initialState = new State(STATE.Attack, this,
             () =>
             {
-                 GetInitialDamage();
-                 SetAffectedCells();
+                GetInitialDamage();
+                SetAffectedCells();
             },
             () =>
             {
 
-            }));
+            });
+
+        FSMSystem.AddState(this, initialState);
+        currentState = states.Find((x) => x.stateName == STATE.Attack);
+        currentTransitions = transitions.FindAll((x) => x.currentState == currentState);
+        currentState.OnEnter();
 
         SetStates();
         SetTransitions();
-        currentState = states.Find((x) => x.stateName == STATE.Idle);
-        currentTransitions = transitions.FindAll((x) => x.currentState == currentState);
-        currentState.OnEnter();
 
         base.Start();
     }
 
     public override void SetStates()
     {
-        FSMSystem.AddState(this, new State(STATE.Remain, this));
+        SetRemainState();
         SetAttackState();
-        //SetIdleState();
     }
 
     public void SetAttackState()

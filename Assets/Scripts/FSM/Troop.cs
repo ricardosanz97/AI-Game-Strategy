@@ -24,8 +24,8 @@ public class Troop : AbstractNPCBrain
     {
         possibleMovements = new List<CustomPathfinding.Node>();
 
-        FSMSystem.AddState(this,new State(STATE.Idle, this, 
-            ()=> {
+        initialState = new State(STATE.Idle, this,
+            () => {
                 if (possibleMovements.Count > 0)
                 {
                     foreach (CustomPathfinding.Node node in possibleMovements)
@@ -34,15 +34,15 @@ public class Troop : AbstractNPCBrain
                     }
                 }
                 GetInitialDamage();
-            }, 
-            ()=> {
+            },
+            () => {
             }
-        ));
-        
-        SetStates();
-        SetTransitions();
-        currentState = initialState;
+        );
+
+        FSMSystem.AddState(this,initialState);
+        currentState = states.Find((x) => x.stateName == STATE.Idle);
         currentTransitions = transitions.FindAll((x) => x.currentState == currentState);
+        currentState.OnEnter();
 
         base.Start();
     }
@@ -82,14 +82,6 @@ public class Troop : AbstractNPCBrain
 
     }
 
-    public override void SetTransitions()
-    {
-    }
-
-    public override void SetStates()
-    {
-    }
-
     public bool ListPossibleMovementsContains(CustomPathfinding.Node node)
     {
         for (int i = 0; i<possibleMovements.Count; i++)
@@ -112,5 +104,13 @@ public class Troop : AbstractNPCBrain
             }
         }
         return false;
+    }
+
+    public override void SetTransitions()
+    {
+    }
+
+    public override void SetStates()
+    {
     }
 }
