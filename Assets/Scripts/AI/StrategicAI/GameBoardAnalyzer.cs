@@ -30,18 +30,18 @@ namespace StrategicAI
             //declaramos la lisa de pequeños comandos que realizara la ia
             List<AITaskCommand> aiTaskCommands = new List<AITaskCommand>();
             
-            Entity[] controlledEntities = _highLevelAi.AIControlledEntites.ToArray();
+            Entity[] IAcontrolledEntities = _highLevelAi.AIControlledEntites.ToArray();
             Entity[] playerControlledEntites = _highLevelAi.PlayerControlledEntities.ToArray();
 
             //check your controlled entities and see the influences they have in their surroundings
             //en funcion del objetivo estrategico se fijaran las tareas que podran ser de un tipo o de otro.
-            for (int i = 0; i < controlledEntities.Length; i++)
+            for (int i = 0; i < IAcontrolledEntities.Length; i++)
             {
-                AnalyzeSurroundingInfluences(aiTaskCommands,chosenStrategicObjective, controlledEntities[i], playerControlledEntites);
+                AnalyzeSurroundingInfluences(aiTaskCommands,chosenStrategicObjective, IAcontrolledEntities[i], playerControlledEntites);
             }
 
             Debug.Log(aiTaskCommands.Count);
-            _tasksAllocator.OnTaskCommandsReceived(aiTaskCommands, controlledEntities);
+            _tasksAllocator.OnTaskCommandsReceived(aiTaskCommands, IAcontrolledEntities);
         }
 
         private void AnalyzeSurroundingInfluences(List<AITaskCommand> aiTaskCommands,

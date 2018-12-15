@@ -11,7 +11,7 @@ namespace StrategicAI
         [SerializeField] private int _sampleRadius;
         public int SampleRadius => _sampleRadius;
 
-        public abstract Entity DecideBasedOnInfluenceData(AbstractNPCBrain brain, List<Node> influenceData,
+        public abstract Entity DecideBasedOnInfluenceData(AbstractNPCBrain analyzedNpc, List<Node> influenceData,
             Entity[] playerControlledEntites);
     }
 }
