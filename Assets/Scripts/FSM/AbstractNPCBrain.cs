@@ -19,7 +19,7 @@ public abstract class AbstractNPCBrain : Entity
     [HideInInspector]public List<Transition> transitions;
     [HideInInspector]public List<State> states;
     [HideInInspector]public State initialState;
-    [HideInInspector]public List<Transition> currentTransitions;
+    public List<Transition> currentTransitions;
     public State currentState;
     [HideInInspector]public bool popupOptionsEnabled = false;
     [HideInInspector]public Pathfinding.PathfindingManager _pathfindingManager;

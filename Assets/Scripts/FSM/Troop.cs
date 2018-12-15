@@ -41,8 +41,6 @@ public class Troop : AbstractNPCBrain
 
         FSMSystem.AddState(this,initialState);
         currentState = states.Find((x) => x.stateName == STATE.Idle);
-        currentTransitions = transitions.FindAll((x) => x.currentState == currentState);
-        currentState.OnEnter();
 
         base.Start();
     }

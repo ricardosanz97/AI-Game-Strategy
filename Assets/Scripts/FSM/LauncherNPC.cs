@@ -8,8 +8,13 @@ public class LauncherNPC : Troop
     public override void Start()
     {
         base.Start();
+        //ya hemos iniciado a currentState
         SetStates();
         SetTransitions();
+
+        currentTransitions = transitions.FindAll((x) => x.currentState.stateName == currentState.stateName);
+        Debug.Log("current transitions es " + currentTransitions.Count);
+        currentState.OnEnter();
     }
 
     public override void SetStates()
@@ -21,7 +26,6 @@ public class LauncherNPC : Troop
 
     public override void SetTransitions()
     {
-        base.SetTransitions();
         List<NextStateInfo> nextStatesInfo2 = new List<NextStateInfo>()
         {
             new NextStateInfo(this, STATE.Attack, STATE.Remain, GetComponent<AttackOrder>()),
