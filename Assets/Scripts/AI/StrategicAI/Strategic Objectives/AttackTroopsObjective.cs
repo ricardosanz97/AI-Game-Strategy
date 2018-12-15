@@ -8,7 +8,7 @@ namespace StrategicAI
     public class AttackTroopsObjective : StrategicObjective
     {
         public override Entity DecideBasedOnInfluenceData(AbstractNPCBrain analyzedNPC, List<Node> influenceData,
-            Entity[] playerControlledEntites)
+            Entity[] playerControlledEntites, LevelController levelController)
         {
             List<float> dataSum = new List<float>();
 

@@ -8,26 +8,37 @@ namespace StrategicAI
     public class AttackBaseObjective : StrategicObjective
     {
         public override Entity DecideBasedOnInfluenceData(AbstractNPCBrain analyzedNPC, List<Node> influenceData,
-            Entity[] playerControlledEntites)
+            Entity[] playerControlledEntites, LevelController levelController)
         {
-            Entity coreEntity = playerControlledEntites[0];
+            Entity[] coreEntities = levelController.playerCoreEntities.ToArray();
 
             //Cuando se lanze este método, todas las unidades solo podran atacar al core.
-
             if (analyzedNPC.entityType == ENTITY.Launcher || analyzedNPC.entityType == ENTITY.Prisioner || analyzedNPC.entityType == ENTITY.Tank)
             {
-                foreach (Entity e in playerControlledEntites)
-                {
-                    if (e.entityType == ENTITY.Core)
-                    {
-                        coreEntity = e;
-                    }
-                }
-                return coreEntity;
+                return FindClosestCoreEntityFromAnalyzedEntity(coreEntities, analyzedNPC);
             }
                   
-            //solo para que no haya nulls
-            return playerControlledEntites[0];
+            //si hay null no pasa nada, se gestiona luego
+            return null;
+        }
+
+        private Entity FindClosestCoreEntityFromAnalyzedEntity(Entity[] coreEntities, AbstractNPCBrain analyzedNpc)
+        {
+            float minDistance = int.MaxValue;
+            Entity closestEntity = null;
+
+            for (int i = 0; i < coreEntities.Length; i++)
+            {
+                float tempDistance = Vector3.Distance(analyzedNpc.transform.position, coreEntities[i].transform.position);
+
+                if (tempDistance < minDistance)
+                {
+                    minDistance = tempDistance;
+                    closestEntity = coreEntities[i];
+                } 
+            }
+
+            return closestEntity;
         }
     }
 }

@@ -11,7 +11,9 @@ public class LevelController : MonoBehaviour {
     public List<Entity> PlayerEntities;
     public List<Entity> AIEntities;
     public List<Entity> TotalEntities;
-
+    public List<Entity> playerCoreEntities;
+    public List<Entity> AICoreEntities;
+    
     private void Awake()
     {
         canvasGameObject = FindObjectOfType<Canvas>().gameObject;
@@ -20,6 +22,19 @@ public class LevelController : MonoBehaviour {
     private void Start()
     {
         ResetAllShadersCells();
+        GameObject[] AIEntitiesGO = GameObject.FindGameObjectsWithTag("CoreAI");
+        GameObject[] PlayerEntitiesGO = GameObject.FindGameObjectsWithTag("CorePlayer");
+
+        foreach (var go in AIEntitiesGO)
+        {
+            AICoreEntities.Add(go.GetComponent<Entity>());
+        }
+
+        foreach (var o in PlayerEntitiesGO)
+        {
+            playerCoreEntities.Add(o.GetComponent<Entity>());
+        }
+
     }
 
     void ResetAllShadersCells()
