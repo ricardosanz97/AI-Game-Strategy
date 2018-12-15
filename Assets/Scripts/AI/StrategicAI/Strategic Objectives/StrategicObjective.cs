@@ -12,6 +12,6 @@ namespace StrategicAI
         public int SampleRadius => _sampleRadius;
 
         public abstract Entity DecideBasedOnInfluenceData(AbstractNPCBrain analyzedNpc, List<Node> influenceData,
-            Entity[] playerControlledEntites);
+            Entity[] playerControlledEntites, LevelController levelController);
     }
 }

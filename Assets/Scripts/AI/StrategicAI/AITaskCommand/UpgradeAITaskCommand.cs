@@ -4,9 +4,11 @@ namespace StrategicAI
 {
     public class UpgradeAITaskCommand : AITaskCommand
     {
+        private Entity entityToUpgrade;
+        
         public UpgradeAITaskCommand(Entity chosenTarget)
         {
-            throw new System.NotImplementedException();
+            entityToUpgrade = chosenTarget;
         }
 
         public override void PerformCommand()
