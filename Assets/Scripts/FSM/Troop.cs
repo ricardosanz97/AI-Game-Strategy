@@ -26,13 +26,6 @@ public class Troop : AbstractNPCBrain
 
         initialState = new State(STATE.Idle, this,
             () => {
-                if (possibleMovements.Count > 0)
-                {
-                    foreach (CustomPathfinding.Node node in possibleMovements)
-                    {
-
-                    }
-                }
                 GetInitialDamage();
             },
             () => {

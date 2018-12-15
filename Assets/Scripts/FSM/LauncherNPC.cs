@@ -54,12 +54,17 @@ public class LauncherNPC : Troop
                 {
                     if (node.cell.entityIn != null && node.cell.entityIn.owner != owner) //the enemy in the cell is an enemy.
                     {
+                        node.cell.gameObject.transform.Find("AttackPlacement").gameObject.SetActive(true);
                         possibleAttacks.Add(node);
                     }
                 }
                 
             },
             () => {
+                foreach (CustomPathfinding.Node node in possibleAttacks)
+                {
+                    node.cell.gameObject.transform.Find("AttackPlacement").gameObject.SetActive(false);
+                }
                 possibleAttacks.Clear();
             })
         );
@@ -83,14 +88,18 @@ public class LauncherNPC : Troop
                 {
                     if (this.cell.PNode.GridX < node.GridX)
                     {
+                        node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(true);
                         possibleMovements.Add(node);
                     }    
                 }
             },
             () =>
             {
+                foreach (CustomPathfinding.Node node in possibleMovements)
+                {
+                    node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(false);
+                }
                 possibleMovements.Clear();
-                GetInitialDamage();
             })
         );
 
