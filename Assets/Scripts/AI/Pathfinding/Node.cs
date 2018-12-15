@@ -82,31 +82,5 @@ namespace CustomPathfinding
             }
             return null;
         }
-
-        public void ColorAsPossibleMovementDistance()
-        {
-            this.GetComponent<MeshRenderer>().material.color = Color.blue;
-        }
-
-        public void ResetColor()
-        {
-            this.GetComponent<MeshRenderer>().material.color = initialColor;
-        }
-
-        public void ColorAsPossibleAttackDistance()
-        {
-            this.GetComponent<MeshRenderer>().material.color = Color.yellow;
-        }
-
-        public void ColorAsPossibleAttack()
-        {
-            this.GetComponent<MeshRenderer>().material.color = Color.black;
-        }
-
-        public void ColorAsPossibleTurretExplosion()
-        {
-            this.GetComponent<MeshRenderer>().material.color = Color.cyan;
-        }
-    
     }
 }

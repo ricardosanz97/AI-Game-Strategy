@@ -69,8 +69,8 @@ public class LevelController : MonoBehaviour {
         bool can = true;
         foreach (Entity entity in PlayerEntities)
         {
-            if (entity.gameObject.GetComponent<AbstractNPCBrain>() != null 
-                && entity.gameObject.GetComponent<AbstractNPCBrain>().currentState != null 
+            if (entity.gameObject.GetComponent<Troop>() != null 
+                && entity.gameObject.GetComponent<AbstractNPCBrain>().currentState != null
                 && entity.gameObject.GetComponent<AbstractNPCBrain>().currentState.stateName != STATE.Idle) //is moving or attacking
             {
                 can = false;

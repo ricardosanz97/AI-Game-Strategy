@@ -55,11 +55,9 @@ public class PrisionerNPC : Troop
                 Debug.Log("nodeList tiene " + nodeList.Count + " elementos. ");
                 foreach (CustomPathfinding.Node node in nodeList)
                 {
-                    node.ColorAsPossibleAttackDistance();
                     if (node.cell.entityIn != null && node.cell.entityIn.owner != owner) //the enemy in the cell is an enemy.
                     {
                         possibleAttacks.Add(node);
-                        node.GetComponent<CustomPathfinding.Node>().ColorAsPossibleAttack();
                     }
                 }
             },
@@ -85,8 +83,10 @@ public class PrisionerNPC : Troop
                 Debug.Log("nodeList tiene " + nodeList.Count + " elementos. ");
                 foreach (CustomPathfinding.Node node in nodeList)
                 {
-                    possibleMovements.Add(node);
-                    node.GetComponent<CustomPathfinding.Node>().ColorAsPossibleMovementDistance();
+                    if (this.cell.PNode.GridX < node.GridX)
+                    {
+                        possibleMovements.Add(node);
+                    }
                 }
             },
             ()=>

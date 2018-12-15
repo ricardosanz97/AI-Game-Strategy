@@ -45,6 +45,11 @@ public class RaycastCamera : MonoBehaviour {
 
             if (_levelController.TryingToMove() != null)
             {
+                if (hit.collider.GetComponent<CellBehaviour>().entityIn == _levelController.TryingToMove() && Input.GetMouseButtonDown(0))
+                {
+                    hit.collider.GetComponent<CellBehaviour>().entityIn.GetComponent<IdleOrder>().Idle = true; //cancelamos.
+                }
+
                 bool nodeMovementAccesible = _levelController.TryingToMove().gameObject.GetComponent<Troop>().ListPossibleMovementsContains(hit.collider.GetComponent<CellBehaviour>().PNode);
                 Debug.Log("this node is accesible: " + nodeMovementAccesible);
                 if (Input.GetMouseButtonDown(0) 
@@ -56,10 +61,16 @@ public class RaycastCamera : MonoBehaviour {
                     }
                 }
             }
+
             else if (_levelController.TryingToAttack() != null)
             {
                 if (_levelController.TryingToAttack().gameObject.GetComponent<Troop>() != null) //si esta en estado atacar pero no es la torre (que siempre esta en ataque atacar).
                 {
+                    if (hit.collider.GetComponent<CellBehaviour>().entityIn == _levelController.TryingToAttack() && Input.GetMouseButtonDown(0))
+                    {
+                        hit.collider.GetComponent<CellBehaviour>().entityIn.GetComponent<IdleOrder>().Idle = true;
+                    }
+
                     bool nodeAttackAccesible = _levelController.TryingToAttack().gameObject.GetComponent<Troop>().ListPossibleAttacksContains(hit.collider.GetComponent<CellBehaviour>().PNode);
                     if (Input.GetMouseButtonDown(0)
                         && nodeAttackAccesible)

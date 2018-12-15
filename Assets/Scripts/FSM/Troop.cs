@@ -30,7 +30,7 @@ public class Troop : AbstractNPCBrain
                 {
                     foreach (CustomPathfinding.Node node in possibleMovements)
                     {
-                        node.GetComponent<CustomPathfinding.Node>().ResetColor();
+
                     }
                 }
                 GetInitialDamage();
@@ -43,13 +43,15 @@ public class Troop : AbstractNPCBrain
         currentState = states.Find((x) => x.stateName == STATE.Idle);
 
         base.Start();
+
+        //xecuted = true;
     }
 
 
     public void OnMouseDown()
     {
         Debug.Log("click in enemy");
-        if (_levelController.GetAnyPopupEnabled() || this.owner == Owner.AI || this.GetComponent<AbstractNPCBrain>().executed) //si hay algun popup abierto o el pertenece a la IA no te abras.
+        if (_levelController.GetAnyPopupEnabled() || this.owner == Owner.AI || this.GetComponent<AbstractNPCBrain>().executed || this.GetComponent<AbstractNPCBrain>().currentState.stateName != STATE.Idle) //si hay algun popup abierto o el pertenece a la IA no te abras.
         {
             return;
         }
