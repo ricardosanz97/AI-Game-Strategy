@@ -13,6 +13,7 @@ namespace StrategicAI
         public SpawnAITaskCommand(TROOP troopToSpawn, CellBehaviour[] cells)
         {
             this.troopToSpawn = troopToSpawn;
+            spawnableCells = cells;
         }
 
         public override void PerformCommand()
@@ -24,7 +25,7 @@ namespace StrategicAI
                 //todo implement
                     case TROOP.Launcher:
                         //todo get random cell
-                        //_spawnablesManager.SpawnEntityIA(troopToSpawn,spawnableCells[0]);
+                        Object.FindObjectOfType<SpawnablesManager>().SpawnEntityAI(troopToSpawn,spawnableCells[0]);
                         break;
                         
                     case TROOP.Prisioner:
