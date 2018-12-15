@@ -566,6 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6adfc145bc8a448ee8203367dc83b0ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodCost: 1
   maxMoves: 2
   moving: 0
   OnGoingCell: {fileID: 0}
@@ -702,6 +703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219904cf804eb4ab19c44053bcc8df2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodCost: 2
   damage: 1
   range: 3
   ObjectiveAssigned: 0

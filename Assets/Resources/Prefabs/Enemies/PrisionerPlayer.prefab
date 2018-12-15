@@ -409,6 +409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodCost: 2
+  entityType: 0
   cell: {fileID: 0}
   owner: 0
   rb: {fileID: 0}
@@ -416,7 +417,7 @@ MonoBehaviour:
   _spawnablesManager: {fileID: 0}
   _levelController: {fileID: 0}
   _influenceMapComp: {fileID: 0}
-  npc: 0
+  damageTurretReceived: 0
   currentLevel: 1
   sliderHealth: {fileID: 0}
   transitions: []
@@ -512,6 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6adfc145bc8a448ee8203367dc83b0ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodCost: 1
   maxMoves: 3
   moving: 0
   OnGoingCell: {fileID: 0}
@@ -577,6 +579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219904cf804eb4ab19c44053bcc8df2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodCost: 2
   damage: 2
   range: 1
   ObjectiveAssigned: 0
