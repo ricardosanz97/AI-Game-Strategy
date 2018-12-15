@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 33241430252030514}
   - component: {fileID: 23630253046111334}
   - component: {fileID: 95713241463904406}
+  - component: {fileID: 114231076650564802}
   m_Layer: 0
   m_Name: TankSkeleton
   m_TagString: Untagged
@@ -414,6 +415,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 8
+--- !u!114 &114231076650564802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1525598729560794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cdc543f20b883a4b808953b1772b05f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114246873943411048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -568,6 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodCost: 4
+  entityType: 0
   cell: {fileID: 0}
   owner: 0
   rb: {fileID: 0}
@@ -575,7 +588,7 @@ MonoBehaviour:
   _spawnablesManager: {fileID: 0}
   _levelController: {fileID: 0}
   _influenceMapComp: {fileID: 0}
-  npc: 3
+  damageTurretReceived: 0
   currentLevel: 1
   sliderHealth: {fileID: 0}
   transitions: []
