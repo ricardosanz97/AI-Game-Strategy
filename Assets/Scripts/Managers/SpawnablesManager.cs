@@ -125,7 +125,7 @@ public class SpawnablesManager : MonoBehaviour {
         Entity entityToSpawn = null;
         Entity.Owner owner = Entity.Owner.AI;
         
-        switch (currentTroopSelected)
+        switch (troop)
         {
             case TROOP.Prisioner:
                 entityToSpawn = Resources.Load<Entity>("Prefabs/Enemies/" + TROOP.Prisioner.ToString() + owner.ToString());

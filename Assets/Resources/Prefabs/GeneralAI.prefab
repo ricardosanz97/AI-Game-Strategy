@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ec4776a81940f6ac8495c1bcddbdd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sampleRadius: 0
+  _sampleRadius: 4
 --- !u!114 &114760300805236182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -65,11 +65,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f17452a0781403b9c60a5f95935dc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPersonality: 0
   _strategicObjective: {fileID: 0}
   AIControlledEntites: []
   PlayerControlledEntities: []
-  spawnableCells:
+  _spawnableCells:
   - {fileID: 0}
 --- !u!114 &114890606136423558
 MonoBehaviour:
@@ -82,4 +81,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1a2133b3e3e4a45bdf8a71898ded19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sampleRadius: 0
+  _sampleRadius: 4

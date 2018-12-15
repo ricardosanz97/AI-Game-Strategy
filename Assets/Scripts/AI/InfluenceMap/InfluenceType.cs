@@ -6,6 +6,7 @@ namespace InfluenceMap
         Prisioner,
         Tank,
         Turret,
-        Wall
+        Wall,
+        Core
     }
 }

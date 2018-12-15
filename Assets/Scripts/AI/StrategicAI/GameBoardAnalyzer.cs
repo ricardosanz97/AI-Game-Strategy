@@ -27,6 +27,7 @@ namespace StrategicAI
         
         public void AnalyzeGameTerrain(StrategicObjective chosenStrategicObjective)
         {   
+            //declaramos la lisa de pequeños comandos que realizara la ia
             List<AITaskCommand> aiTaskCommands = new List<AITaskCommand>();
             
             Entity[] controlledEntities = _highLevelAi.AIControlledEntites.ToArray();
@@ -39,6 +40,7 @@ namespace StrategicAI
                 AnalyzeSurroundingInfluences(aiTaskCommands,chosenStrategicObjective, controlledEntities[i], playerControlledEntites);
             }
 
+            Debug.Log(aiTaskCommands.Count);
             _tasksAllocator.OnTaskCommandsReceived(aiTaskCommands, controlledEntities);
         }
 
@@ -54,11 +56,8 @@ namespace StrategicAI
                 // look in a ring
                 InfluenceMap.Node node = _influenceMapComponent.GetNodeAtLocation(brain.transform.position);
                 List<Node> influenceData = _influenceMapComponent.GetKRingsOfNodes(node, chosenStrategicObjective.SampleRadius);
-                
-                Debug.Log(influenceData.Count);
 
-                Entity chosenTarget = chosenStrategicObjective.DecideBasedOnInfluenceData(brain,influenceData);
-
+                Entity chosenTarget = chosenStrategicObjective.DecideBasedOnInfluenceData(brain,influenceData,playerControlledEntites);
 
                 if(chosenTarget.owner == Entity.Owner.AI) //mejorar
                     aiTaskCommands.Add(new UpgradeAITaskCommand(chosenTarget));
