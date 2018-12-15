@@ -46,7 +46,7 @@ namespace StrategicAI
                     turretSum += node.GetInfluenceOfType(InfluenceType.Turret).Value;
                     dataSum.Add(turretSum);
                 }
-            }
+            }//
 
             //si el npc es launcher o prisioner podran atacar a todo tipo de entidades, ya sean tropas, torretas o el core
 
