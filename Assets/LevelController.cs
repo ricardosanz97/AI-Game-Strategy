@@ -11,6 +11,7 @@ public class LevelController : MonoBehaviour {
     public List<Entity> PlayerEntities;
     public List<Entity> AIEntities;
     public List<Entity> TotalEntities;
+    public int MaxWalls = 8;
 
     private void Awake()
     {
@@ -78,6 +79,32 @@ public class LevelController : MonoBehaviour {
         }
 
         return can;
+    }
+
+    public void ResetTroopBooleans(PlayerType nextTurn)
+    {
+        if (nextTurn == PlayerType.AI)
+        {
+            foreach (Entity e in AIEntities)
+            {
+                if (e.GetComponent<AbstractNPCBrain>() != null)
+                {
+                    e.GetComponent<AbstractNPCBrain>().executed = false;
+                    e.GetComponent<AbstractNPCBrain>().damageTurretReceived = false;
+                }
+            }
+        }
+        else if (nextTurn == PlayerType.Player)
+        {
+            foreach (Entity e in PlayerEntities)
+            {
+                if (e.GetComponent<AbstractNPCBrain>() != null)
+                {
+                    e.GetComponent<AbstractNPCBrain>().executed = false;
+                    e.GetComponent<AbstractNPCBrain>().damageTurretReceived = false;
+                }
+            }
+        }
     }
 
     public void AddPlayerEntities(Entity entity)

@@ -34,13 +34,20 @@ public class Entity : MonoBehaviour
         _influenceMapComp = FindObjectOfType<InfluenceMap.InfluenceMapComponent>();
     }
 
+    private void OnEnable()
+    {
+        
+    }
+
     public void Die()
     {
         OnTroopDeleted?.Invoke(this);
     }
 
     public void SetEntity(Owner owner) {
+
         this.owner = owner;
+
         if (owner == Owner.Player)
         {
             _levelController.AddPlayerEntities(this);

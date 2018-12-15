@@ -26,7 +26,7 @@ public class Troop : AbstractNPCBrain
 
         initialState = new State(STATE.Idle, this,
             () => {
-                GetInitialDamage();
+                GetTurretDamage();
             },
             () => {
             }

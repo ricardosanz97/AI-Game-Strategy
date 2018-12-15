@@ -8,9 +8,11 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Health))]
 public abstract class AbstractNPCBrain : Entity
 {
+    [Inject]
+    protected BloodController _bloodController;
+    public bool damageTurretReceived = false;
     public int currentLevel = 1;
     [SerializeField]public Slider sliderHealth;
-
 
     public abstract void SetTransitions();
     public abstract void SetStates();
@@ -94,8 +96,12 @@ public abstract class AbstractNPCBrain : Entity
         }
     }
 
-    public void GetInitialDamage()
+    public void GetTurretDamage()
     {
+        if (damageTurretReceived)
+        {
+            return;
+        }
         CellBehaviour cell = this.cell;
         if (cell.explosionBelongsTo.Count > 0)
         {
@@ -105,12 +111,21 @@ public abstract class AbstractNPCBrain : Entity
             }
         }
         Debug.Log("get initial damage. ");
+        damageTurretReceived = true;
+    }
 
+    public void ResetExecutedBoolean()
+    {
+        this.executed = false;
+    }
+
+    public void ResetDamageTurretReceivedBoolean()
+    {
+        this.damageTurretReceived = false;
     }
 
     public virtual void DoAttackAnimation()
     {
-
     }
 
     private void Update()
