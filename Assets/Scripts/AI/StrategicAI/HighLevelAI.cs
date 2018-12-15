@@ -12,28 +12,23 @@ namespace StrategicAI
         [SerializeField] private StrategicObjective _strategicObjective;      
         [Inject] private GameBoardAnalyzer _analyzer;
         [Inject] private TurnHandler _turnHandler;
-        public List<Entity> AIControlledEntites;
-        public List<Entity> PlayerControlledEntities;
-        [SerializeField] private CellBehaviour[] _spawnableCells;
+        [SerializeField] private List<CellBehaviour> _spawnableCells;
+        [SerializeField] private LevelController _levelController;
 
-        public CellBehaviour[] SpawnableCells => _spawnableCells;
-
-        private void OnEnable()
-        {
-            SpawnablesManager.OnSpawnedTroop += RegisterSpawnedEntity;
-            Entity.OnTroopDeleted += UnregisterDeletedEntity;
-        }
-
-        private void OnDisable()
-        {
-            SpawnablesManager.OnSpawnedTroop -= RegisterSpawnedEntity;
-            Entity.OnTroopDeleted += UnregisterDeletedEntity;
-        }
+        public List<CellBehaviour> SpawnableCells => _spawnableCells;
 
         private void Start()
-        {
-            AIControlledEntites = new List<Entity>();
-            PlayerControlledEntities = new List<Entity>();
+        {               
+            _levelController = FindObjectOfType<LevelController>();
+            Assert.IsNotNull(_levelController);
+            var spawners = FindObjectsOfType<SpawnableCell>();
+
+            foreach (var spawnableCell in spawners)
+            {
+                if(spawnableCell.GetComponent<CellBehaviour>().owner == PlayerType.AI)
+                    _spawnableCells.Add(spawnableCell.GetComponent<CellBehaviour>());
+            }
+            
             Assert.IsNotNull(_spawnableCells);
         }
 
@@ -43,7 +38,7 @@ namespace StrategicAI
             _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
             
             //todo programar el arbol
-            if (CalculateSetDamage(AIControlledEntites) >= CalculateSetDamage(PlayerControlledEntities))
+            if (CalculateSetDamage(_levelController.AIEntities) >= CalculateSetDamage(_levelController.PlayerEntities))
                 _strategicObjective = GetOrAddComponent<AttackBaseObjective>();
             else
                 _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
@@ -62,18 +57,18 @@ namespace StrategicAI
 
         private void RegisterSpawnedEntity(Entity e)
         {
-            if(e.owner == Entity.Owner.AI && !AIControlledEntites.Contains(e))
-                AIControlledEntites.Add(e);
-            else if(e.owner == Entity.Owner.Player && !PlayerControlledEntities.Contains(e))
-                PlayerControlledEntities.Add(e);    
+            if(e.owner == Entity.Owner.AI && !_levelController.AIEntities.Contains(e))
+                _levelController.AIEntities.Add(e);
+            else if(e.owner == Entity.Owner.Player && !_levelController.PlayerEntities.Contains(e))
+                _levelController.PlayerEntities.Add(e);    
         }
         
         private void UnregisterDeletedEntity(Entity e)
         {
-            if (e.owner == Entity.Owner.AI && AIControlledEntites.Contains(e))
-                AIControlledEntites.Remove(e);
-            else if (e.owner == Entity.Owner.Player && PlayerControlledEntities.Contains(e))
-                PlayerControlledEntities.Remove(e);
+            if (e.owner == Entity.Owner.AI && _levelController.AIEntities.Contains(e))
+                _levelController.AIEntities.Remove(e);
+            else if (e.owner == Entity.Owner.Player && _levelController.PlayerEntities.Contains(e))
+                _levelController.PlayerEntities.Remove(e);
                 
         }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using Zenject;
 
+[SelectionBase]
 public class CellBehaviour : MonoBehaviour
 {
     public PlayerType owner;
