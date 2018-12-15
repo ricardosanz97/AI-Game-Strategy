@@ -15,30 +15,11 @@ namespace StrategicAI
             //Cuando se lanze este método, todas las unidades solo podran atacar al core.
             if (analyzedNPC.entityType == ENTITY.Launcher || analyzedNPC.entityType == ENTITY.Prisioner || analyzedNPC.entityType == ENTITY.Tank)
             {
-                return FindClosestCoreEntityFromAnalyzedEntity(coreEntities, analyzedNPC);
+                return GetClosestEntityInCollection(analyzedNPC, coreEntities);
             }
                   
             //si hay null no pasa nada, se gestiona luego
             return null;
-        }
-
-        private Entity FindClosestCoreEntityFromAnalyzedEntity(Entity[] coreEntities, AbstractNPCBrain analyzedNpc)
-        {
-            float minDistance = int.MaxValue;
-            Entity closestEntity = null;
-
-            for (int i = 0; i < coreEntities.Length; i++)
-            {
-                float tempDistance = Vector3.Distance(analyzedNpc.transform.position, coreEntities[i].transform.position);
-
-                if (tempDistance < minDistance)
-                {
-                    minDistance = tempDistance;
-                    closestEntity = coreEntities[i];
-                } 
-            }
-
-            return closestEntity;
         }
     }
 }

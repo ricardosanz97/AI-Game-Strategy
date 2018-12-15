@@ -7,13 +7,10 @@ namespace StrategicAI
 {
     public class AttackTroopsObjective : StrategicObjective
     {
-        public override Entity DecideBasedOnInfluenceData(AbstractNPCBrain analyzedNPC, List<Node> influenceData,
-            Entity[] playerControlledEntites, LevelController levelController)
+        public override Entity DecideBasedOnInfluenceData(AbstractNPCBrain analyzedNPC, List<Node> influenceData, Entity[] playerControlledEntites, LevelController levelController)
         {
             List<float> dataSum = new List<float>();
-
-            float minDist = Mathf.Infinity;
-            Entity minDistEntity = playerControlledEntites[0];
+            Entity minDistEntity = null;
 
             float coreSum = 0f;
             float prisionerSum = 0f;
@@ -22,7 +19,6 @@ namespace StrategicAI
             float turretSum = 0f;
 
             //calculo todas las influencias cercanas del npc
-
             foreach (var node in influenceData)
             {
                 if (node.HasInfluenceOfType(InfluenceType.Core))
@@ -58,89 +54,26 @@ namespace StrategicAI
             {                            
                 if (coreSum == Mathf.Max(dataSum.ToArray())) 
                 {
-                    foreach(Entity e in playerControlledEntites)
-                    {
-                        if(e.entityType == ENTITY.Core){
-                            minDistEntity = e;
-                        }
-                    }
+                    minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Core);
                 }
-
                 else if(launcherSum == Mathf.Max(dataSum.ToArray()))
                 {
-                    foreach (Entity e in playerControlledEntites)
-                    {
-                        if (e.entityType == ENTITY.Launcher)
-                        {
-                            float dist = Vector3.Distance(e.transform.localPosition, analyzedNPC.transform.localPosition);
-
-                            if (dist < minDist)
-                            {
-                                minDist = dist;
-                                minDistEntity = e;
-                            }
-                        }
-
-                    }
+                    minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Launcher);
                 }
-
                 else if (prisionerSum == Mathf.Max(dataSum.ToArray()))
                 {
-                    foreach (Entity e in playerControlledEntites)
-                    {
-                        if (e.entityType == ENTITY.Prisioner)
-                        {
-                            float dist = Vector3.Distance(e.transform.localPosition, analyzedNPC.transform.localPosition);
-
-                            if (dist < minDist)
-                            {
-                                minDist = dist;
-                                minDistEntity = e;
-                            }
-                        }
-
-                    }
+                    minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Prisioner);
                 }
-
                 else if (tankSum == Mathf.Max(dataSum.ToArray()))
                 {
-                    foreach (Entity e in playerControlledEntites)
-                    {
-                        if (e.entityType == ENTITY.Tank)
-                        {
-                            float dist = Vector3.Distance(e.transform.localPosition, analyzedNPC.transform.localPosition);
-
-                            if (dist < minDist)
-                            {
-                                minDist = dist;
-                                minDistEntity = e;
-                            }
-                        }
-                    }
+                    minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Tank);
                 }
-
                 else if (turretSum == Mathf.Max(dataSum.ToArray()))
                 {
-                    foreach (Entity e in playerControlledEntites)
-                    {
-                        if (e.entityType == ENTITY.Turret)
-                        {
-                            float dist = Vector3.Distance(e.transform.localPosition, analyzedNPC.transform.localPosition);
-
-                            if (dist < minDist)
-                            {
-                                minDist = dist;
-                                minDistEntity = e;
-                            }
-                        }
-                    }
+                    minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Turret);
                 }
-                return minDistEntity;
             }
-
-            //si es tanque, solo podra atacar al core y a torretas
-            
-            else if(analyzedNPC.entityType == ENTITY.Tank)
+            else if(analyzedNPC.entityType == ENTITY.Tank) //si es tanque, solo podra atacar al core y a torretas
             {
                 dataSum.Remove(launcherSum);
                 dataSum.Remove(prisionerSum);
@@ -148,34 +81,17 @@ namespace StrategicAI
 
                 if (coreSum == Mathf.Max(dataSum.ToArray()))
                 {
-                    foreach (Entity e in playerControlledEntites)
-                    {
-                        if (e.entityType == ENTITY.Core)
-                        {
-                            minDistEntity = e;
-                        }
-                    }
+                    minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Core);
                 }
 
                 else if (turretSum == Mathf.Max(dataSum.ToArray()))
                 {
-                    foreach (Entity e in playerControlledEntites)
-                    {
-                        if (e.entityType == ENTITY.Turret)
-                        {
-                            float dist = Vector3.Distance(e.transform.localPosition, analyzedNPC.transform.localPosition);
-
-                            if (dist < minDist)
-                            {
-                                minDist = dist;
-                                minDistEntity = e;
-                            }
-                        }
-                    }
+                    minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Turret);
                 }
             }
+            
             //solo para que no haya nulls
-            return playerControlledEntites[0];
+            return minDistEntity;
         }
     }
 }
