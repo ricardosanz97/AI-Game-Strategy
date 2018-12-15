@@ -11,7 +11,7 @@ public class Entity : MonoBehaviour
 {
     public int bloodCost;
 
-    [HideInInspector] public CellBehaviour cell;
+    public CellBehaviour cell;
     public enum Owner
     {
         AI,

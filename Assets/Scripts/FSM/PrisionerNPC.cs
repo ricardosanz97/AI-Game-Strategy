@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class PrisionerNPC : Troop
 {
+    public override void Start()
+    {
+        base.Start();
+        SetStates();
+        SetTransitions();
+    }
+
     public override void SetStates()
     {
-        base.SetStates();
-        FSMSystem.AddState(this, new State(STATE.Remain, this));  
+        SetRemainState();
+        SetAttackState();
+        SetMoveState();
     }
 
     public override void SetTransitions()

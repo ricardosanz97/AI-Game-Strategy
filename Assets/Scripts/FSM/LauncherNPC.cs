@@ -5,10 +5,16 @@ using UnityEngine;
 
 public class LauncherNPC : Troop
 {
+    public override void Start()
+    {
+        base.Start();
+        SetStates();
+        SetTransitions();
+    }
+
     public override void SetStates()
     {
-        base.SetStates();
-        FSMSystem.AddState(this, new State(STATE.Remain, this));
+        SetRemainState();
         SetAttackState();    
         SetMoveState();  
     }
@@ -40,7 +46,6 @@ public class LauncherNPC : Troop
         FSMSystem.AddState(this, new State(STATE.Attack, this,
             () => {//on enter attack state
                 List<CustomPathfinding.Node> nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Attack>().range, transform.position);
-                Debug.Log("nodeList tiene " + nodeList.Count + " elementos. ");
                 foreach (CustomPathfinding.Node node in nodeList)
                 {
                     node.ColorAsPossibleAttackDistance();

@@ -105,6 +105,7 @@ public abstract class AbstractNPCBrain : Entity
                 this.GetComponent<Health>().ReceiveDamage(t.GetComponent<AreaAttack>().damage);
             }
         }
+        Debug.Log("get initial damage. ");
 
     }
 
