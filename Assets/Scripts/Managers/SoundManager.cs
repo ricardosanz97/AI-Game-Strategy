@@ -28,12 +28,11 @@ public class SoundManager : MonoBehaviour {
     public AudioClip turretSoundShot;
     [HideInInspector]
     public AudioClip turretSoundSpawn;
+    [HideInInspector]
+    public AudioClip cancelActionSound;
+    [HideInInspector]
+    public AudioClip buttonPressedSound;
 
-    void Awake () {
-		
-
-    }
-	
     void Start()
     {
         cageSoundAttack = Resources.Load<AudioClip>("SFX/CageSoundAttack");
@@ -46,6 +45,8 @@ public class SoundManager : MonoBehaviour {
         tankSoundSpawn = Resources.Load<AudioClip>("SFX/TankSoundSpawn");
         turretSoundShot = Resources.Load<AudioClip>("SFX/TurretSoundShot");
         turretSoundSpawn = Resources.Load<AudioClip>("SFX/TurretSoundSpawn");
+        cancelActionSound = Resources.Load<AudioClip>("SFX/CancelAction");
+        buttonPressedSound = Resources.Load<AudioClip>("SFX/ButtonPressed");
     }
 
     public void PlaySingle (AudioClip clip)
