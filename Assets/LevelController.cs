@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using Zenject;
 
@@ -42,6 +43,30 @@ public class LevelController : MonoBehaviour {
             playerCoreEntities.Add(o.GetComponent<Entity>());
         }
 
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimplePausePopup"));
+            go.GetComponent<SimplePausePopupController>().SetPopup(
+            Vector3.zero,
+            "Pause",
+            "Resume",
+            "Quit",
+            () => {
+                go.GetComponent<SimplePausePopupController>().ClosePopup();
+            },
+            () => {
+                go.GetComponent<SimplePausePopupController>().ClosePopup();
+                SceneManager.LoadScene(0);
+            },
+            () =>
+            {
+                go.GetComponent<SimplePausePopupController>().ClosePopup();
+            });
+        }
     }
 
     void ResetAllShadersCells()
