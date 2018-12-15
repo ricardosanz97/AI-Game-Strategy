@@ -12,6 +12,8 @@ public class RaycastCamera : MonoBehaviour {
     TurnHandler _turnHandler;
     CellBehaviour lastCellSelected;
     LevelController _levelController;
+    [Inject]
+    SoundManager soundManager;
 
     private void Awake()
     {
@@ -45,21 +47,35 @@ public class RaycastCamera : MonoBehaviour {
 
             if (_levelController.TryingToMove() != null)
             {
+                if (hit.collider.GetComponent<CellBehaviour>().entityIn == _levelController.TryingToMove() && Input.GetMouseButtonDown(0))
+                {
+                    hit.collider.GetComponent<CellBehaviour>().entityIn.GetComponent<IdleOrder>().Idle = true; //cancelamos.
+                    soundManager.PlaySingle(soundManager.cancelActionSound);
+                }
+
                 bool nodeMovementAccesible = _levelController.TryingToMove().gameObject.GetComponent<Troop>().ListPossibleMovementsContains(hit.collider.GetComponent<CellBehaviour>().PNode);
                 Debug.Log("this node is accesible: " + nodeMovementAccesible);
                 if (Input.GetMouseButtonDown(0) 
                     && nodeMovementAccesible)
                 {
                     if (_levelController.TryingToMove().gameObject.GetComponent<Move>() != null){
+                        soundManager.PlaySingle(soundManager.buttonPressedSound);
                         _levelController.TryingToMove().gameObject.GetComponent<Move>().OnGoingCell = lastCellSelected;
                         _levelController.TryingToMove().gameObject.GetComponent<Move>().PathReceived = true;
                     }
                 }
             }
+
             else if (_levelController.TryingToAttack() != null)
             {
                 if (_levelController.TryingToAttack().gameObject.GetComponent<Troop>() != null) //si esta en estado atacar pero no es la torre (que siempre esta en ataque atacar).
                 {
+                    if (hit.collider.GetComponent<CellBehaviour>().entityIn == _levelController.TryingToAttack() && Input.GetMouseButtonDown(0))
+                    {
+                        hit.collider.GetComponent<CellBehaviour>().entityIn.GetComponent<IdleOrder>().Idle = true;
+                        soundManager.PlaySingle(soundManager.cancelActionSound);
+                    }
+
                     bool nodeAttackAccesible = _levelController.TryingToAttack().gameObject.GetComponent<Troop>().ListPossibleAttacksContains(hit.collider.GetComponent<CellBehaviour>().PNode);
                     if (Input.GetMouseButtonDown(0)
                         && nodeAttackAccesible)

@@ -24,7 +24,7 @@ public class TurretNPC : AbstractNPCBrain
             () =>
             {
                 GetInitialDamage();
-                SetAffectedCells();
+                //SetAffectedCells(); //todo -> descomentar para nada más spawnear, causar daño
             },
             () =>
             {

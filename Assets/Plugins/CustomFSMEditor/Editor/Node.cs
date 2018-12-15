@@ -135,7 +135,6 @@ namespace Editor
         private void ShowNodeInspector()
         {
             var h = AssetDatabase.FindAssets(labelName);
-
             Selection.activeObject = AssetDatabase.LoadAssetAtPath<FSMSO.State>(AssetDatabase.GUIDToAssetPath(h[0]));
         }
 
