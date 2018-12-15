@@ -40,6 +40,8 @@ public class TurretNPC : AbstractNPCBrain
         SetTransitions();
 
         base.Start();
+
+        executed = true; //todo -> esto sirve par saber si ha ejecutado la accion del turno, si esta a false, puede spawnear y realizar una acción
     }
 
     public override void SetStates()

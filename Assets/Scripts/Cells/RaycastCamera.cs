@@ -58,18 +58,22 @@ public class RaycastCamera : MonoBehaviour {
             }
             else if (_levelController.TryingToAttack() != null)
             {
-                bool nodeAttackAccesible = _levelController.TryingToAttack().gameObject.GetComponent<Troop>().ListPossibleAttacksContains(hit.collider.GetComponent<CellBehaviour>().PNode);
-                if (Input.GetMouseButtonDown(0)
-                    && nodeAttackAccesible)
+                if (_levelController.TryingToAttack().gameObject.GetComponent<Troop>() != null) //si esta en estado atacar pero no es la torre (que siempre esta en ataque atacar).
                 {
-                    if (_levelController.TryingToAttack().gameObject.GetComponent<Attack>() != null)
+                    bool nodeAttackAccesible = _levelController.TryingToAttack().gameObject.GetComponent<Troop>().ListPossibleAttacksContains(hit.collider.GetComponent<CellBehaviour>().PNode);
+                    if (Input.GetMouseButtonDown(0)
+                        && nodeAttackAccesible)
                     {
-                        _levelController.TryingToAttack().gameObject.GetComponent<AbstractNPCBrain>().DoAttackAnimation();
-                        _levelController.TryingToAttack().gameObject.GetComponent<Attack>().NPCObjectiveAttack = lastCellSelected.entityIn.GetComponent<AbstractNPCBrain>();
-                        _levelController.TryingToAttack().gameObject.GetComponent<Attack>().ObjectiveAssigned = true;
+                        if (_levelController.TryingToAttack().gameObject.GetComponent<Attack>() != null)
+                        {
+                            _levelController.TryingToAttack().gameObject.GetComponent<AbstractNPCBrain>().DoAttackAnimation();
+                            _levelController.TryingToAttack().gameObject.GetComponent<Attack>().NPCObjectiveAttack = lastCellSelected.entityIn.GetComponent<AbstractNPCBrain>();
+                            _levelController.TryingToAttack().gameObject.GetComponent<Attack>().ObjectiveAssigned = true;
 
+                        }
                     }
                 }
+               
             }
         }
 
