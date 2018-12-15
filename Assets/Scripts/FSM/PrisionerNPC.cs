@@ -117,4 +117,12 @@ public class PrisionerNPC : Troop
         FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().cageSoundAttack);
         GetComponentInChildren<Animator>().SetTrigger("Attack");
     }
+
+    public override void UpgradeNPC()
+    {
+        base.UpgradeNPC();
+        this.UpgradeCost += 2;
+        this.GetComponent<Attack>().damage += 2;
+        this.GetComponent<Move>().maxMoves++;
+    }
 }

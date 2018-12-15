@@ -69,6 +69,12 @@ public class Troop : AbstractNPCBrain
         },
         () =>
         {
+            this.UpgradeNPC();
+            go.GetComponent<SimpleOptionsPopupController>().ClosePopup();
+            popupOptionsEnabled = false;
+        },
+        () =>
+        {
             go.GetComponent<SimpleOptionsPopupController>().ClosePopup();
             popupOptionsEnabled = false;
         });
@@ -106,4 +112,5 @@ public class Troop : AbstractNPCBrain
     public override void SetStates()
     {
     }
+
 }

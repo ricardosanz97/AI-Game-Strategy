@@ -8,8 +8,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Health))]
 public abstract class AbstractNPCBrain : Entity
 {
-    [Inject]
-    protected BloodController _bloodController;
+    public BloodController _bloodController;
     public bool damageTurretReceived = false;
     public int currentLevel = 1;
     [SerializeField]public Slider sliderHealth;
@@ -24,7 +23,8 @@ public abstract class AbstractNPCBrain : Entity
     public State currentState;
     [HideInInspector]public bool popupOptionsEnabled = false;
     [HideInInspector]public Pathfinding.PathfindingManager _pathfindingManager;
-
+    public int UpgradeCost;
+    public int MaxUpgradeLevel = 3;
 
     public bool executed = false;
 
@@ -33,6 +33,7 @@ public abstract class AbstractNPCBrain : Entity
         base.Awake();
         sliderHealth = this.GetComponentInChildren<Slider>();
         _pathfindingManager = FindObjectOfType<Pathfinding.PathfindingManager>();
+        _bloodController = FindObjectOfType<BloodController>();
     }
 
     public virtual void Start()
@@ -110,7 +111,7 @@ public abstract class AbstractNPCBrain : Entity
                 this.GetComponent<Health>().ReceiveDamage(t.GetComponent<AreaAttack>().damage);
             }
         }
-        Debug.Log("get initial damage. ");
+
         damageTurretReceived = true;
     }
 
@@ -134,5 +135,27 @@ public abstract class AbstractNPCBrain : Entity
         ActBehaviours();
     }
 
+    public virtual void UpgradeNPC()
+    {
+        bool bloodEnough = this.owner == Entity.Owner.Player ? this.UpgradeCost < _bloodController.PlayerBlood : this.UpgradeCost < _bloodController.AIBlood;
+        if (currentLevel > MaxUpgradeLevel || !bloodEnough)
+        {
+            return;
+        }
 
+        if (this.owner == Entity.Owner.Player)
+        {
+            _bloodController.DecreasePlayerBloodValue(UpgradeCost);
+        }
+
+        else if (this.owner == Entity.Owner.AI)
+        {
+            _bloodController.DecreaseAIBloodValue(UpgradeCost);
+        }
+
+        executed = true;
+
+        this.currentLevel++;
+        this.GetComponent<Health>().SetHealth(this.GetComponent<Health>().initialHealth);
+    }
 }

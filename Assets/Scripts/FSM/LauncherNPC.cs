@@ -116,4 +116,14 @@ public class LauncherNPC : Troop
         GetComponentInChildren<Animator>().SetTrigger("Attack");
     }
 
+    public override void UpgradeNPC()
+    {
+        Debug.Log("UpgradeNPC");
+        base.UpgradeNPC();
+        this.UpgradeCost += 2;
+        this.GetComponent<Attack>().damage++;
+        this.GetComponent<Attack>().range++;
+        this.GetComponent<Move>().maxMoves++;
+    }
+
 }

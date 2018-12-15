@@ -18,6 +18,11 @@ public class NewGameButtonController : MonoBehaviour
         StartCoroutine(LoadGameSceneAsync(buildIndex));
     }
 
+    public void OnQuitButtonPressed()
+    {
+        Application.Quit();
+    }
+
     private IEnumerator LoadGameSceneAsync(int buildIndex)
     {
         AsyncOperation async = SceneManager.LoadSceneAsync(buildIndex, LoadSceneMode.Additive);

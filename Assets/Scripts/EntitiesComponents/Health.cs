@@ -6,7 +6,7 @@ using DG.Tweening;
 public class Health : MonoBehaviour {
 
     public int health = 8;
-    private int initialHealth;
+    [HideInInspector]public int initialHealth;
 
     private void Start()
     {
@@ -18,5 +18,11 @@ public class Health : MonoBehaviour {
         health -= amount;
         GetComponent<AbstractNPCBrain>().sliderHealth.value = health;
         this.transform.DOShakePosition(0.3f, 0.2f);
+    }
+
+    public void SetHealth(int value)
+    {
+        health = value;
+        GetComponent<AbstractNPCBrain>().sliderHealth.value = health;
     }
 }
