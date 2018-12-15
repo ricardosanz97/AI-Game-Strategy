@@ -10,30 +10,22 @@ namespace StrategicAI
         public override Entity DecideBasedOnInfluenceData(AbstractNPCBrain analyzedNPC, List<Node> influenceData,
             Entity[] playerControlledEntites)
         {
-
             Entity coreEntity = playerControlledEntites[0];
 
-            float coreSum = 0f;
+            //Cuando se lanze este método, todas las unidades solo podran atacar al core.
 
             if (analyzedNPC.entityType == ENTITY.Launcher || analyzedNPC.entityType == ENTITY.Prisioner || analyzedNPC.entityType == ENTITY.Tank)
             {
-                foreach (var node in influenceData)
+                foreach (Entity e in playerControlledEntites)
                 {
-                    if (node.HasInfluenceOfType(InfluenceType.Core))
+                    if (e.entityType == ENTITY.Core)
                     {
-                        coreSum += node.GetInfluenceOfType(InfluenceType.Core).Value;
-                    }
-
-                    foreach(Entity e in playerControlledEntites)
-                    {
-                        if(e.entityType == ENTITY.Core){
-                            coreEntity = e;
-                        }
+                        coreEntity = e;
                     }
                 }
                 return coreEntity;
             }
-           
+                  
             //solo para que no haya nulls
             return playerControlledEntites[0];
         }
