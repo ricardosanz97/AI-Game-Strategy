@@ -36,17 +36,27 @@ public class LevelController : MonoBehaviour {
         //ResetAllShadersCells();
         GameObject[] AIEntitiesGO = GameObject.FindGameObjectsWithTag("CoreAI");
         GameObject[] PlayerEntitiesGO = GameObject.FindGameObjectsWithTag("CorePlayer");
-
+        LayerMask mask = LayerMask.GetMask(new string[] { "Cell" });
         foreach (var go in AIEntitiesGO)
         {
             AICoreEntities.Add(go.GetComponent<Entity>());
+            Collider[] cols = Physics.OverlapBox(go.transform.position, new Vector3(0f, 1f, 0f), Quaternion.identity, mask);
+            Debug.Log("cols mide " + cols.Length);
+            foreach (Collider c in cols)
+            {
+                if (c.GetComponent<CellBehaviour>() != null)
+                {
+                    Debug.Log("es una puta celda");
+                    go.GetComponent<Entity>().cell = c.GetComponent<CellBehaviour>();
+                    c.GetComponent<CellBehaviour>().entityIn = go.GetComponent<Entity>();
+                }
+            }
         }
 
         foreach (var o in PlayerEntitiesGO)
         {
             playerCoreEntities.Add(o.GetComponent<Entity>());
         }
-
     }
 
     private void Update()

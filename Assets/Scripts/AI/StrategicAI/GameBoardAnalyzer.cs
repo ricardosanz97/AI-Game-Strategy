@@ -65,8 +65,6 @@ namespace StrategicAI
                     aiTaskCommands.Add(new UpgradeAITaskCommand(chosenTarget));
                 else if(chosenTarget.owner == Entity.Owner.Player)
                     aiTaskCommands.Add(new AttackAITaskCommand(brain,chosenTarget));
-                else if (chosenTarget == null)
-                    return;
                 
             }
             else // es un muro

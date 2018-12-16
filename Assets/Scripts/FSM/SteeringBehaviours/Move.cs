@@ -11,11 +11,12 @@ public class Move : Action
     public CellBehaviour OnGoingCell;
     public bool PathReceived = false;
     public Vector3[] path;
-    
+    private int counter;
     public override void Act()
     {
         if (!PathReceived)
         {
+            counter = 0;
             return;
         }
         moving = true;

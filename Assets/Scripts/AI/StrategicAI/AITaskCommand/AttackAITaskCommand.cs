@@ -7,16 +7,20 @@ namespace StrategicAI
         private AbstractNPCBrain _doer;
         private readonly Entity chosenTarget;
         
-        public AttackAITaskCommand(AbstractNPCBrain analyzedEntity, Entity chosenTarget)
+        public AttackAITaskCommand(AbstractNPCBrain analyzedEntity, Entity chosenTarget) //si devuelve null chosenTarget, significa que es Turret
         {
             _doer = analyzedEntity;
-            this.chosenTarget = this.chosenTarget;
+            this.chosenTarget = chosenTarget;
         }
 
         public override void PerformCommand()
         {
-            _doer.GetComponent<AttackOrder>().Attack = true;
-            _doer.GetComponent<Attack>().StartAttack(chosenTarget);
+            if (chosenTarget != null) //filtramos la turret
+            {
+                _doer.GetComponent<AttackOrder>().Attack = true;
+                _doer.GetComponent<Attack>().ObjectiveAssigned = true;
+                _doer.GetComponent<Attack>().targetEntity = chosenTarget;
+            }
         }
     }
 }
