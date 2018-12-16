@@ -15,6 +15,18 @@ namespace StrategicAI
         [SerializeField] private List<CellBehaviour> _spawnableCells;
         [SerializeField] private LevelController _levelController;
 
+        public int entitiesValueAI;
+        public int entitiesValuePlayer;
+
+        public int entitiesNumberAI;
+        public int entitiesNumberPlayer;
+
+        public int entitiesValueAIOwnedPlayer;
+        public int entitiesValuePlayerOwnedPlayer;
+
+        public int entitiesValueAIOwnedAI;
+        public int entitiesValuePlayerOwnedAI;
+         
         public List<CellBehaviour> SpawnableCells => _spawnableCells;
 
         private void Start()
@@ -41,17 +53,17 @@ namespace StrategicAI
             List<Entity> AIEntitiesOwnedAI = castEntitiesOwner(_levelController.AIEntities, Entity.Owner.AI);
             List<Entity> PlayerEntitiesOwnedAI = castEntitiesOwner(_levelController.PlayerEntities, Entity.Owner.AI);
 
-            int entitiesValueAI = CalculateValueEntities(_levelController.AIEntities);
-            int entitiesValuePlayer = CalculateValueEntities(_levelController.PlayerEntities);
+            entitiesValueAI = CalculateValueEntities(_levelController.AIEntities);
+            entitiesValuePlayer = CalculateValueEntities(_levelController.PlayerEntities);
 
-            int entitiesNumberAI = _levelController.AIEntities.Count;
-            int entitiesNumberPlayer = _levelController.PlayerEntities.Count;
+            entitiesNumberAI = _levelController.AIEntities.Count;
+            entitiesNumberPlayer = _levelController.PlayerEntities.Count;
 
-            int entitiesValueAIOwnedPlayer = CalculateValueEntities(AIEntitiesOwnedPlayer);
-            int entitiesValuePlayerOwnedPlayer = CalculateValueEntities(PlayerEntitiesOwnedPlayer);
+            entitiesValueAIOwnedPlayer = CalculateValueEntities(AIEntitiesOwnedPlayer);
+            entitiesValuePlayerOwnedPlayer = CalculateValueEntities(PlayerEntitiesOwnedPlayer);
 
-            int entitiesValueAIOwnedAI = CalculateValueEntities(AIEntitiesOwnedAI);
-            int entitiesValuePlayerOwnedAI = CalculateValueEntities(PlayerEntitiesOwnedAI);
+            entitiesValueAIOwnedAI = CalculateValueEntities(AIEntitiesOwnedAI);
+            entitiesValuePlayerOwnedAI = CalculateValueEntities(PlayerEntitiesOwnedAI);
 
             if (entitiesValueAI >= entitiesValuePlayer)
             {
