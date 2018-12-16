@@ -113,7 +113,7 @@ public class SpawnablesManager : MonoBehaviour {
         {
             entitySpawned = Instantiate(entityToSpawn, new Vector3(cell.transform.position.x, 0f, cell.transform.position.z), entityToSpawn.transform.rotation);
             entitySpawned.GetComponent<Entity>().SetEntity(owner);
-            entitySpawned.GetComponent<AbstractNPCBrain>().entityType = lastTroopSpawned;
+            entitySpawned.GetComponent<Entity>().entityType = lastTroopSpawned;
             
             if (owner == Entity.Owner.Player)
                 currentEntitySelected = ENTITY.None;
@@ -134,7 +134,7 @@ public class SpawnablesManager : MonoBehaviour {
             
             FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().HideButtons();
             cell.GetComponent<CellBehaviour>().entityIn = entitySpawned.GetComponent<AbstractNPCBrain>();
-            entitySpawned.GetComponent<AbstractNPCBrain>().cell = cell.GetComponent<CellBehaviour>();
+            entitySpawned.GetComponent<Entity>().cell = cell.GetComponent<CellBehaviour>();
         }
     }
 

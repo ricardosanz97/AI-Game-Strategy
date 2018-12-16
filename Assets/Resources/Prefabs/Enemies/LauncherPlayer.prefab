@@ -585,7 +585,8 @@ MonoBehaviour:
   damage: 1
   range: 3
   ObjectiveAssigned: 0
-  NPCObjectiveAttack: {fileID: 0}
+  targetEntity: {fileID: 0}
+  WaitTimeUntilAttack: 1
 --- !u!114 &114276946539989224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -757,6 +758,7 @@ MonoBehaviour:
   _spawnablesManager: {fileID: 0}
   _levelController: {fileID: 0}
   _influenceMapComp: {fileID: 0}
+  _bloodController: {fileID: 0}
   damageTurretReceived: 0
   currentLevel: 1
   sliderHealth: {fileID: 0}
@@ -773,7 +775,7 @@ MonoBehaviour:
     actions: []
   popupOptionsEnabled: 0
   _pathfindingManager: {fileID: 0}
-  UpgradeCost: 0
+  UpgradeCost: 6
   MaxUpgradeLevel: 3
   executed: 0
   possibleMovements: []
