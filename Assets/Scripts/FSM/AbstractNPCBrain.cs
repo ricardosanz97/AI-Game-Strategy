@@ -152,7 +152,7 @@ public abstract class AbstractNPCBrain : Entity
         {
             _bloodController.DecreaseAIBloodValue(UpgradeCost);
         }
-
+        FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().levelUpSound);
         executed = true;
 
         this.currentLevel++;
