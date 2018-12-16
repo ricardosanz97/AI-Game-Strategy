@@ -69,7 +69,7 @@ public class SpawnablesManager : MonoBehaviour {
         
         GameObject entitySpawned = null;
         GameObject entityToSpawn = null;
-
+        AudioClip entitySpawnSound = null;
         switch (_entityToSpawn)
         {
             case ENTITY.None:
@@ -80,17 +80,17 @@ public class SpawnablesManager : MonoBehaviour {
             case ENTITY.Prisioner:
                 lastTroopSpawned = ENTITY.Prisioner;
                 entityToSpawn = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Prisioner.ToString() + owner.ToString());
-                soundManagerRef.PlaySingle(soundManagerRef.cageSoundSpawn);
+                entitySpawnSound = soundManagerRef.cageSoundSpawn;
                 break;
             case ENTITY.Launcher:
                 lastTroopSpawned = ENTITY.Launcher;
                 entityToSpawn = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Launcher.ToString() + owner.ToString());
-                soundManagerRef.PlaySingle(soundManagerRef.launcherSoundSpawn);
+                entitySpawnSound = soundManagerRef.launcherSoundSpawn;
                 break;
             case ENTITY.Tank:
                 lastTroopSpawned = ENTITY.Tank;
                 entityToSpawn = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Tank.ToString() + owner.ToString());
-                soundManagerRef.PlaySingle(soundManagerRef.tankSoundSpawn);
+                entitySpawnSound = soundManagerRef.tankSoundSpawn;
                 break;
             case ENTITY.Wall:
                 lastTroopSpawned = ENTITY.Wall;
@@ -99,7 +99,7 @@ public class SpawnablesManager : MonoBehaviour {
             case ENTITY.Turret:
                 lastTroopSpawned = ENTITY.Turret;
                 entityToSpawn = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Turret.ToString() + owner.ToString());
-                soundManagerRef.PlaySingle(soundManagerRef.turretSoundSpawn);
+                entitySpawnSound = soundManagerRef.turretSoundSpawn;
                 break;
         }
 
@@ -114,6 +114,7 @@ public class SpawnablesManager : MonoBehaviour {
         {
             if (entityToSpawn != null)
             {
+                soundManagerRef.PlaySingle(entitySpawnSound);
                 entitySpawned = Instantiate(entityToSpawn, new Vector3(cell.transform.position.x, 0f, cell.transform.position.z), entityToSpawn.transform.rotation);
                 entitySpawned.GetComponent<Entity>().SetEntity(owner);
                 entitySpawned.GetComponent<Entity>().entityType = lastTroopSpawned;

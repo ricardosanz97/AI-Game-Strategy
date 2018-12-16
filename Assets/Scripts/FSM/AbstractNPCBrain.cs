@@ -138,24 +138,34 @@ public abstract class AbstractNPCBrain : Entity
     public virtual void UpgradeNPC()
     {
         bool bloodEnough = this.owner == Entity.Owner.Player ? this.UpgradeCost < _bloodController.PlayerBlood : this.UpgradeCost < _bloodController.AIBlood;
-        if (currentLevel > MaxUpgradeLevel || !bloodEnough)
+        if (bloodEnough)
         {
-            return;
+            if (currentLevel > MaxUpgradeLevel)
+            {
+                Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup(this.entityType.ToString(), "MAX LEVEL\nREACHED");
+                return;
+            }
+
+            if (this.owner == Entity.Owner.Player)
+            {
+                _bloodController.DecreasePlayerBloodValue(UpgradeCost);
+            }
+
+            else if (this.owner == Entity.Owner.AI)
+            {
+                _bloodController.DecreaseAIBloodValue(UpgradeCost);
+            }
+            FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().levelUpSound);
+            executed = true;
+
+            this.currentLevel++;
+            this.GetComponent<Health>().SetHealth(this.GetComponent<Health>().initialHealth);
         }
 
-        if (this.owner == Entity.Owner.Player)
+        else
         {
-            _bloodController.DecreasePlayerBloodValue(UpgradeCost);
+            Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "NOT ENOUGH\nBLOOD");
         }
-
-        else if (this.owner == Entity.Owner.AI)
-        {
-            _bloodController.DecreaseAIBloodValue(UpgradeCost);
-        }
-        FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().levelUpSound);
-        executed = true;
-
-        this.currentLevel++;
-        this.GetComponent<Health>().SetHealth(this.GetComponent<Health>().initialHealth);
+        
     }
 }

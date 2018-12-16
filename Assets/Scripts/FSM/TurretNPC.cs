@@ -102,44 +102,62 @@ public class TurretNPC : AbstractNPCBrain
 
     private void RotateRight()
     {
-        this.transform.Rotate(Vector3.up * 90f);
-        switch (CurrentRotation)
+        bool bloodEnough = this.owner == Owner.Player ? this.RotateBloodCost < _bloodController.GetCurrentPlayerBlood() : this.RotateBloodCost < _bloodController.GetCurrentAIBlood();
+        if (bloodEnough)
         {
-            case TROTATION.Front:
-                CurrentRotation = TROTATION.Right;
-                break;
-            case TROTATION.Right:
-                CurrentRotation = TROTATION.Back;
-                break;
-            case TROTATION.Back:
-                CurrentRotation = TROTATION.Left;
-                break;
-            case TROTATION.Left:
-                CurrentRotation = TROTATION.Front;
-                break;
+            this.transform.Rotate(Vector3.up * 90f);
+            switch (CurrentRotation)
+            {
+                case TROTATION.Front:
+                    CurrentRotation = TROTATION.Right;
+                    break;
+                case TROTATION.Right:
+                    CurrentRotation = TROTATION.Back;
+                    break;
+                case TROTATION.Back:
+                    CurrentRotation = TROTATION.Left;
+                    break;
+                case TROTATION.Left:
+                    CurrentRotation = TROTATION.Front;
+                    break;
+            }
+            UpdateAffectedCells();
         }
-        UpdateAffectedCells();
+        else
+        {
+            Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "NOT ENOUGH\nBLOOD");
+        }
+        
     }
 
     private void RotateLeft()
     {
-        this.transform.Rotate(Vector3.up * -90f);
-        switch (CurrentRotation)
+        bool bloodEnough = this.owner == Owner.Player ? this.RotateBloodCost < _bloodController.GetCurrentPlayerBlood() : this.RotateBloodCost < _bloodController.GetCurrentAIBlood();
+        if (bloodEnough)
         {
-            case TROTATION.Front:
-                CurrentRotation = TROTATION.Left;
-                break;
-            case TROTATION.Right:
-                CurrentRotation = TROTATION.Front;
-                break;
-            case TROTATION.Back:
-                CurrentRotation = TROTATION.Right;
-                break;
-            case TROTATION.Left:
-                CurrentRotation = TROTATION.Back;
-                break;
+            this.transform.Rotate(Vector3.up * -90f);
+            switch (CurrentRotation)
+            {
+                case TROTATION.Front:
+                    CurrentRotation = TROTATION.Left;
+                    break;
+                case TROTATION.Right:
+                    CurrentRotation = TROTATION.Front;
+                    break;
+                case TROTATION.Back:
+                    CurrentRotation = TROTATION.Right;
+                    break;
+                case TROTATION.Left:
+                    CurrentRotation = TROTATION.Back;
+                    break;
+            }
+            UpdateAffectedCells();
         }
-        UpdateAffectedCells();
+        else
+        {
+            Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "NOT ENOUGH\nBLOOD");
+        }
+        
     }
 
     public void UpdateAffectedCells()

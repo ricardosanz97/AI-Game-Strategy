@@ -92,8 +92,17 @@ namespace CustomPathfinding
 					Physics.OverlapBoxNonAlloc(nodeWorldPosition,
 						new Vector3(NodeRadius, NodeRadius, NodeRadius), results,Quaternion.identity);*/
 
-                    if (Physics.CheckBox(nodeWorldPosition, new Vector3(0,NodePrefab.NodeRadius,0),Quaternion.identity, _unwalkableMask))
-						nodeType = Node.ENodeType.NonWalkable;
+                    Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(NodePrefab.NodeRadius, NodePrefab.NodeRadius, NodePrefab.NodeRadius), Quaternion.identity);
+                    //Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(0, NodePrefab.NodeRadius, 0), Quaternion.identity);
+
+                    foreach (var collider in colliders)
+                    {
+                        if (collider.GetComponent<Entity>())
+                        {
+                            nodeType = Node.ENodeType.NonWalkable;
+                            break;
+                        }
+                    }
 
                     Collider[] cols = Physics.OverlapBox(nodeWorldPosition, new Vector3(0, NodePrefab.NodeRadius, 0), Quaternion.identity, _cellMask);
                     cell = cols[0].gameObject.GetComponent<CellBehaviour>();
@@ -130,13 +139,14 @@ namespace CustomPathfinding
 					Vector3 nodeWorldPosition = gridOrigin + Vector3.right * (i * _nodeDiameter + NodePrefab.NodeRadius) +
 					                            Vector3.forward * (j * _nodeDiameter + NodePrefab.NodeRadius);
 
-					/*results = new Collider[16];
+                    /*results = new Collider[16];
 					Physics.OverlapBoxNonAlloc(nodeWorldPosition,
 						new Vector3(NodeRadius, NodeRadius, NodeRadius), results,Quaternion.identity);*/
 
-					Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(NodePrefab.NodeRadius,NodePrefab.NodeRadius,NodePrefab.NodeRadius),Quaternion.identity);
+                    Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(NodePrefab.NodeRadius,NodePrefab.NodeRadius,NodePrefab.NodeRadius),Quaternion.identity);
+                    //Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(0, NodePrefab.NodeRadius * 2, 0), Quaternion.identity);
 
-					foreach (var collider in colliders)
+                    foreach (var collider in colliders)
 					{
 						if(collider.GetComponent<Entity>())
 						{

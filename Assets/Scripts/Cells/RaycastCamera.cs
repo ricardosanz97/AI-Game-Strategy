@@ -76,9 +76,10 @@ public class RaycastCamera : MonoBehaviour {
             {
                 if (_levelController.TryingToMove().gameObject.GetComponent<Move>() != null)
                 {
-                    bool bloodEnough = _bloodController.GetCurrentPlayerBlood() >= _levelController.GetComponent<Attack>().bloodCost;
+                    bool bloodEnough = _bloodController.GetCurrentPlayerBlood() >= _levelController.TryingToMove().gameObject.GetComponent<Attack>().bloodCost;
                     if (bloodEnough)
                     {
+                        _bloodController.DecreasePlayerBloodValue(_levelController.TryingToMove().GetComponent<Move>().bloodCost);
                         soundManager.PlaySingle(soundManager.buttonPressedSound);
                         _levelController.TryingToMove().gameObject.GetComponent<Move>().OnGoingCell = lastCellSelected;
                         _levelController.TryingToMove().gameObject.GetComponent<Move>().PathReceived = true;
@@ -111,9 +112,10 @@ public class RaycastCamera : MonoBehaviour {
                 {
                     if (_levelController.TryingToAttack().gameObject.GetComponent<Attack>() != null)
                     {
-                        bool bloodEnough = _bloodController.GetCurrentPlayerBlood() >= _levelController.GetComponent<Attack>().bloodCost;
+                        bool bloodEnough = _bloodController.GetCurrentPlayerBlood() >= _levelController.TryingToAttack().gameObject.GetComponent<Attack>().bloodCost;
                         if (bloodEnough)
                         {
+                            _bloodController.DecreasePlayerBloodValue(_levelController.TryingToAttack().GetComponent<Attack>().bloodCost);
                             _levelController.TryingToAttack().gameObject.GetComponent<AbstractNPCBrain>().DoAttackAnimation();
                             _levelController.TryingToAttack().gameObject.GetComponent<Attack>().targetEntity = lastCellSelected.entityIn;
                             _levelController.TryingToAttack().gameObject.GetComponent<Attack>().ObjectiveAssigned = true;
