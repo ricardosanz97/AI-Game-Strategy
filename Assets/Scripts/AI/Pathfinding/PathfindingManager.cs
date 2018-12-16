@@ -90,7 +90,7 @@ namespace Pathfinding
         }
         
 
-        public void RequestPath(PathRequest request, bool needsSmoothing)
+        public void RequestPath(PathRequest request, bool needsSmoothing = false)
         {
             ThreadPool.QueueUserWorkItem(delegate(object state)
             {

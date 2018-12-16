@@ -11,7 +11,7 @@ public class Move : Action
     public CellBehaviour OnGoingCell;
     public bool PathReceived = false;
     public Vector3[] path;
-    private int counter;
+    private int counter = 0;
     public override void Act()
     {
         if (!PathReceived)
@@ -25,10 +25,12 @@ public class Move : Action
         Debug.Log("request entre " + initial + " y " + OnGoingCell.PNode.gameObject.transform.position);
         GetComponent<Troop>()._pathfindingManager.RequestPath(new Pathfinding.PathfindingManager.PathRequest(initial, OnGoingCell.PNode.gameObject.transform.position, PathReceiver, 0.5f),false);
         PathReceived = false;
+        OnGoingCell = null;
     }
 
     private void PathReceiver(Vector3[] path, bool isPossible)
     {
+        Debug.Log("not possible");
         if (isPossible)
         {
             this.path = path;

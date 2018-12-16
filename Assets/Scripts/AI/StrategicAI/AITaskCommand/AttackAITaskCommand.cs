@@ -18,8 +18,8 @@ namespace StrategicAI
             if (chosenTarget != null) //filtramos la turret
             {
                 _doer.GetComponent<AttackOrder>().Attack = true;
-                _doer.GetComponent<Attack>().ObjectiveAssigned = true;
-                _doer.GetComponent<Attack>().targetEntity = chosenTarget;
+                //ahora mismo está en el estado Attack
+                _doer.GetComponent<Attack>().AIAttack(chosenTarget);
             }
         }
     }

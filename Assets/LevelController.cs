@@ -56,6 +56,17 @@ public class LevelController : MonoBehaviour {
         foreach (var o in PlayerEntitiesGO)
         {
             playerCoreEntities.Add(o.GetComponent<Entity>());
+            Collider[] cols = Physics.OverlapBox(o.transform.position, new Vector3(0f, 1f, 0f), Quaternion.identity, mask);
+            Debug.Log("cols mide " + cols.Length);
+            foreach (Collider c in cols)
+            {
+                if (c.GetComponent<CellBehaviour>() != null)
+                {
+                    Debug.Log("es una puta celda");
+                    o.GetComponent<Entity>().cell = c.GetComponent<CellBehaviour>();
+                    c.GetComponent<CellBehaviour>().entityIn = o.GetComponent<Entity>();
+                }
+            }
         }
     }
 

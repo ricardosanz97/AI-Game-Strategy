@@ -17,12 +17,10 @@ public class Attack : Action
             return;
         }
 
-        if (targetEntity != null && this.GetComponent<Troop>() != null && !this.GetComponent<Troop>().possibleAttacks.Contains(targetEntity.cell.PNode))
+        if (!this.GetComponent<Troop>().possibleAttacks.Contains(targetEntity.cell.PNode))
         {
-            //si tiene un entity objetivo y no está en rango, ir hacia el.
-            this.GetComponent<Move>().PathReceived = true;
-            this.GetComponent<Move>().OnGoingCell = targetEntity.cell;
-            return;
+            //si no lo tiene a tiro, que vaya a por él.
+            AIAttack(targetEntity);
         }
 
         ObjectiveAssigned = false;
@@ -32,19 +30,9 @@ public class Attack : Action
         targetEntity = null;
     }
     
-    /*
-    public void StartAttack(Entity target)
-    {
-        ObjectiveAssigned = true;
-        
-        StartCoroutine(Wait(WaitTimeUntilAttack));
-        
-        targetEntity = target;
-    }
-
-    private IEnumerator Wait(float waitTimeUntilAttack)
-    {
-        yield return new WaitForSeconds(WaitTimeUntilAttack);
-    }
-    */
+   public void AIAttack(Entity target)
+   {
+        GetComponent<Move>().PathReceived = true;
+        GetComponent<Move>().OnGoingCell = target.cell;
+   }
 }
