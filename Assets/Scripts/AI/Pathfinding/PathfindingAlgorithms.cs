@@ -188,6 +188,28 @@ namespace CustomPathfinding
             return nodeList;
         }
 
+        public static List<Node> BFSWithObstacles(Node currentNode, int k, PathfindingGrid pathfindingGrid)
+        {
+            List<Node> nodeList = new List<Node>();
+            for (int i = -k; i <= k; i++)
+            {
+                for (int j = -k; j <= k; j++)
+                {
+                    if (i == 0 && j == 0) continue;
+
+                    var x = currentNode.GridX + i;
+                    var z = currentNode.GridZ + j;
+
+                    if ((x >= 0 && x < pathfindingGrid.GridSizeX) && (z >= 0 && z < pathfindingGrid.GridSizeZ))
+                    {
+                        nodeList.Add(pathfindingGrid.Grid[currentNode.GridX + i, currentNode.GridZ + j]);
+                    }
+                }
+            }
+            //nodeList.Add(currentNode);
+            return nodeList;
+        }
+
         public static void DebugPath(Vector3[] path)
         {
             for (int i = 0; i < path.Length - 1; i++)

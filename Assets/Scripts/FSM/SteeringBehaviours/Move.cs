@@ -52,6 +52,7 @@ public class Move : Action
         this.GetComponent<Entity>().cell = OnGoingCell;
         OnGoingCell.entityIn = this.GetComponent<Entity>();
         this.GetComponent<Entity>()._influenceMapComp.UpdateInfluenceMap(this.GetComponent<Entity>());
+        moving = false;
     }
 
     private IEnumerator GoToPosition(Vector3 point)

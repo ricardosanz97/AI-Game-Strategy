@@ -88,7 +88,13 @@ namespace Pathfinding
             Debug.Log("originX = " + _pathfindingGrid.GetNodeFromWorldPosition(origin).GridX + " y originZ = " + _pathfindingGrid.GetNodeFromWorldPosition(origin).GridZ);
             return PathfindingAlgorithms.BFS(_pathfindingGrid.GetNodeFromWorldPosition(origin), radius, _pathfindingGrid);
         }
-        
+
+        public List<Node> RequestNodesAtRadiusWithObstacles(int radius, Vector3 origin)
+        {
+            Debug.Log("originX = " + _pathfindingGrid.GetNodeFromWorldPosition(origin).GridX + " y originZ = " + _pathfindingGrid.GetNodeFromWorldPosition(origin).GridZ);
+            return PathfindingAlgorithms.BFSWithObstacles(_pathfindingGrid.GetNodeFromWorldPosition(origin), radius, _pathfindingGrid);
+        }
+
         public void RequestPath(PathRequest request, bool needsSmoothing = false)
         {
             ThreadPool.QueueUserWorkItem(delegate(object state)

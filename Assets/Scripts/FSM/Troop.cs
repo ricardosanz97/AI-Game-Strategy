@@ -117,7 +117,7 @@ public class Troop : AbstractNPCBrain
 
     public void GetCellsWithEnemiesInRange()
     {
-        List<CustomPathfinding.Node> nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Attack>().range, transform.position);
+        List<CustomPathfinding.Node> nodeList = _pathfindingManager.RequestNodesAtRadiusWithObstacles(GetComponent<Attack>().range, transform.position);
         foreach (CustomPathfinding.Node node in nodeList)
         {
             if (node.cell.entityIn != null && node.cell.entityIn.owner != owner) //the enemy in the cell is an enemy.

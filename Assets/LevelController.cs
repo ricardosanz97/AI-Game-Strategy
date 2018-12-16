@@ -45,7 +45,6 @@ public class LevelController : MonoBehaviour {
             {
                 if (c.GetComponent<CellBehaviour>() != null)
                 {
-                    Debug.Log("es una puta celda");
                     go.GetComponent<Entity>().cell = c.GetComponent<CellBehaviour>();
                     c.GetComponent<CellBehaviour>().entityIn = go.GetComponent<Entity>();
                 }
@@ -61,7 +60,6 @@ public class LevelController : MonoBehaviour {
             {
                 if (c.GetComponent<CellBehaviour>() != null)
                 {
-                    Debug.Log("es una puta celda");
                     o.GetComponent<Entity>().cell = c.GetComponent<CellBehaviour>();
                     c.GetComponent<CellBehaviour>().entityIn = o.GetComponent<Entity>();
                 }

@@ -6,7 +6,7 @@ namespace StrategicAI
     public class AttackAITaskCommand : AITaskCommand
     {
         private AbstractNPCBrain _doer;
-        private readonly Entity chosenTarget;
+        private Entity chosenTarget;
         
         public AttackAITaskCommand(AbstractNPCBrain analyzedEntity, Entity chosenTarget) //si devuelve null chosenTarget, significa que es Turret
         {
@@ -16,18 +16,19 @@ namespace StrategicAI
 
         public override void PerformCommand()
         {
-            if (chosenTarget != null)
+            if (_doer.GetComponent<Troop>() != null)
             {
-                chosenTarget.GetComponent<AttackOrder>().Attack = true;
-                chosenTarget.StartCoroutine(PerformAttack());
+                _doer.GetComponent<AttackOrder>().Attack = true;
+                _doer.StartCoroutine(PerformAttack());
+
             }
         }
 
         IEnumerator PerformAttack()
         {
             yield return new WaitForSeconds(0.5f);
-            chosenTarget.GetComponent<Attack>().ObjectiveAssigned = true;
-            chosenTarget.GetComponent<Attack>().targetEntity = chosenTarget;
+            _doer.GetComponent<Attack>().ObjectiveAssigned = true;
+            _doer.GetComponent<Attack>().targetEntity = chosenTarget;
         }
     }
 }
