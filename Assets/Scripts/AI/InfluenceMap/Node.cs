@@ -39,6 +39,18 @@ namespace InfluenceMap
             
             return new KeyValuePair<InfluenceType, float>(0,-1);
         }
+        
+        public float GetTotalInfluenceAtNode()
+        {
+            float result = 0;
+            
+            foreach (var influence in Influences)
+            {
+                result += influence.Value;
+            }
+            
+            return result;
+        }
     }
 
 }

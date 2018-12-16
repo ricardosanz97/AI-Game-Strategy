@@ -91,12 +91,14 @@ public class AttackButtonController : MonoBehaviour {
     private void EnableButton(GameObject buttonObject)
     {
         buttonObject.GetComponent<Image>().enabled = true;
+        buttonObject.GetComponentInChildren<Text>().enabled = true;
         buttonObject.GetComponent<Button>().enabled = true;
     }
 
     private void DisableButton(GameObject buttonObject)
     {
         buttonObject.GetComponent<Image>().enabled = false;
+        buttonObject.GetComponentInChildren<Text>().enabled = false;
         buttonObject.GetComponent<Button>().enabled = false;
     }
 }
