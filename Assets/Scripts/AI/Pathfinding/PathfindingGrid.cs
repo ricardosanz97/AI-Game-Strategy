@@ -146,9 +146,11 @@ namespace CustomPathfinding
                     Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(NodePrefab.NodeRadius,NodePrefab.NodeRadius,NodePrefab.NodeRadius),Quaternion.identity);
                     //Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(0, NodePrefab.NodeRadius * 2, 0), Quaternion.identity);
 
+					LevelController levelController = FindObjectOfType<LevelController>();
+					
                     foreach (var collider in colliders)
 					{
-						if(collider.GetComponent<Entity>())
+						if(collider.GetComponent<Entity>() && !levelController.TryingToMove())
 						{
 							nodeType = Node.ENodeType.NonWalkable;
 							break;
