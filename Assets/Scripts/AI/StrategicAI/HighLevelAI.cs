@@ -96,20 +96,8 @@ namespace StrategicAI
                 }
             }
 
-
-
-
-
-            _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
-            
-            //todo programar el arbol
-            if (CalculateSetDamage(_levelController.AIEntities) >= CalculateSetDamage(_levelController.PlayerEntities))
-                _strategicObjective = GetOrAddComponent<AttackBaseObjective>();
-            else
-                _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
-
             _analyzer.AnalyzeGameTerrain(_strategicObjective);
-            Debug.Log("Chosen Strategic Objective: " + _strategicObjective);
+            Debug.Log("Chosen Strategic Objective: " + _strategicObjective);  
         }
 
         public void PlayTurn()
@@ -140,10 +128,26 @@ namespace StrategicAI
             {
                 int entityValue = 0;
 
-                entityValue += e.GetComponent<Health>().health;
-                entityValue += e.GetComponent<Attack>().damage;
+                if (e.entityType == ENTITY.Launcher || e.entityType == ENTITY.Prisioner || e.entityType == ENTITY.Tank)
+                {
+                    entityValue += e.GetComponent<Health>().health;
+                    entityValue += e.GetComponent<Attack>().damage;
 
-                sumEntityValues += entityValue;
+                    sumEntityValues += entityValue;
+                }
+                else if (e.entityType == ENTITY.Core)
+                {
+                    entityValue += e.GetComponent<Health>().health;
+
+                    sumEntityValues += entityValue;
+                }
+                else if(e.entityType == ENTITY.Turret)
+                {
+                    entityValue += e.GetComponent<Health>().health;
+                    entityValue += e.GetComponent<AreaAttack>().damage;
+
+                    sumEntityValues += entityValue;
+                }
             }
 
             return sumEntityValues;
