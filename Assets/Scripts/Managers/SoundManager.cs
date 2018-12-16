@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
 
+    public float defaultVolume = 0.3f;
+    public float pauseVolume = 0.05f;
+
     public AudioSource sfxSource;
-    public float lowPitchRange = 0.95f;
-    public float hightPitchRange = 1.05f;
+    public AudioSource backgroundSource;
 
     [HideInInspector]
     public AudioClip cageSoundAttack;
@@ -34,6 +36,12 @@ public class SoundManager : MonoBehaviour {
     public AudioClip buttonPressedSound;
     [HideInInspector]
     public AudioClip levelUpSound;
+    [HideInInspector]
+    public AudioClip menuBackgroundSound;
+    [HideInInspector]
+    public AudioClip gameBackgroundSound;
+    [HideInInspector]
+    public AudioClip quitSound;
 
     void Start()
     {
@@ -50,11 +58,32 @@ public class SoundManager : MonoBehaviour {
         cancelActionSound = Resources.Load<AudioClip>("SFX/CancelAction");
         buttonPressedSound = Resources.Load<AudioClip>("SFX/ButtonPressed");
         levelUpSound = Resources.Load<AudioClip>("SFX/LevelUpSound");
+        menuBackgroundSound = Resources.Load<AudioClip>("SFX/MenuBackgroundSound");
+        gameBackgroundSound = Resources.Load<AudioClip>("SFX/GameBackgroundSound");
+        quitSound = Resources.Load<AudioClip>("SFX/QuitSound");
     }
 
     public void PlaySingle (AudioClip clip)
     {
         sfxSource.clip = clip;
         sfxSource.Play();
+    }
+
+    public void PlayBackground (AudioClip clip, float volume)
+    {
+        backgroundSource.volume = volume;
+        
+        if (clip != backgroundSource.clip)
+        {
+            backgroundSource.loop = true;
+            backgroundSource.clip = clip;
+            backgroundSource.Play();
+        }
+        //backgroundSource.Play();
+    }
+
+    public void PauseBackground()
+    {
+        backgroundSource.Pause();
     }
 }

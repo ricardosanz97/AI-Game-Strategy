@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4745564922147860}
   - component: {fileID: 82313057812237408}
   - component: {fileID: 114579983879833604}
+  - component: {fileID: 82115839266946766}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -41,6 +42,101 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &82115839266946766
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1892531031776290}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6015d36fb9770874ba939bd5871da440, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.3
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!82 &82313057812237408
 AudioSource:
   m_ObjectHideFlags: 1
@@ -147,9 +243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f15e502f30e05349bd46739c2c09740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultVolume: 0.3
+  pauseVolume: 0.05
   sfxSource: {fileID: 82313057812237408}
-  lowPitchRange: 0.95
-  hightPitchRange: 1.05
+  backgroundSource: {fileID: 82115839266946766}
   cageSoundAttack: {fileID: 0}
   cageSoundSpawn: {fileID: 0}
   cardsSound: {fileID: 0}
@@ -160,3 +257,9 @@ MonoBehaviour:
   tankSoundSpawn: {fileID: 0}
   turretSoundShot: {fileID: 0}
   turretSoundSpawn: {fileID: 0}
+  cancelActionSound: {fileID: 0}
+  buttonPressedSound: {fileID: 0}
+  levelUpSound: {fileID: 0}
+  menuBackgroundSound: {fileID: 0}
+  gameBackgroundSound: {fileID: 0}
+  quitSound: {fileID: 0}

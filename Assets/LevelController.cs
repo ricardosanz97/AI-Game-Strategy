@@ -22,9 +22,13 @@ public class LevelController : MonoBehaviour {
     public int PlayerRewardBloodTurn = 3;
     public int AIRewardBloodTurn = 3;
 
+    private bool pauseMenuEnabled = true;
+    private SoundManager soundManager;
+
     private void Awake()
     {
         canvasGameObject = FindObjectOfType<Canvas>().gameObject;
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     private void Start()
@@ -47,26 +51,39 @@ public class LevelController : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (pauseMenuEnabled)
         {
-            GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimplePausePopup"));
-            go.GetComponent<SimplePausePopupController>().SetPopup(
-            Vector3.zero,
-            "Pause",
-            "Resume",
-            "Quit",
-            () => {
-                go.GetComponent<SimplePausePopupController>().ClosePopup();
-            },
-            () => {
-                go.GetComponent<SimplePausePopupController>().ClosePopup();
-                SceneManager.LoadScene(0);
-            },
-            () =>
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                go.GetComponent<SimplePausePopupController>().ClosePopup();
-            });
+                pauseMenuEnabled = false;
+                soundManager.PlayBackground(soundManager.gameBackgroundSound, soundManager.pauseVolume);
+                GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimplePausePopup"));
+                go.GetComponent<SimplePausePopupController>().SetPopup(
+                Vector3.zero,
+                "Pause",
+                "Resume",
+                "Quit",
+                () => {
+                    pauseMenuEnabled = true;
+                    go.GetComponent<SimplePausePopupController>().ClosePopup();
+                    soundManager.PlayBackground(soundManager.gameBackgroundSound, soundManager.defaultVolume);
+                },
+                () => {
+                    pauseMenuEnabled = true;
+                    go.GetComponent<SimplePausePopupController>().ClosePopup();
+                    soundManager.PlaySingle(soundManager.quitSound);
+                    soundManager.PlayBackground(soundManager.menuBackgroundSound, soundManager.defaultVolume);
+                    SceneManager.LoadScene(0);
+                },
+                () =>
+                {
+                    pauseMenuEnabled = true;
+                    go.GetComponent<SimplePausePopupController>().ClosePopup();
+                    soundManager.PlayBackground(soundManager.gameBackgroundSound, soundManager.defaultVolume);
+                });
+            }
         }
+        
     }
 
     void ResetAllShadersCells()

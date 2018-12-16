@@ -16,6 +16,7 @@ public class NewGameButtonController : MonoBehaviour
         LoadingScreen.SetActive(true);
         MainMenuScreen.SetActive(false);
         StartCoroutine(LoadGameSceneAsync(buildIndex));
+        FindObjectOfType<SoundManager>().PlayBackground(FindObjectOfType<SoundManager>().gameBackgroundSound, FindObjectOfType<SoundManager>().defaultVolume);
     }
 
     public void OnQuitButtonPressed()
