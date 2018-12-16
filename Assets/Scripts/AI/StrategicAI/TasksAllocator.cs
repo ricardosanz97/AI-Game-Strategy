@@ -14,6 +14,7 @@ namespace StrategicAI
     {
         [Inject]private TurnHandler _turnHandler;
         [Inject] private HighLevelAI _highLevelAi;
+        [Inject] private BloodController _bloodController;
         
         public void OnTaskCommandsReceived(List<AITaskCommand> aiTaskCommands, Entity[] controlledEntities)
         {
@@ -48,12 +49,13 @@ namespace StrategicAI
 
         private void DecideWhatToSpawn(List<AITaskCommand> aiTaskCommands)
         {
-            Debug.Log("spawning");
             if (HasResourcesToSpawn())
             {
                 //decide what to spawn and add it to the aitaskcommand
                 Assert.IsNotNull(_highLevelAi.SpawnableCells);
                 //SpawnAITaskCommand spawnCommand = new SpawnAITaskCommand((ENTITY)Random.Range(1,6), _highLevelAi.SpawnableCells);
+
+                Entity troopToSpawn = null; //sera una entidad cara o barata segun lo q hagamos
                 
                 SpawnAITaskCommand spawnCommand = new SpawnAITaskCommand(ENTITY.Launcher, _highLevelAi.SpawnableCells);
                 aiTaskCommands.Insert(0,spawnCommand);  
@@ -62,8 +64,9 @@ namespace StrategicAI
 
         private bool HasResourcesToSpawn()
         {
-            //todo meter el contador de la sangre en el high level
             return true;
+            //todo meter el contador de la sangre en el blood controller
+            
         }
     }
 }

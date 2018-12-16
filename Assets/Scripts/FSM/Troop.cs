@@ -28,10 +28,10 @@ public class Troop : AbstractNPCBrain
         initialState = new State(STATE.Idle, this,
             () => {
                 GetTurretDamage();
-                _pathfindingManager.GetComponent<CustomPathfinding.PathfindingGrid>().UpdateGrid(null);
+                _pathfindingManager.GetComponent<CustomPathfinding.PathfindingGrid>().UpdateGrid(this);
             },
             () => {
-                _pathfindingManager.GetComponent<CustomPathfinding.PathfindingGrid>().UpdateGrid(null);
+                _pathfindingManager.GetComponent<CustomPathfinding.PathfindingGrid>().UpdateGrid(this);
             }
         );
 
@@ -40,7 +40,7 @@ public class Troop : AbstractNPCBrain
 
         base.Start();
 
-        //xecuted = true;
+        executed = true;
     }
 
 
