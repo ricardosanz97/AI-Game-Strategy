@@ -113,7 +113,7 @@ public class TankNPC : Troop
 
     public override void DoAttackAnimation()
     {
-        FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().tankSoundAttack);
+        GetComponentInChildren<Animator>().SetTrigger("Attack");
     }
 
     public override void UpgradeNPC()

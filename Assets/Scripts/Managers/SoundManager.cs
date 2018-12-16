@@ -32,6 +32,8 @@ public class SoundManager : MonoBehaviour {
     public AudioClip cancelActionSound;
     [HideInInspector]
     public AudioClip buttonPressedSound;
+    [HideInInspector]
+    public AudioClip levelUpSound;
 
     void Start()
     {
@@ -47,6 +49,7 @@ public class SoundManager : MonoBehaviour {
         turretSoundSpawn = Resources.Load<AudioClip>("SFX/TurretSoundSpawn");
         cancelActionSound = Resources.Load<AudioClip>("SFX/CancelAction");
         buttonPressedSound = Resources.Load<AudioClip>("SFX/ButtonPressed");
+        levelUpSound = Resources.Load<AudioClip>("SFX/LevelUpSound");
     }
 
     public void PlaySingle (AudioClip clip)

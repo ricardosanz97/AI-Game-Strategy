@@ -12,6 +12,8 @@ public class LauncherNPC : Troop
         SetStates();
         SetTransitions();
 
+        GetComponentInChildren<ParticleSystem>().Stop();
+
         currentTransitions = transitions.FindAll((x) => x.currentState.stateName == currentState.stateName);
         Debug.Log("current transitions es " + currentTransitions.Count);
         currentState.OnEnter();

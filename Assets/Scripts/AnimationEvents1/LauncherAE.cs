@@ -8,7 +8,6 @@ public class LauncherAE : MonoBehaviour {
 	public void DoAnimationEvent()
     {
         FindObjectOfType<SoundManager>().PlaySingle(FindObjectOfType<SoundManager>().launcherSoundShot);
-        GetComponentInChildren<ParticleSystem>().gameObject.SetActive(true);
         GetComponentInChildren<ParticleSystem>().Play();
     }
 }
