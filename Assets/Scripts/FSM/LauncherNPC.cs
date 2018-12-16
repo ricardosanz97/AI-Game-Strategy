@@ -37,13 +37,15 @@ public class LauncherNPC : Troop
 
         List<NextStateInfo> nextStateInfo3 = new List<NextStateInfo>()
         {
-            new NextStateInfo(this, STATE.Idle, STATE.Remain, GetComponent<IdleOrder>())
+            new NextStateInfo(this, STATE.Idle, STATE.Remain, GetComponent<IdleOrder>()),
+            new NextStateInfo(this, STATE.Attack, STATE.Remain, GetComponent<AttackOrder>())
         };
         FSMSystem.AddTransition(this, STATE.Move, nextStateInfo3);
 
         List<NextStateInfo> nextStateInfo4 = new List<NextStateInfo>()
         {
-            new NextStateInfo(this, STATE.Idle, STATE.Remain, GetComponent<IdleOrder>())
+            new NextStateInfo(this, STATE.Idle, STATE.Remain, GetComponent<IdleOrder>()),
+            new NextStateInfo(this, STATE.Move, STATE.Remain, GetComponent<MoveOrder>())
         };
         FSMSystem.AddTransition(this, STATE.Attack, nextStateInfo4);
     }

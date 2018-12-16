@@ -61,11 +61,17 @@ namespace StrategicAI
 
                 Entity chosenTarget = chosenStrategicObjective.DecideBasedOnInfluenceData(brain,influenceData,playerControlledEntites,levelController);
 
-                if(chosenTarget.owner == Entity.Owner.AI) //mejorar
+                if (chosenTarget.owner == Entity.Owner.AI)
+                {
+                    //mejorar
+                    Debug.Log("trying to upgrade");
                     aiTaskCommands.Add(new UpgradeAITaskCommand(chosenTarget));
-                else if(chosenTarget.owner == Entity.Owner.Player)
-                    aiTaskCommands.Add(new AttackAITaskCommand(brain,chosenTarget));
-                
+                }
+                else if (chosenTarget.owner == Entity.Owner.Player)
+                {
+                    Debug.Log("trying to attack");
+                    aiTaskCommands.Add(new AttackAITaskCommand(brain, chosenTarget));
+                }  
             }
             else // es un muro
             {

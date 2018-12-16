@@ -8,12 +8,10 @@ using UnityEngine;
 public class PathfindingGridDebug : MonoBehaviour
 {   
     private PathfindingGrid _grid;
-    private InfluenceMapComponent _influenceMapComponent;
 
     private void Start()
     {
         _grid = GetComponent<PathfindingGrid>();
-        _influenceMapComponent = FindObjectOfType<InfluenceMapComponent>();
     }
 
     private void OnGUI()
@@ -23,9 +21,6 @@ public class PathfindingGridDebug : MonoBehaviour
         {
             _grid.UpdateGrid(null);
         }
-        
-        bool value = GUILayout.Toggle(false,"Activate Influence Map");
-        _influenceMapComponent.influenceGrid._renderGroundGrid = value;
        
         #endif
     }
