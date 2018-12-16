@@ -23,7 +23,7 @@ public class Move : Action
         Debug.Log("request entre " + initial + " y " + OnGoingCell.PNode.gameObject.transform.position);
         GetComponent<Troop>()._pathfindingManager.RequestPath(new Pathfinding.PathfindingManager.PathRequest(initial, OnGoingCell.PNode.gameObject.transform.position, PathReceiver, 0.5f),false);
         PathReceived = false;
-        OnGoingCell = null;
+        //OnGoingCell = null;
     }
 
     private void PathReceiver(Vector3[] path, bool isPossible)
@@ -32,6 +32,7 @@ public class Move : Action
         {
             this.path = path;
             Debug.Log("Se ha generado el camino y tiene " + path.Length + " nodos. ");
+            this.GetComponent<Entity>().cell.entityIn = null;
             StartCoroutine(FollowPath(path));
         }
         else
@@ -48,6 +49,8 @@ public class Move : Action
         }
         GetComponent<IdleOrder>().Idle = true;
         this.GetComponent<AbstractNPCBrain>().executed = true;
+        this.GetComponent<Entity>().cell = OnGoingCell;
+        OnGoingCell.entityIn = this.GetComponent<Entity>();
         this.GetComponent<Entity>()._influenceMapComp.UpdateInfluenceMap(this.GetComponent<Entity>());
     }
 
