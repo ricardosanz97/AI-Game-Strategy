@@ -35,6 +35,71 @@ namespace StrategicAI
         [ContextMenu("Evaluate Game State")]
         public void EvaluateGameState()
         {
+            List<Entity> AIEntitiesOwnedPlayer = castEntitiesOwner(_levelController.AIEntities, Entity.Owner.Player);
+            List<Entity> PlayerEntitiesOwnedPlayer = castEntitiesOwner(_levelController.PlayerEntities, Entity.Owner.Player);
+
+            List<Entity> AIEntitiesOwnedAI = castEntitiesOwner(_levelController.AIEntities, Entity.Owner.AI);
+            List<Entity> PlayerEntitiesOwnedAI = castEntitiesOwner(_levelController.PlayerEntities, Entity.Owner.AI);
+
+            int entitiesValueAI = CalculateValueEntities(_levelController.AIEntities);
+            int entitiesValuePlayer = CalculateValueEntities(_levelController.PlayerEntities);
+
+            int entitiesNumberAI = _levelController.AIEntities.Count;
+            int entitiesNumberPlayer = _levelController.PlayerEntities.Count;
+
+            int entitiesValueAIOwnedPlayer = CalculateValueEntities(AIEntitiesOwnedPlayer);
+            int entitiesValuePlayerOwnedPlayer = CalculateValueEntities(PlayerEntitiesOwnedPlayer);
+
+            int entitiesValueAIOwnedAI = CalculateValueEntities(AIEntitiesOwnedAI);
+            int entitiesValuePlayerOwnedAI = CalculateValueEntities(PlayerEntitiesOwnedAI);
+
+            if (entitiesValueAI >= entitiesValuePlayer)
+            {
+                if(entitiesNumberAI >= entitiesNumberPlayer)
+                {
+                    if(entitiesValueAIOwnedPlayer >= entitiesValuePlayerOwnedPlayer)
+                    {
+                        _strategicObjective = GetOrAddComponent<AttackBaseObjective>();
+                        //Spawnear tropas
+                    }
+                    else
+                    {
+                        _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
+                        //Spawnear tropas
+                    }
+                }
+                else
+                {
+                    _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
+                    //Spawnear tropas
+                }
+
+            }
+            else{
+                if (entitiesNumberAI >= entitiesNumberPlayer)
+                {
+                    _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
+                    //Spawn muros o torretas; mejorarlos
+                }
+                else
+                {
+                    if (entitiesValueAIOwnedAI >= entitiesValuePlayerOwnedAI)
+                    {
+                        _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
+                        //Spawnear tropas
+                    }
+                    else
+                    {
+                        _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
+                        //Spawn muros o torretas; mejorarlos
+                    }
+                }
+            }
+
+
+
+
+
             _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
             
             //todo programar el arbol
@@ -52,6 +117,37 @@ namespace StrategicAI
             Debug.Log("Ia Player turn");
             EvaluateGameState();
             _turnHandler.AIDone = true;
+        }
+
+        private List<Entity> castEntitiesOwner(List<Entity> entities, Entity.Owner own)
+        {
+            List<Entity> entitiesCasted = new List<Entity>();
+            foreach (Entity e in entities)
+            {
+                if(e.owner == own)
+                {
+                    entitiesCasted.Add(e);
+                }
+            }
+            return entitiesCasted;
+        }
+
+        private int CalculateValueEntities(List<Entity> entities)
+        {
+            int sumEntityValues = 0;
+
+            foreach (Entity e in entities)
+            {
+                int entityValue = 0;
+
+                entityValue += e.GetComponent<Health>().health;
+                entityValue += e.GetComponent<Attack>().damage;
+
+                sumEntityValues += entityValue;
+            }
+
+            return sumEntityValues;
+
         }
 
 
