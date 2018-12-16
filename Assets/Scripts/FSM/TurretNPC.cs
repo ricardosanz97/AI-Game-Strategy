@@ -90,6 +90,8 @@ public class TurretNPC : AbstractNPCBrain
         () =>
         {
             this.UpgradeNPC();
+            go.GetComponent<SimpleOptionsPopupController>().ClosePopup();
+            popupOptionsEnabled = false;
         },
         () =>
         {
@@ -222,6 +224,7 @@ public class TurretNPC : AbstractNPCBrain
         this.UpgradeCost += 3;
         this.GetComponent<AreaAttack>().areaSize++;
         this.GetComponent<AreaAttack>().damage++;
+        UpdateAffectedCells();
     }
 
 }
