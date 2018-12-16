@@ -30,12 +30,15 @@ public class Move : Action
 
     private void PathReceiver(Vector3[] path, bool isPossible)
     {
-        Debug.Log("not possible");
         if (isPossible)
         {
             this.path = path;
             Debug.Log("Se ha generado el camino y tiene " + path.Length + " nodos. ");
             StartCoroutine(FollowPath(path));
+        }
+        else
+        {
+            Debug.Log("No es posible generar un camino. ");
         }
         
     }

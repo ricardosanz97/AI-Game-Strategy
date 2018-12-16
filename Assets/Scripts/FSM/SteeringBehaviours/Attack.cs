@@ -21,6 +21,7 @@ public class Attack : Action
         {
             //si no lo tiene a tiro, que vaya a por él.
             AIAttack(targetEntity);
+            return;
         }
 
         ObjectiveAssigned = false;
@@ -32,6 +33,9 @@ public class Attack : Action
     
    public void AIAttack(Entity target)
    {
+        Debug.Log("Attack!");
+        GetComponent<IdleOrder>().Idle = true;//esta en estado idle
+        GetComponent<MoveOrder>().Move = true;//esta en estado move
         GetComponent<Move>().PathReceived = true;
         GetComponent<Move>().OnGoingCell = target.cell;
    }

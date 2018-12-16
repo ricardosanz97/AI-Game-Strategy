@@ -97,7 +97,7 @@ namespace CustomPathfinding
 					Physics.OverlapBoxNonAlloc(nodeWorldPosition,
 						new Vector3(NodeRadius, NodeRadius, NodeRadius), results,Quaternion.identity);*/
 
-                    Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(NodePrefab.NodeRadius,NodePrefab.NodeRadius,NodePrefab.NodeRadius),Quaternion.identity);
+                    Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(0f,NodePrefab.NodeRadius,0f),Quaternion.identity);
                     //Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(0, NodePrefab.NodeRadius * 2, 0), Quaternion.identity);
 
 					LevelController levelController = FindObjectOfType<LevelController>();
