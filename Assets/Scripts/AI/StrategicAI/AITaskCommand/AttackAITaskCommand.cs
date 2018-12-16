@@ -17,10 +17,7 @@ namespace StrategicAI
         {
             if (chosenTarget != null)
             {
-                _doer.GetComponent<AttackOrder>().Attack = true;//ahora mismo está en el estado Attack
-                _doer.GetComponent<Attack>().targetEntity = chosenTarget;
-                _doer.GetComponent<Attack>().ObjectiveAssigned = true;
-                _doer.GetComponent<Attack>().AIAttack(chosenTarget);
+            
             }
         }
     }

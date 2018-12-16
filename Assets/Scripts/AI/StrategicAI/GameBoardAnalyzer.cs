@@ -61,7 +61,12 @@ namespace StrategicAI
 
                 Entity chosenTarget = chosenStrategicObjective.DecideBasedOnInfluenceData(brain,influenceData,playerControlledEntites,levelController);
 
-                if (chosenTarget.owner == Entity.Owner.AI)
+                if (chosenTarget == null) //no hay nadie a quien atacar o mejorar, pues movemos.
+                {
+                    aiTaskCommands.Add(new MoveAITaskCommand(brain));
+                }
+
+                else if (chosenTarget.owner == Entity.Owner.AI)
                 {
                     //mejorar
                     Debug.Log("trying to upgrade");
@@ -71,7 +76,8 @@ namespace StrategicAI
                 {
                     Debug.Log("trying to attack");
                     aiTaskCommands.Add(new AttackAITaskCommand(brain, chosenTarget));
-                }  
+                }
+                
             }
             else // es un muro
             {

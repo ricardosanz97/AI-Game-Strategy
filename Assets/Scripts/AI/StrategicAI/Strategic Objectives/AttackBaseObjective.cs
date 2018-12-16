@@ -15,7 +15,16 @@ namespace StrategicAI
             //Cuando se lanze este método, todas las unidades solo podran atacar al core.
             if (analyzedNPC is Troop)
             {
-                return GetClosestEntityInCollection(analyzedNPC, coreEntities);
+                Debug.Log("generamos posibles nodos a mover. ");
+                Entity closestCore = GetClosestEntityInCollection(analyzedNPC, coreEntities);
+                analyzedNPC.GetComponent<Troop>().GetCellsWithEnemiesInRange();
+                if (analyzedNPC.GetComponent<Troop>().possibleAttacks.Contains(closestCore.cell.PNode)){
+                    return closestCore;
+                }
+                else
+                {
+                    return null;
+                }
             }
                   
             //si hay null no pasa nada, se gestiona luego

@@ -89,7 +89,6 @@ namespace Pathfinding
             return PathfindingAlgorithms.BFS(_pathfindingGrid.GetNodeFromWorldPosition(origin), radius, _pathfindingGrid);
         }
         
-
         public void RequestPath(PathRequest request, bool needsSmoothing = false)
         {
             ThreadPool.QueueUserWorkItem(delegate(object state)

@@ -11,12 +11,10 @@ public class Move : Action
     public CellBehaviour OnGoingCell;
     public bool PathReceived = false;
     public Vector3[] path;
-    private int counter = 0;
     public override void Act()
     {
         if (!PathReceived)
         {
-            counter = 0;
             return;
         }
         moving = true;
@@ -40,7 +38,6 @@ public class Move : Action
         {
             Debug.Log("No es posible generar un camino. ");
         }
-        
     }
 
     IEnumerator FollowPath(Vector3[] path)

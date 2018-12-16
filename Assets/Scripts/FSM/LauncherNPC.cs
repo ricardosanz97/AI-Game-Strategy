@@ -53,16 +53,8 @@ public class LauncherNPC : Troop
     {
         FSMSystem.AddState(this, new State(STATE.Attack, this,
             () => {//on enter attack state
-                List<CustomPathfinding.Node> nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Attack>().range, transform.position);
-                foreach (CustomPathfinding.Node node in nodeList)
-                {
-                    if (node.cell.entityIn != null && node.cell.entityIn.owner != owner) //the enemy in the cell is an enemy.
-                    {
-                        node.cell.gameObject.transform.Find("AttackPlacement").gameObject.SetActive(true);
-                        possibleAttacks.Add(node);
-                    }
-                }
-                
+
+                GetCellsWithEnemiesInRange();
             },
             () => {
                 foreach (CustomPathfinding.Node node in possibleAttacks)
@@ -129,5 +121,4 @@ public class LauncherNPC : Troop
         this.GetComponent<Attack>().range++;
         this.GetComponent<Move>().maxMoves++;
     }
-
 }
