@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CustomPathfinding;
+using UnityEngine;
 using DG.Tweening;
 using Zenject;
 

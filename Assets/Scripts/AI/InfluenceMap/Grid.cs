@@ -11,7 +11,7 @@ namespace InfluenceMap
         public GameObject ParentObject;
 
         public Node[,] _grid { get; private set; }
-        private bool _renderGroundGrid;
+        public bool _renderGroundGrid;
         private List<Originator> _originators = new List<Originator>();
 
         public void RegisterOriginator(Originator originator)

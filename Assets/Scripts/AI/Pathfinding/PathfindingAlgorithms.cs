@@ -19,7 +19,7 @@ namespace CustomPathfinding
         public static bool isDebugMode = true;
         
         //by now it uses a GridDebugger Class. It should have as a paramenter a IAstarSearchableSurface or something like that
-        public static void AStarSearch(PathfindingGrid pathfindingGrid, PathfindingManager.PathRequest request, Action<PathfindingManager.PathResult> callback)
+        public static void AStarSearch(PathfindingGrid pathfindingGrid, PathfindingManager.PathRequest request, Action<PathfindingManager.PathResult> callback, bool needsSmoothing)
         {
             //estos diccionarios se resetean cada vez porque estan dentro de un metodo estatico. Solo hay una instancia de el en memoria
             //the camefrom path can be reconstructed using the parent field in the node itself
@@ -30,8 +30,7 @@ namespace CustomPathfinding
             if (isDebugMode)
             {
                 Debug.Log("Started search at thread number " + Thread.CurrentThread.ManagedThreadId);
-                sw.Start();
-                Profiler.BeginThreadProfiling("AStar", "Thread " + Thread.CurrentThread.ManagedThreadId);                
+                sw.Start();            
             }
 
             Node source = pathfindingGrid.GetNodeFromWorldPosition(request.PathStart);
@@ -73,7 +72,6 @@ namespace CustomPathfinding
                         mediciones.Add(sw.ElapsedMilliseconds);
                         Debug.Log("Tiempo medio de pathfinding: " + GetAverageSearchTime() + " ms.");
                         Debug.Log("Finished search at thread number " + Thread.CurrentThread.ManagedThreadId + " in " + sw.ElapsedMilliseconds + "ms.");                        
-                        Profiler.EndThreadProfiling();
                     }
                     break;
                 }
@@ -93,8 +91,16 @@ namespace CustomPathfinding
             }
 
             Vector3[] path = ReconstructPath(pathSoFar, goal);
-            Vector3[] smoothedWaypoints = pathfindingGrid.SmoothPath(path, request.AgentRadius);
-            callback( new PathfindingManager.PathResult(smoothedWaypoints,true,request.Callback, Thread.CurrentThread.ManagedThreadId));
+            if(needsSmoothing)
+            {
+                Vector3[] smoothedWaypoints = pathfindingGrid.SmoothPath(path, request.AgentRadius);
+                callback( new PathfindingManager.PathResult(smoothedWaypoints,true,request.Callback, Thread.CurrentThread.ManagedThreadId));
+            }
+            else
+            {
+               callback( new PathfindingManager.PathResult(path,true,request.Callback, Thread.CurrentThread.ManagedThreadId));
+            }
+
         }
 
         public static Vector3[] ReconstructPath(Dictionary<Node,Node> pathSoFar, Node pathStartNode)
@@ -136,7 +142,9 @@ namespace CustomPathfinding
             }
 
             return total / mediciones.Count;
-        }/*
+        }
+        
+        /*
         public IEnumerable<Node> GetNeighbors(Node currentNode)
         {
             for (int i = -1; i <= 1; i++)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using CustomPathfinding;
+using ModestTree;
 using Zenject;
 
 [RequireComponent(typeof(MoveOrder))]
@@ -48,6 +49,7 @@ public class Troop : AbstractNPCBrain
         {
             return;
         }
+        
         popupOptionsEnabled = true;
         GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleOptionsPopup"));
         go.GetComponent<SimpleOptionsPopupController>().SetPopup(
