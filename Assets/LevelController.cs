@@ -41,7 +41,6 @@ public class LevelController : MonoBehaviour {
         {
             AICoreEntities.Add(go.GetComponent<Entity>());
             Collider[] cols = Physics.OverlapBox(go.transform.position, new Vector3(0f, 1f, 0f), Quaternion.identity, mask);
-            Debug.Log("cols mide " + cols.Length);
             foreach (Collider c in cols)
             {
                 if (c.GetComponent<CellBehaviour>() != null)

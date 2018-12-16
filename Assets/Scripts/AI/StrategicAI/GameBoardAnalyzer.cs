@@ -63,9 +63,9 @@ namespace StrategicAI
 
                 if (chosenTarget == null) //no hay nadie a quien atacar o mejorar, pues movemos.
                 {
+                    Debug.Log("trying to move");
                     aiTaskCommands.Add(new MoveAITaskCommand(brain));
                 }
-
                 else if (chosenTarget.owner == Entity.Owner.AI)
                 {
                     //mejorar
@@ -77,7 +77,6 @@ namespace StrategicAI
                     Debug.Log("trying to attack");
                     aiTaskCommands.Add(new AttackAITaskCommand(brain, chosenTarget));
                 }
-                
             }
             else // es un muro
             {
