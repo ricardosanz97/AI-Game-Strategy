@@ -79,6 +79,7 @@ public class TurnHandler : MonoBehaviour {
 
                 yield return _waitForSeconds;
                 currentTurn = PlayerType.AI;
+                _levelController.ResetTroopParameters(PlayerType.AI);
             }
 
             else if (currentTurn == PlayerType.AI)
@@ -91,8 +92,19 @@ public class TurnHandler : MonoBehaviour {
                 }
                 AIDone = false;
                 currentTurn = PlayerType.None;
+
+                if (_bloodController.AIBlood + _levelController.AIRewardBloodTurn > _bloodController.maxValue)
+                {
+                    _bloodController.SetAIBlood(_bloodController.maxValue);
+                }
+                else
+                {
+                    _bloodController.IncreaseAIBloodValue(_levelController.AIRewardBloodTurn);
+                }
+
                 yield return _waitForSeconds;
                 currentTurn = PlayerType.Player;
+                _levelController.ResetTroopParameters(PlayerType.Player);
             }
 
             yield return null;

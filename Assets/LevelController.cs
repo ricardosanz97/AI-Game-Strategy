@@ -175,6 +175,10 @@ public class LevelController : MonoBehaviour {
                     e.GetComponent<AbstractNPCBrain>().executed = false;
                     e.GetComponent<AbstractNPCBrain>().damageTurretReceived = false;
                 }
+                if (e.GetComponent<Entity>().entityType == ENTITY.Turret)
+                {
+                    e.GetComponent<TurretNPC>().SetAffectedCells();
+                }
             }
             PlayerRewardBloodTurn = MinBloodReward;
         }
@@ -186,6 +190,10 @@ public class LevelController : MonoBehaviour {
                 {
                     e.GetComponent<AbstractNPCBrain>().executed = false;
                     e.GetComponent<AbstractNPCBrain>().damageTurretReceived = false;
+                }
+                if (e.GetComponent<Entity>().entityType == ENTITY.Turret)
+                {
+                    e.GetComponent<TurretNPC>().SetAffectedCells();
                 }
             }
             AIRewardBloodTurn = MinBloodReward;

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 namespace StrategicAI
 {
@@ -17,8 +18,16 @@ namespace StrategicAI
         {
             if (chosenTarget != null)
             {
-            
+                chosenTarget.GetComponent<AttackOrder>().Attack = true;
+                chosenTarget.StartCoroutine(PerformAttack());
             }
+        }
+
+        IEnumerator PerformAttack()
+        {
+            yield return new WaitForSeconds(0.5f);
+            chosenTarget.GetComponent<Attack>().ObjectiveAssigned = true;
+            chosenTarget.GetComponent<Attack>().targetEntity = chosenTarget;
         }
     }
 }
