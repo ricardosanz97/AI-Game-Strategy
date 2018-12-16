@@ -21,11 +21,11 @@ namespace StrategicAI
         {               
             _levelController = FindObjectOfType<LevelController>();
             Assert.IsNotNull(_levelController);
-            var spawners = FindObjectsOfType<SpawnableCell>();
+            var spawners = FindObjectsOfType<CellBehaviour>();
 
             foreach (var spawnableCell in spawners)
             {
-                if(spawnableCell.GetComponent<CellBehaviour>().owner == PlayerType.AI)
+                if(spawnableCell.GetComponent<CellBehaviour>().GetComponent<SpawnableCell>() != null && spawnableCell.GetComponent<CellBehaviour>().owner == PlayerType.AI)
                     _spawnableCells.Add(spawnableCell.GetComponent<CellBehaviour>());
             }
             

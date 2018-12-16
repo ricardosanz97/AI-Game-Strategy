@@ -7,7 +7,7 @@ using Zenject;
 [SelectionBase]
 public class CellBehaviour : MonoBehaviour
 {
-    public PlayerType owner;
+    public PlayerType owner = PlayerType.None;
     public Entity entityIn;
     private bool PNodeAssigned = false;
     private bool INodeAssigned = false;
@@ -45,7 +45,6 @@ public class CellBehaviour : MonoBehaviour
     {
         if (other.GetComponent<CustomPathfinding.Node>() && PNode == null)
         {
-            Debug.Log("Get reference of the PNode in this cell. ");
             PNode = other.GetComponent<CustomPathfinding.Node>();
             //other.GetComponent<CustomPathfinding.Node>().cell = this;
         }

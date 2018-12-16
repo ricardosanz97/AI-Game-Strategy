@@ -52,7 +52,7 @@ public class RaycastCamera : MonoBehaviour {
                 && hit.collider.GetComponent<CellBehaviour>().GetOwner() == PlayerType.Player
                 && Input.GetMouseButtonDown(0)
                 && lastCellSelected.GetEntityIn() == null
-                && _levelController.CheckIfCanSpawn()) //ningun NPC nuestro spawneado esta en estado ataque o move
+                && _levelController.CheckIfCanSpawn() && hit.collider.GetComponent<CellBehaviour>().GetComponent<SpawnableCell>() != null) //ningun NPC nuestro spawneado esta en estado ataque o move
         {
             _spawnablesManager.SpawnEntity(hit.collider.GetComponent<CellBehaviour>(), _spawnablesManager.currentEntitySelected, Entity.Owner.Player);
         }
@@ -103,7 +103,7 @@ public class RaycastCamera : MonoBehaviour {
                     if (_levelController.TryingToAttack().gameObject.GetComponent<Attack>() != null)
                     {
                         _levelController.TryingToAttack().gameObject.GetComponent<AbstractNPCBrain>().DoAttackAnimation();
-                        _levelController.TryingToAttack().gameObject.GetComponent<Attack>().NPCObjectiveAttack = lastCellSelected.entityIn.GetComponent<AbstractNPCBrain>();
+                        _levelController.TryingToAttack().gameObject.GetComponent<Attack>().targetEntity = lastCellSelected.entityIn;
                         _levelController.TryingToAttack().gameObject.GetComponent<Attack>().ObjectiveAssigned = true;
 
                     }
