@@ -8,6 +8,7 @@ public class RaycastCamera : MonoBehaviour {
     LayerMask cell;
     [Inject]
     SpawnablesManager _spawnablesManager;
+    BloodController _bloodController;
     [Inject]
     TurnHandler _turnHandler;
     CellBehaviour lastCellSelected;
@@ -18,6 +19,7 @@ public class RaycastCamera : MonoBehaviour {
     private void Awake()
     {
         _levelController = FindObjectOfType<LevelController>();
+        _bloodController = FindObjectOfType<BloodController>();
     }
 
     private void Start()
@@ -69,16 +71,22 @@ public class RaycastCamera : MonoBehaviour {
             }
 
             bool nodeMovementAccesible = _levelController.TryingToMove().gameObject.GetComponent<Troop>().ListPossibleMovementsContains(hit.collider.GetComponent<CellBehaviour>().PNode);
-            Debug.Log("this node is accesible: " + nodeMovementAccesible);
             if (Input.GetMouseButtonDown(0)
                 && nodeMovementAccesible)
             {
-                Debug.Log("aqui entra. ");
                 if (_levelController.TryingToMove().gameObject.GetComponent<Move>() != null)
                 {
-                    soundManager.PlaySingle(soundManager.buttonPressedSound);
-                    _levelController.TryingToMove().gameObject.GetComponent<Move>().OnGoingCell = lastCellSelected;
-                    _levelController.TryingToMove().gameObject.GetComponent<Move>().PathReceived = true;
+                    bool bloodEnough = _bloodController.GetCurrentPlayerBlood() >= _levelController.GetComponent<Attack>().bloodCost;
+                    if (bloodEnough)
+                    {
+                        soundManager.PlaySingle(soundManager.buttonPressedSound);
+                        _levelController.TryingToMove().gameObject.GetComponent<Move>().OnGoingCell = lastCellSelected;
+                        _levelController.TryingToMove().gameObject.GetComponent<Move>().PathReceived = true;
+                    }
+                    else
+                    {
+                        Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "NOT ENOUGH\nBLOOD");
+                    }
                 }
             }
         }
@@ -97,14 +105,25 @@ public class RaycastCamera : MonoBehaviour {
                 }
 
                 bool nodeAttackAccesible = _levelController.TryingToAttack().gameObject.GetComponent<Troop>().ListPossibleAttacksContains(hit.collider.GetComponent<CellBehaviour>().PNode);
+                
                 if (Input.GetMouseButtonDown(0)
                     && nodeAttackAccesible)
                 {
                     if (_levelController.TryingToAttack().gameObject.GetComponent<Attack>() != null)
                     {
-                        _levelController.TryingToAttack().gameObject.GetComponent<AbstractNPCBrain>().DoAttackAnimation();
-                        _levelController.TryingToAttack().gameObject.GetComponent<Attack>().targetEntity = lastCellSelected.entityIn;
-                        _levelController.TryingToAttack().gameObject.GetComponent<Attack>().ObjectiveAssigned = true;
+                        bool bloodEnough = _bloodController.GetCurrentPlayerBlood() >= _levelController.GetComponent<Attack>().bloodCost;
+                        if (bloodEnough)
+                        {
+                            _levelController.TryingToAttack().gameObject.GetComponent<AbstractNPCBrain>().DoAttackAnimation();
+                            _levelController.TryingToAttack().gameObject.GetComponent<Attack>().targetEntity = lastCellSelected.entityIn;
+                            _levelController.TryingToAttack().gameObject.GetComponent<Attack>().ObjectiveAssigned = true;
+                        }
+
+                        else
+                        {
+                            Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "NOT ENOUGH\nBLOOD");
+                        }
+                        
 
                     }
                 }

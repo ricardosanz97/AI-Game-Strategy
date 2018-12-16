@@ -109,33 +109,43 @@ public class SpawnablesManager : MonoBehaviour {
         }
         int bloodCost = entityToSpawn.GetComponent<Entity>().bloodCost;
         bool bloodEnough = owner == Entity.Owner.Player ? bloodCost <= _bloodController.GetCurrentPlayerBlood() : bloodCost <= _bloodController.GetCurrentAIBlood();
-        if (entityToSpawn != null && bloodEnough)
+
+        if (bloodEnough)
         {
-            entitySpawned = Instantiate(entityToSpawn, new Vector3(cell.transform.position.x, 0f, cell.transform.position.z), entityToSpawn.transform.rotation);
-            entitySpawned.GetComponent<Entity>().SetEntity(owner);
-            entitySpawned.GetComponent<Entity>().entityType = lastTroopSpawned;
-            
-            if (owner == Entity.Owner.Player)
-                currentEntitySelected = ENTITY.None;
-
-            Node node = _influenceMapComponent.GetNodeAtLocation(new Vector3(cell.transform.position.x, 1f, cell.transform.position.z));
-        
-            OnSpawnedTroop?.Invoke(entitySpawned.GetComponent<Entity>());
-
-            if (owner == Entity.Owner.Player)
+            if (entityToSpawn != null)
             {
-                _bloodController.DecreasePlayerBloodValue(entitySpawned.GetComponent<Entity>().bloodCost);
+                entitySpawned = Instantiate(entityToSpawn, new Vector3(cell.transform.position.x, 0f, cell.transform.position.z), entityToSpawn.transform.rotation);
+                entitySpawned.GetComponent<Entity>().SetEntity(owner);
+                entitySpawned.GetComponent<Entity>().entityType = lastTroopSpawned;
+
+                if (owner == Entity.Owner.Player)
+                    currentEntitySelected = ENTITY.None;
+
+                Node node = _influenceMapComponent.GetNodeAtLocation(new Vector3(cell.transform.position.x, 1f, cell.transform.position.z));
+
+                OnSpawnedTroop?.Invoke(entitySpawned.GetComponent<Entity>());
+
+                if (owner == Entity.Owner.Player)
+                {
+                    _bloodController.DecreasePlayerBloodValue(entitySpawned.GetComponent<Entity>().bloodCost);
+                }
+                else if (owner == Entity.Owner.AI)
+                {
+                    Debug.Log("decreasing blood");
+                    _bloodController.DecreaseAIBloodValue(entitySpawned.GetComponent<Entity>().bloodCost);
+                }
+
+                FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().HideButtons();
+                cell.GetComponent<CellBehaviour>().entityIn = entitySpawned.GetComponent<AbstractNPCBrain>();
+                entitySpawned.GetComponent<Entity>().cell = cell.GetComponent<CellBehaviour>();
             }
-            else if (owner == Entity.Owner.AI)
-            {
-                Debug.Log("decreasing blood");
-                _bloodController.DecreaseAIBloodValue(entitySpawned.GetComponent<Entity>().bloodCost);
-            }
-            
-            FindObjectOfType<AttackButtonController>().GetComponent<AttackButtonController>().HideButtons();
-            cell.GetComponent<CellBehaviour>().entityIn = entitySpawned.GetComponent<AbstractNPCBrain>();
-            entitySpawned.GetComponent<Entity>().cell = cell.GetComponent<CellBehaviour>();
         }
+
+        else
+        {
+            Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "NOT ENOUGH\nBLOOD");
+        }
+        
     }
 
 }
