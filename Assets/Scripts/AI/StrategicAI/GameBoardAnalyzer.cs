@@ -26,7 +26,7 @@ namespace StrategicAI
             _influenceMapComponent = influenceMapComponent;
         }
         
-        public void AnalyzeGameTerrain(StrategicObjective chosenStrategicObjective)
+        public void AnalyzeGameTerrain(StrategicObjective chosenStrategicObjective, AISpawnStrategy aiSpawnStrategy)
         {   
             //declaramos la lisa de pequeños comandos que realizara la ia
             List<AITaskCommand> aiTaskCommands = new List<AITaskCommand>();
@@ -43,7 +43,7 @@ namespace StrategicAI
             }
 
             Debug.Log(aiTaskCommands.Count);
-            _tasksAllocator.OnTaskCommandsReceived(aiTaskCommands, IAcontrolledEntities);
+            _tasksAllocator.OnTaskCommandsReceived(aiTaskCommands, IAcontrolledEntities, aiSpawnStrategy);
         }
 
         private void AnalyzeSurroundingInfluences(List<AITaskCommand> aiTaskCommands,
@@ -84,7 +84,5 @@ namespace StrategicAI
             }
                 
         }
-
-
     }
 }

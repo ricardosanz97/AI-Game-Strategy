@@ -17,10 +17,10 @@ public class LevelController : MonoBehaviour {
     public List<Entity> playerCoreEntities;
     public List<Entity> AICoreEntities;
 
-    public int MinBloodReward = 3;
+    public int MinBloodReward = 10;
 
-    public int PlayerRewardBloodTurn = 3;
-    public int AIRewardBloodTurn = 3;
+    public int PlayerRewardBloodTurn = 10;
+    public int AIRewardBloodTurn = 10;
 
     private bool pauseMenuEnabled = true;
     private SoundManager soundManager;

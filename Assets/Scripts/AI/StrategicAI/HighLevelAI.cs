@@ -10,7 +10,7 @@ namespace StrategicAI
     public class HighLevelAI : MonoBehaviour
     {
         [SerializeField] private StrategicObjective _strategicObjective;
-        [SerializeField] private TasksAllocator _spawnStrategy;
+        [SerializeField] private StrategicAI.AISpawnStrategy _spawnStrategy;
 
         [Inject] private GameBoardAnalyzer _analyzer;
         [Inject] private TurnHandler _turnHandler;
@@ -75,27 +75,51 @@ namespace StrategicAI
                 {
                     if(entitiesValueAIOwnedPlayer >= entitiesValuePlayerOwnedPlayer)
                     {
+                        //Spawnear tropas caras tio xD BIBA BREMEN Y BIBA ANTONIO AB ASCAOL
                         _strategicObjective = GetOrAddComponent<AttackBaseObjective>();
-                        //Spawnear tropas caras
+                        _spawnStrategy = new AISpawnStrategy(new List<EntityBloodCost>
+                        {
+                            //10
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Tank),
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Tank),
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner)
+                        });
                     }
                     else
                     {
                         _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
-                        //Spawnear tropas baratas
+                        //Spawnear tropas baratas tio xD
+                        _spawnStrategy = new AISpawnStrategy(new List<EntityBloodCost>
+                        {
+                            //7
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner),
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner),
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Launcher)
+                        });
                     }
                 }
                 else
                 {
                     _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
                     //Spawnear tropas baratas
+                    _spawnStrategy = new AISpawnStrategy(new List<EntityBloodCost>
+                    {
+                        EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner),
+                        EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Launcher),
+                        EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Turret)
+                    });
                 }
-
             }
             else{
                 if (entitiesNumberAI >= entitiesNumberPlayer)
                 {
                     _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
-                    //Spawn muros 
+                    //Spawn muros
+                    _spawnStrategy = new AISpawnStrategy(new List<EntityBloodCost>
+                    {
+                        EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Turret),
+                        EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Turret)
+                    });
                 }
                 else
                 {
@@ -103,16 +127,27 @@ namespace StrategicAI
                     {
                         _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
                         //Spawnear tropas baratas
+                        _spawnStrategy = new AISpawnStrategy(new List<EntityBloodCost>
+                        {
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner),
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner),
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Launcher)
+                        });
                     }
                     else
                     {
                         _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
                         //Spawn torretas
+                        _spawnStrategy = new AISpawnStrategy(new List<EntityBloodCost>
+                        {
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Turret),
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Turret)
+                        });
                     }
                 }
             }
 
-            _analyzer.AnalyzeGameTerrain(_strategicObjective);
+            _analyzer.AnalyzeGameTerrain(_strategicObjective, _spawnStrategy);
             Debug.Log("Chosen Strategic Objective: " + _strategicObjective);  
         }
 

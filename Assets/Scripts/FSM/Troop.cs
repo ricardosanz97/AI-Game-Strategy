@@ -15,10 +15,12 @@ public class Troop : AbstractNPCBrain
 {
     public List<CustomPathfinding.Node> possibleMovements;
     public List<CustomPathfinding.Node> possibleAttacks;
+    public PathfindingGrid _pathfindingGrid;
 
     public override void Awake()
     {
         base.Awake();
+        _pathfindingGrid = FindObjectOfType<PathfindingGrid>();
     }
 
     public override void Start()
@@ -28,10 +30,10 @@ public class Troop : AbstractNPCBrain
         initialState = new State(STATE.Idle, this,
             () => {
                 GetTurretDamage();
-                _pathfindingManager.GetComponent<CustomPathfinding.PathfindingGrid>().UpdateGrid(this);
+                _pathfindingGrid.UpdateGrid(this);
             },
             () => {
-                _pathfindingManager.GetComponent<CustomPathfinding.PathfindingGrid>().UpdateGrid(this);
+                _pathfindingGrid.UpdateGrid(this);
             }
         );
 
@@ -154,7 +156,6 @@ public class Troop : AbstractNPCBrain
                     possibleMovements.Add(node);
                 }
             }
-
         }
     }
 

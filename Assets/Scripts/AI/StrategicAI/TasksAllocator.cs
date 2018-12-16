@@ -16,7 +16,7 @@ namespace StrategicAI
         [Inject] private HighLevelAI _highLevelAi;
         [Inject] private BloodController _bloodController;
         
-        public void OnTaskCommandsReceived(List<AITaskCommand> aiTaskCommands, Entity[] controlledEntities)
+        public void OnTaskCommandsReceived(List<AITaskCommand> aiTaskCommands, Entity[] controlledEntities, AISpawnStrategy aISpawnStrategy)
         {
             //analiar los recursos de sangre que tenemos
             //en funcion de esos recursos y las tareas que tenemos decidir
@@ -25,7 +25,7 @@ namespace StrategicAI
             //y tropas controladas por nosotros
             //todo cambiar el magic number por un parametro desde el high level
             if (IsSpawnNeeded(aiTaskCommands, controlledEntities, 2))
-                DecideWhatToSpawn(aiTaskCommands);
+                DecideWhatToSpawn(aiTaskCommands, aISpawnStrategy);
             
             for (int i = 0; i < aiTaskCommands.Count; i++)
             {
@@ -38,7 +38,7 @@ namespace StrategicAI
             //añadirlo a una cola en algun monobehaviour para que una corutina lo vaya sacando poco a poco.
 
             Debug.Log("AI Done");
-            _turnHandler.AIDone = true;
+            //_turnHandler.AIDone = true;
 
         }
 
@@ -47,26 +47,24 @@ namespace StrategicAI
             return Mathf.Abs(controlledEntities.Length - aiTaskCommands.Count) > threshhold || controlledEntities.Length == 0 || aiTaskCommands.Count == 0;
         }
 
-        private void DecideWhatToSpawn(List<AITaskCommand> aiTaskCommands)
+        private void DecideWhatToSpawn(List<AITaskCommand> aiTaskCommands, AISpawnStrategy strategySpawn)
         {
-            if (HasResourcesToSpawn())
+            int currentBlood = _bloodController.GetCurrentAIBlood();
+            List<EntityBloodCost> costs = strategySpawn.entitiesBloodCost;
+
+            for (int i = 0; i < costs.Count; i++)
             {
-                //decide what to spawn and add it to the aitaskcommand
-                Assert.IsNotNull(_highLevelAi.SpawnableCells);
-                //SpawnAITaskCommand spawnCommand = new SpawnAITaskCommand((ENTITY)Random.Range(1,6), _highLevelAi.SpawnableCells);
-
-                Entity troopToSpawn = null; //sera una entidad cara o barata segun lo q hagamos
-                
-                SpawnAITaskCommand spawnCommand = new SpawnAITaskCommand(ENTITY.Launcher, _highLevelAi.SpawnableCells);
-                aiTaskCommands.Insert(0,spawnCommand);  
+                if (costs[i].bloodCost <= currentBlood)
+                {
+                    SpawnAITaskCommand spawnCommand = new SpawnAITaskCommand(costs[i].entity, _highLevelAi.SpawnableCells);
+                    aiTaskCommands.Insert(0, spawnCommand);
+                    currentBlood -= costs[i].bloodCost;
+                }
+                else
+                {
+                    break;
+                }
             }
-        }
-
-        private bool HasResourcesToSpawn()
-        {
-            return true;
-            //todo meter el contador de la sangre en el blood controller
-            
         }
     }
 }

@@ -54,7 +54,7 @@ public class LauncherNPC : Troop
         FSMSystem.AddState(this, new State(STATE.Attack, this,
             () => {//on enter attack state
                 GetCellsWithEnemiesInRange();
-                _pathfindingManager.GetComponent<CustomPathfinding.PathfindingGrid>().UpdateGrid(this);
+                _pathfindingGrid.UpdateGrid(this);
             },
             () => {
                 foreach (CustomPathfinding.Node node in possibleAttacks)
@@ -62,7 +62,7 @@ public class LauncherNPC : Troop
                     node.cell.gameObject.transform.Find("AttackPlacement").gameObject.SetActive(false);
                 }
                 possibleAttacks.Clear();
-                _pathfindingManager.GetComponent<CustomPathfinding.PathfindingGrid>().UpdateGrid(this);
+                _pathfindingGrid.UpdateGrid(this);
             })
         );
 
@@ -80,7 +80,7 @@ public class LauncherNPC : Troop
             () =>//on enter move state
             {
                 GetCellsPossibleMovements();
-                _pathfindingManager.GetComponent<CustomPathfinding.PathfindingGrid>().UpdateGrid(this);
+                _pathfindingGrid.UpdateGrid(this);
             },
             () =>
             {
@@ -90,7 +90,7 @@ public class LauncherNPC : Troop
                     node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(false);
                 }
                 possibleMovements.Clear();
-                _pathfindingManager.GetComponent<CustomPathfinding.PathfindingGrid>().UpdateGrid(this);
+                _pathfindingGrid.UpdateGrid(this);
             })
         );
 
