@@ -13,7 +13,7 @@ namespace StrategicAI
             Entity[] coreEntities = levelController.playerCoreEntities.ToArray();
 
             //Cuando se lanze este método, todas las unidades solo podran atacar al core.
-            if (analyzedNPC.entityType == ENTITY.Launcher || analyzedNPC.entityType == ENTITY.Prisioner || analyzedNPC.entityType == ENTITY.Tank)
+            if (analyzedNPC is Troop)
             {
                 return GetClosestEntityInCollection(analyzedNPC, coreEntities);
             }

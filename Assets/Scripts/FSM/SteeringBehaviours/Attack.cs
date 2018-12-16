@@ -17,6 +17,14 @@ public class Attack : Action
             return;
         }
 
+        if (targetEntity != null && this.GetComponent<Troop>() != null && !this.GetComponent<Troop>().possibleAttacks.Contains(targetEntity.cell.PNode))
+        {
+            //si tiene un entity objetivo y no está en rango, ir hacia el.
+            this.GetComponent<Move>().PathReceived = true;
+            this.GetComponent<Move>().OnGoingCell = targetEntity.cell;
+            return;
+        }
+
         ObjectiveAssigned = false;
         targetEntity.GetComponent<Health>().ReceiveDamage(damage);
         GetComponent<IdleOrder>().Idle = true;
@@ -24,6 +32,7 @@ public class Attack : Action
         targetEntity = null;
     }
     
+    /*
     public void StartAttack(Entity target)
     {
         ObjectiveAssigned = true;
@@ -37,4 +46,5 @@ public class Attack : Action
     {
         yield return new WaitForSeconds(WaitTimeUntilAttack);
     }
+    */
 }
