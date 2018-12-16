@@ -18,7 +18,7 @@ namespace StrategicAI
                 Debug.Log("generamos posibles nodos a mover. ");
                 Entity closestCore = GetClosestEntityInCollection(analyzedNPC, coreEntities);
                 analyzedNPC.GetComponent<Troop>().GetCellsWithEnemiesInRange();
-                if (analyzedNPC.GetComponent<Troop>().possibleAttacks.Contains(closestCore.cell.PNode)){
+                if (analyzedNPC.GetComponent<Troop>().possibleAttacks.Contains(closestCore.cell.PNode) && closestCore.entityType == ENTITY.Core){
                     return closestCore;
                 }
                 else
