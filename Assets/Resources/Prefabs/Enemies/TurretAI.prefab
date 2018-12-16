@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 8
+  initialHealth: 0
 --- !u!114 &114329202937774824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -441,17 +442,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodCost: 3
+  entityType: 0
   cell: {fileID: 0}
   owner: 0
   rb: {fileID: 0}
   value: 0
-  tryingTo: 2
   _spawnablesManager: {fileID: 0}
   _levelController: {fileID: 0}
   _influenceMapComp: {fileID: 0}
-  npc: 5
-  healthPoints: 100
+  _bloodController: {fileID: 0}
+  damageTurretReceived: 0
   currentLevel: 1
+  sliderHealth: {fileID: 0}
   transitions: []
   states: []
   initialState:
@@ -464,7 +466,14 @@ MonoBehaviour:
     brain: {fileID: 0}
     actions: []
   popupOptionsEnabled: 0
+  _pathfindingManager: {fileID: 0}
+  UpgradeCost: 7
+  MaxUpgradeLevel: 3
   executed: 0
+  CurrentRotation: 0
+  CellsUnderMyAttack: []
+  nodeAffectedList: []
+  RotateBloodCost: 2
 --- !u!114 &114728348859959276
 MonoBehaviour:
   m_ObjectHideFlags: 1

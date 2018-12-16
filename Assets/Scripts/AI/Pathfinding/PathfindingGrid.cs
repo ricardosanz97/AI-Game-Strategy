@@ -134,8 +134,16 @@ namespace CustomPathfinding
 					Physics.OverlapBoxNonAlloc(nodeWorldPosition,
 						new Vector3(NodeRadius, NodeRadius, NodeRadius), results,Quaternion.identity);*/
 
-					if (Physics.CheckBox(nodeWorldPosition, new Vector3(0,NodePrefab.NodeRadius,0),Quaternion.identity, _unwalkableMask))
-						nodeType = Node.ENodeType.NonWalkable;
+					Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(NodePrefab.NodeRadius,NodePrefab.NodeRadius,NodePrefab.NodeRadius),Quaternion.identity);
+
+					foreach (var collider in colliders)
+					{
+						if(collider.GetComponent<Entity>())
+						{
+							nodeType = Node.ENodeType.NonWalkable;
+							break;
+						}
+					}
 
                     Collider[] cols = Physics.OverlapBox(nodeWorldPosition, new Vector3(0,NodePrefab.NodeRadius,0), Quaternion.identity, _cellMask);
                     cell = cols[0].gameObject.GetComponent<CellBehaviour>();
@@ -225,19 +233,19 @@ namespace CustomPathfinding
 		//it gives as the cost of the edge between these two nodes
 		public float Cost(Node currentNode, Node neighbor)
 		{	
-			//todo aqui hay que coger del influence map el coste.
-			//1. Coger la misma celda que la que estas del pathfinding
-			//2. Añadirle el valor de todas las influences si son enemigas al coste del camino
-			if (currentNode.GridX == neighbor.GridX || currentNode.GridZ == neighbor.GridZ && neighbor.NodeType == Node.ENodeType.Walkable)
-				return 1f;
-
-			if (!(currentNode.GridX == neighbor.GridX || currentNode.GridZ == neighbor.GridZ) &&
-			    neighbor.NodeType == Node.ENodeType.Walkable)
-				return 1.4f;
+			float cost = 0;
 			
-
-			//en caso de que no se pueda pasar
-			return int.MaxValue;
+			//todo revisar esto
+			if (currentNode.GridX == neighbor.GridX || currentNode.GridZ == neighbor.GridZ && neighbor.NodeType == Node.ENodeType.Walkable)
+				cost += 1f;
+			else if (!(currentNode.GridX == neighbor.GridX || currentNode.GridZ == neighbor.GridZ) && neighbor.NodeType == Node.ENodeType.Walkable)
+				cost += 1.4f;
+			
+			InfluenceMap.Node neigborInfluenceNode = _influenceMapComponent.GetNodeAtLocation(currentNode.WorldPosition);
+			
+			cost += neigborInfluenceNode.GetTotalInfluenceAtNode();
+			
+			return cost;
 
 		}
 
