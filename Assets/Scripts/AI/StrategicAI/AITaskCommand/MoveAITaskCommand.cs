@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using StrategicAI;
+using DG.Tweening;
 
 public class MoveAITaskCommand : AITaskCommand {
 
@@ -15,10 +16,16 @@ public class MoveAITaskCommand : AITaskCommand {
     public override void PerformCommand()
     {
         troopToMove.GetComponent<MoveOrder>().Move = true;//ahora estamos en estado move
-        CustomPathfinding.Node objective = troopToMove.GetComponent<Troop>().possibleMovements[Random.Range(0, troopToMove.GetComponent<Troop>().possibleMovements.Count)];
+        troopToMove.StartCoroutine(PerformMovement());
+    }
+
+    IEnumerator PerformMovement()
+    {
+        yield return new WaitForSeconds(0.5f);
+        int random = Random.Range(0, troopToMove.GetComponent<Troop>().possibleMovements.Count);
+        CustomPathfinding.Node objective = troopToMove.GetComponent<Troop>().possibleMovements[random];
         troopToMove.GetComponent<Move>().PathReceived = true;
         troopToMove.GetComponent<Move>().OnGoingCell = objective.cell;
-
     }
 
 }

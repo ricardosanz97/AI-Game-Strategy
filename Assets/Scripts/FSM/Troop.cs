@@ -126,7 +126,34 @@ public class Troop : AbstractNPCBrain
                 possibleAttacks.Add(node);
             }
         }
-        //Debug.Log("possibleAttacks.Count = " + possibleAttacks.Count);
+        Debug.Log("possibleAttacks.Count = " + possibleAttacks.Count);
+    }
+
+    public void GetCellsPossibleMovements()
+    {
+        List<CustomPathfinding.Node> nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Move>().maxMoves, transform.position);
+        Debug.Log("nodeList tiene " + nodeList.Count + " elementos. ");
+        foreach (CustomPathfinding.Node node in nodeList)
+        {
+            Debug.Log("generando lista de posibles movimientos. ");
+            if (this.owner == Owner.Player)
+            {
+                if (this.cell.PNode.GridX < node.GridX)
+                {
+                    node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(true);
+                    possibleMovements.Add(node);
+                }
+            }
+            else
+            {
+                if (this.cell.PNode.GridX > node.GridX)
+                {
+                    node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(true);
+                    possibleMovements.Add(node);
+                }
+            }
+
+        }
     }
 
 }
