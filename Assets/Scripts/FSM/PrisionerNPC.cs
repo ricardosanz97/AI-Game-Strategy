@@ -51,15 +51,8 @@ public class PrisionerNPC : Troop
         FSMSystem.AddState(this, new State(STATE.Attack, this,
             () =>
             {
-                List<CustomPathfinding.Node> nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Attack>().range, transform.position);
-                foreach (CustomPathfinding.Node node in nodeList)
-                {
-                    if (node.cell.entityIn != null && node.cell.entityIn.owner != owner) //the enemy in the cell is an enemy.
-                    {
-                        node.cell.gameObject.transform.Find("AttackPlacement").gameObject.SetActive(true);
-                        possibleAttacks.Add(node);
-                    }
-                }
+                GetCellsWithEnemiesInRange();
+                _pathfindingManager.GetComponent<CustomPathfinding.PathfindingGrid>().UpdateGrid(null);
             },
             () =>
             {
@@ -68,6 +61,7 @@ public class PrisionerNPC : Troop
                     node.cell.gameObject.transform.Find("AttackPlacement").gameObject.SetActive(false);
                 }
                 possibleAttacks.Clear();
+                _pathfindingManager.GetComponent<CustomPathfinding.PathfindingGrid>().UpdateGrid(null);
             }));
 
         List<Action> behavioursAttackState = new List<Action>()
@@ -83,16 +77,8 @@ public class PrisionerNPC : Troop
         FSMSystem.AddState(this, new State(STATE.Move, this,
             ()=>
             {
-                List<CustomPathfinding.Node> nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Move>().maxMoves, transform.position);
-                Debug.Log("nodeList tiene " + nodeList.Count + " elementos. ");
-                foreach (CustomPathfinding.Node node in nodeList)
-                {
-                    if (this.cell.PNode.GridX < node.GridX)
-                    {
-                        node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(true);
-                        possibleMovements.Add(node);
-                    }
-                }
+                GetCellsPossibleMovements();
+                _pathfindingManager.GetComponent<CustomPathfinding.PathfindingGrid>().UpdateGrid(null);
             },
             ()=>
             {
@@ -101,6 +87,7 @@ public class PrisionerNPC : Troop
                     node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(false);
                 }
                 possibleMovements.Clear();
+                _pathfindingManager.GetComponent<CustomPathfinding.PathfindingGrid>().UpdateGrid(null);
             }));
 
         List<Action> behavioursMoveState = new List<Action>()
