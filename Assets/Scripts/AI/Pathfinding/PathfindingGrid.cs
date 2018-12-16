@@ -134,7 +134,7 @@ namespace CustomPathfinding
 					Physics.OverlapBoxNonAlloc(nodeWorldPosition,
 						new Vector3(NodeRadius, NodeRadius, NodeRadius), results,Quaternion.identity);*/
 
-					Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(0,NodePrefab.NodeRadius,0),Quaternion.identity);
+					Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(NodePrefab.NodeRadius,NodePrefab.NodeRadius,NodePrefab.NodeRadius),Quaternion.identity);
 
 					foreach (var collider in colliders)
 					{
