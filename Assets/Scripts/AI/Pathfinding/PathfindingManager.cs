@@ -90,11 +90,14 @@ namespace Pathfinding
         }
         
 
-        public void RequestPath(PathRequest request)
+        public void RequestPath(PathRequest request, bool needsSmoothing)
         {
             ThreadPool.QueueUserWorkItem(delegate(object state)
             {
-                PathfindingAlgorithms.AStarSearch(_pathfindingGrid, request, FinishedProcessingPath);
+                if(needsSmoothing)
+                    PathfindingAlgorithms.AStarSearch(_pathfindingGrid, request, FinishedProcessingPath,true);
+                else
+                    PathfindingAlgorithms.AStarSearch(_pathfindingGrid, request, FinishedProcessingPath,false);
             });
         }
 

@@ -15,7 +15,7 @@ namespace InfluenceMap
         public int Y = 10;
         public float Spacing = 1.0f;
 
-        private InfluenceMap.Grid influenceGrid;
+        public InfluenceMap.Grid influenceGrid;
 
         private void Start()
         {

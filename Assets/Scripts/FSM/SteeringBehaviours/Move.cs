@@ -16,14 +16,13 @@ public class Move : Action
     {
         if (!PathReceived)
         {
-            Debug.Log("no path received.");
             return;
         }
         moving = true;
         //ya tenemos destino
         Vector3 initial = GetComponent<Troop>().gameObject.transform.position;
         Debug.Log("request entre " + initial + " y " + OnGoingCell.PNode.gameObject.transform.position);
-        GetComponent<Troop>()._pathfindingManager.RequestPath(new Pathfinding.PathfindingManager.PathRequest(initial, OnGoingCell.PNode.gameObject.transform.position, PathReceiver, 0.5f));
+        GetComponent<Troop>()._pathfindingManager.RequestPath(new Pathfinding.PathfindingManager.PathRequest(initial, OnGoingCell.PNode.gameObject.transform.position, PathReceiver, 0.5f),false);
         PathReceived = false;
     }
 
@@ -59,6 +58,5 @@ public class Move : Action
         {
             yield return null;
         }
-        Debug.Log("ya he llegado. ");
     }
 }

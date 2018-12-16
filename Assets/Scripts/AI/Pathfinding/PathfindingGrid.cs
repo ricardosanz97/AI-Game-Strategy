@@ -60,58 +60,12 @@ namespace CustomPathfinding
 
 
 		//todo this method can be optimized by sampling the nodes which arearound the spawned entity and only updating those
-		private void UpdateGrid(Entity entitySpawned)
+		public void UpdateGrid(Entity entitySpawned)
 		{
-			if (nodeContainer != null)
-			{
-				Destroy(nodeContainer);
-			}
-			
-			nodeContainer = new GameObject("Node Container");
-			nodeContainer.transform.SetParent(this.transform);
-			Grid = new Node[GridSizeX, GridSizeZ];
-			Vector3 gridOrigin;
-			//Collider[] results = new Collider[16];
-			
-			if(UseTransformAsGridOrigin)
-				gridOrigin = transform.position;
-			else
-				gridOrigin = transform.position - Vector3.right * GridWorldSize.x/2 - Vector3.forward * GridWorldSize.y/2 ;
-			
-			Debug.DrawRay(Vector3.zero, gridOrigin);
-			for (int i = 0; i < GridSizeX; i++)
-			{
-				for (int j = 0; j < GridSizeZ; j++)
-				{
-					Node.ENodeType nodeType = Node.ENodeType.Walkable;
-					Vector3 nodeWorldPosition = gridOrigin + Vector3.right * (i * _nodeDiameter + NodePrefab.NodeRadius) +
-					                            Vector3.forward * (j * _nodeDiameter + NodePrefab.NodeRadius);
-                    CellBehaviour cell = null;
-
-                    /*results = new Collider[16];
-					Physics.OverlapBoxNonAlloc(nodeWorldPosition,
-						new Vector3(NodeRadius, NodeRadius, NodeRadius), results,Quaternion.identity);*/
-
-                    Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(NodePrefab.NodeRadius, NodePrefab.NodeRadius, NodePrefab.NodeRadius), Quaternion.identity);
-                    //Collider[] colliders = Physics.OverlapBox(nodeWorldPosition, new Vector3(0, NodePrefab.NodeRadius, 0), Quaternion.identity);
-
-                    foreach (var collider in colliders)
-                    {
-                        if (collider.GetComponent<Entity>())
-                        {
-                            nodeType = Node.ENodeType.NonWalkable;
-                            break;
-                        }
-                    }
-
-                    Collider[] cols = Physics.OverlapBox(nodeWorldPosition, new Vector3(0, NodePrefab.NodeRadius, 0), Quaternion.identity, _cellMask);
-                    cell = cols[0].gameObject.GetComponent<CellBehaviour>();
-                    InitializeNode(i,j,nodeWorldPosition,nodeType, cell);
-				}
-			}
+			CreateGrid();
 		}
 
-		public void CreateGrid()
+		private void CreateGrid()
 		{
 			if (nodeContainer != null)
 			{
@@ -150,7 +104,10 @@ namespace CustomPathfinding
 					
                     foreach (var collider in colliders)
 					{
-						if(collider.GetComponent<Entity>() && !levelController.TryingToMove())
+						if(collider.GetComponent<Entity>() == levelController.TryingToMove())
+							continue;
+						
+						if(collider.GetComponent<Entity>())
 						{
 							nodeType = Node.ENodeType.NonWalkable;
 							break;
