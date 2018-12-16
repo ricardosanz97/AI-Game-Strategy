@@ -10,6 +10,7 @@ public class NewGameButtonController : MonoBehaviour
     public Slider Slider;
     public GameObject LoadingScreen;
     public GameObject MainMenuScreen;
+    public GameObject CreditsScreen;
 
     public void OnNewGameButtonPressed(int buildIndex)
     {
@@ -22,6 +23,18 @@ public class NewGameButtonController : MonoBehaviour
     public void OnQuitButtonPressed()
     {
         Application.Quit();
+    }
+
+    public void OnCreditsButtonPressed()
+    {
+        MainMenuScreen.SetActive(false);
+        CreditsScreen.SetActive(true);
+    }
+
+    public void OnBackButtonPressed()
+    {
+        MainMenuScreen.SetActive(true);
+        CreditsScreen.SetActive(false);
     }
 
     private IEnumerator LoadGameSceneAsync(int buildIndex)
