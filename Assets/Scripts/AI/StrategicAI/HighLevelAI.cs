@@ -9,7 +9,9 @@ namespace StrategicAI
 {
     public class HighLevelAI : MonoBehaviour
     {
-        [SerializeField] private StrategicObjective _strategicObjective;      
+        [SerializeField] private StrategicObjective _strategicObjective;
+        [SerializeField] private TasksAllocator _spawnStrategy;
+
         [Inject] private GameBoardAnalyzer _analyzer;
         [Inject] private TurnHandler _turnHandler;
         [SerializeField] private List<CellBehaviour> _spawnableCells;
@@ -65,6 +67,8 @@ namespace StrategicAI
             entitiesValueAIOwnedAI = CalculateValueEntities(AIEntitiesOwnedAI);
             entitiesValuePlayerOwnedAI = CalculateValueEntities(PlayerEntitiesOwnedAI);
 
+            Debug.Log(entitiesValueAI + ", " + entitiesValuePlayer + ", " + entitiesNumberAI + ", " + entitiesNumberPlayer + ", " + entitiesValueAIOwnedPlayer + ", " + entitiesValuePlayerOwnedPlayer + ", " + entitiesValueAIOwnedAI + ", " + entitiesValuePlayerOwnedAI);
+
             if (entitiesValueAI >= entitiesValuePlayer)
             {
                 if(entitiesNumberAI >= entitiesNumberPlayer)
@@ -72,18 +76,18 @@ namespace StrategicAI
                     if(entitiesValueAIOwnedPlayer >= entitiesValuePlayerOwnedPlayer)
                     {
                         _strategicObjective = GetOrAddComponent<AttackBaseObjective>();
-                        //Spawnear tropas
+                        //Spawnear tropas caras
                     }
                     else
                     {
                         _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
-                        //Spawnear tropas
+                        //Spawnear tropas baratas
                     }
                 }
                 else
                 {
                     _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
-                    //Spawnear tropas
+                    //Spawnear tropas baratas
                 }
 
             }
@@ -91,19 +95,19 @@ namespace StrategicAI
                 if (entitiesNumberAI >= entitiesNumberPlayer)
                 {
                     _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
-                    //Spawn muros o torretas; mejorarlos
+                    //Spawn muros 
                 }
                 else
                 {
                     if (entitiesValueAIOwnedAI >= entitiesValuePlayerOwnedAI)
                     {
                         _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
-                        //Spawnear tropas
+                        //Spawnear tropas baratas
                     }
                     else
                     {
                         _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
-                        //Spawn muros o torretas; mejorarlos
+                        //Spawn torretas
                     }
                 }
             }
