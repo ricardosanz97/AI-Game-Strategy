@@ -10,7 +10,7 @@ public class BloodController : MonoBehaviour {
     private Text bloodPlayerValueText;
 
     public int minValue = 0;
-    public int maxValue = 100;
+    public int maxValue = 10;
 
     public int PlayerBlood;
     public int AIBlood;

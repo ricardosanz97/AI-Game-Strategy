@@ -79,7 +79,7 @@ public class RaycastCamera : MonoBehaviour {
                     bool bloodEnough = _bloodController.GetCurrentPlayerBlood() >= _levelController.TryingToMove().gameObject.GetComponent<Attack>().bloodCost;
                     if (bloodEnough)
                     {
-                        _bloodController.DecreasePlayerBloodValue(_levelController.TryingToAttack().GetComponent<Move>().bloodCost);
+                        _bloodController.DecreasePlayerBloodValue(_levelController.TryingToMove().GetComponent<Move>().bloodCost);
                         soundManager.PlaySingle(soundManager.buttonPressedSound);
                         _levelController.TryingToMove().gameObject.GetComponent<Move>().OnGoingCell = lastCellSelected;
                         _levelController.TryingToMove().gameObject.GetComponent<Move>().PathReceived = true;
