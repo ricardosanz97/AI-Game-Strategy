@@ -11,12 +11,26 @@ public class ButtonReadyController : MonoBehaviour {
     public Color buttonReadyColor = Color.green;
     public Color otherTurnColor = Color.white;
     public Color buttonNotReadyColor = Color.red;
+    public Button button;
 
     private void Awake()
     {
+        button = this.gameObject.GetComponent<Button>();
+        
         //this.GetComponent<Button>().colors.normalColor = buttonNotReadyColor;
     }
 
+    private void Update()
+    {
+        if (_turnHandler.currentTurn != PlayerType.Player)
+        {
+            button.interactable = false;
+        }
+        else
+        {
+            button.interactable = true;
+        }
+    }
     public void ClickReady()
     {
         StartCoroutine(WaitForNPCsReady());
