@@ -59,7 +59,7 @@ public class TankNPC : Troop
                         possibleAttacks.Add(node);
                     }
                 }
-                //_pathfindingGrid.UpdateGrid(this);
+                _pathfindingGrid.UpdateGrid(this);
             },
             () => {
                 foreach (CustomPathfinding.Node node in possibleAttacks)
@@ -67,7 +67,7 @@ public class TankNPC : Troop
                     node.cell.gameObject.transform.Find("AttackPlacement").gameObject.SetActive(false);
                 }
                 possibleAttacks.Clear();
-                //_pathfindingGrid.UpdateGrid(this);
+                _pathfindingGrid.UpdateGrid(this);
             })
         );
 
@@ -94,7 +94,7 @@ public class TankNPC : Troop
                         possibleMovements.Add(node);
                     }
                 }
-                //_pathfindingGrid.UpdateGrid(this);
+                _pathfindingGrid.UpdateGrid(this);
             },
             () =>
             {
@@ -103,7 +103,7 @@ public class TankNPC : Troop
                     node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(false);
                 }
                 possibleMovements.Clear();
-                //_pathfindingGrid.UpdateGrid(this);
+                _pathfindingGrid.UpdateGrid(this);
             })
         );
 

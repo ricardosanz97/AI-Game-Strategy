@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114410363137578080}
   - component: {fileID: 114228448054511618}
   - component: {fileID: 114529590304067392}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (19)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 114026217462094648}
   - component: {fileID: 114313912359394924}
   - component: {fileID: 114577221243022174}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (33)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 114613671589276978}
   - component: {fileID: 114690214407921178}
   - component: {fileID: 114667471507311920}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (47)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 114308484982398398}
   - component: {fileID: 114567507289574086}
   - component: {fileID: 114018196268995102}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (46)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 114355214477253726}
   - component: {fileID: 114426771898186364}
   - component: {fileID: 114322181856854152}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (40)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 114801560272625900}
   - component: {fileID: 114042495901758724}
   - component: {fileID: 114737525228962448}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (39)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 114167895453552634}
   - component: {fileID: 114012526156454996}
   - component: {fileID: 114254008528575370}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (42)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 114777173676185616}
   - component: {fileID: 114320245906473204}
   - component: {fileID: 114148088997436540}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (49)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 114201859234635430}
   - component: {fileID: 114885722346635564}
   - component: {fileID: 114455443350645702}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (22)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 114799397689584358}
   - component: {fileID: 114641197629218190}
   - component: {fileID: 114187549645124974}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (25)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 114101196527371048}
   - component: {fileID: 114326374899045148}
   - component: {fileID: 114218933135621558}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (31)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 114215231149012662}
   - component: {fileID: 114259808741819758}
   - component: {fileID: 114801381332782802}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (44)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 114281102828342140}
   - component: {fileID: 114636823396706180}
   - component: {fileID: 114568904142864870}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (21)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 114204441399049392}
   - component: {fileID: 114439100816823300}
   - component: {fileID: 114369625636417834}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (26)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 114014668928841218}
   - component: {fileID: 114162819310107320}
   - component: {fileID: 114550787806042484}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (30)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 114388895930589808}
   - component: {fileID: 114086283134576912}
   - component: {fileID: 114470392561145042}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (41)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 114174613514914204}
   - component: {fileID: 114572860270086460}
   - component: {fileID: 114949529693548492}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (34)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -502,7 +502,7 @@ GameObject:
   - component: {fileID: 114104390302326592}
   - component: {fileID: 114704108040417098}
   - component: {fileID: 114287622186610266}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (38)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 114948295769300458}
   - component: {fileID: 114322129515366634}
   - component: {fileID: 114482022573183004}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (29)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 114365334504717992}
   - component: {fileID: 114860098711722604}
   - component: {fileID: 114221321151018188}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (20)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 114224707596033596}
   - component: {fileID: 114397758429543430}
   - component: {fileID: 114411952519372648}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (27)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 114693739695226712}
   - component: {fileID: 114255495052941978}
   - component: {fileID: 114147422602049716}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (18)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 114477579344101618}
   - component: {fileID: 114380716259025604}
   - component: {fileID: 114617858494236138}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (24)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 114379178389534730}
   - component: {fileID: 114177783096661600}
   - component: {fileID: 114689209149019624}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (43)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -656,7 +656,7 @@ GameObject:
   - component: {fileID: 114715755441718112}
   - component: {fileID: 114539698053127596}
   - component: {fileID: 114233258822836088}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (35)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -678,7 +678,7 @@ GameObject:
   - component: {fileID: 114990832574060532}
   - component: {fileID: 114425343450967566}
   - component: {fileID: 114304295671151268}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (45)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 114676071164013176}
   - component: {fileID: 114675190205616068}
   - component: {fileID: 114355813787484736}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (28)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 114198196156985636}
   - component: {fileID: 114994665164402860}
   - component: {fileID: 114442834981199280}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (48)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -776,7 +776,7 @@ GameObject:
   - component: {fileID: 114257788007336192}
   - component: {fileID: 114319509553815998}
   - component: {fileID: 114037543370933734}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (36)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -815,7 +815,7 @@ GameObject:
   - component: {fileID: 114265420355316628}
   - component: {fileID: 114656970426560218}
   - component: {fileID: 114674406490169504}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (50)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -837,7 +837,7 @@ GameObject:
   - component: {fileID: 114988918998464136}
   - component: {fileID: 114368340946344376}
   - component: {fileID: 114732919182823286}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (32)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -859,7 +859,7 @@ GameObject:
   - component: {fileID: 114901145500666256}
   - component: {fileID: 114028369614568294}
   - component: {fileID: 114192769809251500}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (37)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}
@@ -881,7 +881,7 @@ GameObject:
   - component: {fileID: 114504340240186824}
   - component: {fileID: 114427264065959306}
   - component: {fileID: 114422711477964262}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: TowerPillarAI (23)
   m_TagString: CorePlayer
   m_Icon: {fileID: 0}

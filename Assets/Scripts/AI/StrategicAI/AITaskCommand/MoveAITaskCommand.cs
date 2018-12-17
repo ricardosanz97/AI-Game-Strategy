@@ -14,9 +14,11 @@ namespace StrategicAI
     {
 
         private Troop troopToMove;
+        private LevelController _levelController;
 
         public MoveAITaskCommand(AbstractNPCBrain brain)
         {
+            _levelController = Object.FindObjectOfType<LevelController>();
             this.troopToMove = brain.GetComponent<Troop>();
         }
 
@@ -32,20 +34,13 @@ namespace StrategicAI
 
             var minInfluenceNode = GetMinInfluenceNode();
             
-            while(minInfluenceNode.NodeType == Node.ENodeType.NonWalkable)
-            {
-                minInfluenceNode = GetMinInfluenceNode();    
-            }
+            _levelController.chosenNodesToMoveIA.Add(minInfluenceNode);
             
-            troopToMove.cell.PNode.NodeType = Node.ENodeType.Walkable;
-            Object.FindObjectOfType<PathfindingGrid>().UpdateNode(troopToMove.cell.PNode);
             troopToMove.GetComponent<MoveOrder>().Move = true;
             troopToMove.GetComponent<Move>().PathReceived = true;
             
             Debug.Assert(minInfluenceNode != null, nameof(minInfluenceNode) + " != null");
             troopToMove.GetComponent<Move>().OnGoingCell = minInfluenceNode.cell;
-            troopToMove.GetComponent<Move>().OnGoingCell.PNode.NodeType = Node.ENodeType.NonWalkable;
-            Object.FindObjectOfType<PathfindingGrid>().UpdateNode(troopToMove.GetComponent<Move>().OnGoingCell.PNode);
         }
 
         private Node GetMinInfluenceNode()
@@ -53,13 +48,15 @@ namespace StrategicAI
             InfluenceMapComponent influenceMapComponent = Object.FindObjectOfType<InfluenceMapComponent>();
             float minInfluence = int.MaxValue;
             Node minInfluenceNode = null;
+            
             troopToMove.GetComponent<Troop>().GetCellsPossibleMovements();
             foreach (var possibleMovement in troopToMove.GetComponent<Troop>().possibleMovements)
             {
                 float tempInfluence = influenceMapComponent.GetNodeAtLocation(possibleMovement.WorldPosition)
                     .GetTotalInfluenceAtNode();
 
-                if (tempInfluence < minInfluence && possibleMovement.cell.PNode.NodeType != Node.ENodeType.NonWalkable)
+                //intentamos movernos al de menor influencia y que no lo haya elegido otro.
+                if (tempInfluence < minInfluence && !_levelController.chosenNodesToMoveIA.Contains(possibleMovement))
                 {
                     minInfluenceNode = possibleMovement;
                     minInfluence = tempInfluence;

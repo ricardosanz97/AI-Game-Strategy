@@ -52,7 +52,7 @@ public class PrisionerNPC : Troop
             () =>
             {
                 GetCellsWithEnemiesInRange();
-                //_pathfindingGrid.UpdateGrid(this);
+                _pathfindingGrid.UpdateGrid(this);
             },
             () =>
             {
@@ -61,7 +61,7 @@ public class PrisionerNPC : Troop
                     node.cell.gameObject.transform.Find("AttackPlacement").gameObject.SetActive(false);
                 }
                 possibleAttacks.Clear();
-                //_pathfindingGrid.UpdateGrid(this);
+                _pathfindingGrid.UpdateGrid(this);
             }));
 
         List<Action> behavioursAttackState = new List<Action>()
@@ -78,7 +78,7 @@ public class PrisionerNPC : Troop
             ()=>
             {
                 GetCellsPossibleMovements();
-                //_pathfindingGrid.UpdateGrid(this);
+                _pathfindingGrid.UpdateGrid(this);
             },
             ()=>
             {
@@ -87,7 +87,7 @@ public class PrisionerNPC : Troop
                     node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(false);
                 }
                 possibleMovements.Clear();
-                //_pathfindingGrid.UpdateGrid(this);
+                _pathfindingGrid.UpdateGrid(this);
             }));
 
         List<Action> behavioursMoveState = new List<Action>()

@@ -77,7 +77,6 @@ GameObject:
   - component: {fileID: 54155057956959282}
   - component: {fileID: 114479222325973234}
   - component: {fileID: 114080160700048566}
-  - component: {fileID: 114509633274281776}
   - component: {fileID: 65009191531282464}
   m_Layer: 0
   m_Name: TankAI
@@ -497,23 +496,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114509633274281776
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1695462555196660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a907fa3d1334032bdf460cb4cdd796c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Originator:
-    WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.1
-    InfluenceRange: 4
-    Color: {r: 1, g: 0, b: 0.8461652, a: 0}
-    InfluenceType: 2
 --- !u!114 &114693757680137316
 MonoBehaviour:
   m_ObjectHideFlags: 1

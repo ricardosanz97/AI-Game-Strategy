@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using CustomPathfinding;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using Zenject;
@@ -12,6 +13,7 @@ public class LevelController : MonoBehaviour {
     public List<Entity> PlayerEntities;
     public List<Entity> AIEntities;
     public List<Entity> TotalEntities;
+    public List<CustomPathfinding.Node> chosenNodesToMoveIA;
     public int MaxWalls = 8;
 
     public List<Entity> playerCoreEntities;
@@ -29,6 +31,7 @@ public class LevelController : MonoBehaviour {
     {
         canvasGameObject = FindObjectOfType<Canvas>().gameObject;
         soundManager = FindObjectOfType<SoundManager>();
+        chosenNodesToMoveIA = new List<Node>();
     }
 
     private void Start()
