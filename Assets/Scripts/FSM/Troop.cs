@@ -29,7 +29,7 @@ public class Troop : AbstractNPCBrain
 
         initialState = new State(STATE.Idle, this,
             () => {
-                GetTurretDamage();
+                //GetTurretDamage();
                 _pathfindingGrid.UpdateGrid(this);
             },
             () => {

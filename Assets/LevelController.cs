@@ -5,6 +5,7 @@ using CustomPathfinding;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using Zenject;
+using UnityEngine.UI;
 
 public class LevelController : MonoBehaviour {
 
@@ -28,6 +29,10 @@ public class LevelController : MonoBehaviour {
     public int currentTroopsPlayerSpawned = 0;
     public int currentTroopsAISpawned = 0;
 
+    public Slider playerCoreHPSlider; //POR INSPECTOR
+    public Slider AICoreHPSlider; //POR INSPECTOR
+    public int PlayerCoreHP;
+    public int AICoreHP;
     private bool pauseMenuEnabled = true;
     private SoundManager soundManager;
 
@@ -50,11 +55,19 @@ public class LevelController : MonoBehaviour {
 
     private void Start()
     {
-        
         //ResetAllShadersCells();
         AICoreEntities = GameObject.FindGameObjectWithTag("CoreAI").GetComponentsInChildren<Entity>().ToList();
         playerCoreEntities = GameObject.FindGameObjectWithTag("CorePlayer").GetComponentsInChildren<Entity>().ToList();
-        
+
+        PlayerCoreHP = playerCoreEntities.Count;
+        AICoreHP = AICoreEntities.Count;
+
+        playerCoreHPSlider.maxValue = PlayerCoreHP;
+        playerCoreHPSlider.value = playerCoreHPSlider.maxValue;
+
+        AICoreHPSlider.maxValue = AICoreHP;
+        AICoreHPSlider.value = AICoreHPSlider.maxValue;
+
         LayerMask mask = LayerMask.GetMask(new string[] { "Cell" });
         foreach (var entity in AICoreEntities)
         {
@@ -81,7 +94,9 @@ public class LevelController : MonoBehaviour {
                 }
             }
         }
-                
+
+        StartCoroutine(CheckWetherIsAWinner());
+
     }
 
     private void Update()
@@ -119,6 +134,26 @@ public class LevelController : MonoBehaviour {
             }
         }
         
+    }
+
+    IEnumerator CheckWetherIsAWinner()
+    {
+        while (true)
+        {
+            if (PlayerCoreHP <= 0)
+            {
+                GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "YOU LOSE!");
+                yield return new WaitForSeconds(3f);
+                SceneManager.LoadScene(0);
+            }
+            else if (AICoreHP <= 0)
+            {
+                GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "YOU WIN!");
+                yield return new WaitForSeconds(3f);
+                SceneManager.LoadScene(0);
+            }
+            yield return null;
+        }
     }
 
     void ResetAllShadersCells()
@@ -255,7 +290,6 @@ public class LevelController : MonoBehaviour {
         PlayerEntities.Remove(entity);
         TotalEntities.Remove(entity);
         currentTroopsPlayerSpawned -= 1;
-
     }
 
     public void RemoveAIEntities(Entity entity)
@@ -296,8 +330,13 @@ public class LevelController : MonoBehaviour {
         {
             if(entityDeleted.entityType == ENTITY.Core)
             {
-                if(playerCoreEntities.Contains(entityDeleted))
+                if (playerCoreEntities.Contains(entityDeleted))
+                {
                     playerCoreEntities.Remove(entityDeleted);
+                    PlayerCoreHP--;
+                    playerCoreHPSlider.value--;
+                }
+                    
             }
             else if(PlayerEntities.Contains(entityDeleted))
                RemovePlayerEntities(entityDeleted);
@@ -306,8 +345,13 @@ public class LevelController : MonoBehaviour {
         {
             if(entityDeleted.entityType == ENTITY.Core)
             {
-                if(AICoreEntities.Contains(entityDeleted))
+                if (AICoreEntities.Contains(entityDeleted))
+                {
                     AICoreEntities.Remove(entityDeleted);
+                    AICoreHP--;
+                    AICoreHPSlider.value--;
+                }
+                    
             }
             else if(AIEntities.Contains(entityDeleted))
                 RemoveAIEntities(entityDeleted);
