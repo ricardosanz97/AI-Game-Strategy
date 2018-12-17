@@ -21,7 +21,12 @@ public class Move : Action
         //ya tenemos destino
         Vector3 initial = GetComponent<Troop>().gameObject.transform.position;
         Debug.Log("request entre " + initial + " y " + OnGoingCell.PNode.gameObject.transform.position);
-        GetComponent<Troop>()._pathfindingManager.RequestPath(new Pathfinding.PathfindingManager.PathRequest(initial, OnGoingCell.PNode.gameObject.transform.position, PathReceiver, 0.5f),false);
+        
+        if(GetComponent<Troop>().owner == Entity.Owner.AI)
+            GetComponent<Troop>()._pathfindingManager.RequestPath(new Pathfinding.PathfindingManager.PathRequest(initial, OnGoingCell.PNode.gameObject.transform.position, PathReceiver, 0.5f), true ,false);
+        else
+            GetComponent<Troop>()._pathfindingManager.RequestPath(new Pathfinding.PathfindingManager.PathRequest(initial, OnGoingCell.PNode.gameObject.transform.position, PathReceiver, 0.5f), false ,false);
+
         PathReceived = false;
         //OnGoingCell = null;
     }

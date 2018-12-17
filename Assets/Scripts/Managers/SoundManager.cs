@@ -42,6 +42,8 @@ public class SoundManager : MonoBehaviour {
     public AudioClip gameBackgroundSound;
     [HideInInspector]
     public AudioClip quitSound;
+    [HideInInspector]
+    public AudioClip readySound;
 
     void Start()
     {
@@ -61,6 +63,7 @@ public class SoundManager : MonoBehaviour {
         menuBackgroundSound = Resources.Load<AudioClip>("SFX/MenuBackgroundSound");
         gameBackgroundSound = Resources.Load<AudioClip>("SFX/GameBackgroundSound");
         quitSound = Resources.Load<AudioClip>("SFX/QuitSound");
+        readySound = Resources.Load<AudioClip>("SFX/ReadySound");
     }
 
     public void PlaySingle (AudioClip clip)
