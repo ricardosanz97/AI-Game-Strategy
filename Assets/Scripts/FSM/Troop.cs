@@ -158,7 +158,7 @@ public class Troop : AbstractNPCBrain
             Debug.Log("generando lista de posibles movimientos. ");
             if (this.owner == Owner.Player)
             {
-                if (this.cell.PNode.GridX < node.GridX)
+                if (this.cell.PNode.GridX <= node.GridX)
                 {
                     node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(true);
                     possibleMovements.Add(node);
@@ -166,7 +166,7 @@ public class Troop : AbstractNPCBrain
             }
             else
             {
-                if (this.cell.PNode.GridX > node.GridX)
+                if (this.cell.PNode.GridX >= node.GridX)
                 {
                     node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(true);
                     possibleMovements.Add(node);
