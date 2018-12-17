@@ -11,7 +11,8 @@ public class ButtonReadyController : MonoBehaviour {
     public Color buttonReadyColor = Color.green;
     public Color otherTurnColor = Color.white;
     public Color buttonNotReadyColor = Color.red;
-    public Button button;
+    private Button button;
+    private SoundManager soundManager;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class ButtonReadyController : MonoBehaviour {
     }
     public void ClickReady()
     {
+        soundManager.PlaySingle(soundManager.readySound);
         StartCoroutine(WaitForNPCsReady());
         //this.GetComponent<Button>().colors.normalColor = buttonReadyColor;
     }
