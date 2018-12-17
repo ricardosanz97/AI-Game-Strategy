@@ -12,7 +12,7 @@ public class ButtonReadyController : MonoBehaviour {
     public Color otherTurnColor = Color.white;
     public Color buttonNotReadyColor = Color.red;
     private Button button;
-    private SoundManager soundManager;
+    [Inject] private SoundManager soundManager;
 
     private void Awake()
     {
