@@ -247,7 +247,7 @@ public class TurretNPC : AbstractNPCBrain
                 return;
             }
             base.UpgradeNPC();
-            this.UpgradeCost += 3;
+            this.UpgradeCost += 2;
             this.GetComponent<AreaAttack>().areaSize++;
             this.GetComponent<AreaAttack>().damage++;
             UpdateAffectedCells();

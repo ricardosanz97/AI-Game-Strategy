@@ -168,7 +168,7 @@ public class LevelController : MonoBehaviour {
             if (currentTroopsPlayerSpawned >= MaxTroopsSpawned)
             {
                 can = false;
-                GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("NO PUEDES", "YA HAY\n5 TROPAS");
+                GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "TIENES\n5 TROPAS");
             }
             else
             {

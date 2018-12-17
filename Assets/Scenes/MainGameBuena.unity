@@ -4953,9 +4953,12 @@ MonoBehaviour:
   MaxWalls: 8
   playerCoreEntities: []
   AICoreEntities: []
-  MinBloodReward: 3
-  PlayerRewardBloodTurn: 3
-  AIRewardBloodTurn: 3
+  MinBloodReward: 10
+  PlayerRewardBloodTurn: 10
+  AIRewardBloodTurn: 10
+  MaxTroopsSpawned: 5
+  currentTroopsPlayerSpawned: 0
+  currentTroopsAISpawned: 0
 --- !u!4 &2146703504
 Transform:
   m_ObjectHideFlags: 0
