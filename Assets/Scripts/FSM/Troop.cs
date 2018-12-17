@@ -212,11 +212,11 @@ public class Troop : AbstractNPCBrain
                 }
             }
 
-            if (canDisableShader)
-            {
+            //if (canDisableShader)
+            //{
                 //Debug.Log("Node " + node.GetHashCode() + " ha sido borrado. ");
                 node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(false);
-            }
+            //}
         }
     }
 

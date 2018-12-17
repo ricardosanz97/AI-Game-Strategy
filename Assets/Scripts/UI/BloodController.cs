@@ -32,6 +32,7 @@ public class BloodController : MonoBehaviour {
 
     public void DecreasePlayerBloodValue (int value)
     {
+        Debug.Log("decreasing blood. ");
         //Debug.Log("Tenemos " + PlayerBlood);
         //Debug.Log("Restamos " + value);
         float value2 = value / (float)maxValue;
