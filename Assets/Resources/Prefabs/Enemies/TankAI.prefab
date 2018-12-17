@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6adfc145bc8a448ee8203367dc83b0ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloodCost: 1
+  bloodCost: 0
   maxMoves: 3
   moving: 0
   OnGoingCell: {fileID: 0}
@@ -469,6 +469,7 @@ MonoBehaviour:
   executed: 0
   possibleMovements: []
   possibleAttacks: []
+  _pathfindingGrid: {fileID: 0}
 --- !u!114 &114484781987213096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -547,7 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219904cf804eb4ab19c44053bcc8df2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloodCost: 2
+  bloodCost: 0
   damage: 3
   range: 1
   ObjectiveAssigned: 0

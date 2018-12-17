@@ -498,7 +498,7 @@ MonoBehaviour:
   CurrentRotation: 3
   CellsUnderMyAttack: []
   nodeAffectedList: []
-  RotateBloodCost: 2
+  RotateBloodCost: 0
 --- !u!114 &114506134304350822
 MonoBehaviour:
   m_ObjectHideFlags: 1
