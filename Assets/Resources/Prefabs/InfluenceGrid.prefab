@@ -160,6 +160,14 @@ MonoBehaviour:
   X: 24
   Y: 16
   Spacing: 1
+  _colorIntensity: 0.00125
+  influenceGrid:
+    InfluenceMask:
+      serializedVersion: 2
+      m_Bits: 0
+    InfluenceMapTexture: {fileID: 0}
+    ParentObject: {fileID: 0}
+    _renderGroundGrid: 0
 --- !u!222 &222352856994185010
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -14,6 +14,7 @@ namespace InfluenceMap
         public int X = 10;
         public int Y = 10;
         public float Spacing = 1.0f;
+        [Range(0,0.005f)] [SerializeField]private float _colorIntensity;
 
         public InfluenceMap.Grid influenceGrid;
 
@@ -23,6 +24,7 @@ namespace InfluenceMap
             influenceGrid.CreateMap(X, Y, Spacing, InfluenceNodePredab, true, gameObject);
             influenceGrid.InfluenceMask = InfluenceMask;
             InfluenceMapTexture.texture = influenceGrid.InfluenceMapTexture;
+            influenceGrid.ColorIntensity = _colorIntensity;
 
             InitializeInfluenceMap();
             

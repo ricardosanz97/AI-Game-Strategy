@@ -11,6 +11,8 @@ namespace InfluenceMap
         public GameObject ParentObject;
 
         public Node[,] _grid { get; private set; }
+        public float ColorIntensity { get; set; }
+
         public bool _renderGroundGrid;
         private List<Originator> _originators = new List<Originator>();
 
@@ -154,10 +156,9 @@ namespace InfluenceMap
             {
                 if (_renderGroundGrid)
                 {
+                    Color calculatedColor = ((Color) _originators[i].Color) * (node.Influences[k].Value) * (_originators[i].Influence);
                     node.WorldGameObject.GetComponent<Renderer>().enabled = true;
-                    node.WorldGameObject.GetComponent<Renderer>().material.color +=
-                        ((Color) _originators[i].Color) * (node.Influences[k].Value) *
-                        (_originators[i].Influence);
+                    node.WorldGameObject.GetComponent<Renderer>().material.color += calculatedColor * ColorIntensity;
                 }
 
                 node.Color += ((Color) _originators[i].Color) * (node.Influences[k].Value) * (_originators[i].Influence);
