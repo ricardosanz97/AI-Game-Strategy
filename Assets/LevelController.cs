@@ -24,6 +24,10 @@ public class LevelController : MonoBehaviour {
     public int PlayerRewardBloodTurn = 10;
     public int AIRewardBloodTurn = 10;
 
+    public int MaxTroopsSpawned = 5;
+    public int currentTroopsPlayerSpawned = 0;
+    public int currentTroopsAISpawned = 0;
+
     private bool pauseMenuEnabled = true;
     private SoundManager soundManager;
 
@@ -148,20 +152,43 @@ public class LevelController : MonoBehaviour {
         }
     }
 
-    public bool CheckIfCanSpawn()
-    {
-        bool can = true;
-        foreach (Entity entity in PlayerEntities)
+    public bool CheckIfCanSpawn(Entity.Owner owner) {
+        bool can = false;
+        if (owner == Entity.Owner.Player)
         {
-            if (entity.gameObject.GetComponent<Troop>() != null
-                && entity.gameObject.GetComponent<AbstractNPCBrain>().currentState != null
-                && entity.gameObject.GetComponent<AbstractNPCBrain>().currentState.stateName != STATE.Idle) //is moving or attacking
+            foreach (Entity entity in PlayerEntities)
+            {
+                if (entity.gameObject.GetComponent<Troop>() != null
+                    && entity.gameObject.GetComponent<AbstractNPCBrain>().currentState != null
+                    && entity.gameObject.GetComponent<AbstractNPCBrain>().currentState.stateName != STATE.Idle) //is moving or attacking
+                {
+                    can = false;
+                }
+            }
+            if (currentTroopsPlayerSpawned >= MaxTroopsSpawned)
             {
                 can = false;
+                GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "TIENES\n5 TROPAS");
+            }
+            else
+            {
+                can = true;
+            }
+        }
+        else
+        {
+            if (currentTroopsAISpawned >= MaxTroopsSpawned)
+            {
+                can = false;
+            }
+            else
+            {
+                can = true;
             }
         }
 
         return can;
+        
     }
 
     public void ResetTroopParameters(PlayerType nextTurn)

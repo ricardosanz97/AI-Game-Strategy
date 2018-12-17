@@ -492,7 +492,7 @@ MonoBehaviour:
     actions: []
   popupOptionsEnabled: 0
   _pathfindingManager: {fileID: 0}
-  UpgradeCost: 7
+  UpgradeCost: 6
   MaxUpgradeLevel: 3
   executed: 0
   CurrentRotation: 3

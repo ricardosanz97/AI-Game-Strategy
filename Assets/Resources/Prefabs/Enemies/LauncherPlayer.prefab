@@ -775,7 +775,7 @@ MonoBehaviour:
     actions: []
   popupOptionsEnabled: 0
   _pathfindingManager: {fileID: 0}
-  UpgradeCost: 6
+  UpgradeCost: 5
   MaxUpgradeLevel: 3
   executed: 0
   possibleMovements: []

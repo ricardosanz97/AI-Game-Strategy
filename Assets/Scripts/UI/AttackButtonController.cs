@@ -22,7 +22,7 @@ public class AttackButtonController : MonoBehaviour {
 
     public void HandleButtons()
     {
-        if (!canPressButton || !_levelController.CheckIfCanSpawn() || _turnHandler.currentTurn != PlayerType.Player)
+        if (!canPressButton || !_levelController.CheckIfCanSpawn(Entity.Owner.Player) || _turnHandler.currentTurn != PlayerType.Player)
         {
             if (buttonsEnabled)
             {

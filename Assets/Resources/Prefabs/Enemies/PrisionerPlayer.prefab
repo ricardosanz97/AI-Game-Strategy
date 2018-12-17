@@ -434,7 +434,7 @@ MonoBehaviour:
     actions: []
   popupOptionsEnabled: 0
   _pathfindingManager: {fileID: 0}
-  UpgradeCost: 6
+  UpgradeCost: 4
   MaxUpgradeLevel: 3
   executed: 0
   possibleMovements: []

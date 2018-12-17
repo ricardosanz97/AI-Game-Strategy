@@ -55,7 +55,7 @@ public class RaycastCamera : MonoBehaviour {
                 && hit.collider.GetComponent<CellBehaviour>().GetOwner() == PlayerType.Player
                 && Input.GetMouseButtonDown(0)
                 && lastCellSelected.GetEntityIn() == null
-                && _levelController.CheckIfCanSpawn() && hit.collider.GetComponent<CellBehaviour>().GetComponent<SpawnableCell>() != null) //ningun NPC nuestro spawneado esta en estado ataque o move
+                && _levelController.CheckIfCanSpawn(Entity.Owner.Player) && hit.collider.GetComponent<CellBehaviour>().GetComponent<SpawnableCell>() != null) //ningun NPC nuestro spawneado esta en estado ataque o move
         {
             _spawnablesManager.SpawnEntity(hit.collider.GetComponent<CellBehaviour>(), _spawnablesManager.currentEntitySelected, Entity.Owner.Player);
         }
@@ -75,6 +75,7 @@ public class RaycastCamera : MonoBehaviour {
             if (Input.GetMouseButtonDown(0)
                 && nodeMovementAccesible)
             {
+                Debug.Log("CLICK IN A CELL TO MOVE. ");
                 if (_levelController.TryingToMove().gameObject.GetComponent<Move>() != null)
                 {
                     bool bloodEnough = _bloodController.GetCurrentPlayerBlood() >= _levelController.TryingToMove().gameObject.GetComponent<Attack>().bloodCost;
@@ -111,6 +112,7 @@ public class RaycastCamera : MonoBehaviour {
                 if (Input.GetMouseButtonDown(0)
                     && nodeAttackAccesible)
                 {
+                    Debug.Log("CLICK IN A CELL TO ATTACK. ");
                     if (_levelController.TryingToAttack().gameObject.GetComponent<Attack>() != null)
                     {
                         bool bloodEnough = _bloodController.GetCurrentPlayerBlood() >= _levelController.TryingToAttack().gameObject.GetComponent<Attack>().bloodCost;

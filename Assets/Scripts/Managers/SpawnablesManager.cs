@@ -62,7 +62,7 @@ public class SpawnablesManager : MonoBehaviour {
 
     public void SpawnEntity(CellBehaviour cell, ENTITY _entityToSpawn, Entity.Owner owner)
     {
-        if (!_levelController.CheckIfCanSpawn())
+        if (!_levelController.CheckIfCanSpawn(owner))
         {
             return;
         }
@@ -128,11 +128,13 @@ public class SpawnablesManager : MonoBehaviour {
 
                 if (owner == Entity.Owner.Player)
                 {
+                    _levelController.currentTroopsPlayerSpawned++;
                     _bloodController.DecreasePlayerBloodValue(entitySpawned.GetComponent<Entity>().bloodCost);
                 }
                 else if (owner == Entity.Owner.AI)
                 {
                     Debug.Log("decreasing blood");
+                    _levelController.currentTroopsAISpawned++;
                     _bloodController.DecreaseAIBloodValue(entitySpawned.GetComponent<Entity>().bloodCost);
                 }
 

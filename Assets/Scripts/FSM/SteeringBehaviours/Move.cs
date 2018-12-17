@@ -35,7 +35,7 @@ public class Move : Action
     {
         if (isPossible)
         {
-            this.GetComponent<Troop>().DisableShaderAttackCells();
+            this.GetComponent<Troop>().DisableShaderMoveCells();
             this.path = path;
             Debug.Log("Se ha generado el camino y tiene " + path.Length + " nodos. ");
             this.GetComponent<Entity>().cell.entityIn = null;
