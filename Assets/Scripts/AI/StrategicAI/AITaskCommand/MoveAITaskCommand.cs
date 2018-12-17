@@ -25,6 +25,7 @@ namespace StrategicAI
         public override void PerformCommand()
         {
             //ahora estamos en estado move
+            troopToMove.GetComponent<MoveOrder>().Move = true;
             troopToMove.StartCoroutine(PerformMovement());
         }
 
@@ -36,7 +37,7 @@ namespace StrategicAI
             
             _levelController.chosenNodesToMoveIA.Add(minInfluenceNode);
             
-            troopToMove.GetComponent<MoveOrder>().Move = true;
+
             troopToMove.GetComponent<Move>().PathReceived = true;
             
             Debug.Assert(minInfluenceNode != null, nameof(minInfluenceNode) + " != null");
@@ -48,21 +49,27 @@ namespace StrategicAI
             InfluenceMapComponent influenceMapComponent = Object.FindObjectOfType<InfluenceMapComponent>();
             float minInfluence = int.MaxValue;
             Node minInfluenceNode = null;
-            
-            troopToMove.GetComponent<Troop>().GetCellsPossibleMovements();
+            List<Node> sameInfluencesNode = new List<Node>();
             foreach (var possibleMovement in troopToMove.GetComponent<Troop>().possibleMovements)
             {
                 float tempInfluence = influenceMapComponent.GetNodeAtLocation(possibleMovement.WorldPosition)
                     .GetTotalInfluenceAtNode();
 
                 //intentamos movernos al de menor influencia y que no lo haya elegido otro.
-                if (tempInfluence < minInfluence && !_levelController.chosenNodesToMoveIA.Contains(possibleMovement))
+                if (tempInfluence < minInfluence && !(_levelController.chosenNodesToMoveIA.Contains(possibleMovement)))
                 {
                     minInfluenceNode = possibleMovement;
                     minInfluence = tempInfluence;
                 }
+                else if(tempInfluence == minInfluence && !(_levelController.chosenNodesToMoveIA.Contains(possibleMovement)))
+                {
+                      sameInfluencesNode.Add(possibleMovement);
+                }
             }
             
+            if(sameInfluencesNode.Count > 0)
+                return sameInfluencesNode[Random.Range(0,sameInfluencesNode.Count)];
+    
             return minInfluenceNode;
         }
     }

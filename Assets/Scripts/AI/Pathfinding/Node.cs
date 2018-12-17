@@ -5,7 +5,7 @@ using Debug = System.Diagnostics.Debug;
 namespace CustomPathfinding
 {
     [RequireComponent(typeof(Collider),typeof(MeshRenderer))]
-    public class Node : MonoBehaviour
+    public class Node : MonoBehaviour, IEquatable<Node>
     {
         public enum ENodeType
         {
@@ -34,8 +34,12 @@ namespace CustomPathfinding
 
         public bool Equals(Node other)
         {
-            Debug.Assert(other != null, nameof(other) + " != null");
-            return GridX == other.GridX && GridZ == other.GridZ;
+            if (other == null)
+            {
+                return false;
+            }
+
+            return this.GridX == other.GridX && this.GridZ == other.GridZ;
         }
         
         public CellBehaviour GetOurCell()
