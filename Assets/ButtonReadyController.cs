@@ -34,7 +34,7 @@ public class ButtonReadyController : MonoBehaviour {
     }
     public void ClickReady()
     {
-        soundManager.PlaySingle(soundManager.readySound);
+        //soundManager.PlaySingle(soundManager.readySound);//TODO: descomentar
         StartCoroutine(WaitForNPCsReady());
         //this.GetComponent<Button>().colors.normalColor = buttonReadyColor;
     }

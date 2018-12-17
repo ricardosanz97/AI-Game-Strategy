@@ -20,7 +20,7 @@ public class Move : Action
         moving = true;
         //ya tenemos destino
         Vector3 initial = GetComponent<Troop>().gameObject.transform.position;
-        Debug.Log("request entre " + initial + " y " + OnGoingCell.PNode.gameObject.transform.position);
+        //Debug.Log("request entre " + initial + " y " + OnGoingCell.PNode.gameObject.transform.position);
         
         if(GetComponent<Troop>().owner == Entity.Owner.AI)
             GetComponent<Troop>()._pathfindingManager.RequestPath(new Pathfinding.PathfindingManager.PathRequest(initial, OnGoingCell.PNode.gameObject.transform.position, PathReceiver, 0.5f), true ,false);
@@ -35,6 +35,7 @@ public class Move : Action
     {
         if (isPossible)
         {
+            this.GetComponent<Troop>().DisableShaderAttackCells();
             this.path = path;
             Debug.Log("Se ha generado el camino y tiene " + path.Length + " nodos. ");
             this.GetComponent<Entity>().cell.entityIn = null;

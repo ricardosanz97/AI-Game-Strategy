@@ -31,7 +31,7 @@ public class CustomCursor : MonoBehaviour {
     void OnDisable()
     {
         //Resets the cursor to the default 
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        //Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         //Set the _ccEnabled variable to false 
         this.ccEnabled = false;
     }
@@ -39,7 +39,7 @@ public class CustomCursor : MonoBehaviour {
     public void SetCustomCursor(Texture2D cursorTexture)
     {
         //Replace the 'cursorTexture' with the cursor   
-        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+        //Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
         //Set the ccEnabled variable to true 
         this.ccEnabled = true;
     }

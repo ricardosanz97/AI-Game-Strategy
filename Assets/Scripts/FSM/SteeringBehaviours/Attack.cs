@@ -17,6 +17,8 @@ public class Attack : Action
             return;
         }
 
+        this.GetComponent<Troop>().DisableShaderAttackCells();
+
         ObjectiveAssigned = false;
         targetEntity.GetComponent<Health>().ReceiveDamage(damage);
         GetComponent<IdleOrder>().Idle = true;
