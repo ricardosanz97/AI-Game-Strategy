@@ -18,6 +18,18 @@ namespace InfluenceMap
 
         public InfluenceMap.Grid influenceGrid;
 
+        private void OnEnable()
+        {
+            SpawnablesManager.OnSpawnedTroop += UpdateInfluenceMap;
+            Entity.OnTroopDeleted += UpdateInfluenceMap;
+        }
+
+        private void OnDisable()
+        {
+            SpawnablesManager.OnSpawnedTroop -= UpdateInfluenceMap;
+            Entity.OnTroopDeleted -= UpdateInfluenceMap;
+        }
+
         private void Start()
         {
             influenceGrid = new Grid();
@@ -27,8 +39,6 @@ namespace InfluenceMap
             influenceGrid.ColorIntensity = _colorIntensity;
 
             InitializeInfluenceMap();
-            
-            SpawnablesManager.OnSpawnedTroop += UpdateInfluenceMap;
         }
 
         public void InitializeInfluenceMap()

@@ -37,11 +37,13 @@ namespace CustomPathfinding
         private void OnEnable()
         {
             SpawnablesManager.OnSpawnedTroop += UpdateGrid;
+	        Entity.OnTroopDeleted += UpdateGrid;
         }
 
         private void OnDisable()
         {
 	        SpawnablesManager.OnSpawnedTroop -= UpdateGrid;
+	        Entity.OnTroopDeleted -= UpdateGrid;
         }
 
         void Start ()

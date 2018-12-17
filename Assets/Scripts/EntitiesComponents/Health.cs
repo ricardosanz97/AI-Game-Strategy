@@ -16,16 +16,14 @@ public class Health : MonoBehaviour {
     public void ReceiveDamage(int amount)
     {
         health -= amount;
+        
         if (GetComponent<Entity>().entityType != ENTITY.Core)
-        {
             GetComponent<AbstractNPCBrain>().sliderHealth.value = health;
-        }
+        
         this.transform.DOShakePosition(0.3f, 0.2f);
+        
         if (health <= 0)
-        {
-            this.transform.DOLocalMoveY(-100f, 59f);
-            this.GetComponent<Entity>().cell.entityIn = null;
-        }
+            GetComponent<Entity>().Die();
     }
 
     public void SetHealth(int value)

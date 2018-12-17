@@ -31,6 +31,16 @@ public class LevelController : MonoBehaviour {
     private bool pauseMenuEnabled = true;
     private SoundManager soundManager;
 
+    private void OnEnable()
+    {
+        Entity.OnTroopDeleted += OnEntityDeleted;
+    }
+
+    private void OnDisable()
+    {
+        Entity.OnTroopDeleted -= OnEntityDeleted;
+    }
+
     private void Awake()
     {
         canvasGameObject = FindObjectOfType<Canvas>().gameObject;
@@ -238,6 +248,18 @@ public class LevelController : MonoBehaviour {
         AIEntities.Add(entity);
         TotalEntities.Add(entity);
     }
+    
+    public void RemovePlayerEntities(Entity entity)
+    {
+        PlayerEntities.Remove(entity);
+        TotalEntities.Remove(entity);
+    }
+
+    public void RemoveAIEntities(Entity entity)
+    {
+        AIEntities.Remove(entity);
+        TotalEntities.Remove(entity);
+    }
 
     public Entity TryingToMove()
     {
@@ -263,5 +285,18 @@ public class LevelController : MonoBehaviour {
         return null;
     }
 
+    private void OnEntityDeleted(Entity entityDeleted)
+    {
+        if(entityDeleted.owner == Entity.Owner.Player)
+        {
+           if(PlayerEntities.Contains(entityDeleted))
+               RemovePlayerEntities(entityDeleted);
+        }
+        else if(entityDeleted.owner == Entity.Owner.AI)
+        {
+            if(AIEntities.Contains(entityDeleted))
+                RemoveAIEntities(entityDeleted);
+        }
+    }
 
 }

@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using InfluenceMap;
 using StrategicAI;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
+using Node = CustomPathfinding.Node;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
@@ -34,14 +37,16 @@ public class Entity : MonoBehaviour
         _influenceMapComp = FindObjectOfType<InfluenceMap.InfluenceMapComponent>();
     }
 
-    private void OnEnable()
-    {
-        
-    }
-
+    [ContextMenu("Provoke Death")]
     public void Die()
     {
+        this.transform.DOLocalMoveY(-100f, 59f);
+        
+        //todo hacer que el pathfinding y el influence
+        
+        Destroy(this.gameObject,1f);
         OnTroopDeleted?.Invoke(this);
+
     }
 
     public void SetEntity(Owner owner) {
