@@ -1,5 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
+using Boo.Lang;
 using CustomPathfinding;
 using UnityEngine.SceneManagement;
 using UnityEngine;
@@ -10,14 +11,13 @@ public class LevelController : MonoBehaviour {
     public GameObject rightSideCells;
     public GameObject leftSideCells;
     private GameObject canvasGameObject;
-    public List<Entity> PlayerEntities;
-    public List<Entity> AIEntities;
-    public List<Entity> TotalEntities;
-    public List<CustomPathfinding.Node> chosenNodesToMoveIA;
+    public System.Collections.Generic.List<Entity> PlayerEntities;
+    public System.Collections.Generic.List<Entity> AIEntities;
+    public System.Collections.Generic.List<Entity> TotalEntities;
+    public System.Collections.Generic.List<CustomPathfinding.Node> chosenNodesToMoveIA;
     public int MaxWalls = 8;
-
-    public List<Entity> playerCoreEntities;
-    public List<Entity> AICoreEntities;
+    public System.Collections.Generic.List<Entity> playerCoreEntities;
+    public System.Collections.Generic.List<Entity> AICoreEntities;
 
     public int MinBloodReward = 10;
 
@@ -45,42 +45,43 @@ public class LevelController : MonoBehaviour {
     {
         canvasGameObject = FindObjectOfType<Canvas>().gameObject;
         soundManager = FindObjectOfType<SoundManager>();
-        chosenNodesToMoveIA = new List<Node>();
+        chosenNodesToMoveIA = new System.Collections.Generic.List<Node>();
     }
 
     private void Start()
     {
+        
         //ResetAllShadersCells();
-        GameObject[] AIEntitiesGO = GameObject.FindGameObjectsWithTag("CoreAI");
-        GameObject[] PlayerEntitiesGO = GameObject.FindGameObjectsWithTag("CorePlayer");
+        AICoreEntities = GameObject.FindGameObjectWithTag("CoreAI").GetComponentsInChildren<Entity>().ToList();
+        playerCoreEntities = GameObject.FindGameObjectWithTag("CorePlayer").GetComponentsInChildren<Entity>().ToList();
+        
         LayerMask mask = LayerMask.GetMask(new string[] { "Cell" });
-        foreach (var go in AIEntitiesGO)
+        foreach (var entity in AICoreEntities)
         {
-            AICoreEntities.Add(go.GetComponent<Entity>());
-            Collider[] cols = Physics.OverlapBox(go.transform.position, new Vector3(0f, 1f, 0f), Quaternion.identity, mask);
+            Collider[] cols = Physics.OverlapBox(entity.transform.position, new Vector3(0f, 1f, 0f), Quaternion.identity, mask);
             foreach (Collider c in cols)
             {
                 if (c.GetComponent<CellBehaviour>() != null)
                 {
-                    go.GetComponent<Entity>().cell = c.GetComponent<CellBehaviour>();
-                    c.GetComponent<CellBehaviour>().entityIn = go.GetComponent<Entity>();
+                    entity.cell = c.GetComponent<CellBehaviour>();
+                    c.GetComponent<CellBehaviour>().entityIn = entity;
                 }
             }
         }
 
-        foreach (var o in PlayerEntitiesGO)
+        foreach (var entity in playerCoreEntities)
         {
-            playerCoreEntities.Add(o.GetComponent<Entity>());
-            Collider[] cols = Physics.OverlapBox(o.transform.position, new Vector3(0f, 1f, 0f), Quaternion.identity, mask);
+            Collider[] cols = Physics.OverlapBox(entity.transform.position, new Vector3(0f, 1f, 0f), Quaternion.identity, mask);
             foreach (Collider c in cols)
             {
                 if (c.GetComponent<CellBehaviour>() != null)
                 {
-                    o.GetComponent<Entity>().cell = c.GetComponent<CellBehaviour>();
-                    c.GetComponent<CellBehaviour>().entityIn = o.GetComponent<Entity>();
+                    entity.cell = c.GetComponent<CellBehaviour>();
+                    c.GetComponent<CellBehaviour>().entityIn = entity;
                 }
             }
         }
+                
     }
 
     private void Update()
@@ -253,12 +254,16 @@ public class LevelController : MonoBehaviour {
     {
         PlayerEntities.Remove(entity);
         TotalEntities.Remove(entity);
+        currentTroopsPlayerSpawned -= 1;
+
     }
 
     public void RemoveAIEntities(Entity entity)
     {
         AIEntities.Remove(entity);
-        TotalEntities.Remove(entity);
+        TotalEntities.Remove(entity);  
+        currentTroopsAISpawned -= 1;
+
     }
 
     public Entity TryingToMove()
@@ -289,12 +294,22 @@ public class LevelController : MonoBehaviour {
     {
         if(entityDeleted.owner == Entity.Owner.Player)
         {
-           if(PlayerEntities.Contains(entityDeleted))
+            if(entityDeleted.entityType == ENTITY.Core)
+            {
+                if(playerCoreEntities.Contains(entityDeleted))
+                    playerCoreEntities.Remove(entityDeleted);
+            }
+            else if(PlayerEntities.Contains(entityDeleted))
                RemovePlayerEntities(entityDeleted);
         }
         else if(entityDeleted.owner == Entity.Owner.AI)
         {
-            if(AIEntities.Contains(entityDeleted))
+            if(entityDeleted.entityType == ENTITY.Core)
+            {
+                if(AICoreEntities.Contains(entityDeleted))
+                    AICoreEntities.Remove(entityDeleted);
+            }
+            else if(AIEntities.Contains(entityDeleted))
                 RemoveAIEntities(entityDeleted);
         }
     }

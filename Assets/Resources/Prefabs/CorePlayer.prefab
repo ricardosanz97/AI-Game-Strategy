@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 114529590304067392}
   m_Layer: 0
   m_Name: TowerPillarAI (19)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 114577221243022174}
   m_Layer: 0
   m_Name: TowerPillarAI (33)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 114667471507311920}
   m_Layer: 0
   m_Name: TowerPillarAI (47)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 114018196268995102}
   m_Layer: 0
   m_Name: TowerPillarAI (46)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 114322181856854152}
   m_Layer: 0
   m_Name: TowerPillarAI (40)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 114737525228962448}
   m_Layer: 0
   m_Name: TowerPillarAI (39)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 114254008528575370}
   m_Layer: 0
   m_Name: TowerPillarAI (42)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 65142821418714616}
   m_Layer: 0
   m_Name: CorePlayer
-  m_TagString: Untagged
+  m_TagString: CorePlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 114148088997436540}
   m_Layer: 0
   m_Name: TowerPillarAI (49)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 114455443350645702}
   m_Layer: 0
   m_Name: TowerPillarAI (22)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 114187549645124974}
   m_Layer: 0
   m_Name: TowerPillarAI (25)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 114218933135621558}
   m_Layer: 0
   m_Name: TowerPillarAI (31)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 114801381332782802}
   m_Layer: 0
   m_Name: TowerPillarAI (44)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 114568904142864870}
   m_Layer: 0
   m_Name: TowerPillarAI (21)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 114369625636417834}
   m_Layer: 0
   m_Name: TowerPillarAI (26)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 114550787806042484}
   m_Layer: 0
   m_Name: TowerPillarAI (30)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,29 +443,7 @@ GameObject:
   - component: {fileID: 114470392561145042}
   m_Layer: 0
   m_Name: TowerPillarAI (41)
-  m_TagString: CorePlayer
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1657478865794268
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4311405987234418}
-  - component: {fileID: 33986576527867920}
-  - component: {fileID: 23929902340529138}
-  - component: {fileID: 54589953799369246}
-  - component: {fileID: 65075867709431646}
-  - component: {fileID: 114174613514914204}
-  - component: {fileID: 114572860270086460}
-  - component: {fileID: 114949529693548492}
-  m_Layer: 0
-  m_Name: TowerPillarAI (34)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -504,7 +482,7 @@ GameObject:
   - component: {fileID: 114287622186610266}
   m_Layer: 0
   m_Name: TowerPillarAI (38)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -526,7 +504,7 @@ GameObject:
   - component: {fileID: 114482022573183004}
   m_Layer: 0
   m_Name: TowerPillarAI (29)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -548,7 +526,7 @@ GameObject:
   - component: {fileID: 114221321151018188}
   m_Layer: 0
   m_Name: TowerPillarAI (20)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -570,7 +548,7 @@ GameObject:
   - component: {fileID: 114411952519372648}
   m_Layer: 0
   m_Name: TowerPillarAI (27)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -592,7 +570,7 @@ GameObject:
   - component: {fileID: 114147422602049716}
   m_Layer: 0
   m_Name: TowerPillarAI (18)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -614,7 +592,7 @@ GameObject:
   - component: {fileID: 114617858494236138}
   m_Layer: 0
   m_Name: TowerPillarAI (24)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -636,7 +614,7 @@ GameObject:
   - component: {fileID: 114689209149019624}
   m_Layer: 0
   m_Name: TowerPillarAI (43)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -658,7 +636,7 @@ GameObject:
   - component: {fileID: 114233258822836088}
   m_Layer: 0
   m_Name: TowerPillarAI (35)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -680,7 +658,7 @@ GameObject:
   - component: {fileID: 114304295671151268}
   m_Layer: 0
   m_Name: TowerPillarAI (45)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -702,7 +680,7 @@ GameObject:
   - component: {fileID: 114355813787484736}
   m_Layer: 0
   m_Name: TowerPillarAI (28)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -756,7 +734,7 @@ GameObject:
   - component: {fileID: 114442834981199280}
   m_Layer: 0
   m_Name: TowerPillarAI (48)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -778,7 +756,7 @@ GameObject:
   - component: {fileID: 114037543370933734}
   m_Layer: 0
   m_Name: TowerPillarAI (36)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -817,7 +795,7 @@ GameObject:
   - component: {fileID: 114674406490169504}
   m_Layer: 0
   m_Name: TowerPillarAI (50)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -839,7 +817,7 @@ GameObject:
   - component: {fileID: 114732919182823286}
   m_Layer: 0
   m_Name: TowerPillarAI (32)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -861,7 +839,7 @@ GameObject:
   - component: {fileID: 114192769809251500}
   m_Layer: 0
   m_Name: TowerPillarAI (37)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -883,7 +861,7 @@ GameObject:
   - component: {fileID: 114422711477964262}
   m_Layer: 0
   m_Name: TowerPillarAI (23)
-  m_TagString: CorePlayer
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -977,7 +955,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 29
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4308599304221286
 Transform:
@@ -990,20 +968,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 25
-  m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
---- !u!4 &4311405987234418
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1657478865794268}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 9, y: -0.5, z: -1.08}
-  m_LocalScale: {x: 1.9500042, y: 1.9499999, z: 1.9500042}
-  m_Children: []
-  m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 16
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4313178992265238
 Transform:
@@ -1029,7 +994,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4353895291170350
 Transform:
@@ -1042,7 +1007,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 33
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4360257331839956
 Transform:
@@ -1068,7 +1033,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 31
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4414316790904552
 Transform:
@@ -1108,7 +1073,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 27
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4464940768731378
 Transform:
@@ -1134,7 +1099,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4494865387556406
 Transform:
@@ -1147,7 +1112,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 32
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4532224105207928
 Transform:
@@ -1160,7 +1125,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4552792093484408
 Transform:
@@ -1173,7 +1138,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4595212053294736
 Transform:
@@ -1201,7 +1166,6 @@ Transform:
   - {fileID: 4707523181966934}
   - {fileID: 4198047921981758}
   - {fileID: 4839449115579246}
-  - {fileID: 4311405987234418}
   - {fileID: 4698958874640856}
   - {fileID: 4865977027397310}
   - {fileID: 4319341812461710}
@@ -1259,7 +1223,7 @@ Transform:
   m_LocalScale: {x: 1.9500042, y: 1.9499999, z: 1.9500042}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4707523181966934
 Transform:
@@ -1311,7 +1275,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 28
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4770580149081544
 Transform:
@@ -1324,7 +1288,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 30
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4790285839028584
 Transform:
@@ -1363,7 +1327,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4865977027397310
 Transform:
@@ -1376,7 +1340,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4873394228145004
 Transform:
@@ -1421,7 +1385,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 26
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4913067799932866
 Transform:
@@ -1434,7 +1398,7 @@ Transform:
   m_LocalScale: {x: 1.9500004, y: 1.9499999, z: 1.9500004}
   m_Children: []
   m_Father: {fileID: 4595212053294736}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: -270, z: 0}
 --- !u!4 &4973960432632932
 Transform:
@@ -2736,42 +2700,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!23 &23929902340529138
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1657478865794268}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
-  m_Materials:
-  - {fileID: 2100000, guid: e96ac1c4016e5ee498ecfd64c9677426, type: 2}
-  - {fileID: 2100000, guid: 672349f609891b94badc2ec3c95aecb0, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!33 &33019462493484156
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -3003,13 +2931,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1949831220636414}
   m_Mesh: {fileID: 4300000, guid: e8e54110920603c4b83b7344ec40f87a, type: 3}
---- !u!33 &33986576527867920
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1657478865794268}
-  m_Mesh: {fileID: 4300000, guid: 273e7d66de467c0488a114e57b5c1a9a, type: 3}
 --- !u!33 &33986815703567194
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -3339,21 +3260,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!54 &54589953799369246
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1657478865794268}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!54 &54591500182430978
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -3549,18 +3455,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!65 &65075867709431646
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1657478865794268}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.8199535, y: 2.5094326, z: 1.0000005}
-  m_Center: {x: 0.009976451, y: 1.2547163, z: -0.0000011920929}
 --- !u!65 &65096020907943798
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -4015,9 +3909,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 6
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114026217462094648
 MonoBehaviour:
@@ -4065,9 +3959,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 7
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114042495901758724
 MonoBehaviour:
@@ -4148,9 +4042,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114148088997436540
 MonoBehaviour:
@@ -4165,9 +4059,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114162819310107320
 MonoBehaviour:
@@ -4188,26 +4082,6 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1309716695452008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3abf3fd745a6241df8d56b3c3cae9e85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bloodCost: 0
-  entityType: 6
-  cell: {fileID: 0}
-  owner: 1
-  rb: {fileID: 0}
-  value: 0
-  _spawnablesManager: {fileID: 0}
-  _levelController: {fileID: 0}
-  _influenceMapComp: {fileID: 0}
---- !u!114 &114174613514914204
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1657478865794268}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3abf3fd745a6241df8d56b3c3cae9e85, type: 3}
@@ -4248,9 +4122,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114192769809251500
 MonoBehaviour:
@@ -4265,9 +4139,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 7
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114198196156985636
 MonoBehaviour:
@@ -4362,9 +4236,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114221321151018188
 MonoBehaviour:
@@ -4379,9 +4253,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114224707596033596
 MonoBehaviour:
@@ -4429,9 +4303,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114254008528575370
 MonoBehaviour:
@@ -4446,9 +4320,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 7
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114255495052941978
 MonoBehaviour:
@@ -4549,9 +4423,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 6
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114304295671151268
 MonoBehaviour:
@@ -4566,9 +4440,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 7
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114308484982398398
 MonoBehaviour:
@@ -4655,9 +4529,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 5
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114326374899045148
 MonoBehaviour:
@@ -4705,9 +4579,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114365334504717992
 MonoBehaviour:
@@ -4755,9 +4629,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114379178389534730
 MonoBehaviour:
@@ -4858,9 +4732,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114422711477964262
 MonoBehaviour:
@@ -4875,9 +4749,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114425343450967566
 MonoBehaviour:
@@ -4944,9 +4818,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114455443350645702
 MonoBehaviour:
@@ -4961,9 +4835,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114470392561145042
 MonoBehaviour:
@@ -4978,9 +4852,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 5
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114477579344101618
 MonoBehaviour:
@@ -5015,9 +4889,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114504340240186824
 MonoBehaviour:
@@ -5052,9 +4926,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114539698053127596
 MonoBehaviour:
@@ -5082,9 +4956,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114567507289574086
 MonoBehaviour:
@@ -5112,23 +4986,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
---- !u!114 &114572860270086460
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1657478865794268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6168b011147eb1e469b8a172bfccc41f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 1
-  initialHealth: 0
 --- !u!114 &114577221243022174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5142,9 +5003,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114613671589276978
 MonoBehaviour:
@@ -5179,9 +5040,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114636823396706180
 MonoBehaviour:
@@ -5235,9 +5096,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 5
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114674406490169504
 MonoBehaviour:
@@ -5252,9 +5113,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114675190205616068
 MonoBehaviour:
@@ -5302,9 +5163,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 6
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114690214407921178
 MonoBehaviour:
@@ -5385,9 +5246,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114737525228962448
 MonoBehaviour:
@@ -5402,9 +5263,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 6
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114777173676185616
 MonoBehaviour:
@@ -5459,9 +5320,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
+    Influence: 1
     InfluenceRange: 5
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
+    Color: {r: 0, g: 1, b: 0, a: 0.25882354}
     InfluenceType: 5
 --- !u!114 &114801560272625900
 MonoBehaviour:
@@ -5549,23 +5410,6 @@ MonoBehaviour:
   _spawnablesManager: {fileID: 0}
   _levelController: {fileID: 0}
   _influenceMapComp: {fileID: 0}
---- !u!114 &114949529693548492
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1657478865794268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a907fa3d1334032bdf460cb4cdd796c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Originator:
-    WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 0.5
-    InfluenceRange: 8
-    Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
-    InfluenceType: 5
 --- !u!114 &114988918998464136
 MonoBehaviour:
   m_ObjectHideFlags: 1
