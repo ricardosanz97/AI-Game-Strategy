@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using InfluenceMap;
 using StrategicAI;
 using UnityEngine;
@@ -22,56 +23,38 @@ namespace StrategicAI
             foreach (var node in influenceData)
             {
                 if (node.HasInfluenceOfType(InfluenceType.Core))
-                {
                     coreSum += node.GetInfluenceOfType(InfluenceType.Core).Value;
-                    dataSum.Add(coreSum);
-                }
                 else if (node.HasInfluenceOfType(InfluenceType.Prisioner))
-                {
                     prisionerSum += node.GetInfluenceOfType(InfluenceType.Prisioner).Value;
-                    dataSum.Add(prisionerSum);
-                }
                 else if (node.HasInfluenceOfType(InfluenceType.Launcher))
-                {
                     launcherSum += node.GetInfluenceOfType(InfluenceType.Launcher).Value;
-                    dataSum.Add(launcherSum);
-                }
                 else if (node.HasInfluenceOfType(InfluenceType.Tank))
-                {
                     tankSum += node.GetInfluenceOfType(InfluenceType.Tank).Value;
-                    dataSum.Add(tankSum);
-                }
                 else if (node.HasInfluenceOfType(InfluenceType.Turret))
-                {
                     turretSum += node.GetInfluenceOfType(InfluenceType.Turret).Value;
-                    dataSum.Add(turretSum);
-                }
-            }//
-
+                
+                //todo influencia del core
+            }
+            
+            dataSum.Add(coreSum);
+            dataSum.Add(prisionerSum);
+            dataSum.Add(launcherSum);
+            dataSum.Add(tankSum);
+            dataSum.Add(turretSum);
+            
             //si el npc es launcher o prisioner podran atacar a todo tipo de entidades, ya sean tropas, torretas o el core
-
             if (analyzedNPC.entityType == ENTITY.Launcher || analyzedNPC.entityType == ENTITY.Prisioner)
             {                            
                 if (coreSum == Mathf.Max(dataSum.ToArray())) 
-                {
-                    minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Core);
-                }
+                    minDistEntity = GetClosestEntityInCollection(analyzedNPC, levelController.playerCoreEntities.ToArray() , ENTITY.Core);
                 else if(launcherSum == Mathf.Max(dataSum.ToArray()))
-                {
                     minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Launcher);
-                }
                 else if (prisionerSum == Mathf.Max(dataSum.ToArray()))
-                {
                     minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Prisioner);
-                }
                 else if (tankSum == Mathf.Max(dataSum.ToArray()))
-                {
                     minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Tank);
-                }
                 else if (turretSum == Mathf.Max(dataSum.ToArray()))
-                {
                     minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Turret);
-                }
                 
                 if(minDistEntity != null)
                 {
