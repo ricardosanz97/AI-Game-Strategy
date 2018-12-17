@@ -40,13 +40,17 @@ public class Entity : MonoBehaviour
     [ContextMenu("Provoke Death")]
     public void Die()
     {
+        StartCoroutine(Die(this.GetComponent<Entity>()));
+    }
+    
+    IEnumerator Die(Entity e)
+    {
         this.transform.DOLocalMoveY(-100f, 59f);
         
-        //todo hacer que el pathfinding y el influence
-        
-        Destroy(this.gameObject,1f);
+        yield return new WaitForSeconds(2f);
         OnTroopDeleted?.Invoke(this);
-
+        yield return new WaitForSeconds(1f);
+        Destroy(this.gameObject);
     }
 
     public void SetEntity(Owner owner) {
