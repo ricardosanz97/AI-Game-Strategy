@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using Zenject;
 using Random = UnityEngine.Random;
+using StrategicAI;
 
 namespace StrategicAI
 {

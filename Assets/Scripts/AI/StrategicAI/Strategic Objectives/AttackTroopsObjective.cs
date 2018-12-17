@@ -72,6 +72,15 @@ namespace StrategicAI
                 {
                     minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Turret);
                 }
+                
+                if(minDistEntity != null)
+                {
+                    analyzedNPC.GetComponent<Troop>().GetCellsWithEnemiesInRange();
+            
+                    if(analyzedNPC.GetComponent<Troop>().possibleAttacks.Contains(minDistEntity.cell.PNode))
+                        return minDistEntity;
+                }
+
             }
             else if(analyzedNPC.entityType == ENTITY.Tank) //si es tanque, solo podra atacar al core y a torretas
             {
@@ -88,10 +97,18 @@ namespace StrategicAI
                 {
                     minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Turret);
                 }
+                
+                if(minDistEntity != null)
+                {
+                    analyzedNPC.GetComponent<Troop>().GetCellsWithEnemiesInRange();
+            
+                    if(analyzedNPC.GetComponent<Troop>().possibleAttacks.Contains(minDistEntity.cell.PNode))
+                        return minDistEntity;
+                }
+
             }
             
-            //solo para que no haya nulls
-            return minDistEntity;
+            return null;
         }
     }
 }

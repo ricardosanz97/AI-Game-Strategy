@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using StrategicAI;
 using DG.Tweening;
+using InfluenceMap;
+using Debug = System.Diagnostics.Debug;
+using Node = CustomPathfinding.Node;
+
 namespace StrategicAI
 {
     public class MoveAITaskCommand : AITaskCommand
@@ -24,12 +28,35 @@ namespace StrategicAI
         IEnumerator PerformMovement()
         {
             yield return new WaitForSeconds(0.5f);
-            int random = Random.Range(0, troopToMove.GetComponent<Troop>().possibleMovements.Count);
-            CustomPathfinding.Node objective = troopToMove.GetComponent<Troop>().possibleMovements[random];
+
+            var minInfluenceNode = GetMinInfluenceNode();
+
             troopToMove.GetComponent<Move>().PathReceived = true;
-            troopToMove.GetComponent<Move>().OnGoingCell = objective.cell;
+            
+            Debug.Assert(minInfluenceNode != null, nameof(minInfluenceNode) + " != null");
+            troopToMove.GetComponent<Move>().OnGoingCell = minInfluenceNode.cell;
         }
 
+        private Node GetMinInfluenceNode()
+        {
+            InfluenceMapComponent influenceMapComponent = Object.FindObjectOfType<InfluenceMapComponent>();
+            float minInfluence = int.MaxValue;
+            Node minInfluenceNode = null;
+
+            foreach (var possibleMovement in troopToMove.GetComponent<Troop>().possibleMovements)
+            {
+                float tempInfluence = influenceMapComponent.GetNodeAtLocation(possibleMovement.WorldPosition)
+                    .GetTotalInfluenceAtNode();
+
+                if (tempInfluence < minInfluence)
+                {
+                    minInfluenceNode = possibleMovement;
+                    minInfluence = tempInfluence;
+                }
+            }
+
+            return minInfluenceNode;
+        }
     }
 }
 

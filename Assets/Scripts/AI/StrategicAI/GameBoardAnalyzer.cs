@@ -50,21 +50,21 @@ namespace StrategicAI
             StrategicObjective chosenStrategicObjective, Entity analyzedEntity,
             Entity[] playerControlledEntites, LevelController levelController)
         {
-            AbstractNPCBrain brain = analyzedEntity.GetComponent<AbstractNPCBrain>();
+            AbstractNPCBrain analyzedNpc = analyzedEntity.GetComponent<AbstractNPCBrain>();
 
-            if (brain != null) // es una entidad con brain, es decir, no es un muro
+            if (analyzedNpc != null) // es una entidad con brain, es decir, no es un muro
             {
                 //get node of the entity in the influence map
                 // look in a ring
-                InfluenceMap.Node node = _influenceMapComponent.GetNodeAtLocation(brain.transform.position);
+                InfluenceMap.Node node = _influenceMapComponent.GetNodeAtLocation(analyzedNpc.transform.position);
                 List<Node> influenceData = _influenceMapComponent.GetKRingsOfNodes(node, chosenStrategicObjective.SampleRadius);
 
-                Entity chosenTarget = chosenStrategicObjective.DecideBasedOnInfluenceData(brain,influenceData,playerControlledEntites,levelController);
+                Entity chosenTarget = chosenStrategicObjective.DecideBasedOnInfluenceData(analyzedNpc,influenceData,playerControlledEntites,levelController);
 
-                if (chosenTarget == null) //no hay nadie a quien atacar o mejorar, pues movemos.
+                if (chosenTarget == null && analyzedNpc is Troop) //no hay nadie a quien atacar o mejorar, pues movemos.
                 {
                     Debug.Log("trying to move");
-                    aiTaskCommands.Add(new MoveAITaskCommand(brain));
+                    aiTaskCommands.Add(new MoveAITaskCommand(analyzedNpc));
                 }
                 else if (chosenTarget.owner == Entity.Owner.AI)
                 {
@@ -75,7 +75,7 @@ namespace StrategicAI
                 else if (chosenTarget.owner == Entity.Owner.Player)
                 {
                     Debug.Log("trying to attack");
-                    aiTaskCommands.Add(new AttackAITaskCommand(brain, chosenTarget));
+                    aiTaskCommands.Add(new AttackAITaskCommand(analyzedNpc, chosenTarget));
                 }
             }
             else // es un muro
