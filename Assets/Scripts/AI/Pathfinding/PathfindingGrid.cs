@@ -200,7 +200,7 @@ namespace CustomPathfinding
 		}
 
 		//it gives as the cost of the edge between these two nodes
-		public float Cost(Node currentNode, Node neighbor)
+		public float CostWithInfluences(Node currentNode, Node neighbor)
 		{	
 			float cost = 0;
 			
@@ -216,6 +216,18 @@ namespace CustomPathfinding
 			
 			return cost;
 
+		}
+		
+		//it gives as the cost of the edge between these two nodes
+		public float Cost(Node currentNode, Node neighbor)
+		{	
+			//todo revisar esto
+			if (currentNode.GridX == neighbor.GridX || currentNode.GridZ == neighbor.GridZ && neighbor.NodeType == Node.ENodeType.Walkable)
+				return 1f;
+			if (!(currentNode.GridX == neighbor.GridX || currentNode.GridZ == neighbor.GridZ) && neighbor.NodeType == Node.ENodeType.Walkable)
+				return 1.4f;
+			
+			return int.MaxValue;
 		}
 
 		public Vector3[] SmoothPath(Vector3[] pathToSmooth, float agentRadius)

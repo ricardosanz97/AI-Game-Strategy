@@ -95,14 +95,19 @@ namespace Pathfinding
             return PathfindingAlgorithms.BFSWithObstacles(_pathfindingGrid.GetNodeFromWorldPosition(origin), radius, _pathfindingGrid);
         }
 
-        public void RequestPath(PathRequest request, bool needsSmoothing = false)
+        public void RequestPath(PathRequest request, bool useInfluenceData,bool needsSmoothing = false)
         {
             ThreadPool.QueueUserWorkItem(delegate(object state)
             {
-                if(needsSmoothing)
-                    PathfindingAlgorithms.AStarSearch(_pathfindingGrid, request, FinishedProcessingPath,true);
-                else
-                    PathfindingAlgorithms.AStarSearch(_pathfindingGrid, request, FinishedProcessingPath,false);
+                if(needsSmoothing && useInfluenceData)
+                    PathfindingAlgorithms.AStarSearch(_pathfindingGrid, request, FinishedProcessingPath,true,true);
+                else if(needsSmoothing && !useInfluenceData)
+                    PathfindingAlgorithms.AStarSearch(_pathfindingGrid, request, FinishedProcessingPath,true,false);
+                else if(!needsSmoothing && useInfluenceData)
+                    PathfindingAlgorithms.AStarSearch(_pathfindingGrid, request, FinishedProcessingPath,false,true);
+                else if(!needsSmoothing && !useInfluenceData)
+                    PathfindingAlgorithms.AStarSearch(_pathfindingGrid, request, FinishedProcessingPath,false,false);
+                    
             });
         }
 

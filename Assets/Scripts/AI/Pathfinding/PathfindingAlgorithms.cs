@@ -19,7 +19,7 @@ namespace CustomPathfinding
         public static bool isDebugMode = true;
         
         //by now it uses a GridDebugger Class. It should have as a paramenter a IAstarSearchableSurface or something like that
-        public static void AStarSearch(PathfindingGrid pathfindingGrid, PathfindingManager.PathRequest request, Action<PathfindingManager.PathResult> callback, bool needsSmoothing)
+        public static void AStarSearch(PathfindingGrid pathfindingGrid, PathfindingManager.PathRequest request, Action<PathfindingManager.PathResult> callback, bool needsSmoothing, bool usesInfluenceData)
         {
             //estos diccionarios se resetean cada vez porque estan dentro de un metodo estatico. Solo hay una instancia de el en memoria
             //the camefrom path can be reconstructed using the parent field in the node itself
@@ -78,7 +78,9 @@ namespace CustomPathfinding
 
                 foreach (var next in pathfindingGrid.GetNeighbors(currentNode))
                 {   
-                    var newCost = costSoFar[currentNode] + pathfindingGrid.Cost(currentNode, next);
+                    
+                    float cost = usesInfluenceData ? pathfindingGrid.CostWithInfluences(currentNode, next) : pathfindingGrid.Cost(currentNode,next);
+                    var newCost = costSoFar[currentNode] + cost;
 
                     if (!costSoFar.ContainsKey(next) || newCost < costSoFar[next])
                     {
