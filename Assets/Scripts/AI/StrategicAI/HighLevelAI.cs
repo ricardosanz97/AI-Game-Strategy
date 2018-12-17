@@ -80,7 +80,7 @@ namespace StrategicAI
                         _spawnStrategy = new AISpawnStrategy(new List<EntityBloodCost>
                         {
                             //10
-                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Tank),
+                            //EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Tank),
                             EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner),
                             EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner)
                         });

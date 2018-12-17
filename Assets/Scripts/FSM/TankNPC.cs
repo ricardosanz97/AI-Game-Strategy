@@ -50,16 +50,8 @@ public class TankNPC : Troop
     {
         FSMSystem.AddState(this, new State(STATE.Attack, this,
             () => {//on enter attack state
-                List<CustomPathfinding.Node> nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Attack>().range, transform.position);
-                foreach (CustomPathfinding.Node node in nodeList)
-                {
-                    if (node.cell.entityIn != null && node.cell.entityIn.GetComponent<Troop>() == null && node.cell.entityIn.owner != owner) //the enemy in the cell is an enemy.
-                    {
-                        node.cell.gameObject.transform.Find("AttackPlacement").gameObject.SetActive(true);
-                        possibleAttacks.Add(node);
-                    }
-                }
                 _pathfindingGrid.UpdateGrid(this);
+                GetCellsWithEnemyConstructionsInRange();
             },
             () => {
                 foreach (CustomPathfinding.Node node in possibleAttacks)
@@ -84,23 +76,56 @@ public class TankNPC : Troop
         FSMSystem.AddState(this, new State(STATE.Move, this,
             () =>//on enter move state
             {
-                List<CustomPathfinding.Node> nodeList = _pathfindingManager.RequestNodesAtRadius(GetComponent<Move>().maxMoves, transform.position);
-                Debug.Log("nodeList tiene " + nodeList.Count + " elementos. ");
-                foreach (CustomPathfinding.Node node in nodeList)
-                {
-                    if (this.cell.PNode.GridX < node.GridX)
-                    {
-                        node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(true);
-                        possibleMovements.Add(node);
-                    }
-                }
                 _pathfindingGrid.UpdateGrid(this);
+                GetCellsPossibleMovements();
             },
             () =>
             {
+                Debug.Log("hacemos el onexit");
                 foreach (CustomPathfinding.Node node in possibleMovements)
                 {
-                    node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(false);
+                    bool canDisableShader = true;
+                    if (this.owner == Owner.Player)
+                    {
+                        for (int i = 0; i < _levelController.PlayerEntities.Count; i++)
+                        {
+                            if (_levelController.PlayerEntities[i] == this || _levelController.PlayerEntities[i].GetComponent<Troop>() == null) //si somos nosotros o no es una troop, miramos el siguiente
+                            {
+                                continue;
+                            }
+
+                            if (_levelController.PlayerEntities[i].GetComponent<Troop>().possibleMovements.Contains(node))
+                            {
+                                //Debug.Log("alguien lo contiene, asi que no lo borro. ");
+                                canDisableShader = false;
+                            }
+
+                        }
+                    }
+
+                    else if (this.owner == Owner.AI)
+                    {
+                        for (int i = 0; i < _levelController.AIEntities.Count; i++)
+                        {
+                            if (_levelController.AIEntities[i] == this || _levelController.AIEntities[i].GetComponent<Troop>() == null) //si somos nosotros o no es una troop, miramos el siguiente
+                            {
+                                continue;
+                            }
+
+                            if (_levelController.AIEntities[i].GetComponent<Troop>().possibleMovements.Contains(node))
+                            {
+                                //Debug.Log("alguien lo contiene, asi que no lo borro. ");
+                                canDisableShader = false;
+                            }
+
+                        }
+                    }
+
+                    if (canDisableShader)
+                    {
+                        //Debug.Log("lo borro");
+                        node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(false);
+                    }
                 }
                 possibleMovements.Clear();
                 _pathfindingGrid.UpdateGrid(this);

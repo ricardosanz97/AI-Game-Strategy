@@ -53,8 +53,8 @@ public class LauncherNPC : Troop
     {
         FSMSystem.AddState(this, new State(STATE.Attack, this,
             () => {//on enter attack state
-                GetCellsWithEnemiesInRange();
                 _pathfindingGrid.UpdateGrid(this);
+                GetCellsWithEnemiesInRange();
             },
             () => {
                 foreach (CustomPathfinding.Node node in possibleAttacks)
@@ -79,16 +79,57 @@ public class LauncherNPC : Troop
         FSMSystem.AddState(this, new State(STATE.Move, this,
             () =>//on enter move state
             {
-                GetCellsPossibleMovements();
                 _pathfindingGrid.UpdateGrid(this);
+                GetCellsPossibleMovements();
             },
             () =>
             {
                 Debug.Log("hacemos el onexit");
                 foreach (CustomPathfinding.Node node in possibleMovements)
                 {
-                    node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(false);
+                    bool canDisableShader = true;
+                    if (this.owner == Owner.Player)
+                    {
+                        for (int i = 0; i < _levelController.PlayerEntities.Count; i++)
+                        {
+                            if (_levelController.PlayerEntities[i] == this || _levelController.PlayerEntities[i].GetComponent<Troop>() == null) //si somos nosotros o no es una troop, miramos el siguiente
+                            {
+                                continue;
+                            }
+
+                            if (_levelController.PlayerEntities[i].GetComponent<Troop>().possibleMovements.Contains(node))
+                            {
+                                //Debug.Log("alguien lo contiene, asi que no lo borro. ");
+                                canDisableShader = false;
+                            }
+                        }
+                    }
+
+                    else if (this.owner == Owner.AI)
+                    {
+                        for (int i = 0; i < _levelController.AIEntities.Count; i++)
+                        {
+                            if (_levelController.AIEntities[i] == this || _levelController.AIEntities[i].GetComponent<Troop>() == null) //si somos nosotros o no es una troop, miramos el siguiente
+                            {
+                                continue;
+                            }
+
+                            if (_levelController.AIEntities[i].GetComponent<Troop>().possibleMovements.Contains(node))
+                            {
+                                //Debug.Log("Node " + node.GetHashCode() + " no se borra. ");
+                                canDisableShader = false;
+                            }
+
+                        }
+                    }
+
+                    if (canDisableShader)
+                    {
+                        //Debug.Log("Node " + node.GetHashCode() + " ha sido borrado. ");
+                        node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(false);
+                    }
                 }
+
                 possibleMovements.Clear();
                 _pathfindingGrid.UpdateGrid(this);
             })
