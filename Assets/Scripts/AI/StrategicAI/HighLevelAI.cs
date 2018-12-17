@@ -75,26 +75,22 @@ namespace StrategicAI
                 {
                     if(entitiesValueAIOwnedPlayer >= entitiesValuePlayerOwnedPlayer)
                     {
-                        //Spawnear tropas caras tio xD BIBA BREMEN Y BIBA ANTONIO AB ASCAOL
                         _strategicObjective = GetOrAddComponent<AttackBaseObjective>();
                         _spawnStrategy = new AISpawnStrategy(new List<EntityBloodCost>
                         {
-                            //10
-                            //EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Tank),
-                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner),
-                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner)
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Tank),
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Launcher),
                         });
                     }
                     else
                     {
                         _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
-                        //Spawnear tropas baratas tio xD
+                        //Spawnear tropas baratas
                         _spawnStrategy = new AISpawnStrategy(new List<EntityBloodCost>
                         {
-                            //7
                             EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner),
                             EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner),
-                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Launcher)
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Launcher),
                         });
                     }
                 }
@@ -105,8 +101,8 @@ namespace StrategicAI
                     _spawnStrategy = new AISpawnStrategy(new List<EntityBloodCost>
                     {
                         EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner),
+                        EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner),
                         EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Launcher),
-                        EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Turret)
                     });
                 }
             }
@@ -114,11 +110,11 @@ namespace StrategicAI
                 if (entitiesNumberAI >= entitiesNumberPlayer)
                 {
                     _strategicObjective = GetOrAddComponent<AttackTroopsObjective>();
-                    //Spawn muros
+                    //Spawn defensas
                     _spawnStrategy = new AISpawnStrategy(new List<EntityBloodCost>
                     {
                         EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Turret),
-                        EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Turret)
+                        EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Turret),
                     });
                 }
                 else
