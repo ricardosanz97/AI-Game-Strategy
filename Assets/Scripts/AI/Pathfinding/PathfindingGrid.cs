@@ -296,6 +296,21 @@ namespace CustomPathfinding
 				Grid[node.GridX, node.GridZ].GetComponent<MeshRenderer>().material = mat;
 			}
 		}
+		
+		public void ChangeNodeDisplayMode(bool turnOn)
+		{
+			for (int i = 0; i < GridSizeX; i++)
+			{
+				for (int j = 0; j < GridSizeZ; j++)
+				{
+					if(turnOn)
+						Grid[i,j].GetComponent<MeshRenderer>().enabled = true;
+					else
+						Grid[i,j].GetComponent<MeshRenderer>().enabled = false;
+				}
+				
+			}
+		}
 	}
 	
 	

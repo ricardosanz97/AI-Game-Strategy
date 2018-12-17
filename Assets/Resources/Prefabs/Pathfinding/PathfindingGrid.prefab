@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4565784593016118}
   - component: {fileID: 114484714985080646}
-  - component: {fileID: 114962751060168446}
   m_Layer: 0
   m_Name: PathfindingGrid
   m_TagString: Untagged
@@ -52,21 +51,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e8f0945ab095454589bf97719521d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridWorldSize: {x: 12, y: 8}
+  GridWorldSize: {x: 24, y: 16}
+  UseTransformAsGridOrigin: 1
   _unwalkableMask:
     serializedVersion: 2
-    m_Bits: 512
-  UseTransformAsGridOrigin: 1
-  nodePrefab: {fileID: 0}
---- !u!114 &114962751060168446
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1753253163013532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60173983492346d49b113f83e518cf35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cubeSeparation: 0.9
+    m_Bits: 32768
+  _cellMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  WalkableColor: {r: 0.33232188, g: 1, b: 0, a: 0.5803922}
+  UnWalkableColor: {r: 0.9528302, g: 0, b: 0, a: 0.60784316}
+  ScaleFactor: 0.5
+  NodePrefab: {fileID: 114668318050415838, guid: 709c66aa57df6c34ab858de042aef403,
+    type: 2}
