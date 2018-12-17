@@ -54,6 +54,7 @@ public class TankNPC : Troop
                 GetCellsWithEnemyConstructionsInRange();
             },
             () => {
+                DisableShaderAttackCells();
                 possibleAttacks.Clear();
                 _pathfindingGrid.UpdateGrid(this);
             })
@@ -77,6 +78,7 @@ public class TankNPC : Troop
             },
             () =>
             {
+                DisableShaderMoveCells();
                 possibleMovements.Clear();
                 _pathfindingGrid.UpdateGrid(this);
             })

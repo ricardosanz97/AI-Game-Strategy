@@ -30,6 +30,8 @@ public class Troop : AbstractNPCBrain
         initialState = new State(STATE.Idle, this,
             () => {
                 //GetTurretDamage();
+                //DisableShaderMoveCells();
+                //DisableShaderAttackCells();
                 _pathfindingGrid.UpdateGrid(this);
             },
             () => {
