@@ -56,10 +56,7 @@ public class TurnHandler : MonoBehaviour {
 
             if (currentTurn == PlayerType.Player)
             {
-                Debug.Log("TIRA EL PLAYER!");
-
-                Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "TU TURNO!");
-
+                GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "TU TURNO!");
                 while (!playerDone)
                 {
                     yield return null;
@@ -80,10 +77,12 @@ public class TurnHandler : MonoBehaviour {
                 yield return _waitForSeconds;
                 currentTurn = PlayerType.AI;
                 _levelController.ResetTroopParameters(PlayerType.AI);
+                
             }
 
             else if (currentTurn == PlayerType.AI)
             {
+                Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("IA", "TURN");
                 _globalHighLevelAi.PlayTurn();
                 Debug.Log("TIRA LA IA");
                 while (!AIDone)

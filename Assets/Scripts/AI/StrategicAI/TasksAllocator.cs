@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -28,13 +29,7 @@ namespace StrategicAI
             if (IsSpawnNeeded(aiTaskCommands, controlledEntities, 2))
                 DecideWhatToSpawn(aiTaskCommands, aISpawnStrategy);
             
-            for (int i = 0; i < aiTaskCommands.Count; i++)
-            {
-                //el perform command se encarga de o bien comunicarle a la fsm
-                //la señal necesaria como ataque o defensa
-                aiTaskCommands[i].PerformCommand();
-                Debug.Log("Performing Command");
-            }
+            _highLevelAi.StartCoroutine(PerformDifferentTasks(aiTaskCommands));
             
             //añadirlo a una cola en algun monobehaviour para que una corutina lo vaya sacando poco a poco.
 
@@ -42,6 +37,24 @@ namespace StrategicAI
             //_turnHandler.AIDone = true;
 
         }
+
+        IEnumerator PerformDifferentTasks(List<AITaskCommand> aiTaskCommands)
+        {
+            for (int i = 0; i < aiTaskCommands.Count; i++)
+            {
+                //el perform command se encarga de o bien comunicarle a la fsm
+                //la señal necesaria como ataque o defensa
+                aiTaskCommands[i].PerformCommand();
+                Debug.Log("Performing Command");
+                yield return new WaitForSeconds(2.0f);
+            }   
+            
+            //todo mostrar letrero
+            _turnHandler.AIDone = true;
+            Debug.Log("AI Done");
+            yield return null;
+        }
+        
 
         private bool IsSpawnNeeded(List<AITaskCommand> aiTaskCommands, Entity[] controlledEntities, int threshhold)
         {

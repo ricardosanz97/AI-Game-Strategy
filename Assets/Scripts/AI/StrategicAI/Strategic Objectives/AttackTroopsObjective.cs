@@ -90,7 +90,7 @@ namespace StrategicAI
 
                 if (coreSum == Mathf.Max(dataSum.ToArray()))
                 {
-                    minDistEntity = GetClosestEntityInCollection(analyzedNPC, playerControlledEntites, ENTITY.Core);
+                    minDistEntity = GetClosestEntityInCollection(analyzedNPC, levelController.playerCoreEntities.ToArray());
                 }
 
                 else if (turretSum == Mathf.Max(dataSum.ToArray()))

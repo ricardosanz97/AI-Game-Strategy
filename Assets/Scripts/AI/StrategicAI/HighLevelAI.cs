@@ -81,7 +81,7 @@ namespace StrategicAI
                         {
                             //10
                             EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Tank),
-                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Tank),
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner),
                             EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner)
                         });
                     }
@@ -155,7 +155,6 @@ namespace StrategicAI
         {
             Debug.Log("Ia Player turn");
             EvaluateGameState();
-            _turnHandler.AIDone = true;
         }
 
         private List<Entity> castEntitiesOwner(List<Entity> entities, Entity.Owner own)

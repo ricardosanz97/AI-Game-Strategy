@@ -268,6 +268,22 @@ namespace CustomPathfinding
 			}
 			return true;
 		}
+		
+		public void UpdateNode(Node node)
+		{
+			if (node.NodeType == Node.ENodeType.NonWalkable)
+			{
+				Material mat = Grid[node.GridX, node.GridZ].GetComponent<MeshRenderer>().material;
+				mat.color = new Color(0.1f, 0, 0, 0.1f);
+				Grid[node.GridX, node.GridZ].GetComponent<MeshRenderer>().material = mat;
+			}
+			else
+			{
+				Material mat = Grid[node.GridX, node.GridZ].GetComponent<MeshRenderer>().material;
+				mat.color = new Color(0,0.2f,0,0.1f);
+				Grid[node.GridX, node.GridZ].GetComponent<MeshRenderer>().material = mat;
+			}
+		}
 	}
 	
 	
