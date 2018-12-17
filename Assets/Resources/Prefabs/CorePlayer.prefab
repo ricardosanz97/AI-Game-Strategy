@@ -4015,8 +4015,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
-    InfluenceRange: 8
+    Influence: 0.5
+    InfluenceRange: 6
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
 --- !u!114 &114026217462094648
@@ -4065,8 +4065,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
-    InfluenceRange: 8
+    Influence: 0.5
+    InfluenceRange: 7
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
 --- !u!114 &114042495901758724
@@ -4148,7 +4148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -4165,7 +4165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -4248,7 +4248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -4265,8 +4265,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
-    InfluenceRange: 8
+    Influence: 0.5
+    InfluenceRange: 7
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
 --- !u!114 &114198196156985636
@@ -4362,7 +4362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -4379,7 +4379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -4429,7 +4429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -4446,8 +4446,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
-    InfluenceRange: 8
+    Influence: 0.5
+    InfluenceRange: 7
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
 --- !u!114 &114255495052941978
@@ -4549,8 +4549,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
-    InfluenceRange: 8
+    Influence: 0.5
+    InfluenceRange: 6
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
 --- !u!114 &114304295671151268
@@ -4566,8 +4566,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
-    InfluenceRange: 8
+    Influence: 0.5
+    InfluenceRange: 7
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
 --- !u!114 &114308484982398398
@@ -4655,8 +4655,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
-    InfluenceRange: 8
+    Influence: 0.5
+    InfluenceRange: 5
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
 --- !u!114 &114326374899045148
@@ -4705,8 +4705,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
-    InfluenceRange: 11
+    Influence: 0.5
+    InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
 --- !u!114 &114365334504717992
@@ -4755,7 +4755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -4858,7 +4858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -4875,7 +4875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -4944,7 +4944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -4961,7 +4961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -4978,8 +4978,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
-    InfluenceRange: 8
+    Influence: 0.5
+    InfluenceRange: 5
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
 --- !u!114 &114477579344101618
@@ -5015,7 +5015,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -5052,7 +5052,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -5082,7 +5082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -5112,7 +5112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -5142,7 +5142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -5179,7 +5179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -5235,8 +5235,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
-    InfluenceRange: 8
+    Influence: 0.5
+    InfluenceRange: 5
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
 --- !u!114 &114674406490169504
@@ -5252,7 +5252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -5302,8 +5302,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
-    InfluenceRange: 8
+    Influence: 0.5
+    InfluenceRange: 6
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
 --- !u!114 &114690214407921178
@@ -5385,7 +5385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
@@ -5402,8 +5402,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
-    InfluenceRange: 8
+    Influence: 0.5
+    InfluenceRange: 6
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
 --- !u!114 &114777173676185616
@@ -5459,8 +5459,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
-    InfluenceRange: 8
+    Influence: 0.5
+    InfluenceRange: 5
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
 --- !u!114 &114801560272625900
@@ -5562,7 +5562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.06
+    Influence: 0.5
     InfluenceRange: 8
     Color: {r: 0.16860697, g: 0.990566, b: 0, a: 0.42745098}
     InfluenceType: 5
