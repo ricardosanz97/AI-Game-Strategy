@@ -58,6 +58,7 @@ public class RaycastCamera : MonoBehaviour {
                 && _levelController.CheckIfCanSpawn(Entity.Owner.Player) && hit.collider.GetComponent<CellBehaviour>().GetComponent<SpawnableCell>() != null) //ningun NPC nuestro spawneado esta en estado ataque o move
         {
             _spawnablesManager.SpawnEntity(hit.collider.GetComponent<CellBehaviour>(), _spawnablesManager.currentEntitySelected, Entity.Owner.Player);
+            _levelController.DisableSpawnableCellsShader();
         }
     }
 
