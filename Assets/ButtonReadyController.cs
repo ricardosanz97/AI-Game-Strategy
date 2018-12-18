@@ -8,6 +8,7 @@ public class ButtonReadyController : MonoBehaviour {
 
     [Inject]
     TurnHandler _turnHandler;
+    LevelController _levelController;
     public Color buttonReadyColor = Color.green;
     public Color otherTurnColor = Color.white;
     public Color buttonNotReadyColor = Color.red;
@@ -17,7 +18,7 @@ public class ButtonReadyController : MonoBehaviour {
     private void Awake()
     {
         button = this.gameObject.GetComponent<Button>();
-        
+        _levelController = FindObjectOfType<LevelController>();
         //this.GetComponent<Button>().colors.normalColor = buttonNotReadyColor;
     }
 
@@ -48,6 +49,14 @@ public class ButtonReadyController : MonoBehaviour {
         //yield return null;
         //}
         //this.GetComponent<Button>().colors.normalColor = buttonReadyColor;
+
+        foreach (Entity e in _levelController.PlayerEntities)
+        {
+            if (_levelController.TryingToMove())
+            {
+                e.GetComponent<IdleOrder>().Idle = true;
+            }
+        }
 
         _turnHandler.playerDone = true;
         yield return null;

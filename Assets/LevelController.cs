@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using Zenject;
 using UnityEngine.UI;
+using System;
 
 public class LevelController : MonoBehaviour {
 
@@ -36,6 +37,8 @@ public class LevelController : MonoBehaviour {
     private bool pauseMenuEnabled = true;
     private SoundManager soundManager;
 
+    public SpawnableCell[] cellsSpawnables;
+
     private void OnEnable()
     {
         Entity.OnTroopDeleted += OnEntityDeleted;
@@ -55,6 +58,7 @@ public class LevelController : MonoBehaviour {
 
     private void Start()
     {
+        cellsSpawnables = leftSideCells.transform.GetComponentsInChildren<SpawnableCell>(); 
         //ResetAllShadersCells();
         AICoreEntities = GameObject.FindGameObjectWithTag("CoreAI").GetComponentsInChildren<Entity>().ToList();
         playerCoreEntities = GameObject.FindGameObjectWithTag("CorePlayer").GetComponentsInChildren<Entity>().ToList();
@@ -133,7 +137,6 @@ public class LevelController : MonoBehaviour {
                 });
             }
         }
-        
     }
 
     IEnumerator CheckWetherIsAWinner()
@@ -184,6 +187,22 @@ public class LevelController : MonoBehaviour {
             return true;
         }
         return false;
+    }
+
+    public void EnableSpawnableCellsShader()
+    {
+        foreach (SpawnableCell sc in cellsSpawnables)
+        {
+            sc.transform.Find("SpawnPlacement").gameObject.SetActive(true);
+        }
+    }
+
+    public void DisableSpawnableCellsShader()
+    {
+        foreach (SpawnableCell sc in cellsSpawnables)
+        {
+            sc.transform.Find("SpawnPlacement").gameObject.SetActive(false);
+        }
     }
 
     public void ClosePopups()
@@ -252,6 +271,13 @@ public class LevelController : MonoBehaviour {
                 {
                     e.GetComponent<TurretNPC>().SetAffectedCells();
                 }
+                if (e.GetComponent<Troop>() != null)
+                {
+                    e.GetComponent<Troop>().DisableShaderAttackCells();
+                    e.GetComponent<Troop>().DisableShaderMoveCells();
+
+                    //e.GetComponent<IdleOrder>().Idle = true;
+                }
             }
             PlayerRewardBloodTurn = MinBloodReward;
         }
@@ -267,6 +293,13 @@ public class LevelController : MonoBehaviour {
                 if (e.GetComponent<Entity>().entityType == ENTITY.Turret)
                 {
                     e.GetComponent<TurretNPC>().SetAffectedCells();
+                }
+                if (e.GetComponent<Troop>() != null)
+                {
+                    e.GetComponent<Troop>().DisableShaderAttackCells();
+                    e.GetComponent<Troop>().DisableShaderMoveCells();
+
+                    //e.GetComponent<IdleOrder>().Idle = true;
                 }
             }
             AIRewardBloodTurn = MinBloodReward;

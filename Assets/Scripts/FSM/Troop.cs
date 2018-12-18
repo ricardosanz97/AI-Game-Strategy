@@ -30,6 +30,8 @@ public class Troop : AbstractNPCBrain
         initialState = new State(STATE.Idle, this,
             () => {
                 //GetTurretDamage();
+                //DisableShaderMoveCells();
+                //DisableShaderAttackCells();
                 _pathfindingGrid.UpdateGrid(this);
             },
             () => {
@@ -87,30 +89,6 @@ public class Troop : AbstractNPCBrain
 
     }
 
-    public bool ListPossibleMovementsContains(CustomPathfinding.Node node)
-    {
-        for (int i = 0; i<possibleMovements.Count; i++)
-        {
-            if (possibleMovements[i].gameObject == node.gameObject)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public bool ListPossibleAttacksContains(CustomPathfinding.Node node)
-    {
-        for (int i = 0; i<possibleAttacks.Count; i++)
-        {
-            if (possibleAttacks[i].gameObject == node.gameObject)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public override void SetTransitions()
     {
     }
@@ -156,7 +134,7 @@ public class Troop : AbstractNPCBrain
             Debug.Log("generando lista de posibles movimientos. ");
             if (this.owner == Owner.Player)
             {
-                if (this.cell.PNode.GridX < node.GridX)
+                if (this.cell.PNode.GridX <= node.GridX)
                 {
                     node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(true);
                     possibleMovements.Add(node);
@@ -164,7 +142,7 @@ public class Troop : AbstractNPCBrain
             }
             else
             {
-                if (this.cell.PNode.GridX > node.GridX)
+                if (this.cell.PNode.GridX >= node.GridX)
                 {
                     node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(true);
                     possibleMovements.Add(node);

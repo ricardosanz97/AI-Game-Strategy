@@ -56,6 +56,7 @@ public class PrisionerNPC : Troop
             },
             () =>
             {
+                DisableShaderAttackCells();
                 possibleAttacks.Clear();
                 _pathfindingGrid.UpdateGrid(this);
             }));
@@ -78,6 +79,7 @@ public class PrisionerNPC : Troop
             },
             ()=>
             {
+                DisableShaderMoveCells();
                 possibleMovements.Clear();
                 _pathfindingGrid.UpdateGrid(this);
             }));

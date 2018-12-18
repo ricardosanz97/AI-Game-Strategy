@@ -76,11 +76,13 @@ public class LauncherNPC : Troop
         FSMSystem.AddState(this, new State(STATE.Move, this,
             () =>//on enter move state
             {
+                DisableShaderAttackCells();
                 _pathfindingGrid.UpdateGrid(this);
                 GetCellsPossibleMovements();
             },
             () =>
             {
+                DisableShaderMoveCells();
                 Debug.Log("hacemos el onexit");
                 possibleMovements.Clear();
                 _pathfindingGrid.UpdateGrid(this);
