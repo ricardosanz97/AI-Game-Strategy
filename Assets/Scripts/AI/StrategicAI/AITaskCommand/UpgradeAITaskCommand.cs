@@ -13,7 +13,7 @@ namespace StrategicAI
 
         public override void PerformCommand()
         {
-            throw new System.NotImplementedException();
+            entityToUpgrade.GetComponent<AbstractNPCBrain>().UpgradeNPC();
         }
     }
 }

@@ -8,7 +8,6 @@ public class LauncherNPC : Troop
     public override void Start()
     {
         base.Start();
-        //ya hemos iniciado a currentState
         SetStates();
         SetTransitions();
 
@@ -52,7 +51,7 @@ public class LauncherNPC : Troop
     private void SetAttackState()
     {
         FSMSystem.AddState(this, new State(STATE.Attack, this,
-            () => {//on enter attack state
+            () => {
                 _pathfindingGrid.UpdateGrid(this);
                 GetCellsWithEnemiesInRange();
             },
@@ -70,7 +69,6 @@ public class LauncherNPC : Troop
 
         FSMSystem.AddBehaviours(this, behavioursAttackState, states.Find((x) => x.stateName == STATE.Attack));
     }
-
     public void SetMoveState()
     {
         FSMSystem.AddState(this, new State(STATE.Move, this,
@@ -106,6 +104,11 @@ public class LauncherNPC : Troop
     public override void UpgradeNPC()
     {
         bool bloodEnough = this.owner == Entity.Owner.Player ? this.UpgradeCost < _bloodController.PlayerBlood : this.UpgradeCost < _bloodController.AIBlood;
+        if (currentLevel > MaxUpgradeLevel)
+        {
+            Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup(this.entityType.ToString(), "MAX LEVEL\nREACHED");
+            return;
+        }
         if (bloodEnough)
         {
             if (currentLevel > MaxUpgradeLevel)

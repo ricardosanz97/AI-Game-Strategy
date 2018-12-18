@@ -90,6 +90,11 @@ namespace StrategicAI
                 }
 
             }
+
+            else if (analyzedNPC.entityType == ENTITY.Turret)
+            {
+                return analyzedNPC;
+            }
             
             return null;
         }

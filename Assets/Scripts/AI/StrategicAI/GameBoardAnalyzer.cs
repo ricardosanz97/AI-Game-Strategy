@@ -61,6 +61,10 @@ namespace StrategicAI
 
                 Entity chosenTarget = chosenStrategicObjective.DecideBasedOnInfluenceData(analyzedNpc,influenceData,playerControlledEntites,levelController);
 
+                if (chosenTarget == null && !(analyzedNpc is Troop))
+                {
+                    return;
+                }
                 if (chosenTarget == null && analyzedNpc is Troop) //no hay nadie a quien atacar o mejorar, pues movemos.
                 {
                     Debug.Log("trying to move");

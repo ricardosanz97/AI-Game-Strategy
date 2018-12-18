@@ -102,6 +102,11 @@ public class PrisionerNPC : Troop
     public override void UpgradeNPC()
     {
         bool bloodEnough = this.owner == Entity.Owner.Player ? this.UpgradeCost < _bloodController.PlayerBlood : this.UpgradeCost < _bloodController.AIBlood;
+        if (currentLevel > MaxUpgradeLevel)
+        {
+            Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup(this.entityType.ToString(), "MAX LEVEL\nREACHED");
+            return;
+        }
         if (bloodEnough)
         {
             if (currentLevel > MaxUpgradeLevel)
