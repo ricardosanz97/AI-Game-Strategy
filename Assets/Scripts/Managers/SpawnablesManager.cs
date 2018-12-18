@@ -47,6 +47,10 @@ public class SpawnablesManager : MonoBehaviour {
 
     public void SetCurrentEntity(ENTITY troop)
     {
+        if (troop != ENTITY.None)
+        {
+            _levelController.EnableSpawnableCellsShader();
+        }
         currentEntitySelected = troop;
     }
 

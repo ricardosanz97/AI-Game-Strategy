@@ -32,7 +32,7 @@ namespace StrategicAI
         public List<CellBehaviour> SpawnableCells => _spawnableCells;
 
         private void Start()
-        {               
+        {   
             _levelController = FindObjectOfType<LevelController>();
             Assert.IsNotNull(_levelController);
             var spawners = FindObjectsOfType<CellBehaviour>();

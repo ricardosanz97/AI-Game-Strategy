@@ -128,12 +128,9 @@ public class RaycastCamera : MonoBehaviour {
                         {
                             Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "NOT ENOUGH\nBLOOD");
                         }
-                        
-
                     }
                 }
             }
-
         }
     }
 
