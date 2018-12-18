@@ -50,6 +50,7 @@ public class TankNPC : Troop
     {
         FSMSystem.AddState(this, new State(STATE.Attack, this,
             () => {//on enter attack state
+                currentStateDebug.text = STATE.Attack.ToString();
                 _pathfindingGrid.UpdateGrid(this);
                 GetCellsWithEnemyConstructionsInRange();
             },
@@ -73,6 +74,7 @@ public class TankNPC : Troop
         FSMSystem.AddState(this, new State(STATE.Move, this,
             () =>//on enter move state
             {
+                currentStateDebug.text = STATE.Move.ToString();
                 _pathfindingGrid.UpdateGrid(this);
                 GetCellsPossibleMovements();
             },
@@ -115,7 +117,11 @@ public class TankNPC : Troop
         }
         else
         {
-            Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "NOT ENOUGH\nBLOOD");
+            if (this.owner  == Entity.Owner.Player)
+            {
+                Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup(this.owner.ToString(), "NOT ENOUGH\nBLOOD");
+            }
+            
         }
     }
 }

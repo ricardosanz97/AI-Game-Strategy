@@ -54,6 +54,7 @@ public class TurretNPC : AbstractNPCBrain
     public void SetAttackState()
     {
         FSMSystem.AddState(this, new State(STATE.Attack, this));
+        currentStateDebug.text = STATE.Attack.ToString();
     }
 
     public override void SetTransitions()
@@ -263,7 +264,11 @@ public class TurretNPC : AbstractNPCBrain
         }
         else
         {
-            Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "NOT ENOUGH\nBLOOD");
+            if (this.owner == Owner.Player)
+            {
+                Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "NOT ENOUGH\nBLOOD");
+            }
+            
         }
     }
 }

@@ -51,6 +51,7 @@ public class PrisionerNPC : Troop
         FSMSystem.AddState(this, new State(STATE.Attack, this,
             () =>
             {
+                currentStateDebug.text = STATE.Attack.ToString();
                 _pathfindingGrid.UpdateGrid(this);
                 GetCellsWithEnemiesInRange();
             },
@@ -74,6 +75,7 @@ public class PrisionerNPC : Troop
         FSMSystem.AddState(this, new State(STATE.Move, this,
             ()=>
             {
+                currentStateDebug.text = STATE.Move.ToString();
                 _pathfindingGrid.UpdateGrid(this);
                 GetCellsPossibleMovements();
             },

@@ -29,6 +29,7 @@ public class Troop : AbstractNPCBrain
 
         initialState = new State(STATE.Idle, this,
             () => {
+                currentStateDebug.text = STATE.Idle.ToString();
                 //GetTurretDamage();
                 //DisableShaderMoveCells();
                 //DisableShaderAttackCells();

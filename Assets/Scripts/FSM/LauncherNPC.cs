@@ -52,6 +52,7 @@ public class LauncherNPC : Troop
     {
         FSMSystem.AddState(this, new State(STATE.Attack, this,
             () => {
+                currentStateDebug.text = STATE.Attack.ToString();
                 _pathfindingGrid.UpdateGrid(this);
                 GetCellsWithEnemiesInRange();
             },
@@ -74,6 +75,7 @@ public class LauncherNPC : Troop
         FSMSystem.AddState(this, new State(STATE.Move, this,
             () =>//on enter move state
             {
+                currentStateDebug.text = STATE.Move.ToString();
                 DisableShaderAttackCells();
                 _pathfindingGrid.UpdateGrid(this);
                 GetCellsPossibleMovements();

@@ -26,6 +26,8 @@ public abstract class AbstractNPCBrain : Entity
     public int UpgradeCost;
     public int MaxUpgradeLevel = 3;
 
+    public Text currentStateDebug;
+
     public bool executed = false;
 
     public override void Awake()
