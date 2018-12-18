@@ -80,6 +80,7 @@ namespace StrategicAI
                         {
                             EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Tank),
                             EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Launcher),
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Launcher)
                         });
                     }
                     else
@@ -114,7 +115,8 @@ namespace StrategicAI
                     _spawnStrategy = new AISpawnStrategy(new List<EntityBloodCost>
                     {
                         EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Turret),
-                        EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Turret),
+                        EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Tank),
+                        EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Tank)
                     });
                 }
                 else
@@ -137,7 +139,8 @@ namespace StrategicAI
                         _spawnStrategy = new AISpawnStrategy(new List<EntityBloodCost>
                         {
                             EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Turret),
-                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Turret)
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Tank),
+                            EntitySpawnCostInfo.EntitySpawnCosts.Find((x)=>x.entity == ENTITY.Prisioner)
                         });
                     }
                 }
