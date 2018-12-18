@@ -13,7 +13,6 @@ public class LevelController : MonoBehaviour {
 
     public GameObject rightSideCells;
     public GameObject leftSideCells;
-    private GameObject canvasGameObject;
     public System.Collections.Generic.List<Entity> PlayerEntities;
     public System.Collections.Generic.List<Entity> AIEntities;
     public System.Collections.Generic.List<Entity> TotalEntities;
@@ -52,7 +51,6 @@ public class LevelController : MonoBehaviour {
 
     private void Awake()
     {
-        canvasGameObject = FindObjectOfType<Canvas>().gameObject;
         soundManager = FindObjectOfType<SoundManager>();
         chosenNodesToMoveIA = new System.Collections.Generic.List<Node>();
     }
@@ -237,7 +235,6 @@ public class LevelController : MonoBehaviour {
             if (currentTroopsPlayerSpawned >= MaxTroopsSpawned)
             {
                 can = false;
-                GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "TIENES\n5 TROPAS");
             }
             else
             {

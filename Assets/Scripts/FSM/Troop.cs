@@ -156,7 +156,6 @@ public class Troop : AbstractNPCBrain
     {
         foreach (CustomPathfinding.Node node in possibleMovements)
         {
-            bool canDisableShader = true;
             if (this.owner == Owner.Player)
             {
                 for (int i = 0; i < _levelController.PlayerEntities.Count; i++)
@@ -169,7 +168,6 @@ public class Troop : AbstractNPCBrain
                     if (_levelController.PlayerEntities[i].GetComponent<Troop>().possibleMovements.Contains(node))
                     {
                         //Debug.Log("alguien lo contiene, asi que no lo borro. ");
-                        canDisableShader = false;
                     }
                 }
             }
@@ -186,7 +184,6 @@ public class Troop : AbstractNPCBrain
                     if (_levelController.AIEntities[i].GetComponent<Troop>().possibleMovements.Contains(node))
                     {
                         //Debug.Log("Node " + node.GetHashCode() + " no se borra. ");
-                        canDisableShader = false;
                     }
                 }
             }

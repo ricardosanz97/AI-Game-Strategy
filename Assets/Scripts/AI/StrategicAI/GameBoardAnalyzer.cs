@@ -14,14 +14,12 @@ namespace StrategicAI
     public class GameBoardAnalyzer
     {
         //tareas asignadas en funcion de la personalidad a la IA.
-        [SerializeField] private HighLevelAI _highLevelAi;
         [SerializeField] private TasksAllocator _tasksAllocator;
         [SerializeField] private InfluenceMapComponent _influenceMapComponent;
 
         [Inject]
-        public GameBoardAnalyzer(HighLevelAI highLevelAi, TasksAllocator tasksAllocator, InfluenceMapComponent influenceMapComponent)
+        public GameBoardAnalyzer(TasksAllocator tasksAllocator, InfluenceMapComponent influenceMapComponent)
         {
-            _highLevelAi = highLevelAi;
             _tasksAllocator = tasksAllocator;
             _influenceMapComponent = influenceMapComponent;
         }

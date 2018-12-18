@@ -127,7 +127,7 @@ public class SpawnablesManager : MonoBehaviour {
                 if (owner == Entity.Owner.Player)
                     currentEntitySelected = ENTITY.None;
 
-                Node node = _influenceMapComponent.GetNodeAtLocation(new Vector3(cell.transform.position.x, 1f, cell.transform.position.z));
+                //Node node = _influenceMapComponent.GetNodeAtLocation(new Vector3(cell.transform.position.x, 1f, cell.transform.position.z));
 
                 OnSpawnedTroop?.Invoke(entitySpawned.GetComponent<Entity>());
 

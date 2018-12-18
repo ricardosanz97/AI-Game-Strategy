@@ -114,7 +114,6 @@ public class RaycastCamera : MonoBehaviour {
                 if (Input.GetMouseButtonDown(0)
                     && nodeAttackAccesible)
                 {
-                    Debug.Log("CLICK IN A CELL TO ATTACK. ");
                     if (_levelController.TryingToAttack().gameObject.GetComponent<Attack>() != null)
                     {
                         bool bloodEnough = _bloodController.GetCurrentPlayerBlood() >= _levelController.TryingToAttack().gameObject.GetComponent<Attack>().bloodCost;

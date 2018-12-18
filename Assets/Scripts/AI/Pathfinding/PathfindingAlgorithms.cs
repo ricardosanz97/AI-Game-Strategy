@@ -15,7 +15,6 @@ namespace CustomPathfinding
     public class PathfindingAlgorithms
     {
         private static List<float> mediciones = new List<float>();
-        private static int MaxBfsSteps = 10;
         public static bool isDebugMode = true;
         
         //by now it uses a GridDebugger Class. It should have as a paramenter a IAstarSearchableSurface or something like that

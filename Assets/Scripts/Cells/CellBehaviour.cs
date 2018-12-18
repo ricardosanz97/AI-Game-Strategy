@@ -9,8 +9,6 @@ public class CellBehaviour : MonoBehaviour
 {
     public PlayerType owner = PlayerType.None;
     public Entity entityIn;
-    private bool PNodeAssigned = false;
-    private bool INodeAssigned = false;
     public CustomPathfinding.Node PNode;
     public InfluenceMap.Node INode;
 

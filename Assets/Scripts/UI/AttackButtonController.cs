@@ -22,6 +22,12 @@ public class AttackButtonController : MonoBehaviour {
 
     public void HandleButtons()
     {
+        if(_levelController.currentTroopsPlayerSpawned >= 5)
+        {
+            GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Popups/SimpleInfoPopup")).GetComponent<SimpleInfoPopupController>().SetPopup("PLAYER", "TIENES\n5 TROPAS");
+            return;
+        }
+        
         if (!canPressButton || !_levelController.CheckIfCanSpawn(Entity.Owner.Player) || _turnHandler.currentTurn != PlayerType.Player)
         {
             if (buttonsEnabled)
@@ -29,11 +35,13 @@ public class AttackButtonController : MonoBehaviour {
                 HideButtons();
             }
             
+            
             return;
         }
         canPressButton = false;
         if (!buttonsEnabled)
         {
+
             ShowButtons();
         }
         else
