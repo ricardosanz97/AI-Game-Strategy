@@ -97,6 +97,7 @@ public class LauncherNPC : Troop
         FSMSystem.AddBehaviours(this, behavioursMoveState, states.Find((x) => x.stateName == STATE.Move));
     }
 
+    [ContextMenu("Attack Animation")]
     public override void DoAttackAnimation()
     {
         GetComponentInChildren<Animator>().SetTrigger("Attack");

@@ -121,7 +121,6 @@ public class RaycastCamera : MonoBehaviour {
                         if (bloodEnough)
                         {
                             _bloodController.DecreasePlayerBloodValue(_levelController.TryingToAttack().GetComponent<Attack>().bloodCost);
-                            _levelController.TryingToAttack().gameObject.GetComponent<AbstractNPCBrain>().DoAttackAnimation();
                             _levelController.TryingToAttack().gameObject.GetComponent<Attack>().targetEntity = lastCellSelected.entityIn;
                             _levelController.TryingToAttack().gameObject.GetComponent<Attack>().ObjectiveAssigned = true;
                         }

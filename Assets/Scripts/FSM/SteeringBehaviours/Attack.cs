@@ -19,6 +19,7 @@ public class Attack : Action
 
         this.GetComponent<Troop>().DisableShaderAttackCells();
         ObjectiveAssigned = false;
+        GetComponent<AbstractNPCBrain>().DoAttackAnimation();
         targetEntity.GetComponent<Health>().ReceiveDamage(damage);
         GetComponent<IdleOrder>().Idle = true;
         this.GetComponent<AbstractNPCBrain>().executed = true;

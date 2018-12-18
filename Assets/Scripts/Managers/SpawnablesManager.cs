@@ -89,6 +89,7 @@ public class SpawnablesManager : MonoBehaviour {
             case ENTITY.Launcher:
                 lastTroopSpawned = ENTITY.Launcher;
                 entityToSpawn = Resources.Load<GameObject>("Prefabs/Enemies/" + ENTITY.Launcher.ToString() + owner.ToString());
+                entityToSpawn.GetComponentInChildren<ParticleSystem>().Stop();
                 entitySpawnSound = soundManagerRef.launcherSoundSpawn;
                 break;
             case ENTITY.Tank:

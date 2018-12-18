@@ -3,6 +3,7 @@ using System.Linq;
 using Boo.Lang;
 using CustomPathfinding;
 using UnityEngine.SceneManagement;
+using UnityEngine.Assertions;
 using UnityEngine;
 using Zenject;
 using UnityEngine.UI;
@@ -243,7 +244,7 @@ public class LevelController : MonoBehaviour {
                 can = true;
             }
         }
-        else
+        else if (owner == Entity.Owner.AI)
         {
             if (currentTroopsAISpawned >= MaxTroopsSpawned)
             {
