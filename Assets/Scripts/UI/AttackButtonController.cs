@@ -46,6 +46,7 @@ public class AttackButtonController : MonoBehaviour {
     public void ShowButtons()
     {
         soundManagerRef.PlaySingle(soundManagerRef.cardsSound);
+        _levelController.EnableSpawnableCellsShader();
         _levelController.ClosePopups();
         Sequence s = DOTween.Sequence();
         int childCount = this.transform.childCount;
@@ -83,6 +84,7 @@ public class AttackButtonController : MonoBehaviour {
         }
         s.OnComplete(() =>
         {
+            _levelController.DisableSpawnableCellsShader();
             buttonsEnabled = false;
             canPressButton = true;
         });

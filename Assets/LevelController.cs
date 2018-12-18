@@ -193,7 +193,10 @@ public class LevelController : MonoBehaviour {
     {
         foreach (SpawnableCell sc in cellsSpawnables)
         {
-            sc.transform.Find("SpawnPlacement").gameObject.SetActive(true);
+            if(sc.GetComponent<CellBehaviour>().entityIn == null)
+            {
+                sc.transform.Find("SpawnPlacement").gameObject.SetActive(true);
+            }
         }
     }
 
