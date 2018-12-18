@@ -89,30 +89,6 @@ public class Troop : AbstractNPCBrain
 
     }
 
-    public bool ListPossibleMovementsContains(CustomPathfinding.Node node)
-    {
-        for (int i = 0; i<possibleMovements.Count; i++)
-        {
-            if (possibleMovements[i].gameObject == node.gameObject)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public bool ListPossibleAttacksContains(CustomPathfinding.Node node)
-    {
-        for (int i = 0; i<possibleAttacks.Count; i++)
-        {
-            if (possibleAttacks[i].gameObject == node.gameObject)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public override void SetTransitions()
     {
     }
