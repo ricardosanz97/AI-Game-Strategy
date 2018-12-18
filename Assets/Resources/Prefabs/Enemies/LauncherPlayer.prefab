@@ -806,8 +806,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.1
-    InfluenceRange: 3
+    Influence: 12
+    InfluenceRange: 6
     Color: {r: 0.6784314, g: 0.13536845, b: 0.13536845, a: 0.15294118}
     InfluenceType: 0
 --- !u!198 &198887181815695540

@@ -214,7 +214,7 @@ namespace CustomPathfinding
 			
 			InfluenceMap.Node neigborInfluenceNode = _influenceMapComponent.GetNodeAtLocation(currentNode.WorldPosition);
 			
-			cost += neigborInfluenceNode.GetTotalInfluenceAtNode();
+			cost += neigborInfluenceNode.GetTotalInfluenceAtNodeWithFilter(InfluenceType.Core);
 			
 			return cost;
 

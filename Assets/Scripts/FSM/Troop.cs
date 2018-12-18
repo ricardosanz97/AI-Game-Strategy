@@ -142,7 +142,7 @@ public class Troop : AbstractNPCBrain
             }
             else
             {
-                if (this.cell.PNode.GridX >= node.GridX)
+                if (this.cell.PNode.GridX > node.GridX)
                 {
                     node.cell.gameObject.transform.Find("MovePlacement").gameObject.SetActive(true);
                     possibleMovements.Add(node);

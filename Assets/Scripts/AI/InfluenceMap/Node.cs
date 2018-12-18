@@ -51,6 +51,19 @@ namespace InfluenceMap
             
             return result;
         }
+        
+        public float GetTotalInfluenceAtNodeWithFilter(InfluenceType type = InfluenceType.Core)
+        {
+            float result = 0;
+            
+            foreach (var influence in Influences)
+            {
+                if(influence.Key != type)
+                    result += influence.Value;
+            }
+            
+            return result;
+        }
     }
 
 }

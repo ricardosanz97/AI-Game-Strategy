@@ -602,7 +602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 2
+    Influence: 12
     InfluenceRange: 6
     Color: {r: 1, g: 0.0670706, b: 0, a: 0}
     InfluenceType: 1
