@@ -572,7 +572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodCost: 0
-  maxMoves: 10
+  maxMoves: 4
   moving: 0
   OnGoingCell: {fileID: 0}
   PathReceived: 0

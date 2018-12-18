@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodCost: 0
-  maxMoves: 3
+  maxMoves: 5
   moving: 0
   OnGoingCell: {fileID: 0}
   PathReceived: 0
@@ -585,7 +585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bloodCost: 0
   damage: 2
-  range: 1
+  range: 2
   ObjectiveAssigned: 0
   targetEntity: {fileID: 0}
   WaitTimeUntilAttack: 1

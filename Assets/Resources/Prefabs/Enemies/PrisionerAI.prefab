@@ -510,7 +510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bloodCost: 0
   damage: 2
-  range: 5
+  range: 2
   ObjectiveAssigned: 0
   targetEntity: {fileID: 0}
   WaitTimeUntilAttack: 1
@@ -526,7 +526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodCost: 0
-  maxMoves: 10
+  maxMoves: 5
   moving: 0
   OnGoingCell: {fileID: 0}
   PathReceived: 0
