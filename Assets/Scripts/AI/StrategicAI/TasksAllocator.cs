@@ -8,6 +8,7 @@ using UnityEngine.Assertions;
 using Zenject;
 using Random = UnityEngine.Random;
 using StrategicAI;
+using Object = UnityEngine.Object;
 
 namespace StrategicAI
 {
@@ -20,13 +21,15 @@ namespace StrategicAI
         
         public void OnTaskCommandsReceived(List<AITaskCommand> aiTaskCommands, Entity[] controlledEntities, AISpawnStrategy aISpawnStrategy)
         {
+            LevelController _levelController =  Object.FindObjectOfType<LevelController>();
+            
             //analiar los recursos de sangre que tenemos
             //en funcion de esos recursos y las tareas que tenemos decidir
             
             //antes de llamar a todos lo comandos hay que ver si hay una desproporcion entre tareas
             //y tropas controladas por nosotros
             //todo cambiar el magic number por un parametro desde el high level
-            if (IsSpawnNeeded(aiTaskCommands, controlledEntities, 2))
+            if (IsSpawnNeeded(aiTaskCommands, _levelController.AIEntities.ToArray(), _levelController.PlayerEntities.ToArray() , 2))
                 DecideWhatToSpawn(aiTaskCommands, aISpawnStrategy);
             
             _highLevelAi.StartCoroutine(PerformDifferentTasks(aiTaskCommands));
@@ -56,9 +59,10 @@ namespace StrategicAI
         }
         
 
-        private bool IsSpawnNeeded(List<AITaskCommand> aiTaskCommands, Entity[] controlledEntities, int threshhold)
+        private bool IsSpawnNeeded(List<AITaskCommand> aiTaskCommands, Entity[] AIEntities, Entity[] playerEntities,
+            int threshhold)
         {
-            return Mathf.Abs(controlledEntities.Length - aiTaskCommands.Count) > threshhold || controlledEntities.Length == 0 || aiTaskCommands.Count == 0;
+            return Mathf.Abs(playerEntities.Length - AIEntities.Length) >= threshhold || playerEntities.Length == 0 || aiTaskCommands.Count == 0 || AIEntities.Length == 0;
         }
 
         private void DecideWhatToSpawn(List<AITaskCommand> aiTaskCommands, AISpawnStrategy strategySpawn)
