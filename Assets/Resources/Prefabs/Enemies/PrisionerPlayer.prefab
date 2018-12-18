@@ -602,9 +602,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Originator:
     WorldPosition: {x: 0, y: 0, z: 0}
-    Influence: 1.1
-    InfluenceRange: 3
-    Color: {r: 0.17528482, g: 0.9528302, b: 0.29752523, a: 0}
+    Influence: 2
+    InfluenceRange: 6
+    Color: {r: 1, g: 0.0670706, b: 0, a: 0}
     InfluenceType: 1
 --- !u!114 &114672673549251076
 MonoBehaviour:

@@ -71,7 +71,8 @@ public class RaycastCamera : MonoBehaviour {
                 soundManager.PlaySingle(soundManager.cancelActionSound);
             }
 
-            bool nodeMovementAccesible = _levelController.TryingToMove().gameObject.GetComponent<Troop>().ListPossibleMovementsContains(hit.collider.GetComponent<CellBehaviour>().PNode);
+            //bool nodeMovementAccesible = _levelController.TryingToMove().gameObject.GetComponent<Troop>().ListPossibleMovementsContains(hit.collider.GetComponent<CellBehaviour>().PNode);
+            bool nodeMovementAccesible = _levelController.TryingToMove().gameObject.GetComponent<Troop>().possibleMovements.Contains(hit.collider.GetComponent<CellBehaviour>().PNode);
             if (Input.GetMouseButtonDown(0)
                 && nodeMovementAccesible)
             {
@@ -107,7 +108,7 @@ public class RaycastCamera : MonoBehaviour {
                     soundManager.PlaySingle(soundManager.cancelActionSound);
                 }
 
-                bool nodeAttackAccesible = _levelController.TryingToAttack().gameObject.GetComponent<Troop>().ListPossibleAttacksContains(hit.collider.GetComponent<CellBehaviour>().PNode);
+                bool nodeAttackAccesible = _levelController.TryingToAttack().gameObject.GetComponent<Troop>().possibleAttacks.Contains(hit.collider.GetComponent<CellBehaviour>().PNode);
                 
                 if (Input.GetMouseButtonDown(0)
                     && nodeAttackAccesible)
