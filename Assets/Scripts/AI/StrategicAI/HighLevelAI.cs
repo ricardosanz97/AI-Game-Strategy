@@ -49,11 +49,11 @@ namespace StrategicAI
         [ContextMenu("Evaluate Game State")]
         public void EvaluateGameState()
         {
-            List<Entity> AIEntitiesOwnedPlayer = castEntitiesOwner(_levelController.AIEntities, Entity.Owner.Player);
-            List<Entity> PlayerEntitiesOwnedPlayer = castEntitiesOwner(_levelController.PlayerEntities, Entity.Owner.Player);
+            List<Entity> AIEntitiesInPlayerSide = castEntitiesOwner(_levelController.AIEntities, PlayerType.Player);
+            List<Entity> PlayerEntitiesInPlayerSide = castEntitiesOwner(_levelController.PlayerEntities, PlayerType.Player);
 
-            List<Entity> AIEntitiesOwnedAI = castEntitiesOwner(_levelController.AIEntities, Entity.Owner.AI);
-            List<Entity> PlayerEntitiesOwnedAI = castEntitiesOwner(_levelController.PlayerEntities, Entity.Owner.AI);
+            List<Entity> AIEntitiesInAISide = castEntitiesOwner(_levelController.AIEntities, PlayerType.Player);
+            List<Entity> PlayerEntitiesInAISide = castEntitiesOwner(_levelController.PlayerEntities, PlayerType.Player);
 
             entitiesValueAI = CalculateValueEntities(_levelController.AIEntities);
             entitiesValuePlayer = CalculateValueEntities(_levelController.PlayerEntities);
@@ -61,11 +61,11 @@ namespace StrategicAI
             entitiesNumberAI = _levelController.AIEntities.Count;
             entitiesNumberPlayer = _levelController.PlayerEntities.Count;
 
-            entitiesValueAIOwnedPlayer = CalculateValueEntities(AIEntitiesOwnedPlayer);
-            entitiesValuePlayerOwnedPlayer = CalculateValueEntities(PlayerEntitiesOwnedPlayer);
+            entitiesValueAIOwnedPlayer = CalculateValueEntities(AIEntitiesInPlayerSide);
+            entitiesValuePlayerOwnedPlayer = CalculateValueEntities(PlayerEntitiesInPlayerSide);
 
-            entitiesValueAIOwnedAI = CalculateValueEntities(AIEntitiesOwnedAI);
-            entitiesValuePlayerOwnedAI = CalculateValueEntities(PlayerEntitiesOwnedAI);
+            entitiesValueAIOwnedAI = CalculateValueEntities(AIEntitiesInAISide);
+            entitiesValuePlayerOwnedAI = CalculateValueEntities(PlayerEntitiesInAISide);
 
             Debug.Log(entitiesValueAI + ", " + entitiesValuePlayer + ", " + entitiesNumberAI + ", " + entitiesNumberPlayer + ", " + entitiesValueAIOwnedPlayer + ", " + entitiesValuePlayerOwnedPlayer + ", " + entitiesValueAIOwnedAI + ", " + entitiesValuePlayerOwnedAI);
 
@@ -153,12 +153,12 @@ namespace StrategicAI
             EvaluateGameState();
         }
 
-        private List<Entity> castEntitiesOwner(List<Entity> entities, Entity.Owner own)
+        private List<Entity> castEntitiesOwner(List<Entity> entities, PlayerType cellOwner)
         {
             List<Entity> entitiesCasted = new List<Entity>();
             foreach (Entity e in entities)
             {
-                if(e.owner == own)
+                if(e.cell.owner == cellOwner)
                 {
                     entitiesCasted.Add(e);
                 }
