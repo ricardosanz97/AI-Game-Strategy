@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 65374389958983546}
   - component: {fileID: 114461981337804540}
   - component: {fileID: 114309714493245700}
+  - component: {fileID: 114355725058987174}
   m_Layer: 0
   m_Name: TurretAI
   m_TagString: Untagged
@@ -430,6 +431,23 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114355725058987174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1923659558454022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed13bcf06331fc443bc88d4d022cf3dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodCost: 0
+  areaSize: 1
+  offset: -2
+  damage: 1
+  AreaCenterCell: {fileID: 0}
+  AreaCenterSet: 0
 --- !u!114 &114461981337804540
 MonoBehaviour:
   m_ObjectHideFlags: 1
