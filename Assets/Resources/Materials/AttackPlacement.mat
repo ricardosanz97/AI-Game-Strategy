@@ -29,4 +29,5 @@ Material:
     m_Floats:
     - _Cutoff: 0.5
     - _TimeSpeed: 0
+    - _alphaValue: 1
     m_Colors: []
